@@ -1,0 +1,59 @@
+<!-- app/Resources/views/base.html.twig -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
+        <title>{% block title %}The Final Allegiance{% endblock %} | Warlords</title>
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        {% block stylesheets %}
+            <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" />
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+
+        <div id="container">
+            <header id="header">
+                <hgroup>
+                    <h2>{% block blog_title %}<a href="#">Warlords: The Final Allegiance</a>{% endblock %}</h2>
+                </hgroup>
+				<div class="top">
+                    {% block navigation %}
+                        <nav>
+                            <ul class="navigation">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">About</a></li>
+								<li><a href="#">Guide</a></li>
+								<li><a href="#">Ranking</a></li>
+								<li><a href="#">Profile</a></li>
+								<li><a href="#">Player</a></li>
+								<li><a href="#">Guild</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </nav>
+                    {% endblock %}
+                </div>
+            </header>
+
+			<div id="content">
+				<aside class="sidebar">
+		            {% block sidebar %}{% endblock %}
+		        </aside>
+
+		        <section class="main-col">
+		            {% block body %}{% endblock %}
+		        </section>
+			</div>
+
+            <div id="footer">
+                {% block footer %}
+                    Warlords: The Final Allegiance - © 2012 WeWeb
+                {% endblock %}
+            </div>
+        </div>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

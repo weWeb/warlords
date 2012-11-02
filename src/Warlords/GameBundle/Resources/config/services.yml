@@ -1,0 +1,7 @@
+parameters:
+#    warlords_game.example.class: Warlords\GameBundle\Example
+
+services:
+#    warlords_game.example:
+#        class: %warlords_game.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

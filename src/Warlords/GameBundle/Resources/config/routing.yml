@@ -1,0 +1,5 @@
+WarlordsGameBundle_homepage:
+    pattern:  /
+    defaults: { _controller: WarlordsGameBundle:Main:index }
+    requirements:
+        _method:  GET
