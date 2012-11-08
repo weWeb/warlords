@@ -1,0 +1,18 @@
+Warlords\GameBundle\Entity\Ally:
+    type: entity
+    table: ally
+    id:
+        id:
+            type: integer
+            generator: {strategy: AUTO}
+    fields:
+        isActive:
+            type: boolean
+    manyToOne:    
+        username:
+            type: string
+            length: 255
+        ally:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

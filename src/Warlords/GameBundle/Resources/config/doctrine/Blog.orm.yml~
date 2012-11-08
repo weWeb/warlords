@@ -1,0 +1,36 @@
+#src/Blogger/BlogBundle/Resources/config/doctrine/Blog.orm.yml
+Blogger\BlogBundle\Entity\Blog:
+   type: entity
+   repositoryClass: Blogger\BlogBundle\Entity\BlogRepository
+   table: blog
+   id:
+      id:
+         type: integer
+         generator: {strategy: AUTO}
+   fields:
+      title:
+         type: string
+      author:
+         type: string
+         length: 100
+      blog:
+         type: text
+      image:
+         type: string
+         length: 20
+         nullable: true
+      tags:
+         type: text
+         nullable: true
+      created:
+         type: datetime
+      updated:
+         type: datetime
+      slug:
+         type: string
+   lifecycleCallbacks:
+      preUpdate: [setUpdatedValue]
+   oneToMany:
+      comments:
+         targetEntity: Comment
+         mappedBy: blog
