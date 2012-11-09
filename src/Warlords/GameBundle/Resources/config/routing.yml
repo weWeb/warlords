@@ -3,3 +3,10 @@ WarlordsGameBundle_homepage:
     defaults: { _controller: WarlordsGameBundle:Main:index }
     requirements:
         _method:  GET
+        
+        
+WarloadsGameBundle_profile:
+    pattern: /profile
+    defaults: { _controller: WarlordsGameBundle:Page:profile }
+    requirements:
+        _method: GET
