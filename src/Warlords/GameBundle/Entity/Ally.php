@@ -9,10 +9,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class Ally
 {
-
-	protected $username;
-
-    	protected $ally;
+	protected $id;
+	
+	protected $user;
+	
+	protected $ally
 	
 	protected $isActive;
 

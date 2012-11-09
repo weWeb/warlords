@@ -26,6 +26,9 @@ class User implements UserInterface
     
     protected $guild;
     
+    
+    protected $allies;
+    
 
     protected $isActive;
     
