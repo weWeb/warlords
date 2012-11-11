@@ -1,41 +1,26 @@
 Warlords\GameBundle\Entity\User:
     type: entity
     table: user
-    id:
+    fields:
         id:
             type: integer
-            generator: {strategy: AUTO}
-    fields:
+            id: true
+            generator:
+                strategy: AUTO
         username:
             type: string
-            length: 255
+            length: 50
             unique: true
         salt:
             type: string
             length: 255
-            nullable: true
         password:
             type: string
             length: 255
         email:
             type: string
             length: 100
-            nullable: true
-        guild:
-            type: string
-            length: 255
-            nullable: true
-        land:
-            type: integer
-        gold:
-            type: integer
-        army:
-            type: integer
         isActive:
-            type: boolean
+            type: boolean  
             
-    oneToMany:
-        allies:
-            targetEntity: Ally
-            mappedBy: user
     lifecycleCallbacks: {  }

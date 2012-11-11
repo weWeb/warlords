@@ -1,21 +1,33 @@
 <?php
-// src/Warlords/GameBundle/Entity/Ally.php
 
 namespace Warlords\GameBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
-
-
+/**
+ * Warlords\GameBundle\Entity\Ally
+ */
 class Ally
 {
-	protected $id;
-	
-	protected $user;
-	
-	protected $ally;
-	
-	protected $isActive;
+    /**
+     * @var integer $id
+     */
+    private $id;
+
+    /**
+     * @var string $ally
+     */
+    private $ally;
+
+    /**
+     * @var boolean $isActive
+     */
+    private $isActive;
+
+    /**
+     * @var boolean $isBlocked
+     */
+    private $isBlocked;
 
 
     /**
@@ -26,6 +38,29 @@ class Ally
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set ally
+     *
+     * @param string $ally
+     * @return Ally
+     */
+    public function setAlly($ally)
+    {
+        $this->ally = $ally;
+    
+        return $this;
+    }
+
+    /**
+     * Get ally
+     *
+     * @return string 
+     */
+    public function getAlly()
+    {
+        return $this->ally;
     }
 
     /**
@@ -51,27 +86,34 @@ class Ally
         return $this->isActive;
     }
 
+   
     /**
-     * Set ally
+     * @var Warlords\GameBundle\Entity\User
+     */
+    private $user;
+
+
+    /**
+     * Set isBlocked
      *
-     * @param string $ally
+     * @param boolean $isBlocked
      * @return Ally
      */
-    public function setAlly($ally)
+    public function setIsBlocked($isBlocked)
     {
-        $this->ally = $ally;
+        $this->isBlocked = $isBlocked;
     
         return $this;
     }
 
     /**
-     * Get ally
+     * Get isBlocked
      *
-     * @return string 
+     * @return boolean 
      */
-    public function getAlly()
+    public function getIsBlocked()
     {
-        return $this->ally;
+        return $this->isBlocked;
     }
 
     /**

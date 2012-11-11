@@ -1,0 +1,31 @@
+Warlords\GameBundle\Entity\Stats:
+    type: entity
+    table: stats
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        level:
+            type: integer
+        exp:
+            type: integer
+        sp:
+            type: integer
+        fame:
+            type: integer
+        land:
+            type: integer
+        gold:
+            type: integer
+        army:
+            type: integer
+    oneToOne:
+        user:
+            targetEntity: User
+    oneToMany:
+        skills:
+            targetEntity: Skill
+            mappedBy: stats
+    lifecycleCallbacks: {  }

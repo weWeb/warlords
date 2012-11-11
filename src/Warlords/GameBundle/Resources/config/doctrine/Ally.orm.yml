@@ -1,22 +1,21 @@
 Warlords\GameBundle\Entity\Ally:
     type: entity
     table: ally
-    id:
+    fields:
         id:
             type: integer
-            generator: {strategy: AUTO}
-    fields:
-        isActive:
-            type: boolean
+            id: true
+            generator:
+                strategy: AUTO
         ally:
             type: string
             length: 255
-    manyToOne:    
-        user:
+        isActive:
+            type: boolean
+        isBlocked:
+            type: boolean
+    manyToOne:
+        user:    
             targetEntity: User
-            inversedBy: allies
-            joinColumn:
-                name: user_id
-                referenceColumnName: id
-       
+    
     lifecycleCallbacks: {  }
