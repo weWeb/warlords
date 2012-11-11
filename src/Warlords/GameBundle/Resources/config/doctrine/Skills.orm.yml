@@ -1,0 +1,34 @@
+Warlords\GameBundle\Entity\Skills:
+    type: entity
+    table: skills
+    id:
+        id:
+            type: integer
+            generator: {strategy: AUTO}
+    fields:
+        #skill own by this user
+        skill:
+            type: string
+            length: 255
+            unique: true
+        #level of this skill
+        level:
+            type: integer
+            nullable: true
+        #instances casted, spells should only be casted 3 times per hour.
+        instances:
+            type: integer
+            nullable: false
+        #for attack and defense increase spells. Should turn inactive after 3 instances
+        isActive:
+            type: boolean
+        #for tracking how long since it is active.
+        casted_time:
+            type: datetime
+    manyToOne:
+        user:
+            targetEntity: User
+            inversedBy: skills
+            joinColumn:
+                name: user_id
+                referencedColumnName: id

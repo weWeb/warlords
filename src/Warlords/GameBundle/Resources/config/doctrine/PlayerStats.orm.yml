@@ -1,0 +1,27 @@
+Warlords\GameBundle\Entity\PlayerStats:
+    type: entity
+    table: PlayerStats
+    id:
+        id:
+            type: integer
+            generator: {strategy: AUTO}
+    fields:
+        gold:
+            type: integer
+        land:
+            type: integer
+        fame:
+            type: integer
+        infantry:
+            type: integer
+        knights:
+            type: integer
+        calvary:
+            type: integer
+    manyToOne:
+        user:
+            targetEntity: User
+            inversedBy: skills
+            joinColumn:
+                name: user_id
+                referencedColumnName: id

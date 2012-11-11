@@ -1,0 +1,31 @@
+{# src/Warlords/GameBundle/Resources/views/Page/index.html.twig #}
+{% extends 'WarlordsGameBundle::layout.html.twig' %}
+
+{% block body %}
+    <div id="stats">
+        <ul id="resources">
+            <li>Gold: <label id="gold"></label>
+            <li>Land: <label id="land"></label>
+            <li>Fame: <label id="fame"></label>
+        </ul>
+        <ul id="army">
+            <li>Infantry: <label id="infantry"></label>
+            <li>Knights: <label id="knights"></label>
+            <li>Calvary: <label id="calvary"></label>
+        </ul>
+    </div>
+    <h2>Events</h2>
+    <div id="events">
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+<label> {{ userID }} {{app.user.username}}</label><br/><br/>
+<label>Experience:</label><label id="experience"></label>
+<ul id="attack_stats">
+    <li>Level: <label id="lvl"></label>
+    <li>Attack: <label id="attk"></label>
+    <li>Defense: <label id="defs"></label>
+</ul>
+
+{% endblock %}
