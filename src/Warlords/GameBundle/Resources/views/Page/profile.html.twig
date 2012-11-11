@@ -1,17 +1,22 @@
 {# src/Warlords/GameBundle/Resources/views/Page/index.html.twig #}
 {% extends 'WarlordsGameBundle::layout.html.twig' %}
 
+{% block stylesheets %}
+    <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('css/profile.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
 {% block body %}
     <div id="stats">
         <ul id="resources">
-            <li>Gold: <label id="gold"></label>
-            <li>Land: <label id="land"></label>
-            <li>Fame: <label id="fame"></label>
+            <li>Gold: <label id="gold">{{ playerstats.gold }}</label>
+            <li>Land: <label id="land">{{ playerstats.land }}</label>
+            <li>Fame: <label id="fame">{{ playerstats.fame }}</label>
         </ul>
         <ul id="army">
-            <li>Infantry: <label id="infantry"></label>
-            <li>Knights: <label id="knights"></label>
-            <li>Calvary: <label id="calvary"></label>
+            <li>Infantry: <label id="infantry">{{ playerstats.infantry }}</label>
+            <li>Knights: <label id="knights">{{ playerstats.knights }}</label>
+            <li>Calvary: <label id="calvary">{{ playerstats.calvary }}</label>
         </ul>
     </div>
     <h2>Events</h2>
@@ -20,12 +25,12 @@
 {% endblock %}
 
 {% block sidebar %}
-<label> {{ userID }} {{app.user.username}}</label><br/><br/>
-<label>Experience:</label><label id="experience"></label>
+<label>{{app.user.username}}</label><br/><br/>
+<label>Experience:</label><label id="experience">{{ playerstats.experience }}</label>
 <ul id="attack_stats">
-    <li>Level: <label id="lvl"></label>
-    <li>Attack: <label id="attk"></label>
-    <li>Defense: <label id="defs"></label>
+    <li>Level: <label id="lvl">{{ playerstats.level }}</label>
+    <li>Attack: <label id="attk">{{ attack }}</label>
+    <li>Defense: <label id="defs">{{ defense }}</label>
 </ul>
 
 {% endblock %}

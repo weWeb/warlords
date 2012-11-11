@@ -220,4 +220,60 @@ class PlayerStats
     {
         return $this->user;
     }
+    /**
+     * @var integer $experience
+     */
+    private $experience;
+
+    /**
+     * @var integer $level
+     */
+    private $level;
+
+
+    /**
+     * Set experience
+     *
+     * @param integer $experience
+     * @return PlayerStats
+     */
+    public function setExperience($experience)
+    {
+        $this->experience = $experience;
+    
+        return $this;
+    }
+
+    /**
+     * Get experience
+     *
+     * @return integer 
+     */
+    public function getExperience()
+    {
+        return $this->experience;
+    }
+
+    /**
+     * Set level
+     *
+     * @param integer $level
+     * @return PlayerStats
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+    
+        return $this;
+    }
+
+    /**
+     * Get level
+     *
+     * @return integer 
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
 }

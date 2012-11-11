@@ -18,7 +18,12 @@ Warlords\GameBundle\Entity\PlayerStats:
             type: integer
         calvary:
             type: integer
-    manyToOne:
+        experience:
+            type: integer
+        level: 
+            type: integer
+            range: [1,20]
+    OneToOne:
         user:
             targetEntity: User
             inversedBy: skills
