@@ -9,18 +9,19 @@
 {% block body %}
     <div id="stats">
         <ul id="resources">
-            <li>Gold: <label id="gold">{{ playerstats.gold }}</label>
-            <li>Land: <label id="land">{{ playerstats.land }}</label>
-            <li>Fame: <label id="fame">{{ playerstats.fame }}</label>
+            <li class="gold">Gold: <label id="gold">{{ playerstats.gold }}</label></li>
+            <li class="land">Land: <label id="land">{{ playerstats.land }}</label></li>
+            <li class="fame">Fame: <label id="fame">{{ playerstats.fame }}</label></li>
         </ul>
+        <br />
         <ul id="army">
-            <li>Infantry: <label id="infantry">{{ playerstats.infantry }}</label>
-            <li>Knights: <label id="knights">{{ playerstats.knights }}</label>
-            <li>Calvary: <label id="calvary">{{ playerstats.calvary }}</label>
+            <li>Infantry: <label id="infantry">{{ playerstats.infantry }}</label></li>
+            <li>Knights: <label id="knights">{{ playerstats.knights }}</label></li>
+            <li>Calvary: <label id="calvary">{{ playerstats.calvary }}</label></li>
         </ul>
     </div>
-    <h2>Events</h2>
     <div id="events">
+    <h2>Events</h2>
     </div>
 {% endblock %}
 
