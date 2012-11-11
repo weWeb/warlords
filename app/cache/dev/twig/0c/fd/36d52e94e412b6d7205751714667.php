@@ -134,7 +134,7 @@ class __TwigTemplate_0cfd36d52e94e412b6d7205751714667 extends Twig_Template
                                 <li><a href=\"#\">About</a></li>
 \t\t\t\t\t\t\t\t<li><a href=\"#\">Guide</a></li>
 \t\t\t\t\t\t\t\t<li><a href=\"#\">Ranking</a></li>
-\t\t\t\t\t\t\t\t<li><a href=\"#\">Profile</a></li>
+\t\t\t\t\t\t\t\t<li><a href=\"profile\">Profile</a></li>
 \t\t\t\t\t\t\t\t<li><a href=\"#\">Player</a></li>
 \t\t\t\t\t\t\t\t<li><a href=\"#\">Guild</a></li>
                                 <li><a href=\"#\">Contact</a></li>
@@ -183,6 +183,6 @@ class __TwigTemplate_0cfd36d52e94e412b6d7205751714667 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  168 => 60,  163 => 55,  160 => 54,  155 => 49,  150 => 45,  145 => 43,  129 => 24,  126 => 23,  120 => 20,  113 => 11,  110 => 10,  104 => 6,  98 => 61,  96 => 60,  91 => 57,  89 => 54,  83 => 50,  81 => 49,  76 => 46,  74 => 45,  71 => 44,  69 => 43,  61 => 37,  59 => 23,  53 => 20,  42 => 13,  40 => 10,  33 => 6,  26 => 1,);
+        return array (  168 => 60,  163 => 55,  160 => 54,  155 => 49,  150 => 45,  145 => 43,  129 => 24,  126 => 23,  120 => 20,  113 => 11,  110 => 10,  104 => 6,  98 => 61,  96 => 60,  91 => 57,  89 => 54,  83 => 50,  81 => 49,  76 => 46,  74 => 45,  71 => 44,  69 => 43,  61 => 37,  59 => 23,  53 => 20,  42 => 13,  40 => 10,  33 => 6,  26 => 1,  52 => 23,  49 => 22,  30 => 5,  27 => 4,);
     }
 }

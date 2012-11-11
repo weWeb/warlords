@@ -244,7 +244,7 @@ class appDevDebugProjectContainer extends Container
         $b = new \Doctrine\DBAL\Configuration();
         $b->setSQLLogger($a);
 
-        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('dbname' => 'symfony', 'host' => 'localhost', 'port' => NULL, 'user' => 'root', 'password' => NULL, 'charset' => 'UTF8', 'driver' => 'pdo_mysql', 'driverOptions' => array()), $b, new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
+        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('dbname' => 'warlords', 'host' => 'localhost', 'port' => NULL, 'user' => 'root', 'password' => 'weweb', 'charset' => 'UTF8', 'driver' => 'pdo_mysql', 'driverOptions' => array()), $b, new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
     }
 
     /**
@@ -253,11 +253,11 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager509a2b4f33690_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager509a2b4f33690_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager509f59d591690_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager509f59d591690_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once '/var/www/warlords/app/cache/dev/jms_diextra/doctrine/EntityManager_509a2b4f33690.php';
+        require_once '/var/www/warlords/app/cache/dev/jms_diextra/doctrine/EntityManager_509f59d591690.php';
 
         $a = new \Doctrine\Common\Cache\ArrayCache();
         $a->setNamespace('sf2orm_default_7ee5a82612ffbf39a866482a147aba77');
@@ -290,7 +290,7 @@ class appDevDebugProjectContainer extends Container
         $g = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $f);
         $this->get('doctrine.orm.default_manager_configurator')->configure($g);
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager509a2b4f33690_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($g, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager509f59d591690_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($g, $this);
     }
 
     /**
@@ -404,7 +404,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getForm_CsrfProviderService()
     {
-        return $this->services['form.csrf_provider'] = new \Symfony\Component\Form\Extension\Csrf\CsrfProvider\SessionCsrfProvider($this->get('session'), 'ThisTokenIsNotSoSecretChangeIt');
+        return $this->services['form.csrf_provider'] = new \Symfony\Component\Form\Extension\Csrf\CsrfProvider\SessionCsrfProvider($this->get('session'), 'fdcab712e14e7b80dd7e3693b986b3410d268f04');
     }
 
     /**
@@ -1401,7 +1401,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_EncoderFactoryService()
     {
-        return $this->services['security.encoder_factory'] = new \Symfony\Component\Security\Core\Encoder\EncoderFactory(array('Symfony\\Component\\Security\\Core\\User\\User' => array('class' => 'Symfony\\Component\\Security\\Core\\Encoder\\PlaintextPasswordEncoder', 'arguments' => array(0 => false))));
+        return $this->services['security.encoder_factory'] = new \Symfony\Component\Security\Core\Encoder\EncoderFactory(array('Warlords\\GameBundle\\Entity\\User' => array('class' => 'Symfony\\Component\\Security\\Core\\Encoder\\MessageDigestPasswordEncoder', 'arguments' => array(0 => 'sha1', 1 => false, 2 => 1))));
     }
 
     /**
@@ -1449,7 +1449,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_FirewallService()
     {
-        return $this->services['security.firewall'] = new \Symfony\Component\Security\Http\Firewall(new \Symfony\Bundle\SecurityBundle\Security\FirewallMap($this, array('security.firewall.map.context.dev' => new \Symfony\Component\HttpFoundation\RequestMatcher('^/(_(profiler|wdt)|css|images|js)/'), 'security.firewall.map.context.login' => new \Symfony\Component\HttpFoundation\RequestMatcher('^/demo/secured/login$'), 'security.firewall.map.context.secured_area' => new \Symfony\Component\HttpFoundation\RequestMatcher('^/demo/secured/'))), $this->get('event_dispatcher'));
+        return $this->services['security.firewall'] = new \Symfony\Component\Security\Http\Firewall(new \Symfony\Bundle\SecurityBundle\Security\FirewallMap($this, array('security.firewall.map.context.dev' => new \Symfony\Component\HttpFoundation\RequestMatcher('^/(_(profiler|wdt)|css|images|js)/'), 'security.firewall.map.context.login' => new \Symfony\Component\HttpFoundation\RequestMatcher('^/login$'), 'security.firewall.map.context.secured_area' => new \Symfony\Component\HttpFoundation\RequestMatcher('^/'))), $this->get('event_dispatcher'));
     }
 
     /**
@@ -1495,17 +1495,23 @@ class appDevDebugProjectContainer extends Container
         $e = $this->get('http_kernel');
         $f = $this->get('security.authentication.manager');
 
-        $g = new \Symfony\Component\Security\Http\AccessMap();
+        $g = new \Symfony\Component\HttpFoundation\RequestMatcher('^/login');
 
-        $h = new \Symfony\Component\Security\Http\HttpUtils($d, $d);
+        $h = new \Symfony\Component\HttpFoundation\RequestMatcher('^/profile');
 
-        $i = new \Symfony\Component\Security\Http\Firewall\LogoutListener($b, $h, new \Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler($h, '/demo/'), array('csrf_parameter' => '_csrf_token', 'intention' => 'logout', 'logout_path' => '/demo/secured/logout'));
-        $i->addHandler(new \Symfony\Component\Security\Http\Logout\SessionLogoutHandler());
+        $i = new \Symfony\Component\Security\Http\AccessMap();
+        $i->add($g, array(0 => 'IS_AUTHENTICATED_ANONYMOUSLY'), NULL);
+        $i->add($h, array(0 => 'ROLE_USER'), NULL);
 
-        $j = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler($h, array('login_path' => '/demo/secured/login', 'always_use_default_target_path' => false, 'default_target_path' => '/', 'target_path_parameter' => '_target_path', 'use_referer' => false));
-        $j->setProviderKey('secured_area');
+        $j = new \Symfony\Component\Security\Http\HttpUtils($d, $d);
 
-        return $this->services['security.firewall.map.context.secured_area'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($g, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.in_memory')), 'secured_area', $a, $c), 2 => $i, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $h, 'secured_area', $j, new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($e, $h, array('login_path' => '/demo/secured/login', 'failure_path' => NULL, 'failure_forward' => false), $a), array('check_path' => '/demo/secured/login_check', 'use_forward' => false, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $c), 4 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $g, $f, $a)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $h, 'secured_area', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $h, '/demo/secured/login', false), NULL, NULL, $a));
+        $k = new \Symfony\Component\Security\Http\Firewall\LogoutListener($b, $j, new \Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler($j, '/'), array('csrf_parameter' => '_csrf_token', 'intention' => 'logout', 'logout_path' => '/logout'));
+        $k->addHandler(new \Symfony\Component\Security\Http\Logout\SessionLogoutHandler());
+
+        $l = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler($j, array('default_target_path' => '/profile', 'login_path' => '/login', 'always_use_default_target_path' => false, 'target_path_parameter' => '_target_path', 'use_referer' => false));
+        $l->setProviderKey('secured_area');
+
+        return $this->services['security.firewall.map.context.secured_area'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($i, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.users')), 'secured_area', $a, $c), 2 => $k, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $j, 'secured_area', $l, new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($e, $j, array('login_path' => '/login', 'failure_path' => NULL, 'failure_forward' => false), $a), array('check_path' => '/login_check', 'use_forward' => false, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $c), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '509f59d573842', $a), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $i, $f, $a)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $j, 'secured_area', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $j, '/login', false), NULL, NULL, $a));
     }
 
     /**
@@ -1968,7 +1974,7 @@ class appDevDebugProjectContainer extends Container
     {
         $this->services['templating.helper.logout_url'] = $instance = new \Symfony\Bundle\SecurityBundle\Templating\Helper\LogoutUrlHelper($this, $this->get('router'));
 
-        $instance->registerListener('secured_area', '/demo/secured/logout', 'logout', '_csrf_token', NULL);
+        $instance->registerListener('secured_area', '/logout', 'logout', '_csrf_token', NULL);
 
         return $instance;
     }
@@ -2567,7 +2573,7 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the doctrine.orm.entity_manager service alias.
      *
-     * @return EntityManager509a2b4f33690_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
+     * @return EntityManager509f59d591690_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
      */
     protected function getDoctrine_Orm_EntityManagerService()
     {
@@ -2725,7 +2731,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.in_memory'), new \Symfony\Component\Security\Core\User\UserChecker(), 'secured_area', $this->get('security.encoder_factory'), true)), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.users'), new \Symfony\Component\Security\Core\User\UserChecker(), 'secured_area', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('509f59d573842')), true);
 
         $instance->setEventDispatcher($this->get('event_dispatcher'));
 
@@ -2754,7 +2760,7 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
-     * Gets the 'security.user.provider.concrete.in_memory' service.
+     * Gets the 'security.user.provider.concrete.users' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
@@ -2763,16 +2769,11 @@ class appDevDebugProjectContainer extends Container
      * If you want to be able to request this service from the container directly,
      * make it public, otherwise you might end up with broken code.
      *
-     * @return Symfony\Component\Security\Core\User\InMemoryUserProvider A Symfony\Component\Security\Core\User\InMemoryUserProvider instance.
+     * @return Symfony\Bridge\Doctrine\Security\User\EntityUserProvider A Symfony\Bridge\Doctrine\Security\User\EntityUserProvider instance.
      */
-    protected function getSecurity_User_Provider_Concrete_InMemoryService()
+    protected function getSecurity_User_Provider_Concrete_UsersService()
     {
-        $this->services['security.user.provider.concrete.in_memory'] = $instance = new \Symfony\Component\Security\Core\User\InMemoryUserProvider();
-
-        $instance->createUser(new \Symfony\Component\Security\Core\User\User('user', 'userpass', array(0 => 'ROLE_USER')));
-        $instance->createUser(new \Symfony\Component\Security\Core\User\User('admin', 'adminpass', array(0 => 'ROLE_ADMIN')));
-
-        return $instance;
+        return $this->services['security.user.provider.concrete.users'] = new \Symfony\Bridge\Doctrine\Security\User\EntityUserProvider($this->get('doctrine'), 'Warlords\\GameBundle\\Entity\\User', 'username', NULL);
     }
 
     /**
@@ -2920,15 +2921,16 @@ class appDevDebugProjectContainer extends Container
             'database_driver' => 'pdo_mysql',
             'database_host' => 'localhost',
             'database_port' => NULL,
-            'database_name' => 'symfony',
+            'database_name' => 'warlords',
             'database_user' => 'root',
-            'database_password' => NULL,
+            'database_password' => 'weweb',
             'mailer_transport' => 'smtp',
             'mailer_host' => 'localhost',
             'mailer_user' => NULL,
             'mailer_password' => NULL,
             'locale' => 'en',
-            'secret' => 'ThisTokenIsNotSoSecretChangeIt',
+            'secret' => 'fdcab712e14e7b80dd7e3693b986b3410d268f04',
+            'database_path' => NULL,
             'controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver',
             'controller_name_converter.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerNameParser',
             'response_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener',
@@ -2970,7 +2972,7 @@ class appDevDebugProjectContainer extends Container
             'debug.stopwatch.class' => 'Symfony\\Component\\HttpKernel\\Debug\\Stopwatch',
             'debug.container.dump' => '/var/www/warlords/app/cache/dev/appDevDebugProjectContainer.xml',
             'debug.controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\TraceableControllerResolver',
-            'kernel.secret' => 'ThisTokenIsNotSoSecretChangeIt',
+            'kernel.secret' => 'fdcab712e14e7b80dd7e3693b986b3410d268f04',
             'kernel.trust_proxy_headers' => false,
             'kernel.default_locale' => 'en',
             'session.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Session',
@@ -3372,8 +3374,8 @@ class appDevDebugProjectContainer extends Container
             ),
             'jms_di_extra.cache_dir' => '/var/www/warlords/app/cache/dev/jms_diextra',
             'jms_di_extra.doctrine_integration' => true,
-            'jms_di_extra.doctrine_integration.entity_manager.file' => '/var/www/warlords/app/cache/dev/jms_diextra/doctrine/EntityManager_509a2b4f33690.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager509a2b4f33690_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => '/var/www/warlords/app/cache/dev/jms_diextra/doctrine/EntityManager_509f59d591690.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager509f59d591690_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
 
             ),

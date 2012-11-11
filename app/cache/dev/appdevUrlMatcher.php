@@ -134,6 +134,17 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array('_route' => 'logout');
         }
 
+        // WarlordsGameBundle_profile
+        if ($pathinfo === '/profile') {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_WarlordsGameBundle_profile;
+            }
+
+            return array (  '_controller' => 'Warlords\\GameBundle\\Controller\\ProfileController::profileAction',  '_route' => 'WarlordsGameBundle_profile',);
+        }
+        not_WarlordsGameBundle_profile:
+
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }
 }

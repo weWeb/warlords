@@ -3,7 +3,7 @@ WarlordsGameBundle_homepage:
     defaults: { _controller: WarlordsGameBundle:Main:index }
     requirements:
         _method:  GET
-        
+
 login:
     pattern:   /login
     defaults:  { _controller: WarlordsGameBundle:Security:login }
@@ -11,3 +11,11 @@ login_check:
     pattern:   /login_check
 logout:
     pattern: /logout
+
+
+WarlordsGameBundle_profile:
+    pattern: /profile
+    defaults:  { _controller: WarlordsGameBundle:Profile:profile }
+    requirements:
+        _method:  GET
+        id: \d+
