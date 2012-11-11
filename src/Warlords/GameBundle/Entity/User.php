@@ -27,6 +27,15 @@ class User implements UserInterface
     protected $guild;
     
     
+    protected $land;
+    
+    
+    protected $gold;
+    
+    
+    protected $army;
+    
+    
     protected $allies;
     
 
@@ -245,5 +254,74 @@ class User implements UserInterface
     public function getAllies()
     {
         return $this->allies;
+    }
+
+    /**
+     * Set land
+     *
+     * @param integer $land
+     * @return User
+     */
+    public function setLand($land)
+    {
+        $this->land = $land;
+    
+        return $this;
+    }
+
+    /**
+     * Get land
+     *
+     * @return integer 
+     */
+    public function getLand()
+    {
+        return $this->land;
+    }
+
+    /**
+     * Set gold
+     *
+     * @param integer $gold
+     * @return User
+     */
+    public function setGold($gold)
+    {
+        $this->gold = $gold;
+    
+        return $this;
+    }
+
+    /**
+     * Get gold
+     *
+     * @return integer 
+     */
+    public function getGold()
+    {
+        return $this->gold;
+    }
+
+    /**
+     * Set army
+     *
+     * @param integer $army
+     * @return User
+     */
+    public function setArmy($army)
+    {
+        $this->army = $army;
+    
+        return $this;
+    }
+
+    /**
+     * Get army
+     *
+     * @return integer 
+     */
+    public function getArmy()
+    {
+        return $this->army;
     }
 }

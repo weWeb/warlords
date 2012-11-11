@@ -25,6 +25,12 @@ Warlords\GameBundle\Entity\User:
             type: string
             length: 255
             nullable: true
+        land:
+            type: integer
+        gold:
+            type: integer
+        army:
+            type: integer
         isActive:
             type: boolean
             

@@ -5,8 +5,8 @@ WarlordsGameBundle_homepage:
         _method:  GET
         
         
-WarloadsGameBundle_profile:
-    pattern: /profile
-    defaults: { _controller: WarlordsGameBundle:Page:profile }
+WarlordsGameBundle_player:
+    pattern: /player
+    defaults: { _controller: WarlordsGameBundle:Page:player }
     requirements:
         _method: GET
