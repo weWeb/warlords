@@ -12,6 +12,8 @@ class ProfileController extends Controller{
         $em = $this->getDoctrine()->getEntityManager();
 
         $playerstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->find($id);
+        
+        $Skills = $em->getRepository('WarlordsGameBundle:Skills')->find($id);
 
         if (!$playerstats) {
         	throw $this->createNotFoundException('Unable to find player.');
@@ -25,7 +27,10 @@ class ProfileController extends Controller{
     	$defn = $soldiers + $knights*3 + $calvary*3;
     	
         
-        return $this->render('WarlordsGameBundle:Page:profile.html.twig', array('playerstats' => $playerstats, 'attack' => $attk, 'defense' => $defn));
+        return $this->render('WarlordsGameBundle:Page:profile.html.twig', array(
+                                'playerstats' => $playerstats,
+                                'skills' => $Skills,
+                                'attack' => $attk, 'defense' => $defn));
     }
 }
 ?>
