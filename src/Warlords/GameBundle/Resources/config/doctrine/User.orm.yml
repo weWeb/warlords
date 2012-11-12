@@ -21,6 +21,20 @@ Warlords\GameBundle\Entity\User:
             type: string
             length: 100
         isActive:
-            type: boolean  
-            
+            type: boolean
+    manyToMany:
+        alliesWithMe:
+            targetEntity: User
+            mappedBy: myAllies
+        myAllies:
+            targetEntity: User
+            inversedBy: alliesWithMe
+            joinTable:
+                name: allies
+                joinColumns:
+                    user_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    ally_user_id:
+                        referencedColumnName: id
     lifecycleCallbacks: {  }

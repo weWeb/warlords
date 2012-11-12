@@ -29,7 +29,7 @@ class Skill
      */
     private $start_time;
 
-
+    
     /**
      * Get id
      *
@@ -135,5 +135,33 @@ class Skill
     public function getSkill()
     {
         return $this->skill;
+    }
+    /**
+     * @var Warlords\GameBundle\Entity\Stats
+     */
+    private $stats;
+
+
+    /**
+     * Set stats
+     *
+     * @param Warlords\GameBundle\Entity\Stats $stats
+     * @return Skill
+     */
+    public function setStats(\Warlords\GameBundle\Entity\Stats $stats = null)
+    {
+        $this->stats = $stats;
+    
+        return $this;
+    }
+
+    /**
+     * Get stats
+     *
+     * @return Warlords\GameBundle\Entity\Stats 
+     */
+    public function getStats()
+    {
+        return $this->stats;
     }
 }

@@ -16,4 +16,8 @@ Warlords\GameBundle\Entity\Skill:
     oneToOne:
         skill:
             targetEntity: SkillList
+    manyToOne:
+        stats:
+            targetEntity: Stats
+            inversedBy: skills
     lifecycleCallbacks: {  }

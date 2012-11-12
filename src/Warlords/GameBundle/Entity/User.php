@@ -40,6 +40,14 @@ class User
     private $isActive;
 
 
+
+    private $alliesWithMe;
+
+
+
+    private $myAllies;
+
+
     /**
      * Get id
      *
@@ -163,5 +171,79 @@ class User
     public function getIsActive()
     {
         return $this->isActive;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->alliesWithMe = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->myAllies = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add alliesWithMe
+     *
+     * @param Warlords\GameBundle\Entity\User $alliesWithMe
+     * @return User
+     */
+    public function addAlliesWithMe(\Warlords\GameBundle\Entity\User $alliesWithMe)
+    {
+        $this->alliesWithMe[] = $alliesWithMe;
+    
+        return $this;
+    }
+
+    /**
+     * Remove alliesWithMe
+     *
+     * @param Warlords\GameBundle\Entity\User $alliesWithMe
+     */
+    public function removeAlliesWithMe(\Warlords\GameBundle\Entity\User $alliesWithMe)
+    {
+        $this->alliesWithMe->removeElement($alliesWithMe);
+    }
+
+    /**
+     * Get alliesWithMe
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getAlliesWithMe()
+    {
+        return $this->alliesWithMe;
+    }
+
+    /**
+     * Add myAllies
+     *
+     * @param Warlords\GameBundle\Entity\User $myAllies
+     * @return User
+     */
+    public function addMyAllie(\Warlords\GameBundle\Entity\User $myAllies)
+    {
+        $this->myAllies[] = $myAllies;
+    
+        return $this;
+    }
+
+    /**
+     * Remove myAllies
+     *
+     * @param Warlords\GameBundle\Entity\User $myAllies
+     */
+    public function removeMyAllie(\Warlords\GameBundle\Entity\User $myAllies)
+    {
+        $this->myAllies->removeElement($myAllies);
+    }
+
+    /**
+     * Get myAllies
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMyAllies()
+    {
+        return $this->myAllies;
     }
 }

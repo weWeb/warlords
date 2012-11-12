@@ -49,7 +49,8 @@ class Stats
      */
     private $army;
 
-
+    
+    
     /**
      * Get id
      *
