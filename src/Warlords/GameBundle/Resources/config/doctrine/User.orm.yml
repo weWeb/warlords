@@ -1,14 +1,15 @@
 Warlords\GameBundle\Entity\User:
     type: entity
     table: user
-    id:
+    fields:
         id:
             type: integer
-            generator: {strategy: AUTO}
-    fields:
+            id: true
+            generator:
+                strategy: AUTO
         username:
             type: string
-            length: 255
+            length: 50
             unique: true
         salt:
             type: string
@@ -23,4 +24,23 @@ Warlords\GameBundle\Entity\User:
             nullable: true
         isActive:
             type: boolean
+    oneToOne:
+        stats:
+            targetEntity: PlayerStats
+            mappedBy: user
+    manyToMany:
+        alliesWithMe:
+            targetEntity: User
+            mappedBy: myAllies
+        myAllies:
+            targetEntity: User
+            inversedBy: alliesWithMe
+            joinTable:
+                name: allies
+                joinColumns:
+                    user_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    ally_user_id:
+                        referencedColumnName: id
     lifecycleCallbacks: {  }

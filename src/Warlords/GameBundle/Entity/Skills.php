@@ -15,11 +15,6 @@ class Skills
     private $id;
 
     /**
-     * @var string $skill
-     */
-    private $skill;
-
-    /**
      * @var integer $level
      */
     private $level;
@@ -40,9 +35,14 @@ class Skills
     private $casted_time;
 
     /**
-     * @var Warlords\GameBundle\Entity\User
+     * @var Warlords\GameBundle\Entity\SkillList
      */
-    private $user;
+    private $skill;
+
+    /**
+     * @var Warlords\GameBundle\Entity\PlayerStats
+     */
+    private $stats;
 
 
     /**
@@ -53,29 +53,6 @@ class Skills
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set skill
-     *
-     * @param string $skill
-     * @return Skills
-     */
-    public function setSkill($skill)
-    {
-        $this->skill = $skill;
-    
-        return $this;
-    }
-
-    /**
-     * Get skill
-     *
-     * @return string 
-     */
-    public function getSkill()
-    {
-        return $this->skill;
     }
 
     /**
@@ -171,25 +148,48 @@ class Skills
     }
 
     /**
-     * Set user
+     * Set skill
      *
-     * @param Warlords\GameBundle\Entity\User $user
+     * @param Warlords\GameBundle\Entity\SkillList $skill
      * @return Skills
      */
-    public function setUser(\Warlords\GameBundle\Entity\User $user = null)
+    public function setSkill(\Warlords\GameBundle\Entity\SkillList $skill = null)
     {
-        $this->user = $user;
+        $this->skill = $skill;
     
         return $this;
     }
 
     /**
-     * Get user
+     * Get skill
      *
-     * @return Warlords\GameBundle\Entity\User 
+     * @return Warlords\GameBundle\Entity\SkillList 
      */
-    public function getUser()
+    public function getSkill()
     {
-        return $this->user;
+        return $this->skill;
+    }
+
+    /**
+     * Set stats
+     *
+     * @param Warlords\GameBundle\Entity\PlayerStats $stats
+     * @return Skills
+     */
+    public function setStats(\Warlords\GameBundle\Entity\PlayerStats $stats = null)
+    {
+        $this->stats = $stats;
+    
+        return $this;
+    }
+
+    /**
+     * Get stats
+     *
+     * @return Warlords\GameBundle\Entity\PlayerStats 
+     */
+    public function getStats()
+    {
+        return $this->stats;
     }
 }
