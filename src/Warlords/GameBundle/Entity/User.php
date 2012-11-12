@@ -3,11 +3,12 @@
 namespace Warlords\GameBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Warlords\GameBundle\Entity\User
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var integer $id
@@ -38,6 +39,11 @@ class User
      * @var boolean $isActive
      */
     private $isActive;
+    
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
 
 
 
@@ -46,6 +52,17 @@ class User
 
 
     private $myAllies;
+
+
+
+
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+    }
 
 
     /**
@@ -245,5 +262,33 @@ class User
     public function getMyAllies()
     {
         return $this->myAllies;
+    }
+    /**
+     * @var \Warlords\GameBundle\Entity\Playerstats
+     */
+    private $stats;
+
+
+    /**
+     * Set stats
+     *
+     * @param \Warlords\GameBundle\Entity\Playerstats $stats
+     * @return User
+     */
+    public function setStats(\Warlords\GameBundle\Entity\Playerstats $stats = null)
+    {
+        $this->stats = $stats;
+    
+        return $this;
+    }
+
+    /**
+     * Get stats
+     *
+     * @return \Warlords\GameBundle\Entity\Playerstats 
+     */
+    public function getStats()
+    {
+        return $this->stats;
     }
 }

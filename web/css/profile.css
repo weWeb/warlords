@@ -1,0 +1,37 @@
+ul#resources > li {
+    display: inline;
+    font-weight: bold;
+}
+
+ul#army > li {
+    display: inline;
+    font-weight: bold;
+}
+
+div#events {
+    float: right;
+    width: 300px;
+    height: 70%;;
+    border: solid;
+}
+
+div#events > h2 {
+    text-align: center;
+    color: #009933;
+}
+
+.gold{
+    color: #CC9900;
+}
+
+.land{
+    color: #008A2E;
+}
+
+.fame{
+    color: #0066CC;
+}
+
+.sidebar{
+    font-weight: bold;
+}

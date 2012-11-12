@@ -14,7 +14,7 @@
     </head>
     <body>
 
-        <div id="container">
+        <div id="container"><div id="innercontainer">
             <header id="header">
                 <hgroup>
                     <h2>{% block blog_title %}<a href="#">Warlords: The Final Allegiance</a>{% endblock %}</h2>
@@ -26,8 +26,18 @@
                                 <li><a href="#">Home</a></li>
                                 <li><a href="#">About</a></li>
 								<li><a href="#">Guide</a></li>
+
+								<li><a href="#">Ranking</a>
+									<ul>
+           				 				<li><a href=”#”>Wealth</a></li>
+            							<li><a href=”#”>Fame</a></li>
+        							</ul>									
+								</li>
+								<li><a href="profile">Profile</a></li>
+								<li><a href="#">Player</a></li>
+
 								<li><a href="#">Ranking</a></li>
-								<li><a href="#">Profile</a></li>
+								<li><a href="{{ path('WarlordsGameBundle_profile') }}">Profile</a></li>
 								<li><a href="{{ path('WarlordsGameBundle_player') }}">Player</a></li>
 								<li><a href="#">Guild</a></li>
                                 <li><a href="#">Contact</a></li>
@@ -39,6 +49,9 @@
 
 			<div id="content">
 				<aside class="sidebar">
+    				<div class="login">
+				    {% block login %}{% endblock %}
+				    </div>
 		            {% block sidebar %}{% endblock %}
 		        </aside>
 
@@ -52,7 +65,7 @@
                     Warlords: The Final Allegiance - © 2012 WeWeb
                 {% endblock %}
             </div>
-        </div>
+        </div></div>
 
         {% block javascripts %}{% endblock %}
     </body>

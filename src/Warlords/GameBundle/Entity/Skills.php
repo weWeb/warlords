@@ -5,9 +5,9 @@ namespace Warlords\GameBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Warlords\GameBundle\Entity\Skill
+ * Warlords\GameBundle\Entity\Skills
  */
-class Skill
+class Skills
 {
     /**
      * @var integer $id
@@ -20,16 +20,31 @@ class Skill
     private $level;
 
     /**
+     * @var integer $instances
+     */
+    private $instances;
+
+    /**
      * @var boolean $isActive
      */
     private $isActive;
 
     /**
-     * @var \DateTime $start_time
+     * @var \DateTime $casted_time
      */
-    private $start_time;
+    private $casted_time;
 
-    
+    /**
+     * @var Warlords\GameBundle\Entity\SkillList
+     */
+    private $skill;
+
+    /**
+     * @var Warlords\GameBundle\Entity\PlayerStats
+     */
+    private $stats;
+
+
     /**
      * Get id
      *
@@ -44,7 +59,7 @@ class Skill
      * Set level
      *
      * @param integer $level
-     * @return Skill
+     * @return Skills
      */
     public function setLevel($level)
     {
@@ -64,10 +79,33 @@ class Skill
     }
 
     /**
+     * Set instances
+     *
+     * @param integer $instances
+     * @return Skills
+     */
+    public function setInstances($instances)
+    {
+        $this->instances = $instances;
+    
+        return $this;
+    }
+
+    /**
+     * Get instances
+     *
+     * @return integer 
+     */
+    public function getInstances()
+    {
+        return $this->instances;
+    }
+
+    /**
      * Set isActive
      *
      * @param boolean $isActive
-     * @return Skill
+     * @return Skills
      */
     public function setIsActive($isActive)
     {
@@ -87,38 +125,33 @@ class Skill
     }
 
     /**
-     * Set start_time
+     * Set casted_time
      *
-     * @param \DateTime $startTime
-     * @return Skill
+     * @param \DateTime $castedTime
+     * @return Skills
      */
-    public function setStartTime($startTime)
+    public function setCastedTime($castedTime)
     {
-        $this->start_time = $startTime;
+        $this->casted_time = $castedTime;
     
         return $this;
     }
 
     /**
-     * Get start_time
+     * Get casted_time
      *
      * @return \DateTime 
      */
-    public function getStartTime()
+    public function getCastedTime()
     {
-        return $this->start_time;
+        return $this->casted_time;
     }
-    /**
-     * @var Warlords\GameBundle\Entity\SkillList
-     */
-    private $skill;
-
 
     /**
      * Set skill
      *
      * @param Warlords\GameBundle\Entity\SkillList $skill
-     * @return Skill
+     * @return Skills
      */
     public function setSkill(\Warlords\GameBundle\Entity\SkillList $skill = null)
     {
@@ -136,19 +169,14 @@ class Skill
     {
         return $this->skill;
     }
-    /**
-     * @var Warlords\GameBundle\Entity\Stats
-     */
-    private $stats;
-
 
     /**
      * Set stats
      *
-     * @param Warlords\GameBundle\Entity\Stats $stats
-     * @return Skill
+     * @param Warlords\GameBundle\Entity\PlayerStats $stats
+     * @return Skills
      */
-    public function setStats(\Warlords\GameBundle\Entity\Stats $stats = null)
+    public function setStats(\Warlords\GameBundle\Entity\PlayerStats $stats = null)
     {
         $this->stats = $stats;
     
@@ -158,7 +186,7 @@ class Skill
     /**
      * Get stats
      *
-     * @return Warlords\GameBundle\Entity\Stats 
+     * @return Warlords\GameBundle\Entity\PlayerStats 
      */
     public function getStats()
     {

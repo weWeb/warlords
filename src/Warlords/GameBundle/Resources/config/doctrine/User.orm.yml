@@ -14,14 +14,20 @@ Warlords\GameBundle\Entity\User:
         salt:
             type: string
             length: 255
+            nullable: true
         password:
             type: string
             length: 255
         email:
             type: string
             length: 100
+            nullable: true
         isActive:
             type: boolean
+    oneToOne:
+        stats:
+            targetEntity: PlayerStats
+            mappedBy: user
     manyToMany:
         alliesWithMe:
             targetEntity: User

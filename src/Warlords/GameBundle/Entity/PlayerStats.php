@@ -5,9 +5,9 @@ namespace Warlords\GameBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Warlords\GameBundle\Entity\Stats
+ * Warlords\GameBundle\Entity\PlayerStats
  */
-class Stats
+class PlayerStats
 {
     /**
      * @var integer $id
@@ -28,8 +28,7 @@ class Stats
      * @var integer $sp
      */
     private $sp;
-
-    /**
+/**
      * @var integer $fame
      */
     private $fame;
@@ -45,11 +44,39 @@ class Stats
     private $gold;
 
     /**
-     * @var integer $army
+     * @var integer $infantry
      */
-    private $army;
+    private $infantry;
 
-    
+    /**
+     * @var integer $knights
+     */
+    private $knights;
+
+    /**
+     * @var integer $calvary
+     */
+     
+    private $calvary;
+
+   
+    /**
+     * @var Warlords\GameBundle\Entity\User
+     */
+    private $user;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $skills;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     
     /**
      * Get id
@@ -65,7 +92,7 @@ class Stats
      * Set level
      *
      * @param integer $level
-     * @return Stats
+     * @return PlayerStats
      */
     public function setLevel($level)
     {
@@ -88,7 +115,7 @@ class Stats
      * Set exp
      *
      * @param integer $exp
-     * @return Stats
+     * @return PlayerStats
      */
     public function setExp($exp)
     {
@@ -111,7 +138,7 @@ class Stats
      * Set sp
      *
      * @param integer $sp
-     * @return Stats
+     * @return PlayerStats
      */
     public function setSp($sp)
     {
@@ -134,7 +161,7 @@ class Stats
      * Set fame
      *
      * @param integer $fame
-     * @return Stats
+     * @return PlayerStats
      */
     public function setFame($fame)
     {
@@ -157,7 +184,7 @@ class Stats
      * Set land
      *
      * @param integer $land
-     * @return Stats
+     * @return PlayerStats
      */
     public function setLand($land)
     {
@@ -180,7 +207,7 @@ class Stats
      * Set gold
      *
      * @param integer $gold
-     * @return Stats
+     * @return PlayerStats
      */
     public function setGold($gold)
     {
@@ -200,50 +227,79 @@ class Stats
     }
 
     /**
-     * Set army
+     * Set infantry
      *
-     * @param integer $army
-     * @return Stats
+     * @param integer $infantry
+     * @return PlayerStats
      */
-    public function setArmy($army)
+    public function setInfantry($infantry)
     {
-        $this->army = $army;
+        $this->infantry = $infantry;
     
         return $this;
     }
 
     /**
-     * Get army
+     * Get infantry
      *
      * @return integer 
      */
-    public function getArmy()
+    public function getInfantry()
     {
-        return $this->army;
+        return $this->infantry;
     }
-    /**
-     * @var Warlords\GameBundle\Entity\User
-     */
-    private $user;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * Set knights
+     *
+     * @param integer $knights
+     * @return PlayerStats
      */
-    private $skills;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
+    public function setKnights($knights)
     {
-        $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+        $this->knights = $knights;
     
+        return $this;
+    }
+
+    /**
+     * Get knights
+     *
+     * @return integer 
+     */
+    public function getKnights()
+    {
+        return $this->knights;
+    }
+
+    /**
+     * Set calvary
+     *
+     * @param integer $calvary
+     * @return PlayerStats
+     */
+    public function setCalvary($calvary)
+    {
+        $this->calvary = $calvary;
+    
+        return $this;
+    }
+
+    /**
+     * Get calvary
+     *
+     * @return integer 
+     */
+    public function getCalvary()
+    {
+        return $this->calvary;
+    }
+
     /**
      * Set user
      *
      * @param Warlords\GameBundle\Entity\User $user
-     * @return Stats
+     * @return PlayerStats
      */
     public function setUser(\Warlords\GameBundle\Entity\User $user = null)
     {
@@ -265,10 +321,10 @@ class Stats
     /**
      * Add skills
      *
-     * @param Warlords\GameBundle\Entity\Skill $skills
-     * @return Stats
+     * @param Warlords\GameBundle\Entity\Skills $skills
+     * @return PlayerStats
      */
-    public function addSkill(\Warlords\GameBundle\Entity\Skill $skills)
+    public function addSkill(\Warlords\GameBundle\Entity\Skills $skills)
     {
         $this->skills[] = $skills;
     
@@ -278,9 +334,9 @@ class Stats
     /**
      * Remove skills
      *
-     * @param Warlords\GameBundle\Entity\Skill $skills
+     * @param Warlords\GameBundle\Entity\Skills $skills
      */
-    public function removeSkill(\Warlords\GameBundle\Entity\Skill $skills)
+    public function removeSkill(\Warlords\GameBundle\Entity\Skills $skills)
     {
         $this->skills->removeElement($skills);
     }

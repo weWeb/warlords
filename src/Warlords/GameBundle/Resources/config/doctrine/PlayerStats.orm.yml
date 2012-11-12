@@ -1,12 +1,11 @@
-Warlords\GameBundle\Entity\Stats:
+Warlords\GameBundle\Entity\PlayerStats:
     type: entity
-    table: stats
-    fields:
+    table: playerStats
+    id:
         id:
             type: integer
-            id: true
-            generator:
-                strategy: AUTO
+            generator: {strategy: AUTO}
+    fields:
         level:
             type: integer
         exp:
@@ -19,13 +18,18 @@ Warlords\GameBundle\Entity\Stats:
             type: integer
         gold:
             type: integer
-        army:
+        infantry:
+            type: integer
+        knights:
+            type: integer
+        calvary:
             type: integer
     oneToOne:
         user:
             targetEntity: User
+            inversedBy: stats
     oneToMany:
         skills:
-            targetEntity: Skill
+            targetEntity: Skills
             mappedBy: stats
     lifecycleCallbacks: {  }
