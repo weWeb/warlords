@@ -14,14 +14,14 @@
     </head>
     <body>
 
-        <div id="container"><div id="innercontainer">
+        <div id="container">
             <header id="header">
                
 				<div class="top">
                     {% block navigation %}
                         <nav>
                             <ul class="navigation">
-                                <li><a href="#">Home</a></li>
+                                <li><a href="{{ path('WarlordsGameBundle_homepage') }}">Home</a></li>
                                 <li><a href="#">About</a></li>
 								<li><a href="#">Guide</a></li>
 								<li><a href="#">Ranking</a>
@@ -40,26 +40,24 @@
                     {% endblock %}
                 </div>
             </header>
-
+			
 			<div id="content">
 				<aside class="sidebar">
-    				<div class="login">
-				    {% block login %}{% endblock %}
-				    </div>
-		            {% block sidebar %}{% endblock %}
+				        {% block sidebar %}{% endblock %}
+					
 		        </aside>
-
+				
 		        <section class="main-col">
 		            {% block body %}{% endblock %}
-		        </section>
+		        </section> 
+				<div class="clear"></div>
 			</div>
-
             <div id="footer">
                 {% block footer %}
                     Warlords: The Final Allegiance - © 2012 WeWeb
                 {% endblock %}
             </div>
-        </div></div>
+        </div>
 
         {% block javascripts %}{% endblock %}
     </body>
