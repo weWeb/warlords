@@ -19,6 +19,12 @@ login_check:
 logout:
     pattern: /logout
 
+WarlordsGameBundle_profile_get:
+    pattern: /profile/{target_id}
+    defaults:  { _controller: WarlordsGameBundle:Profile:profile_get }
+    requirements:
+        _method:  GET
+        id: \d+
 
 WarlordsGameBundle_profile:
     pattern: /profile
@@ -26,3 +32,5 @@ WarlordsGameBundle_profile:
     requirements:
         _method:  GET
         id: \d+
+        
+

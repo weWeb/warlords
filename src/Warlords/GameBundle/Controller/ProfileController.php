@@ -30,5 +30,25 @@ class ProfileController extends Controller{
                                 'playerstats' => $playerstats,
                                 'attack' => $attk, 'defense' => $defn));
     }
+    
+    public function profile_getAction($target_id){
+        $id=$target_id;
+        
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $playerstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($id);
+
+
+        if (!$playerstats) {
+        	throw $this->createNotFoundException('Unable to find player.');
+    	}
+    	
+    	$soldiers = $playerstats->getInfantry();
+    	$knights = $playerstats->getKnights();
+    	$calvary = $playerstats->getCalvary();
+        
+        return $this->render('WarlordsGameBundle:Page:profile_get.html.twig', array(
+                                'playerstats' => $playerstats));
+    }
 }
 ?>
