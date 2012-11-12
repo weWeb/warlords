@@ -1,16 +1,22 @@
 Warlords\GameBundle\Entity\PlayerStats:
     type: entity
-    table: PlayerStats
+    table: playerStats
     id:
         id:
             type: integer
             generator: {strategy: AUTO}
     fields:
-        gold:
+        level:
+            type: integer
+        exp:
+            type: integer
+        sp:
+            type: integer
+        fame:
             type: integer
         land:
             type: integer
-        fame:
+        gold:
             type: integer
         infantry:
             type: integer
@@ -18,15 +24,12 @@ Warlords\GameBundle\Entity\PlayerStats:
             type: integer
         calvary:
             type: integer
-        experience:
-            type: integer
-        level: 
-            type: integer
-            range: [1,20]
-    OneToOne:
+    oneToOne:
         user:
             targetEntity: User
-            inversedBy: skills
-            joinColumn:
-                name: user_id
-                referencedColumnName: id
+            inversedBy: stats
+    oneToMany:
+        skills:
+            targetEntity: Skills
+            mappedBy: stats
+    lifecycleCallbacks: {  }

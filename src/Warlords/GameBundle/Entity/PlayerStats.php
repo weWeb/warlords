@@ -15,9 +15,23 @@ class PlayerStats
     private $id;
 
     /**
-     * @var integer $gold
+     * @var integer $level
      */
-    private $gold;
+    private $level;
+
+    /**
+     * @var integer $exp
+     */
+    private $exp;
+
+    /**
+     * @var integer $sp
+     */
+    private $sp;
+/**
+     * @var integer $fame
+     */
+    private $fame;
 
     /**
      * @var integer $land
@@ -25,9 +39,9 @@ class PlayerStats
     private $land;
 
     /**
-     * @var integer $fame
+     * @var integer $gold
      */
-    private $fame;
+    private $gold;
 
     /**
      * @var integer $infantry
@@ -42,14 +56,28 @@ class PlayerStats
     /**
      * @var integer $calvary
      */
+     
     private $calvary;
 
+   
     /**
      * @var Warlords\GameBundle\Entity\User
      */
     private $user;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $skills;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -61,26 +89,95 @@ class PlayerStats
     }
 
     /**
-     * Set gold
+     * Set level
      *
-     * @param integer $gold
+     * @param integer $level
      * @return PlayerStats
      */
-    public function setGold($gold)
+    public function setLevel($level)
     {
-        $this->gold = $gold;
+        $this->level = $level;
     
         return $this;
     }
 
     /**
-     * Get gold
+     * Get level
      *
      * @return integer 
      */
-    public function getGold()
+    public function getLevel()
     {
-        return $this->gold;
+        return $this->level;
+    }
+
+    /**
+     * Set exp
+     *
+     * @param integer $exp
+     * @return PlayerStats
+     */
+    public function setExp($exp)
+    {
+        $this->exp = $exp;
+    
+        return $this;
+    }
+
+    /**
+     * Get exp
+     *
+     * @return integer 
+     */
+    public function getExp()
+    {
+        return $this->exp;
+    }
+
+    /**
+     * Set sp
+     *
+     * @param integer $sp
+     * @return PlayerStats
+     */
+    public function setSp($sp)
+    {
+        $this->sp = $sp;
+    
+        return $this;
+    }
+
+    /**
+     * Get sp
+     *
+     * @return integer 
+     */
+    public function getSp()
+    {
+        return $this->sp;
+    }
+
+    /**
+     * Set fame
+     *
+     * @param integer $fame
+     * @return PlayerStats
+     */
+    public function setFame($fame)
+    {
+        $this->fame = $fame;
+    
+        return $this;
+    }
+
+    /**
+     * Get fame
+     *
+     * @return integer 
+     */
+    public function getFame()
+    {
+        return $this->fame;
     }
 
     /**
@@ -107,26 +204,26 @@ class PlayerStats
     }
 
     /**
-     * Set fame
+     * Set gold
      *
-     * @param integer $fame
+     * @param integer $gold
      * @return PlayerStats
      */
-    public function setFame($fame)
+    public function setGold($gold)
     {
-        $this->fame = $fame;
+        $this->gold = $gold;
     
         return $this;
     }
 
     /**
-     * Get fame
+     * Get gold
      *
      * @return integer 
      */
-    public function getFame()
+    public function getGold()
     {
-        return $this->fame;
+        return $this->gold;
     }
 
     /**
@@ -220,60 +317,37 @@ class PlayerStats
     {
         return $this->user;
     }
-    /**
-     * @var integer $experience
-     */
-    private $experience;
 
     /**
-     * @var integer $level
-     */
-    private $level;
-
-
-    /**
-     * Set experience
+     * Add skills
      *
-     * @param integer $experience
+     * @param Warlords\GameBundle\Entity\Skills $skills
      * @return PlayerStats
      */
-    public function setExperience($experience)
+    public function addSkill(\Warlords\GameBundle\Entity\Skills $skills)
     {
-        $this->experience = $experience;
+        $this->skills[] = $skills;
     
         return $this;
     }
 
     /**
-     * Get experience
+     * Remove skills
      *
-     * @return integer 
+     * @param Warlords\GameBundle\Entity\Skills $skills
      */
-    public function getExperience()
+    public function removeSkill(\Warlords\GameBundle\Entity\Skills $skills)
     {
-        return $this->experience;
+        $this->skills->removeElement($skills);
     }
 
     /**
-     * Set level
+     * Get skills
      *
-     * @param integer $level
-     * @return PlayerStats
+     * @return Doctrine\Common\Collections\Collection 
      */
-    public function setLevel($level)
+    public function getSkills()
     {
-        $this->level = $level;
-    
-        return $this;
-    }
-
-    /**
-     * Get level
-     *
-     * @return integer 
-     */
-    public function getLevel()
-    {
-        return $this->level;
+        return $this->skills;
     }
 }
