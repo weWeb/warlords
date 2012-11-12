@@ -7,6 +7,10 @@
 {% endblock %}
 
 {% block body %}
+    {% if info is not empty %}
+        <div class="loginerror">{{ info }}</div>
+    {% endif %}
+    
     <div id="stats">
         <ul id="resources">
             <li class="gold">Gold: <label id="gold">{{ playerstats.gold }}</label></li>

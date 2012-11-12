@@ -31,4 +31,9 @@ WarlordsGameBundle_profile:
     defaults:  { _controller: WarlordsGameBundle:Profile:profile }
     requirements:
         _method:  GET
-        
+                
+WarlordsGameBundle_attack:
+    pattern: /attack/{target_id}
+    defaults:  { _controller: WarlordsGameBundle:Profile:attack }
+    requirements:
+        _method:  GET

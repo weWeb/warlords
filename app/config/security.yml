@@ -58,3 +58,4 @@ security:
         #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/profile , roles: ROLE_USER}
+        - { path: ^/attack , roles: ROLE_USER}
