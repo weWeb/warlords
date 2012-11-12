@@ -1,0 +1,15 @@
+Warlords\GameBundle\Entity\SkillList:
+    type: entity
+    table: skill_list
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: 255
+        base_power:
+            type: integer
+    lifecycleCallbacks: {  }

@@ -7,56 +7,33 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Warlords\GameBundle\Entity\User
- *
- * @ORM\Table(name="user")
- * @ORM\Entity
  */
 class User implements UserInterface
 {
     /**
      * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string $username
-     *
-     * @ORM\Column(name="username", type="string", length=255, nullable=false)
      */
     private $username;
 
     /**
      * @var string $salt
-     *
-     * @ORM\Column(name="salt", type="string", length=255, nullable=true)
      */
     private $salt;
 
     /**
      * @var string $password
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private $password;
 
     /**
      * @var string $email
-     *
-     * @ORM\Column(name="email", type="string", length=100, nullable=true)
      */
     private $email;
-
-    /**
-     * @var boolean $isactive
-     *
-     * @ORM\Column(name="isActive", type="boolean", nullable=false)
-     */
-    private $isactive;
-
 
     /**
      * @var boolean $isActive
@@ -67,6 +44,18 @@ class User implements UserInterface
     {
         return array('ROLE_USER');
     }
+
+
+
+    private $alliesWithMe;
+
+
+
+    private $myAllies;
+
+
+
+
 
     /**
      * @inheritDoc
@@ -199,5 +188,107 @@ class User implements UserInterface
     public function getIsActive()
     {
         return $this->isActive;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->alliesWithMe = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->myAllies = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add alliesWithMe
+     *
+     * @param Warlords\GameBundle\Entity\User $alliesWithMe
+     * @return User
+     */
+    public function addAlliesWithMe(\Warlords\GameBundle\Entity\User $alliesWithMe)
+    {
+        $this->alliesWithMe[] = $alliesWithMe;
+    
+        return $this;
+    }
+
+    /**
+     * Remove alliesWithMe
+     *
+     * @param Warlords\GameBundle\Entity\User $alliesWithMe
+     */
+    public function removeAlliesWithMe(\Warlords\GameBundle\Entity\User $alliesWithMe)
+    {
+        $this->alliesWithMe->removeElement($alliesWithMe);
+    }
+
+    /**
+     * Get alliesWithMe
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getAlliesWithMe()
+    {
+        return $this->alliesWithMe;
+    }
+
+    /**
+     * Add myAllies
+     *
+     * @param Warlords\GameBundle\Entity\User $myAllies
+     * @return User
+     */
+    public function addMyAllie(\Warlords\GameBundle\Entity\User $myAllies)
+    {
+        $this->myAllies[] = $myAllies;
+    
+        return $this;
+    }
+
+    /**
+     * Remove myAllies
+     *
+     * @param Warlords\GameBundle\Entity\User $myAllies
+     */
+    public function removeMyAllie(\Warlords\GameBundle\Entity\User $myAllies)
+    {
+        $this->myAllies->removeElement($myAllies);
+    }
+
+    /**
+     * Get myAllies
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMyAllies()
+    {
+        return $this->myAllies;
+    }
+    /**
+     * @var \Warlords\GameBundle\Entity\Playerstats
+     */
+    private $stats;
+
+
+    /**
+     * Set stats
+     *
+     * @param \Warlords\GameBundle\Entity\Playerstats $stats
+     * @return User
+     */
+    public function setStats(\Warlords\GameBundle\Entity\Playerstats $stats = null)
+    {
+        $this->stats = $stats;
+    
+        return $this;
+    }
+
+    /**
+     * Get stats
+     *
+     * @return \Warlords\GameBundle\Entity\Playerstats 
+     */
+    public function getStats()
+    {
+        return $this->stats;
     }
 }

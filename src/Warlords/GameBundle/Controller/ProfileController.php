@@ -11,7 +11,7 @@ class ProfileController extends Controller{
         
         $em = $this->getDoctrine()->getEntityManager();
 
-        $playerstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->find($id);
+        $playerstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($id);
 
         if (!$playerstats) {
         	throw $this->createNotFoundException('Unable to find player.');

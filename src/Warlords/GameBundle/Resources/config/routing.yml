@@ -3,6 +3,13 @@ WarlordsGameBundle_homepage:
     defaults: { _controller: WarlordsGameBundle:Main:index }
     requirements:
         _method:  GET
+        
+        
+WarlordsGameBundle_player:
+    pattern: /player
+    defaults: { _controller: WarlordsGameBundle:Page:player }
+    requirements:
+        _method: GET
 
 login:
     pattern:   /login

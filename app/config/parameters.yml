@@ -12,3 +12,4 @@ parameters:
     locale: en
     secret: fdcab712e14e7b80dd7e3693b986b3410d268f04
     database_path: null
+

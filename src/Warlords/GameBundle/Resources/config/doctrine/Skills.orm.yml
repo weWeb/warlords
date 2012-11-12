@@ -6,11 +6,6 @@ Warlords\GameBundle\Entity\Skills:
             type: integer
             generator: {strategy: AUTO}
     fields:
-        #skill own by this user
-        skill:
-            type: string
-            length: 255
-            unique: true
         #level of this skill
         level:
             type: integer
@@ -25,10 +20,11 @@ Warlords\GameBundle\Entity\Skills:
         #for tracking how long since it is active.
         casted_time:
             type: datetime
+    oneToOne:
+        skill:
+            targetEntity: SkillList
     manyToOne:
-        user:
-            targetEntity: User
+        stats:
+            targetEntity: PlayerStats
             inversedBy: skills
-            joinColumn:
-                name: user_id
-                referencedColumnName: id
+    lifecycleCallbacks: {  }
