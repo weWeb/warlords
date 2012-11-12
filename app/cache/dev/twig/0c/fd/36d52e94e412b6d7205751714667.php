@@ -13,7 +13,6 @@ class __TwigTemplate_0cfd36d52e94e412b6d7205751714667 extends Twig_Template
             'title' => array($this, 'block_title'),
             'stylesheets' => array($this, 'block_stylesheets'),
             'navigation' => array($this, 'block_navigation'),
-            'login' => array($this, 'block_login'),
             'sidebar' => array($this, 'block_sidebar'),
             'body' => array($this, 'block_body'),
             'footer' => array($this, 'block_footer'),
@@ -46,7 +45,7 @@ class __TwigTemplate_0cfd36d52e94e412b6d7205751714667 extends Twig_Template
     </head>
     <body>
 
-        <div id=\"container\"><div id=\"innercontainer\">
+        <div id=\"container\">
             <header id=\"header\">
                
 \t\t\t\t<div class=\"top\">
@@ -56,41 +55,36 @@ class __TwigTemplate_0cfd36d52e94e412b6d7205751714667 extends Twig_Template
         // line 41
         echo "                </div>
             </header>
-
+\t\t\t
 \t\t\t<div id=\"content\">
 \t\t\t\t<aside class=\"sidebar\">
-    \t\t\t\t<div class=\"login\">
-\t\t\t\t    ";
-        // line 47
-        $this->displayBlock('login', $context, $blocks);
-        // line 48
-        echo "\t\t\t\t    </div>
-\t\t            ";
-        // line 49
+\t\t\t\t        ";
+        // line 46
         $this->displayBlock('sidebar', $context, $blocks);
-        // line 50
-        echo "\t\t        </aside>
-
+        // line 47
+        echo "\t\t\t\t\t
+\t\t        </aside>
+\t\t\t\t
 \t\t        <section class=\"main-col\">
 \t\t            ";
-        // line 53
+        // line 51
         $this->displayBlock('body', $context, $blocks);
-        // line 54
-        echo "\t\t        </section>
+        // line 52
+        echo "\t\t        </section> 
+\t\t\t\t<div class=\"clear\"></div>
 \t\t\t</div>
-
             <div id=\"footer\">
                 ";
-        // line 58
+        // line 56
         $this->displayBlock('footer', $context, $blocks);
-        // line 61
+        // line 59
         echo "            </div>
-        </div></div>
+        </div>
 
         ";
-        // line 64
+        // line 62
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 65
+        // line 63
         echo "    </body>
 </html>
 ";
@@ -118,7 +112,10 @@ class __TwigTemplate_0cfd36d52e94e412b6d7205751714667 extends Twig_Template
         // line 22
         echo "                        <nav>
                             <ul class=\"navigation\">
-                                <li><a href=\"#\">Home</a></li>
+                                <li><a href=\"";
+        // line 24
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("WarlordsGameBundle_homepage"), "html", null, true);
+        echo "\">Home</a></li>
                                 <li><a href=\"#\">About</a></li>
 \t\t\t\t\t\t\t\t<li><a href=\"#\">Guide</a></li>
 \t\t\t\t\t\t\t\t<li><a href=\"#\">Ranking</a>
@@ -143,30 +140,25 @@ class __TwigTemplate_0cfd36d52e94e412b6d7205751714667 extends Twig_Template
                     ";
     }
 
-    // line 47
-    public function block_login($context, array $blocks = array())
-    {
-    }
-
-    // line 49
+    // line 46
     public function block_sidebar($context, array $blocks = array())
     {
     }
 
-    // line 53
+    // line 51
     public function block_body($context, array $blocks = array())
     {
     }
 
-    // line 58
+    // line 56
     public function block_footer($context, array $blocks = array())
     {
-        // line 59
+        // line 57
         echo "                    Warlords: The Final Allegiance - © 2012 WeWeb
                 ";
     }
 
-    // line 64
+    // line 62
     public function block_javascripts($context, array $blocks = array())
     {
     }
@@ -183,6 +175,6 @@ class __TwigTemplate_0cfd36d52e94e412b6d7205751714667 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  170 => 64,  165 => 59,  162 => 58,  157 => 53,  152 => 49,  147 => 47,  137 => 35,  133 => 34,  119 => 22,  116 => 21,  109 => 11,  106 => 10,  100 => 6,  94 => 65,  92 => 64,  87 => 61,  85 => 58,  79 => 54,  77 => 53,  72 => 50,  70 => 49,  67 => 48,  65 => 47,  57 => 41,  55 => 21,  43 => 13,  41 => 10,  34 => 6,  27 => 1,);
+        return array (  162 => 62,  157 => 57,  154 => 56,  149 => 51,  144 => 46,  134 => 35,  130 => 34,  117 => 24,  113 => 22,  110 => 21,  103 => 11,  100 => 10,  94 => 6,  88 => 63,  86 => 62,  81 => 59,  79 => 56,  73 => 52,  71 => 51,  65 => 47,  63 => 46,  56 => 41,  54 => 21,  33 => 6,  26 => 1,  64 => 11,  42 => 13,  40 => 10,  32 => 5,  29 => 4,);
     }
 }
