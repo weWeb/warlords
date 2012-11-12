@@ -59,7 +59,7 @@ class __TwigTemplate_0cfd36d52e94e412b6d7205751714667 extends Twig_Template
                     ";
         // line 23
         $this->displayBlock('navigation', $context, $blocks);
-        // line 42
+        // line 44
         echo "                </div>
             </header>
 
@@ -67,36 +67,36 @@ class __TwigTemplate_0cfd36d52e94e412b6d7205751714667 extends Twig_Template
 \t\t\t\t<aside class=\"sidebar\">
     \t\t\t\t<div class=\"login\">
 \t\t\t\t    ";
-        // line 48
+        // line 50
         $this->displayBlock('login', $context, $blocks);
-        // line 49
+        // line 51
         echo "\t\t\t\t    </div>
 \t\t            ";
-        // line 50
+        // line 52
         $this->displayBlock('sidebar', $context, $blocks);
-        // line 51
+        // line 53
         echo "\t\t        </aside>
 
 \t\t        <section class=\"main-col\">
 \t\t            ";
-        // line 54
+        // line 56
         $this->displayBlock('body', $context, $blocks);
-        // line 55
+        // line 57
         echo "\t\t        </section>
 \t\t\t</div>
 
             <div id=\"footer\">
                 ";
-        // line 59
+        // line 61
         $this->displayBlock('footer', $context, $blocks);
-        // line 62
+        // line 64
         echo "            </div>
         </div></div>
 
         ";
-        // line 65
+        // line 67
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 66
+        // line 68
         echo "    </body>
 </html>
 ";
@@ -132,46 +132,54 @@ class __TwigTemplate_0cfd36d52e94e412b6d7205751714667 extends Twig_Template
                             <ul class=\"navigation\">
                                 <li><a href=\"#\">Home</a></li>
                                 <li><a href=\"#\">About</a></li>
-\t\t\t\t\t\t\t\t<li><a href=\"#\">Guide</a></li>
-\t\t\t\t\t\t\t\t<li><a href=\"#\">Ranking</a>
-\t\t\t\t\t\t\t\t\t<ul>
-           \t\t\t\t \t\t\t\t<li><a href=”#”>Wealth</a></li>
-            \t\t\t\t\t\t\t<li><a href=”#”>Fame</a></li>
-        \t\t\t\t\t\t\t</ul>\t\t\t\t\t\t\t\t\t
-\t\t\t\t\t\t\t\t</li>
-\t\t\t\t\t\t\t\t<li><a href=\"profile\">Profile</a></li>
-\t\t\t\t\t\t\t\t<li><a href=\"#\">Player</a></li>
-\t\t\t\t\t\t\t\t<li><a href=\"#\">Guild</a></li>
+\t\t\t\t<li><a href=\"#\">Guide</a></li>
+
+\t\t\t\t<li><a href=\"#\">Ranking</a>
+\t\t\t\t\t<ul>
+           \t\t\t\t\t<li><a href=”#”>Wealth</a></li>
+            \t\t\t\t\t<li><a href=”#”>Fame</a></li>
+        \t\t\t\t</ul>\t\t\t\t\t\t\t\t\t
+\t\t\t\t</li>
+
+\t\t\t\t<li><a href=\"";
+        // line 37
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("WarlordsGameBundle_profile"), "html", null, true);
+        echo "\">Profile</a></li>
+\t\t\t\t<li><a href=\"";
+        // line 38
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("WarlordsGameBundle_player"), "html", null, true);
+        echo "\">Player</a></li>
+\t\t\t\t<li><a href=\"#\">Guild</a></li>
                                 <li><a href=\"#\">Contact</a></li>
                             </ul>
                         </nav>
                     ";
     }
 
-    // line 48
+    // line 50
     public function block_login($context, array $blocks = array())
     {
     }
 
-    // line 50
+    // line 52
     public function block_sidebar($context, array $blocks = array())
     {
     }
 
-    // line 54
+    // line 56
     public function block_body($context, array $blocks = array())
     {
     }
 
-    // line 59
+    // line 61
     public function block_footer($context, array $blocks = array())
     {
-        // line 60
+        // line 62
         echo "                    Warlords: The Final Allegiance - © 2012 WeWeb
                 ";
     }
 
-    // line 65
+    // line 67
     public function block_javascripts($context, array $blocks = array())
     {
     }
@@ -188,6 +196,6 @@ class __TwigTemplate_0cfd36d52e94e412b6d7205751714667 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  173 => 65,  168 => 60,  165 => 59,  160 => 54,  155 => 50,  150 => 48,  129 => 24,  126 => 23,  120 => 20,  113 => 11,  110 => 10,  104 => 6,  98 => 66,  96 => 65,  91 => 62,  89 => 59,  83 => 55,  81 => 54,  76 => 51,  74 => 50,  71 => 49,  69 => 48,  61 => 42,  59 => 23,  53 => 20,  42 => 13,  40 => 10,  33 => 6,  26 => 1,);
+        return array (  183 => 67,  178 => 62,  175 => 61,  170 => 56,  165 => 52,  160 => 50,  150 => 38,  146 => 37,  131 => 24,  128 => 23,  122 => 20,  115 => 11,  112 => 10,  106 => 6,  100 => 68,  98 => 67,  93 => 64,  91 => 61,  85 => 57,  83 => 56,  78 => 53,  76 => 52,  73 => 51,  71 => 50,  63 => 44,  61 => 23,  55 => 20,  44 => 13,  42 => 10,  35 => 6,  31 => 5,  28 => 1,);
     }
 }

@@ -11,9 +11,6 @@ class ProfileController extends Controller{
         
         $em = $this->getDoctrine()->getEntityManager();
 
-
-        $Skills = $em->getRepository('WarlordsGameBundle:Skills')->findOneByUser($id);
-
         $playerstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($id);
 
 
@@ -31,7 +28,6 @@ class ProfileController extends Controller{
         
         return $this->render('WarlordsGameBundle:Page:profile.html.twig', array(
                                 'playerstats' => $playerstats,
-                                'skills' => $Skills,
                                 'attack' => $attk, 'defense' => $defn));
     }
 }
