@@ -26,26 +26,21 @@ a:active {outline: none;}
 
 /* Body */
 html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size: 12px; width: 100%; height: 100%; color: #FFF; font-size: 14px; 
-	background: #000;
-	/*background-image:url('../images/bg1.jpg');
-	background-attachment:fixed;*/
-	text-align: center;}
+	background: #000; text-align: center; overflow: auto; clear: both; }
 
-#container { margin: 0px auto; width: 960px;  height: auto !important; min-height: 100%; height: 100%; background-color:#10100f; text-align: left; position: relative; 
-	background-image:url('../images/warlord_bg_bar.jpg'); background-repeat:repeat-y; }
+#container { margin: 0px auto; width: 960px;  height: auto ; background-color:#10100f; text-align: left; position: relative; 
+	background-image:url('../images/warlord_bg_bar.jpg'); background-repeat:repeat-y; margin-bottom: 50px; }
 
-#wrapper a { text-decoration: none; color: #F48A00; }
-#wrapper span.highlight { color: #F48A00; }
 
 /* Header */
-#header { margin-bottom: 20px; height: 250px; position:relative; background-image:url('../images/warlord_bg.jpg'); background-repeat:no-repeat; }
+#header {height: 250px; position:relative; background-image:url('../images/warlord_bg.jpg'); background-repeat:no-repeat;  }
 #header h2 { font-family: 'Verdana', cursive; font-size: 40px; text-align: center; line-height: 110px; }
 #header h2 a { color: #000; }
 
 /* Menu */
-#header .top { solid #ccc; margin-bottom: 10px; width:100% }
+#header .top { solid #ccc; width:100%; height: auto }
 
-#header ul.navigation { list-style: none; text-align: center; margin:40px auto 0px auto; height:43px; position:absolute; left:14px; bottom:0; width: 923px; padding-left: 4px;
+#header ul.navigation { list-style: none; text-align: center; height:43px; position:absolute; left:14px; bottom:0; width: 923px; padding-left: 4px;
 	/* Rounded Corners */  
     -moz-border-radius: 10px;  
     -webkit-border-radius: 10px;  
@@ -55,7 +50,7 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
     background: -moz-linear-gradient(top, #2d221c, #0c0908);  
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2d221c), to(#0c0908));  
     /* Borders */  
-    border: 1px solid #320f00;  
+    border: 1px solid #100c09;  
     -moz-box-shadow:inset 0px 0px 1px #e4cba6;  
     -webkit-box-shadow:inset 0px 0px 1px #e4cba6;  
     box-shadow:inset 0px 0px 1px #e4cba6;
@@ -146,7 +141,7 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
     text-decoration:none;  
     text-shadow: 1px 1px 1px #000;
  /* Borders */  
-    border: 1px solid #320f00;  
+    border: 1px solid #100c09;  
     -moz-box-shadow:inset 0px 0px 1px #e4cba6;  
     -webkit-box-shadow:inset 0px 0px 1px #e4cba6;  
     box-shadow:inset 0px 0px 1px #e4cba6;
@@ -203,45 +198,84 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
 }
 
 /* Content Container */
-#content { display: block; position:absolute; left:0; top:250px; width:100%; height: auto; bottom:0; background-image:url('../images/warlord_bg.jpg'); background-repeat:no-repeat; background-position:0px -250px; }
+#content { position:relative; left:0px; top:0px; width:960px; height: auto; margin: 0px; padding: 0px; background-image:url('../images/warlord_bg.jpg'); background-repeat:no-repeat; background-position:0px -250px; }
 
 /* Sidebar */
 .sidebar { display: block;
-    position:absolute;
-	width: 200px;
+    position:relative;
+	width: 220px;
     height:auto;
     bottom:0;
     top:0;
     left:15px;
     right:0;
-	padding: 10px; 
-    margin-top:0px;
-    margin-bottom:0px;
-    margin-right:0px;
-    margin-left:0px;
+	padding: 0px; 
+	padding-top: 15px;
+	float: left;
  }
+
+.sidebar .sidebaritem { 
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.sidebar .sidebaritem .header {
+	width: 208px;
+	height: 63px;
+	margin-left: 4px;
+	background-image:url('../images/warlord_sidebar_header.png'); background-repeat:no-repeat;
+}
+
+.sidebar .sidebaritem .header .title {
+	float: right;
+	position:relative;
+	right: 30px;
+	top: 28px; 
+	 text-shadow: 1px 1px 1px #000;  
+}
+
+.sidebar .sidebaritem .content {
+	width: 179px;
+	position:relative;
+	top: 0px; 	
+	left: 14px;
+	padding: 15px; 
+	background-image:url('../images/warlord_sidebar_bg.png'); background-repeat:repeat-y;
+}
+
+
+.sidebar .sidebaritem .footer {
+	width: 198px;
+	height: 26px;
+	position:relative;
+	top: 0px;
+	left: 14px;
+	background-image:url('../images/warlord_sidebar_footer.png'); background-repeat:no-repeat;
+}
+
 
 /* Main Content */
 .main-col { display: block;
-    position:absolute;
-	width: 708px;
+    position:relative;
+	width: 685px;
     height:auto;
+	min-height: 400px;
     bottom:0;
-    top:0;
-    left:215px;
-	right:0;
+    top: 0px;
+	right: 17px;
 	padding: 10px; 
     margin-top:0px;
     margin-bottom:0px;
     margin-right:0px;
     margin-left:0px;
-    float: left; }
+	float: right;
+	}
 .main-col a { color: #F48A00; }
 .main-col h1, .main-col h2 { line-height: 1.2em; font-size: 32px; margin-bottom: 10px; font-weight: normal; color: #F48A00; }
 .main-col p { line-height: 1.5em; margin-bottom: 20px; }
 
 
 /* Footer */
-#footer { text-align: center; color: #aaa; height: 20px; padding-top:5px; position: absolute; bottom: 0; left: 5px; width: 949px; background-color: #171310 }
+#footer { text-align: center; color: #aaa; height: 16px; padding-top:10px; position: relative; bottom: 0px; left: 0px; width: 951px; background-image:url('../images/warlord_bg_footer.jpg'); background-repeat:no-repeat; font-size: 10px;  background-position:0px -4px; }
 
 

@@ -2,6 +2,30 @@
 {% extends '::base.html.twig' %}
 
 {% block sidebar %}
-    Sidebar content
+    <div class="sidebaritem">
+		<div class="header">
+			<div class="title">LOGIN</div>
+		</div>
+		<div class="content">
+			<div class="login">
+				{% block login %}{% endblock %}
+			</div>
+			
+		</div>
+		<div class="footer"></div>
+	</div>
+	
+	<div class="sidebaritem">
+		<div class="header">
+			<div class="title">Events</div>
+		</div>
+		<div class="content">	
+			This is where the events update can occur!!!
+		</div>
+		<div class="footer"></div>
+	</div>
+
+	
+
 {% endblock %}
 
