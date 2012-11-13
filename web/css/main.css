@@ -22,6 +22,11 @@ a:active {outline: none;}
 
 .disabled { pointer-events: none; opacity: 0.5; }
 
+.opacity50 {
+	opacity:0.5;
+	filter:alpha(opacity=50); /* For IE8 and earlier */
+}
+
 .clear { clear: both; }
 
 /* Default fonts */
@@ -51,7 +56,7 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
 	background: #000; text-align: center; overflow: auto; clear: both; }
 
 #container { margin: 0px auto; width: 960px;  height: auto ; background-color:#10100f; text-align: left; position: relative; 
-	background-image:url('../images/warlord_bg_bar.jpg'); background-repeat:repeat-y; margin-bottom: 50px; }
+	background-image:url('../images/warlord_bg_bar.jpg'); background-repeat:repeat-y; margin-bottom: 0px; overflow: auto;}
 
 
 /* Header */
@@ -276,8 +281,8 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
 	position:relative;
 	top: 0px; 	
 	left: 4px;
-	padding: 0px 22px 0px 23px; 
-	background-image:url('../images/warlord_sidebar_bg.jpg'); background-repeat:repeat-y; background-position:10px 0px;
+	padding: 2px 22px 2px 23px; 
+	background-image:url('../images/warlord_sidebar_bg.jpg'); background-repeat:repeat-y; background-position:10px 0px; margin-top: -2px;
 }
 
 .sidebar .sidebaritem .footer {
@@ -286,7 +291,7 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
 	position:relative;
 	top: 0px;
 	left: 4px;
-	background-image:url('../images/warlord_sidebar_footer.png'); background-repeat:no-repeat; background-position:10px 0px;
+	background-image:url('../images/warlord_sidebar_footer.png'); background-repeat:no-repeat; background-position:10px 0px; margin-top: -2px;
 }
 
 
@@ -307,8 +312,8 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
 	float: right;
 	}
 .main-col a { }
-.main-col h1, .main-col h2 { line-height: 1.2em; font-size: 28px; margin-bottom: 10px; font-weight: normal; color: #eda321; }
-.main-col p { line-height: 1.5em; margin-bottom: 20px; }
+.main-col h1, .main-col h2 { line-height: 1.2em; font-size: 28px;  font-weight: normal; color: #eda321; }
+.main-col p { line-height: 1.5em; }
 
 .main-co .mainitem { 
 	width: 100%;
@@ -333,11 +338,12 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
 .main-col .mainitem .content {
 	min-height: 300px; 
 	width: 694x;
+	height: auto;
 	position:relative;
 	top: 0px; 	
 	left: 4px;
-	padding: 0px 22px 0px 23px; 
-	background-image:url('../images/warlord_content_bg.jpg'); background-repeat:repeat-y; background-position:-6px 0px;
+	padding: 10px 35px 0px 23px; 
+	background-image:url('../images/warlord_content_bg.jpg'); background-repeat:repeat-y; background-position:-6px 0px; margin-top: -1px; 
 }
 
 .main-col .mainitem .footer {
@@ -346,12 +352,31 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
 	position:relative;
 	top: 0px;
 	left: 4px;
-	background-image:url('../images/warlord_content_footer.jpg'); background-repeat:no-repeat; background-position:-7px 0px;
+	background-image:url('../images/warlord_content_footer.jpg'); background-repeat:no-repeat; background-position:-7px 0px; margin-top: -1px;
 }
-
-
 
 /* Footer */
 #footer { text-align: center; color: #aaa; height: 16px; padding-top:10px; position: relative; bottom: 0px; left: 0px; width: 951px; background-image:url('../images/warlord_bg_footer.jpg'); background-repeat:no-repeat; font-size: 10px;  background-position:0px -4px; }
+
+/* News */
+p.news {
+	padding: 10px; 
+	/* Rounded Corners */  
+    -moz-border-radius: 10px;  
+    -webkit-border-radius: 10px;  
+    border-radius: 10px;  
+    background: #110e0c;  
+    /* Borders */  
+    border: 1px solid #100c09;  
+    -moz-box-shadow:inset 0px 0px 1px #e4cba6;  
+    -webkit-box-shadow:inset 0px 0px 1px #e4cba6;  
+    box-shadow:inset 0px 0px 1px #e4cba6;
+}
+
+li.news {
+	padding: 5px;
+}
+
+
 
 

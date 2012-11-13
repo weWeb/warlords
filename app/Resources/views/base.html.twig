@@ -23,6 +23,7 @@
         		s.parentNode.insertBefore(wf, s);
      		 })();
     	</script>
+		<script src="{{ asset('jquery.js') }}"></script>
     </head>
     <body>
 
@@ -68,11 +69,10 @@
                 {% endblock %}
             </div>
         </div>
-
-        {% block javascripts %}
-
 		
-
+	 	     
+        {% block javascripts %}
 		{% endblock %}
+		
     </body>
 </html>

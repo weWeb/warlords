@@ -1,0 +1,24 @@
+<ul>
+{% for news in newslist %}
+	<li class="news">
+    	<p class="news opacity50">
+			Title: {{ news.title }} </br>
+			Content: {{ news.content }}   </br>
+			Author: {{ news.author }}   </br>		
+			Date: {{ news.date }}   </br>			
+		</p>
+	</li>
+{% endfor %}
+</ul>
+
+{% block javascripts %}
+	<script type="text/javascript"> 
+	$('li.news').first();
+	
+  	$("p.news").hover(
+    	 function() { $(this).stop().fadeTo("slow", 1);},
+         function() { $(this).stop().fadeTo("slow", 0.5);});
+  
+	</script>  
+{% endblock %}
+

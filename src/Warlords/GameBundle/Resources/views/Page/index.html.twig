@@ -7,8 +7,7 @@
 			<div class="title"><h1>RECENT NEWS</h1></div>
 		</div>
 		<div class="content">
-			<p>Hello! This is our first news!</p>
-			
+			{% render "WarlordsGameBundle:News:recentNews" with {'max': 3} %}
 		</div>
 		<div class="footer"></div>
 	</div>
