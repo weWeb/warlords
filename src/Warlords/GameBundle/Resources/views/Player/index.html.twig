@@ -1,0 +1,13 @@
+{% for player in players %}
+    <article class="player {{ cycle(['odd', 'even'], loop.index0) }}" id="player-{{ player.id }}">
+        <header>
+            <p><span>{{ player.user.username }}</span></p>
+        </header>
+        <ul>
+        	<li>Level: {{ player.level }}</li>
+        	<li>Infantry: {{ player.infantry}}</li>
+        </ul>
+    </article>
+{% else %}
+    <p>There are no players match your search.</p>
+{% endfor %}

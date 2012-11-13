@@ -1,6 +1,12 @@
 {# src/Warlords/GameBundle/Resources/views/layout.html.twig #}
 {% extends '::base.html.twig' %}
 
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/player.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
 {% block sidebar %}
     Sidebar content
 {% endblock %}
