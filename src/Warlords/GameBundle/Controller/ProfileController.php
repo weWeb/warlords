@@ -184,7 +184,38 @@ class ProfileController extends Controller{
                                 'info' => $info));
     }
     public function buyAction(){
-        return $this->render('WarlordsGameBundle: index.html.twig');
+        $form = $this->createForm(new BuySoldierType(), NULL);
+        $request = $this->getRequest();
+        
+        if ($request->isMethod('POST')) {
+            
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                // perform some action, such as saving the task to the database
+                $usr = $this->get('security.context')->getToken()->getUser();
+                $id = $usr->getID();
+                
+                $em = $this->getDoctrine()->getEntityManager();
+
+                $playerstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($id);
+                
+                if (!$playerstats) {
+                	throw $this->createNotFoundException('Unable to find you.');
+            	}
+            	
+            	$soldiers = $playerstats->getInfantry();
+    	        $soldiers = $soldiers + $form["soldiers"]->getData();
+    	        
+    	        $playerstats->setInfantry($soldiers);
+    	        
+    	        $em->persist($playerstats);
+    	        $em->flush();
+
+                //return $this->redirect($this->generateUrl('task_success'));
+            }
+        }
+        return $this->render('WarlordsGameBundle:Page:index.html.twig');
     }
 }
 ?>

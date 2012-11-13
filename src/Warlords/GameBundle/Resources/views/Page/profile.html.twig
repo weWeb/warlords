@@ -42,12 +42,14 @@
 </ul>
 
 <div id="buysoldiers">
-<form action="{{ path( 'WarlordsGameBundle_buy_soldier' ) }}" method="post" {{ form_enctype(form) }} class="comment">
+{% if form is defined %}
+<form action="{{ path( 'WarlordsGameBundle_buy' ) }}" method="post" {{ form_enctype(form) }} class="comment">
     {{ form_widget(form) }}
     <p class="submit">
         <input type="submit" value="Buy">
     </p>
 </form>
+{% endif %}
 </div>
 
 {% endblock %}

@@ -38,9 +38,8 @@ WarlordsGameBundle_attack:
     requirements:
         _method:  GET
         
-WarlordsGameBundle_buy_soldier:
+WarlordsGameBundle_buy:
     pattern: /profile/buy
     defaults:  { _controller: WarlordsGameBundle:Profile:buy }
     requirements:
-        _method:  GET | POST
-        id: \d+
+        _method: POST
