@@ -2,6 +2,14 @@
 {% extends 'WarlordsGameBundle::layout.html.twig' %}
 
 {% block body %}
-    Game homepage
+    <div class="mainitem">
+		<div class="header">
+			<div class="title"><h1>RECENT NEWS</h1></div>
+		</div>
+		<div class="content">
+			{% render "WarlordsGameBundle:News:recentNews" with {'max': 3} %}
+		</div>
+		<div class="footer"></div>
+	</div>
 {% endblock %}
 

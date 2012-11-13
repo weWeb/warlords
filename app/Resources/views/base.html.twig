@@ -11,6 +11,19 @@
             <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" />
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+		<script type="text/javascript">
+      		WebFontConfig = { google: { families: [ 'Black Ops One' ] } };
+      		(function() {
+        		var wf = document.createElement('script');
+        		wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        		wf.type = 'text/javascript';
+        		wf.async = 'true';
+        		var s = document.getElementsByTagName('script')[0];
+        		s.parentNode.insertBefore(wf, s);
+     		 })();
+    	</script>
+		<script src="{{ asset('jquery.js') }}"></script>
     </head>
     <body>
 
@@ -27,7 +40,6 @@
 								<li><a href="#">Ranking</a>
 									<ul>
            				 				<li><a href=”#”>Wealth</a></li>
-										<li><a href=”#”>Test</a></li>
             							<li><a href=”#”>Fame</a></li>
         							</ul>									
 								</li>
@@ -44,7 +56,6 @@
 			<div id="content">
 				<aside class="sidebar">
 				        {% block sidebar %}{% endblock %}
-					
 		        </aside>
 				
 		        <section class="main-col">
@@ -58,7 +69,10 @@
                 {% endblock %}
             </div>
         </div>
-
-        {% block javascripts %}{% endblock %}
+		
+	 	     
+        {% block javascripts %}
+		{% endblock %}
+		
     </body>
 </html>
