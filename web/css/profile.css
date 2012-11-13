@@ -37,5 +37,20 @@ div#events > h2 {
 }
 
 a#logout {
-    float:right
+    float:right;
+}
+
+
+div#sidebar_profile {
+    border: solid;
+    border-width: 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+ul#attack_stats {
+    border-width: 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
