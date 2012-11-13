@@ -68,8 +68,8 @@ class ProfileController extends Controller{
                                 'selfstats' => $selfstats,
                                 'attack' => $attk,
                                 'defense' => $defn,
-                                'target_id' => $target_id,
-                                'info'=>NULL));
+                                'target_id' => $target_id
+                                ));
     }
     
     public function attackAction($target_id){
@@ -204,10 +204,20 @@ class ProfileController extends Controller{
                 	throw $this->createNotFoundException('Unable to find you.');
             	}
             	
+            	//Check Gold
+            	
             	$soldiers = $playerstats->getInfantry();
     	        $soldiers = $soldiers + $form["soldiers"]->getData();
     	        
+    	        $knights = $playerstats->getKnights();
+    	        $knights = $knights + $form["knights"]->getData();
+    	        
+    	        $calvary = $playerstats->getInfantry();
+    	        $calvary = $calvary + $form["calvary"]->getData();
+    	        
     	        $playerstats->setInfantry($soldiers);
+    	        $playerstats->setKnights($knights);
+    	        $playerstats->setCalvary($calvary);
     	        
     	        $em->persist($playerstats);
     	        $em->flush();
@@ -215,7 +225,7 @@ class ProfileController extends Controller{
                 //return $this->redirect($this->generateUrl('task_success'));
             }
         }
-        return $this->render('WarlordsGameBundle:Page:index.html.twig');
+        return $this->redirect($this->generateUrl('WarlordsGameBundle_profile'));
     }
 }
 ?>

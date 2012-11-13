@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-    {% if info is not empty %}
+    {% if info is defined %}
         <div class="loginerror">{{ info }}</div>
     {% endif %}
     

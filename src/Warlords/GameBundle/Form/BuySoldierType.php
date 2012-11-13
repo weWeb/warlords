@@ -9,9 +9,9 @@ class BuySoldierType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('soldiers')
-                ->add('knights')
-                ->add('calvary')
+        $builder->add('soldiers', 'text', array('label' => 'Soldiers','required' => false))
+                ->add('knights', 'text', array('label' => 'Knights','required' => false))
+                ->add('calvary', 'text', array('label' => 'Calvary','required' => false))
                 ;
     }
     
