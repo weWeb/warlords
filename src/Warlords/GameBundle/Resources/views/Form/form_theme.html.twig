@@ -1,0 +1,43 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block integer_widget %}
+    <div class="integer_widget">
+        {{ parent() }}
+    </div>
+{% endblock %}
+
+{% block field_errors %}
+   {% spaceless %}
+       <span class="help-inline">
+       {% if errors|length > 0 %}
+            {% for error in errors %}
+                {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}<br />
+            {% endfor %}
+        {% endif %}
+    </span>
+    {% endspaceless %}
+{% endblock field_errors %}
+
+{% block field_row %}
+     <div class="label {% if errors|length > 0 %}error{% endif %} float-left">
+        {{ form_label(form, label) }}
+	 </div>
+     <div class="input float-right">
+            {% set class = '' %}
+            {% if errors|length > 0 %}
+                {% set class = 'inputerror' %}
+            {% endif %}
+            {{ form_widget(form, { 'attr': { 'class': 'form' } }) }}
+          {#  {{ form_errors(form) }} #}
+      </div>
+      <div class="clear"></div>
+{% endblock field_row %}
+
+
+{% block field_label %}
+    {% spaceless %}
+        <label for="{{ id }}">{{ id|trans }}</label>
+    {% endspaceless %}
+{% endblock field_label %}
+
+

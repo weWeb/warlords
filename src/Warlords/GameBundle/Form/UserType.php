@@ -9,12 +9,16 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('username');
+        $builder->add('username', 'text', array('label' => 'overview.marker.new.given_taken_email',
+       'required' => true,));
 		$builder->add('password', 'repeated', array(
            'first_name' => 'password',
            'second_name' => 'confirm',
            'type' => 'password'));
-        $builder->add('email', 'email');
+        $builder->add('email', 'repeated', array(
+           'first_name' => 'email',
+           'second_name' => 'confirm',
+           'type' => 'email'));
     }
 
     public function getName()

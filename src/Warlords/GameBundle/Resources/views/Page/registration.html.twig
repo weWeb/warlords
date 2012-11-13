@@ -6,27 +6,43 @@
 		<div class="header">
 			<div class="title"><h1>REGISTRATION</h1></div>
 		</div>
-		<div class="content">
-
+		<div class="content center">
+			<p>Already have an account? <a>Click here to log in</a></p>
 			{% if app.session.hasFlash('registration-notice') %}
     			<div class="registration-notice">
         			{{ app.session.flash('registration-notice') }}
     			</div>
 			{% endif %}
-
-			<form action="{{ path('WarlordsGameBundle_registration') }}" method="post" {{ form_enctype(form) }} class="blogger">
-        		{{ form_errors(form) }}
-        		{{ form_row(form.username) }}
-        		{{ form_row(form.password) }}	
-        		{{ form_row(form.email) }}
-
-        	{{ form_rest(form) }}
+			
+			{% form_theme form 'WarlordsGameBundle:Form:form_theme.html.twig' %}
+			
+			<form action="{{ path('WarlordsGameBundle_registration') }}" method="post" {{ form_enctype(form) }} novalidate>
+	    		{{ form_errors(form) }}
+	    		{{ form_row(form.username) }}
+	    		{{ form_row(form.password) }}	
+	    		{{ form_row(form.email) }}
+		
+	    	
 			<p class="submit">
-        		<input type="submit" value="Sign Up" />
+	    		<input type="submit" value="REGISTER" />
 			</p>
-   			</form>
+			</form>
+			
+			<p><a>Having problems creating an account?</a></p>
 		</div>
 		<div class="footer"></div>
 	</div>
 {% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript"> 
+		$("input").focus(function() {
+			$(this).addClass("formFocused")
+		});
+		$("input").blur(function() {
+			$(this).removeClass("formFocused")
+		});
+	</script>  
+{% endblock %}
+
 

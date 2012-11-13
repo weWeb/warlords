@@ -1,5 +1,7 @@
 Warlords\GameBundle\Entity\User:
     properties:
+        username: 
+            - NotBlank: { groups: [registration] }
         email:
             - Email: { groups: [registration] }
         password:
