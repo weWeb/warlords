@@ -11,6 +11,8 @@
         <div class="loginerror">{{ info }}</div>
     {% endif %}
     
+    <a id="logout" href="{{ path('logout') }}">Logout</a>
+    
     <div id="stats">
         <ul id="resources">
             <li class="gold">Gold: <label id="gold">{{ playerstats.gold }}</label></li>
@@ -37,5 +39,13 @@
     <li>Attack: <label id="attk">{{ attack }}</label>
     <li>Defense: <label id="defs">{{ defense }}</label>
 </ul>
+
+<div id="buysoldiers">
+<form action="{{ path( 'WarlordsGameBundle_buy_soldier' ) }}" method="post" {{ form_enctype(form) }} class="comment">
+    <p class="submit">
+        <input type="submit" value="Submit">
+    </p>
+</form>
+</div>
 
 {% endblock %}

@@ -4,6 +4,8 @@ namespace Warlords\GameBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 
+use Warlords\GameBundle\Form\BuySoldierType;
+
 class ProfileController extends Controller{
     public function profileAction(){
         $usr = $this->get('security.context')->getToken()->getUser();
@@ -25,12 +27,16 @@ class ProfileController extends Controller{
     	$attk = $soldiers + $knights*2 + $calvary*4;
     	$defn = $soldiers + $knights*3 + $calvary*3;
     	
-        
+    	//Create the form
+    	$form = $this->createForm(new BuySoldierType(), NULL);
+    	
         return $this->render('WarlordsGameBundle:Page:profile.html.twig', array(
                                 'playerstats' => $playerstats,
                                 'attack' => $attk,
                                 'defense' => $defn,
-                                'info'=>NULL));
+                                'info'=>NULL,
+                                'form' => $form->createView()
+                                ));
     }
     
     public function profile_getAction($target_id){
@@ -121,21 +127,21 @@ class ProfileController extends Controller{
         $loss_ratio = 1-$rand_percent;
         
         //Everyone loses soldiers
-        $soldiers =$soldiers*$loss_ratio;
-        $knights = $knights*$loss_ratio;
-        $calvary = $calvary*$loss_ratio;
+        (int)$soldiers =$soldiers*$loss_ratio;
+        (int)$knights = $knights*$loss_ratio;
+        (int)$calvary = $calvary*$loss_ratio;
         
-        $playerstats->setInfantry($soldiers);
-        $playerstats->setKnights($knights);
-        $playerstats->setCalvary($calvary);
+        $playerstats->setInfantry((int)$soldiers);
+        $playerstats->setKnights((int)$knights);
+        $playerstats->setCalvary((int)$calvary);
         
-        $soldiers2 = $soldiers2*$loss_ratio;
-        $knights2 = $knights2*$loss_ratio;
-        $calvary2 = $calvary2*$loss_ratio;
+        (int)$soldiers2 = $soldiers2*$loss_ratio;
+        (int)$knights2 = $knights2*$loss_ratio;
+        (int)$calvary2 = $calvary2*$loss_ratio;
         
-        $targetstats->setInfantry($soldiers2);
-        $targetstats->setKnights($knights2);
-        $targetstats->setCalvary($calvary2);
+        $targetstats->setInfantry((int)$soldiers2);
+        $targetstats->setKnights((int)$knights2);
+        $targetstats->setCalvary((int)$calvary2);
         
         if($playerattk > $targetdefn)
         {
@@ -151,10 +157,10 @@ class ProfileController extends Controller{
             //Gold gain
             (int)$gold = $targetstats->getGold();
             (int)$diff = $gold*$rand_percent;
-            $targetstats->setGold($gold-$diff);
+            $targetstats->setGold((int)($gold-$diff));
             
             $gold = $playerstats->getGold();
-            $playerstats->setGold($gold+$diff);
+            $playerstats->setGold((int)($gold+$diff));
         }
         else
         {
@@ -176,6 +182,9 @@ class ProfileController extends Controller{
                                 'attack' => (int)$playerattk,
                                 'defense' => (int)$playerdefn,
                                 'info' => $info));
+    }
+    public function buyAction(){
+        return $this->render('WarlordsGameBundle: index.html.twig');
     }
 }
 ?>
