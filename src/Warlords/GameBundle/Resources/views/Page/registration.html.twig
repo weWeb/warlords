@@ -1,0 +1,32 @@
+{# src/Warlords/GameBundle/Resources/views/Page/index.html.twig #}
+{% extends 'WarlordsGameBundle::layout.html.twig' %}
+
+{% block body %}
+    <div class="mainitem">
+		<div class="header">
+			<div class="title"><h1>REGISTRATION</h1></div>
+		</div>
+		<div class="content">
+
+			{% if app.session.hasFlash('registration-notice') %}
+    			<div class="registration-notice">
+        			{{ app.session.flash('registration-notice') }}
+    			</div>
+			{% endif %}
+
+			<form action="{{ path('WarlordsGameBundle_registration') }}" method="post" {{ form_enctype(form) }} class="blogger">
+        		{{ form_errors(form) }}
+        		{{ form_row(form.username) }}
+        		{{ form_row(form.password) }}	
+        		{{ form_row(form.email) }}
+
+        	{{ form_rest(form) }}
+			<p class="submit">
+        		<input type="submit" value="Sign Up" />
+			</p>
+   			</form>
+		</div>
+		<div class="footer"></div>
+	</div>
+{% endblock %}
+

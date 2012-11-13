@@ -34,13 +34,16 @@
                     {% block navigation %}
                         <nav>
                             <ul class="navigation">
-                                <li><a href="{{ path('WarlordsGameBundle_homepage') }}">Home</a></li>
+                                <li><a href="{{ path('WarlordsGameBundle_homepage') }}">Home</a>
+									<ul>
+           				 				<li><a href="{{ path('WarlordsGameBundle_registration') }}">Registration</a></li>
+        							</ul>		</li>
                                 <li><a href="#">About</a></li>
 								<li><a href="#">Guide</a></li>
 								<li><a href="#">Ranking</a>
 									<ul>
-           				 				<li><a href=”#”>Wealth</a></li>
-            							<li><a href=”#”>Fame</a></li>
+           				 				<li><a href="#">Wealth</a></li>
+            							<li><a href="#">Fame</a></li>
         							</ul>									
 								</li>
 								<li><a href="{{ path('WarlordsGameBundle_profile') }}">Profile</a></li>

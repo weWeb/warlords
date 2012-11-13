@@ -1,0 +1,8 @@
+Warlords\GameBundle\Entity\User:
+    properties:
+        email:
+            - Email: { groups: [registration] }
+        password:
+            - NotBlank: { groups: [registration] }
+            - MinLength: { limit: 7, groups: [registration] }
+     
