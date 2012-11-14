@@ -23,7 +23,9 @@ security:
                 use_forward:    false
                 check_path:     /login_check
                 failure_path:   null
-            logout:       true
+            logout:       
+                path:   /logout
+                target: /
             anonymous:    true
 #            remember_me:
 #                key:      secret

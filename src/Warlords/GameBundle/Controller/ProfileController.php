@@ -5,6 +5,9 @@ use FOS\UserBundle\Controller\ProfileController as BaseController;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Warlords\GameBundle\Form\BuySoldierType;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormBuilder;
 
 class ProfileController extends BaseController{
     public function profileAction(){
@@ -243,6 +246,21 @@ class ProfileController extends BaseController{
             }
         }
         return $this->redirect($this->generateUrl('WarlordsGameBundle_profile'));
+    }
+
+    public function createForm($type, $data = null, array $options = array())
+    {
+        return $this->container->get('form.factory')->create($type, $data, $options);
+    }
+
+    public function renderView($view, array $parameters = array())
+    {
+        return $this->container->get('templating')->render($view, $parameters);
+    }
+
+     public function render($view, array $parameters = array(), Response $response = null)
+    {
+        return $this->container->get('templating')->renderResponse($view, $parameters, $response);
     }
 }
 ?>
