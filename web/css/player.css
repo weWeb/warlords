@@ -1,0 +1,19 @@
+.players { clear: both; margin: 0px; padding: 0px; margin-bottom: 100px; overflow: inherit}
+
+.players .player { padding: 0px; margin: 0px; }
+.players p { padding: 5px 10px 25px 10px; margin: 0px; color: #a68282; }
+.players .player p { padding: 5px 10px 25px 10px; margin: 0px; color: #a68282; }
+.players .player header p { padding: 5px 10px 5px 10px; margin: 0px; color: white; }
+.players h3 { border-bottom: 1px dashed; padding: 10px 0px 10px 0px; font-size: 16px; text-align: right; margin-bottom: 20px; color: #a68282; clear: both; }
+.players .previous-players { margin: 0px; }
+
+.players header { margin: 0px; padding: 0px;  background: #cbbfbc }
+.players span { color: #9d7070; font-size: 14px; font-weight: 600;  }
+
+form.player { font-size: 14px; color: #cbbfbc; font-family: 'Verdana'; margin-top: 20px; }
+form.player div { clear: left; margin-bottom: 10px; }
+form.player label { float: left; margin-right: 30px; text-align: left; width: 70px; font-weight: bold; vertical-align: top; padding-top: 7px; }
+form.player input[type="text"] { width: 400px; line-height: 26=0px; font-size: 12px; min-height: 26px; font-family: 'Verdana';}
+form.player textarea { width: 400px; height: 150px; line-height: 20px; font-size: 12px; max-width: 400px; min-width: 400px; font-family: 'Verdana'; }
+form.player ul li { color: #ff0000; float: left; margin-bottom: 5px; display: inline; }
+form.player input[type="submit"] { margin-left: 240px; width: 100px; line-height: 26px; font-size: 14px; min-height: 26px; }

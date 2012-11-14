@@ -26,8 +26,10 @@
             {% set class = '' %}
             {% if errors|length > 0 %}
                 {% set class = 'inputerror' %}
+			{% else %}
+				{% set class = 'form' %}
             {% endif %}
-            {{ form_widget(form, { 'attr': { 'class': 'form' } }) }}
+            {{ form_widget(form, { 'attr': { 'class': class } }) }}
           {#  {{ form_errors(form) }} #}
       </div>
       <div class="clear"></div>

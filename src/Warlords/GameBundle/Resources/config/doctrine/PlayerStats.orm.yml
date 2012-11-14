@@ -1,6 +1,7 @@
 Warlords\GameBundle\Entity\PlayerStats:
     type: entity
     table: playerStats
+    repositoryClass: Warlords\GameBundle\Entity\PlayerStatsRepository
     id:
         id:
             type: integer

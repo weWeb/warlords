@@ -1,10 +1,48 @@
 Warlords\GameBundle\Entity\User:
     properties:
         username: 
-            - NotBlank: { groups: [registration] }
+            - NotBlank: 
+                groups: [registration]
+                message: You must enter a username.
+            - MinLength: 
+                groups: [registration]
+                limit: 6
+                message: Username must be at least 6 characters long.
+            - Regex:
+                groups: [registration]
+                pattern: /^[a-zA-Z0-9 _]*$/
+                match: true
+                message: Username can only contain letters, digits or underscore "_".
+            - Regex:
+                groups: [registration]
+                pattern: /^[a-zA-Z]/
+                match: true
+                message: Username must start with a letter.
+            - Regex:
+                groups: [registration]
+                pattern: /[a-zA-Z0-9]$/
+                match: true
+                message: Username must end with a letter or number.
+         #   - Callback: http://symfony.com/doc/current/reference/constraints/Callback.html
+         #       methods:   [isUserValid]
         email:
-            - Email: { groups: [registration] }
+            - NotBlank:
+                groups: [registration]
+                message: You must enter an email address.
+            - Email: 
+                groups: [registration]
+                message: The email "{{ value }}" is not a valid email.
+                checkMX: true
         password:
-            - NotBlank: { groups: [registration] }
-            - MinLength: { limit: 7, groups: [registration] }
+            - NotBlank:
+                groups: [registration]
+                message: You must enter a password.
+            - MinLength:
+                groups: [registration]
+                limit: 6
+                message: Password must be 6-14 characters long.
+            - MaxLength: 
+                groups: [registration] 
+                limit: 14
+                message: Password must be 6-14 characters long.
      
