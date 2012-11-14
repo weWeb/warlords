@@ -204,16 +204,33 @@ class ProfileController extends Controller{
                 	throw $this->createNotFoundException('Unable to find you.');
             	}
             	
+            	$buys = $form["soldiers"]->getData();
+            	$buyk = $form["knights"]->getData();
+            	$buyc = $form["calvary"]->getData();
+            	
             	//Check Gold
+            	$gold = $playerstats->getGold();
+            	
+            	$cost = $buys*50 + $buyk*200 + $buyc*500;
+            	
+            	if($cost > $gold)
+            	{
+            	    $info = "Insufficient gold !";
+            	    return $this->redirect($this->generateUrl('WarlordsGameBundle_profile'));
+            	}
+            	
+            	$gold = $gold - $cost;
+            	$playerstats->setGold($gold);
+            	
             	
             	$soldiers = $playerstats->getInfantry();
-    	        $soldiers = $soldiers + $form["soldiers"]->getData();
+    	        $soldiers = $soldiers + $buys;
     	        
     	        $knights = $playerstats->getKnights();
-    	        $knights = $knights + $form["knights"]->getData();
+    	        $knights = $knights + $buyk;
     	        
-    	        $calvary = $playerstats->getInfantry();
-    	        $calvary = $calvary + $form["calvary"]->getData();
+    	        $calvary = $playerstats->getCalvary();
+    	        $calvary = $calvary + $buyc;
     	        
     	        $playerstats->setInfantry($soldiers);
     	        $playerstats->setKnights($knights);
@@ -222,7 +239,6 @@ class ProfileController extends Controller{
     	        $em->persist($playerstats);
     	        $em->flush();
 
-                //return $this->redirect($this->generateUrl('task_success'));
             }
         }
         return $this->redirect($this->generateUrl('WarlordsGameBundle_profile'));
