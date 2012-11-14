@@ -7,7 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class NewsController extends Controller
 {
-	public $dir = "/var/www/warlords/web/xml/news/";
+
+	public $dir = "./xml/news/";
+
 
     public function recentNewsAction($max = 3)
     {
