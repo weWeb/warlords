@@ -14,5 +14,5 @@ Warlords\GameBundle\Entity\SecurityQuestions:
             type: string
             length: 255
     oneToOne:
-        user_id:
+        user:
             targetEntity: User
