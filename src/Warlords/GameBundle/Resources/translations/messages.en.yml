@@ -1,0 +1,12 @@
+#WarlordsGameBundle\Resources\translations\messages.en.yml
+
+## Registration Form ##
+username_username: "Username"
+username_password_password: "Password"
+username_password_confirm: "Confirm Password"
+username_email_email: "Email"
+username_email_confirm: "Confirm Email"
+
+     
+
+

@@ -1,14 +1,11 @@
 /* Base Settings */
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font:inherit;vertical-align:baseline;margin:0;padding:0}
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {display:block}
 body{line-height:1}
 ol,ul{list-style:none}
 blockquote,q{quotes:none}
 blockquote:before,blockquote:after,q:before,q:after{content:none}
 table{border-collapse:collapse;border-spacing:0}
-a { text-decoration: none; color: #08C; transition: all 0.3s ease-out; position: relative; padding: .5em; margin: -.5em; }
-a:hover { color: #0AF; }
-a:active {outline: none;} 
 
 /* Shorthand Classes */
 
@@ -22,25 +19,65 @@ a:active {outline: none;}
 
 .disabled { pointer-events: none; opacity: 0.5; }
 
+.opacity50 {
+	opacity:0.5;
+	filter:alpha(opacity=50); /* For IE8 and earlier */
+}
+
+.center {
+	text-align: center;
+}
+
 .clear { clear: both; }
 
+/* Default fonts */
+p {
+    font-family: 'Arial', 'Helvetica'; 
+	font-size: 1.8em;
+	color: #e2d7c5;
+}
+form {
+    font-family: 'Arial', 'Helvetica'; 
+	font-size: 1.8em;
+	color: #e2d7c5;
+}
+.wf-loading h1 {
+	font-family: serif;
+	font-size: 2.5em;
+	color: #d5a042;
+}
+.wf-inactive h1 {
+	font-family: serif;
+	font-size: 2.5em;
+	color: #d5a042;
+}
+.wf-active h1 {
+	font-family: 'Black Ops One', serif;
+	font-size: 2.5em;
+	color: #d5a042;
+}
+
+a { text-decoration: none; color: #faa333; transition: all 0.3s ease-out; position: relative; padding: .5em; margin: -.5em; }
+a:hover { color: #ff6b1a; }
+a:active {outline: none;} 
+
 /* Body */
-html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size: 12px; width: 100%; height: 100%; color: #FFF; font-size: 14px; 
-	background: #000; text-align: center; overflow: auto; clear: both; }
+html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size: 62.5%; width: 100%; height: 100%; color: #FFF;  
+	background: #000; text-align: center; overflow: auto; clear: both; min-width: 960px;}
 
 #container { margin: 0px auto; width: 960px;  height: auto ; background-color:#10100f; text-align: left; position: relative; 
-	background-image:url('../images/warlord_bg_bar.jpg'); background-repeat:repeat-y; margin-bottom: 50px; }
+	background-image:url('../images/warlord_bg_bar.jpg'); background-repeat:repeat-y; margin-bottom: 0px; overflow: auto;}
 
 
 /* Header */
 #header {height: 250px; position:relative; background-image:url('../images/warlord_bg.jpg'); background-repeat:no-repeat;  }
-#header h2 { font-family: 'Verdana', cursive; font-size: 40px; text-align: center; line-height: 110px; }
+#header h2 { font-family: 'Verdana', cursive; font-size: 4em; text-align: center; line-height: 110px; }
 #header h2 a { color: #000; }
 
 /* Menu */
 #header .top { solid #ccc; width:100%; height: auto }
 
-#header ul.navigation { list-style: none; text-align: center; height:43px; position:absolute; left:14px; bottom:0; width: 923px; padding-left: 4px;
+#header ul.navigation { list-style: none; text-align: center; height:43px; position:absolute; left:14px; bottom:0; width: 923px; padding-left: 4px; 
 	/* Rounded Corners */  
     -moz-border-radius: 10px;  
     -webkit-border-radius: 10px;  
@@ -60,12 +97,12 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
     display:block;  
     text-align:center;  
     position:relative;  
-    padding: 12px 0px 4px 0px;  
+    padding: 12px 4px 4px 0px;  
     margin-right:0px;  
 	margin-left: 0px; 
     margin-top:2px;  
 	height: 24px;
-	width: 115px; 
+	width: 110px; 
       }
 
 #header .navigation li:hover {  
@@ -73,16 +110,24 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
     }
 
 #header .navigation li a {    
-    font-size:14px;  
+    font-size:2.3em;  
     color: #EEEEEE;  
     display:block;  
     outline:0;  
     text-decoration:none;  
-    text-shadow: 1px 1px 1px #000;   }
+    text-shadow: 1px 1px 1px #000; 
+	
+	/* WebKit (Safari/Chrome) Only */
+    -webkit-text-fill-color: white; 
+
+  }
 
 #header .navigation li:hover a {  
     color:#161616;  
     text-shadow: 1px 1px 1px #FFFFFF;  
+	/* WebKit (Safari/Chrome) Only */
+	-webkit-text-stroke: 1px #100c09;
+    -webkit-text-fill-color: #100c09; 
     }  
 
 
@@ -145,6 +190,10 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
     -moz-box-shadow:inset 0px 0px 1px #e4cba6;  
     -webkit-box-shadow:inset 0px 0px 1px #e4cba6;  
     box-shadow:inset 0px 0px 1px #e4cba6;
+	/* WebKit (Safari/Chrome) Only */
+    -webkit-text-fill-color: #FFF;
+	-webkit-text-stroke: 0px #FFF; 
+
 }
 
 *html #header ul.navigation li:hover ul a{ /* IE6 */   
@@ -158,15 +207,18 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
 }
 
 #header ul.navigation li:hover ul a:hover{
-    background: #0186ba;
-	background: -moz-linear-gradient(#04acec,  #0186ba);	
-	background: -webkit-gradient(linear, left top, left bottom, from(#04acec), to(#0186ba));
-	background: -webkit-linear-gradient(#04acec,  #0186ba);
-	background: -o-linear-gradient(#04acec,  #0186ba);
-	background: -ms-linear-gradient(#04acec,  #0186ba);
-	background: linear-gradient(#04acec,  #0186ba);
+    background: #1b1511;
+	background: -moz-linear-gradient(#ba803c,  #5c452a);	
+	background: -webkit-gradient(linear, left top, left bottom, from(#ba803c), to(#5c452a));
+	background: -webkit-linear-gradient(#ba803c,  #5c452a);
+	background: -o-linear-gradient(#ba803c,  #5c452a);
+	background: -ms-linear-gradient(#ba803c,  #5c452a);
+	background: linear-gradient(#ba803c,  #5c452a);
 	color:#161616;  
     text-shadow: 1px 1px 1px #FFFFFF;  
+	/* WebKit (Safari/Chrome) Only */
+	-webkit-text-stroke: 1px #100c09;
+    -webkit-text-fill-color: #100c09; 
 }
 
 #header ul.navigation li:hover ul li:first-child a{
@@ -184,11 +236,11 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-bottom: 8px solid #444;
+    border-bottom: 8px solid #1b1511;
 }
 
 #header ul.navigation li:hover ul li:first-child a:hover:after{
-    border-bottom-color: #04acec; 
+    border-bottom-color: #ba803c; 
 }
 
 #header ul.navigation li:hover ul li:last-child a{
@@ -223,34 +275,33 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
 	width: 208px;
 	height: 63px;
 	margin-left: 4px;
-	background-image:url('../images/warlord_sidebar_header.png'); background-repeat:no-repeat;
+	background-image:url('../images/warlord_sidebar_header.png'); background-repeat:no-repeat; 
 }
 
 .sidebar .sidebaritem .header .title {
 	float: right;
 	position:relative;
 	right: 30px;
-	top: 28px; 
-	 text-shadow: 1px 1px 1px #000;  
+	top: 29px; 
+	text-shadow: 1px 1px 1px #000;  
 }
 
 .sidebar .sidebaritem .content {
-	width: 179px;
+	width: 172px;
 	position:relative;
 	top: 0px; 	
-	left: 14px;
-	padding: 15px; 
-	background-image:url('../images/warlord_sidebar_bg.jpg'); background-repeat:repeat-y;
+	left: 4px;
+	padding: 2px 22px 2px 23px; 
+	background-image:url('../images/warlord_sidebar_bg.jpg'); background-repeat:repeat-y; background-position:10px 0px; margin-top: -2px;
 }
 
-
 .sidebar .sidebaritem .footer {
-	width: 198px;
+	width: 208px;
 	height: 26px;
 	position:relative;
 	top: 0px;
-	left: 14px;
-	background-image:url('../images/warlord_sidebar_footer.png'); background-repeat:no-repeat;
+	left: 4px;
+	background-image:url('../images/warlord_sidebar_footer.png'); background-repeat:no-repeat; background-position:10px 0px; margin-top: -2px;
 }
 
 
@@ -264,18 +315,86 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
     top: 0px;
 	right: 17px;
 	padding: 10px; 
-    margin-top:0px;
+    margin-top:6px;
     margin-bottom:0px;
     margin-right:0px;
     margin-left:0px;
 	float: right;
 	}
-.main-col a { color: #F48A00; }
-.main-col h1, .main-col h2 { line-height: 1.2em; font-size: 32px; margin-bottom: 10px; font-weight: normal; color: #F48A00; }
-.main-col p { line-height: 1.5em; margin-bottom: 20px; }
+.main-col a { }
+.main-col h1, .main-col h2 { line-height: 1.2em; font-size: 4.5em;  font-weight: normal; color: #eda321; }
+.main-col p { line-height: 1.5em; }
 
+.main-co .mainitem { 
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.main-col .mainitem .header {
+	width: 688px;
+	height: 63px;
+	margin-left: 4px;
+	background-image:url('../images/warlord_content_header.PNG'); background-repeat:no-repeat; 
+}
+
+.main-col .mainitem .header .title {
+	float: right;
+	position:relative;
+	right: 40px;
+	top: 19px; 
+	text-shadow: 1px 1px 1px #000;  
+}
+
+.main-col .mainitem .content {
+	min-height: 300px; 
+	width: 694x;
+	height: auto;
+	position:relative;
+	top: 0px; 	
+	left: 4px;
+	padding: 10px 35px 0px 23px; 
+	background-image:url('../images/warlord_content_bg.jpg'); background-repeat:repeat-y; background-position:-6px 0px; margin-top: -1px; 
+}
+
+.main-col .mainitem .footer {
+	width: 698px;
+	height: 45px;
+	position:relative;
+	top: 0px;
+	left: 4px;
+	background-image:url('../images/warlord_content_footer.jpg'); background-repeat:no-repeat; background-position:-7px 0px; margin-top: -1px;
+}
 
 /* Footer */
-#footer { text-align: center; color: #aaa; height: 16px; padding-top:10px; position: relative; bottom: 0px; left: 0px; width: 951px; background-image:url('../images/warlord_bg_footer.jpg'); background-repeat:no-repeat; font-size: 10px;  background-position:0px -4px; }
+#footer { text-align: center; color: #aaa; height: 16px; padding-top:8px; position: relative; bottom: 0px; left: 0px; width: 951px; background-image:url('../images/warlord_bg_footer.jpg'); background-repeat:no-repeat; font-size: 1.5em;  background-position:0px -4px; }
+
+/* News */
+p.news {
+	padding: 10px; 
+	/* Rounded Corners */  
+    -moz-border-radius: 10px;  
+    -webkit-border-radius: 10px;  
+    border-radius: 10px;  
+    background: #110e0c;  
+    /* Borders */  
+    border: 1px solid #100c09;  
+    -moz-box-shadow:inset 0px 0px 1px #e4cba6;  
+    -webkit-box-shadow:inset 0px 0px 1px #e4cba6;  
+    box-shadow:inset 0px 0px 1px #e4cba6;
+}
+
+li.news {
+	padding: 5px;
+}
+
+/* Forms */
+form { margin-top: 10px; text-align: center; width: 320px; margin: 10px auto 10px auto;}
+.form { border: 1px solid #7d441e; background-color: #1b1511; font-family: 'Arial', 'Helvetica'; font-size: 1.05em; color: #e2d7c5; padding: 2px; width:190px; }
+.formFocused { background-color: #3f332b;  -webkit-box-shadow:0 0 5px #ff9c00; -moz-box-shadow:0 0 4px #ff9c00; box-shadow:0 0 4px #ff9c00; outline: none; }
+.label { width: 100px; text-align: right; padding: 4px; }
+.input { width: 200px; text-align: left; padding: 4px;}
+.inputerror { border: 1px solid red; }
+.error { color: red; }
+
 
 
