@@ -229,6 +229,6 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
 
 
 /* Footer */
-#footer { text-align: center; color: #aaa; height: 20px; padding-top:5px; position: absolute; bottom: 0; left: 5px; width: 949px; background-color: #171310 }
+#footer { text-align: center; color: #aaa; height: 20px; padding-top:5px; position: fixed; bottom: 0; left: 154px; width: 949px; background-color: #171310 }
 
 

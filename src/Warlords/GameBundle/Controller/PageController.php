@@ -32,8 +32,23 @@ class PageController extends Controller
             				$postData = $request->request->get('warlords_gamebundle_searchtype');
             				$type = $postData['search_player_type'];
             				$value = $postData['_'];
-            				$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
-                  				->getPlayerWithLevel($value);
+            				switch($type) {
+            					case 'level':
+            						$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
+					  				->getPlayerByLevel($value);
+				    			break;
+            					case 'fame':
+            						$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
+					  				->getPlayerByFame($value);
+					  		break;
+					  	case 'gold':
+					  		$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
+					  				->getPlayerByGold($value);
+					  		break;
+					  	default:
+					  		break;
+            				}
+            				
             				print($type . ' ');
             				print($value);
             				

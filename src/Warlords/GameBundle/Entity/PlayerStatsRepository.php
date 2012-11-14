@@ -14,7 +14,7 @@ class PlayerStatsRepository extends EntityRepository
 {
 
 	// $limit set to 3 to see if the result show correctly; subject to change
-	public function getPlayerWithLevel($level, $limit = 4)
+	public function getPlayerByLevel($level, $limit = 3)
 	{
 		$qb = $this->createQueryBuilder('p')
 				->select('p')
@@ -28,8 +28,74 @@ class PlayerStatsRepository extends EntityRepository
     		return $qb->getQuery()
               		->getResult();		
 		
+	}
+	
+	// $limit set to 3 to see if the result show correctly; subject to change
+	public function getPlayerByGold($gold, $limit = 3)
+	{
+		$qb = $this->createQueryBuilder('p')
+				->select('p')
+				->where('p.gold <= :player_gold')
+				->addOrderBy('p.gold','DESC')
+				->setParameter('player_gold', $gold);
+		
+		if (false === is_null($limit))
+       	 		$qb->setMaxResults($limit);
+		
+    		return $qb->getQuery()
+              		->getResult();		
+		
+	}
+	
+	// $limit set to 3 to see if the result show correctly; subject to change
+	public function getPlayerByInfantry($infantry, $limit = 3)
+	{
+		$qb = $this->createQueryBuilder('p')
+				->select('p')
+				->where('p.infantry <= :player_infantry')
+				->addOrderBy('p.infantry','DESC')
+				->setParameter('player_infantry', $infantry);
+		
+		if (false === is_null($limit))
+       	 		$qb->setMaxResults($limit);
+		
+    		return $qb->getQuery()
+              		->getResult();		
+		
 	} 
 	
-	
+	// $limit set to 3 to see if the result show correctly; subject to change
+	public function getPlayerByKnight($knights, $limit = 3)
+	{
+		$qb = $this->createQueryBuilder('p')
+				->select('p')
+				->where('p.knights <= :player_knights')
+				->addOrderBy('p.knights','DESC')
+				->setParameter('player_knights', $knights);
+		
+		if (false === is_null($limit))
+       	 		$qb->setMaxResults($limit);
+		
+    		return $qb->getQuery()
+              		->getResult();		
+		
+	}
+
+	// $limit set to 3 to see if the result show correctly; subject to change
+	public function getPlayerByFame($fame, $limit = 3)
+	{
+		$qb = $this->createQueryBuilder('p')
+				->select('p')
+				->where('p.fame <= :player_fame')
+				->addOrderBy('p.fame','DESC')
+				->setParameter('player_fame', $fame);
+		
+		if (false === is_null($limit))
+       	 		$qb->setMaxResults($limit);
+		
+    		return $qb->getQuery()
+              		->getResult();		
+		
+	} 
 		
 }
