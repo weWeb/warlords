@@ -10,24 +10,31 @@
 			<p>Already have an account? <a>Click here to log in</a></p>
 			{% if app.session.hasFlash('registration-notice') %}
     			<div class="registration-notice">
-        			{{ app.session.flash('registration-notice') }}
+        			{{ app.session.flash('registration-notice') | raw}}
     			</div>
 			{% endif %}
 			
+            {% if errors != null %}
+			    <ul class="errormsg">
+			        {% for error in errors %}
+				        <li>{{ error }} </li>
+			        {% endfor %}
+			    </ul>
+            {% endif %}
+
 			{% form_theme form 'WarlordsGameBundle:Form:form_theme.html.twig' %}
 			
 			<form action="{{ path('WarlordsGameBundle_registration') }}" method="post" {{ form_enctype(form) }} novalidate>
-	    		{{ form_errors(form) }}
+                	
 	    		{{ form_row(form.username) }}
 	    		{{ form_row(form.password) }}	
 	    		{{ form_row(form.email) }}
-		
-	    	
-			<p class="submit">
-	    		<input type="submit" value="REGISTER" />
-			</p>
+                {{ form_rest(form) }}
+				<p class="submit">
+	    			<input type="submit" class="registerBtn" value="REGISTER" />
+				</p>
 			</form>
-			
+			<p><a>Forgot password?</a></p>
 			<p><a>Having problems creating an account?</a></p>
 		</div>
 		<div class="footer"></div>
