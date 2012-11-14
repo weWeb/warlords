@@ -219,9 +219,10 @@ class ProfileController extends Controller{
             	    return $this->redirect($this->generateUrl('WarlordsGameBundle_profile'));
             	}
             	
+            	//adjust gold and army
+            	
             	$gold = $gold - $cost;
             	$playerstats->setGold($gold);
-            	
             	
             	$soldiers = $playerstats->getInfantry();
     	        $soldiers = $soldiers + $buys;
