@@ -11,18 +11,19 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            	->add('search_player_type', 'choice', array(
+            	->add('search_by', 'choice', array(
 
             			'choices' => array(	
             				'level' => 'Level',
             				'fame' => 'Fame',
             				'gold' => 'Gold',
+            				
             			),
             			'property_path' => false
             		)
 
         	)
-        	->add('_', 'text', array('property_path' => false))
+        	->add('value', 'text', array('property_path' => false))
         ;
     }
 

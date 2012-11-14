@@ -6,23 +6,24 @@ namespace Warlords\GameBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Warlords\GameBundle\Entity\PlayerStats;
 use Warlords\GameBundle\Form\SearchType;
-
+use Warlords\GameBundle\Entity\User;
+use Warlords\GameBundle\Form\UserType;
 
 class PageController extends Controller
 {
     	public function indexAction()
     	{
-        	return $this->render('WarlordsGameBundle:Page:index.html.twig');
+       	 		return $this->render('WarlordsGameBundle:Page:index.html.twig');
     	}
     
     	public function playerAction()
     	{
 
 		$players = NULL; 
-		$search = NULL;  		
+		//$search = NULL;  		
         	$em = $this->getDoctrine()->getEntityManager();
 
-		$form = $this->createForm(new SearchType(), $search);
+		$form = $this->createForm(new SearchType());
 
 		$request = $this->getRequest();
     			if ($request->getMethod() == 'POST') {
@@ -30,8 +31,8 @@ class PageController extends Controller
 
         			if ($form->isValid()) {
             				$postData = $request->request->get('warlords_gamebundle_searchtype');
-            				$type = $postData['search_player_type'];
-            				$value = $postData['_'];
+            				$type = $postData['search_by'];
+            				$value = $postData['value'];
             				switch($type) {
             					case 'level':
             						$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
@@ -66,4 +67,25 @@ class PageController extends Controller
     	}
     
     
+    public function registrationAction()
+    {
+		$em = $this->getDoctrine()->getEntityManager();
+		$form = $this->createForm(new UserType(), new User());
+
+		$request = $this->getRequest();
+		if ($request->getMethod() == 'POST') {
+		    $form->bindRequest($request);
+
+		    if ($form->isValid()) {
+				$user = $form->getData();
+				$user->setIsActive(true); 
+       			$em->persist($user);
+        		$em->flush();
+
+       			$this->get('session')->setFlash('registration-notice', 'Registration Completed. You will automatically be logged in!');
+		        return $this->redirect($this->generateUrl('WarlordsGameBundle_registration'));
+		    }
+		}
+    	return $this->render('WarlordsGameBundle:Page:registration.html.twig', array('form' => $form->createView()));
+    }
 }

@@ -10,6 +10,12 @@ WarlordsGameBundle_player:
     defaults: { _controller: WarlordsGameBundle:Page:player }
     requirements:
         _method: GET|POST
+
+WarlordsGameBundle_registration:
+    pattern: /registration
+    defaults: { _controller: WarlordsGameBundle:Page:registration }
+    requirements:
+        _method: GET|POST
        
 
 login:
@@ -32,6 +38,15 @@ WarlordsGameBundle_profile:
     defaults:  { _controller: WarlordsGameBundle:Profile:profile }
     requirements:
         _method:  GET
-        id: \d+
+                
+WarlordsGameBundle_attack:
+    pattern: /attack/{target_id}
+    defaults:  { _controller: WarlordsGameBundle:Profile:attack }
+    requirements:
+        _method:  GET
         
-
+WarlordsGameBundle_buy:
+    pattern: /profile/buy
+    defaults:  { _controller: WarlordsGameBundle:Profile:buy }
+    requirements:
+        _method: POST

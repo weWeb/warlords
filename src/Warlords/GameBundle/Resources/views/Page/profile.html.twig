@@ -7,6 +7,12 @@
 {% endblock %}
 
 {% block body %}
+    {% if info is defined %}
+        <div class="loginerror">{{ info }}</div>
+    {% endif %}
+    
+    <a id="logout" href="{{ path('logout') }}">Logout</a>
+    
     <div id="stats">
         <ul id="resources">
             <li class="gold">Gold: <label id="gold">{{ playerstats.gold }}</label></li>
@@ -26,12 +32,24 @@
 {% endblock %}
 
 {% block sidebar %}
-<label>{{app.user.username}}</label><br/><br/>
+<label>{{app.user.username}}</label>
+<div id="sidebar_profile">
+<label>Level:</label><label id="lvl">{{ playerstats.level }}</label><br />
 <label>Experience:</label><label id="experience">{{ playerstats.exp }}</label>
 <ul id="attack_stats">
-    <li>Level: <label id="lvl">{{ playerstats.level }}</label>
-    <li>Attack: <label id="attk">{{ attack }}</label>
-    <li>Defense: <label id="defs">{{ defense }}</label>
+    <li>Attack: <label id="attk">{{ attack }}</label></li>
+    <li>Defense: <label id="defs">{{ defense }}</label></li>
 </ul>
+
+<div id="buysoldiers">
+{% if form is defined %}
+<form action="{{ path( 'WarlordsGameBundle_buy' ) }}" method="post" {{ form_enctype(form) }} class="comment">
+    {{ form_widget(form) }}
+    <p class="submit">
+        <input type="submit" value="Buy">
+    </p>
+</form>
+{% endif %}
+</div>
 
 {% endblock %}

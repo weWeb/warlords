@@ -8,6 +8,27 @@
 {% endblock %}
 
 {% block sidebar %}
-    Sidebar content
+    <div class="sidebaritem">
+		<div class="header">
+			<div class="title"><h1>LOGIN</h1></div>
+		</div>
+		<div class="content">
+			<div class="login">
+				{% block login %}{% endblock %}
+			</div>
+			
+		</div>
+		<div class="footer"></div>
+	</div>
+	
+	<div class="sidebaritem">
+		<div class="header">
+			<div class="title"><h1>EVENTS</h1></div>
+		</div>
+		<div class="content">	
+			<p>This is where the events update can occur!!!</p>
+		</div>
+		<div class="footer"></div>
+	</div>
 {% endblock %}
 

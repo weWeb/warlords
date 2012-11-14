@@ -11,59 +11,71 @@
             <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" />
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+		<script type="text/javascript">
+      		WebFontConfig = { google: { families: [ 'Black Ops One' ] } };
+      		(function() {
+        		var wf = document.createElement('script');
+        		wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        		wf.type = 'text/javascript';
+        		wf.async = 'true';
+        		var s = document.getElementsByTagName('script')[0];
+        		s.parentNode.insertBefore(wf, s);
+     		 })();
+    	</script>
+		<script src="{{ asset('jquery.js') }}"></script>
     </head>
     <body>
 
-        <div id="container"><div id="innercontainer">
+        <div id="container">
             <header id="header">
-                <hgroup>
-                    <h2>{% block blog_title %}<a href="#">Warlords: The Final Allegiance</a>{% endblock %}</h2>
-                </hgroup>
+               
 				<div class="top">
                     {% block navigation %}
                         <nav>
                             <ul class="navigation">
-                                <li><a href="#">Home</a></li>
+                                <li><a href="{{ path('WarlordsGameBundle_homepage') }}">Home</a>
+									<ul>
+           				 				<li><a href="{{ path('WarlordsGameBundle_registration') }}">Registration</a></li>
+        							</ul>		</li>
                                 <li><a href="#">About</a></li>
-				<li><a href="#">Guide</a></li>
-
-				<li><a href="#">Ranking</a>
-					<ul>
-           					<li><a href=”#”>Wealth</a></li>
-            					<li><a href=”#”>Fame</a></li>
-        				</ul>									
-				</li>
-
-				<li><a href="{{ path('WarlordsGameBundle_profile') }}">Profile</a></li>
-				<li><a href="{{ path('WarlordsGameBundle_player') }}">Player</a></li>
-				<li><a href="#">Guild</a></li>
+								<li><a href="#">Guide</a></li>
+								<li><a href="#">Ranking</a>
+									<ul>
+           				 				<li><a href="#">Wealth</a></li>
+            							<li><a href="#">Fame</a></li>
+        							</ul>									
+								</li>
+								<li><a href="{{ path('WarlordsGameBundle_profile') }}">Profile</a></li>
+								<li><a href="{{ path('WarlordsGameBundle_player') }}">Player</a></li>
+								<li><a href="#">Guild</a></li>
                                 <li><a href="#">Contact</a></li>
                             </ul>
                         </nav>
                     {% endblock %}
                 </div>
             </header>
-
+			
 			<div id="content">
 				<aside class="sidebar">
-    				<div class="login">
-				    {% block login %}{% endblock %}
-				    </div>
-		            {% block sidebar %}{% endblock %}
+				        {% block sidebar %}{% endblock %}
 		        </aside>
-
+				
 		        <section class="main-col">
 		            {% block body %}{% endblock %}
-		        </section>
+		        </section> 
+				<div class="clear"></div>
 			</div>
-
             <div id="footer">
                 {% block footer %}
                     Warlords: The Final Allegiance - © 2012 WeWeb
                 {% endblock %}
             </div>
-        </div></div>
-
-        {% block javascripts %}{% endblock %}
+        </div>
+		
+	 	     
+        {% block javascripts %}
+		{% endblock %}
+		
     </body>
 </html>
