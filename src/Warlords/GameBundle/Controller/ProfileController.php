@@ -1,23 +1,23 @@
 <?php
 namespace Warlords\GameBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use FOS\UserBundle\Controller\ProfileController as BaseController;
 use Symfony\Component\Security\Core\SecurityContext;
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Warlords\GameBundle\Form\BuySoldierType;
 
-class ProfileController extends Controller{
+class ProfileController extends BaseController{
     public function profileAction(){
-        $usr = $this->get('security.context')->getToken()->getUser();
+        $usr = $this->container->get('security.context')->getToken()->getUser();
         $id = $usr->getID();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->container->get('doctrine')->getEntityManager();
 
         $playerstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($id);
 
 
         if (!$playerstats) {
-        	throw $this->createNotFoundException('Unable to find player.');
+        	throw new NotFoundHttpException('Unable to find player.');
     	}
     	
     	$soldiers = $playerstats->getInfantry();
@@ -50,10 +50,10 @@ class ProfileController extends Controller{
 
 
         if (!$playerstats) {
-        	throw $this->createNotFoundException('Unable to find player.');
+        	throw new NotFoundHttpException('Unable to find player.');
     	}
     	if (!$selfstats) {
-        	throw $this->createNotFoundException('Unable to find target player.');
+            throw new NotFoundHttpException('Unable to find target player.');
     	}
     	
     	$soldiers = $selfstats->getInfantry();
@@ -85,7 +85,7 @@ class ProfileController extends Controller{
         
 
         if (!$playerstats) {
-        	throw $this->createNotFoundException('Unable to find you.');
+            throw new NotFoundHttpException('Unable to find you.');
     	}
 
         //player    	
@@ -111,7 +111,7 @@ class ProfileController extends Controller{
         $targetstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($target_id);
         
         if (!$targetstats) {
-        	throw $this->createNotFoundException('Unable to find target player.');
+            throw new NotFoundHttpException('Unable to find target player.');
     	}
     	
     	//target
@@ -201,7 +201,7 @@ class ProfileController extends Controller{
                 $playerstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($id);
                 
                 if (!$playerstats) {
-                	throw $this->createNotFoundException('Unable to find you.');
+                    throw new NotFoundHttpException('Unable to find you.');
             	}
             	
             	$buys = $form["soldiers"]->getData();

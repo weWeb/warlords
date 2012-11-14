@@ -17,6 +17,11 @@ framework:
     trust_proxy_headers: false # Whether or not the Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
     session:         ~
 
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Warlords\GameBundle\Entity\User
+
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"

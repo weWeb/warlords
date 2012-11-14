@@ -3,169 +3,30 @@
 namespace Warlords\GameBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
- * Warlords\GameBundle\Entity\User
+ * @ORM\Entity
+ * @ORM\Table(name="user")
  */
-class User implements UserInterface
+class User extends BaseUser
 {
     /**
-     * @var integer $id
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var string $username
-     */
-    private $username;
-
-    /**
-     * @var string $salt
-     */
-    private $salt;
-
-    /**
-     * @var string $password
-     */
-    private $password;
-
-    /**
-     * @var string $email
-     */
-    private $email;
+    protected $id;
 
     /**
      * @var boolean $isActive
      */
     private $isActive;
     
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
-
-
-
+ 
     private $alliesWithMe;
 
-
-
     private $myAllies;
-
-
-
-
-
-    /**
-     * @inheritDoc
-     */
-    public function eraseCredentials()
-    {
-    }
-
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string 
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * Set salt
-     *
-     * @param string $salt
-     * @return User
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-    
-        return $this;
-    }
-
-    /**
-     * Get salt
-     *
-     * @return string 
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
 
     /**
      * Set isActive
@@ -189,11 +50,14 @@ class User implements UserInterface
     {
         return $this->isActive;
     }
+
     /**
      * Constructor
      */
     public function __construct()
     {
+        parent::__construct();
+        $this->isActive = false;
         $this->alliesWithMe = new \Doctrine\Common\Collections\ArrayCollection();
         $this->myAllies = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -237,7 +101,7 @@ class User implements UserInterface
      * @param Warlords\GameBundle\Entity\User $myAllies
      * @return User
      */
-    public function addMyAllie(\Warlords\GameBundle\Entity\User $myAllies)
+    public function addMyAllies(\Warlords\GameBundle\Entity\User $myAllies)
     {
         $this->myAllies[] = $myAllies;
     
@@ -249,7 +113,7 @@ class User implements UserInterface
      *
      * @param Warlords\GameBundle\Entity\User $myAllies
      */
-    public function removeMyAllie(\Warlords\GameBundle\Entity\User $myAllies)
+    public function removeMyAllies(\Warlords\GameBundle\Entity\User $myAllies)
     {
         $this->myAllies->removeElement($myAllies);
     }
@@ -263,6 +127,7 @@ class User implements UserInterface
     {
         return $this->myAllies;
     }
+
     /**
      * @var \Warlords\GameBundle\Entity\Playerstats
      */

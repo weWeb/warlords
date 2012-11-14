@@ -14,7 +14,8 @@
 		</div>
 		<div class="content">
 			<div class="login">
-				{% block login %}{% endblock %}
+               	
+				{% block login %}{% render "FOSUserBundle:Security:login" with {'embedded': true} %}{% endblock %}
 			</div>
 			
 		</div>

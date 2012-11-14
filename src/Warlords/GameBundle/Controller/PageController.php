@@ -78,7 +78,6 @@ class PageController extends Controller
 
 		    if ($form->isValid()) {
 				$user = $form->getData();
-				$user->setIsActive(true); 
        			$em->persist($user);
         		$em->flush();
                 $notice = 'A confirmation email has been sent to "' . $user->getEmail() . '"<br/>Click the verify email link in the email to complete registration.';

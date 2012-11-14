@@ -8,6 +8,10 @@ Warlords\GameBundle\Entity\User:
                 groups: [registration]
                 limit: 6
                 message: Username must be at least 6 characters long.
+            - MaxLength: 
+                groups: [registration] 
+                limit: 50
+                message: Username cannot be longer than 50 characters.
             - Regex:
                 groups: [registration]
                 pattern: /^[a-zA-Z0-9 _]*$/
@@ -33,6 +37,10 @@ Warlords\GameBundle\Entity\User:
                 groups: [registration]
                 message: The email "{{ value }}" is not a valid email.
                 checkMX: true
+            - MaxLength: 
+                groups: [registration] 
+                limit: 100
+                message: Email cannot be longer than 100 characters.
         password:
             - NotBlank:
                 groups: [registration]

@@ -18,20 +18,6 @@ WarlordsGameBundle_registration:
         _method: GET|POST
        
 
-WarlordsGameBundle_registration:
-    pattern: /registration
-    defaults: { _controller: WarlordsGameBundle:Page:registration }
-    requirements:
-        _method: GET|POST
-
-login:
-    pattern:   /login
-    defaults:  { _controller: WarlordsGameBundle:Security:login }
-login_check:
-    pattern:   /login_check
-logout:
-    pattern: /logout
-
 WarlordsGameBundle_profile_get:
     pattern: /profile/{target_id}
     defaults:  { _controller: WarlordsGameBundle:Profile:profile_get }
@@ -56,3 +42,22 @@ WarlordsGameBundle_buy:
     defaults:  { _controller: WarlordsGameBundle:Profile:buy }
     requirements:
         _method: POST
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
