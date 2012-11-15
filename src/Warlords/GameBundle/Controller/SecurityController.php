@@ -19,7 +19,7 @@ class SecurityController extends BaseController
             
             $url = $request->headers->get("referer");
             if ($url == '') {
-              
+              //  return new RedirectResponse('/');
             }
          //   return new RedirectResponse($url);
            // return new RedirectResponse('/');

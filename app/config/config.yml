@@ -22,6 +22,10 @@ fos_user:
     firewall_name: main
     user_class: Warlords\GameBundle\Entity\User
 
+services:
+    authentication_handler:
+        class: Warlords\GameBundle\Handler\AuthenticationHandler
+
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"

@@ -22,10 +22,13 @@ security:
                 csrf_provider: form.csrf_provider
                 use_forward:    false
                 check_path:     /login_check
-                failure_path:   null
+                use_referer: true
+                success_handler: authentication_handler
+                failure_handler: authentication_handler  
             logout:       
                 path:   /logout
                 target: /
+                success_handler: authentication_handler
             anonymous:    true
 #            remember_me:
 #                key:      secret
