@@ -13,13 +13,10 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-	
 
         $user0 = new User();
-        $user = 'user';
         $user0->setUsername('user');
-        $user0->setPassword(hash('sha512','userpass'));
-        $user0->setEmail('user@warlords.com');
+        $user0->setPassword(hash('sha1','userpass'));
         $user0->setIsActive(true);
 
         
@@ -27,16 +24,14 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface
 
         $user1 = new User();
         $user1->setUsername('yfw1');
-        $user1->setPassword(hash('sha512','weweb'));
-        $user1->setEmail('yfw1@warlords.com');
+        $user1->setPassword(hash('sha1','weweb'));
         $user1->setIsActive(true);
 
         $manager->persist($user1);
 
         $user2 = new User();
         $user2->setUsername('yla288');
-        $user2->setPassword(hash('sha512','weweb'));
-        $user2->setEmail('yla228@warlords.com');
+        $user2->setPassword(hash('sha1','weweb'));
         $user2->setIsActive(true);
 
         
@@ -45,8 +40,7 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface
 
         $user3 = new User();
         $user3->setUsername('yhw3');
-        $user3->setPassword(hash('sha512','weweb'));
-        $user3->setEmail('yhw3@warlords.com');
+        $user3->setPassword(hash('sha1','weweb'));
         $user3->setIsActive(true);
 
         $manager->persist($user3);

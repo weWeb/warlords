@@ -24,6 +24,10 @@ class SecurityQuestions
      */
     private $question;
 
+    /**
+     * @var \Warlords\GameBundle\Entity\User
+     */
+    private $user_id;
 
 
     /**
@@ -82,7 +86,28 @@ class SecurityQuestions
         return $this->question;
     }
 
+    /**
+     * Set user_id
+     *
+     * @param \Warlords\GameBundle\Entity\User $userId
+     * @return SecurityQuestions
+     */
+    public function setUserId(\Warlords\GameBundle\Entity\User $userId = null)
+    {
+        $this->user_id = $userId;
     
+        return $this;
+    }
+
+    /**
+     * Get user_id
+     *
+     * @return \Warlords\GameBundle\Entity\User 
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
     /**
      * @var \Warlords\GameBundle\Entity\User
      */
