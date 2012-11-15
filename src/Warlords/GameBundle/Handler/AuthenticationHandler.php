@@ -18,16 +18,26 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
         if ($request->isXmlHttpRequest()) {
             $result = array('success' => true);
             return new Response(json_encode($result));
+        } else {
+            // $referer = $request->headers->get('referer');  
+            $referer = $request->getSession()->get('LAST_URI'); 
+              
+            if (substr_compare($referer, "/login", -strlen("/login"), strlen("/login")) === 0) {
+               $referer = str_replace("/login", "/profile", $referer);
+            }
+            return new RedirectResponse($referer);
         }
-
-        $referer = $request->headers->get('referer');       
-        return new RedirectResponse($referer);
     }
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
-    {       
-        $referer = $request->headers->get('referer');       
-        $request->getSession()->setFlash('error', $exception->getMessage());
-        return new RedirectResponse($referer);
+    {     
+        if ($request->isXmlHttpRequest()) {
+            $result = array('success' => false);
+            return new Response(json_encode($result));
+        } else {
+            $referer = $request->headers->get('referer');       
+            $request->getSession()->setFlash('error', $exception->getMessage());
+            return new RedirectResponse($referer);
+        }
     }
     public function onLogoutSuccess(Request $request) 
     {

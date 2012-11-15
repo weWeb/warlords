@@ -16,10 +16,11 @@ group:
 
 security:
     login:
-        username: "Username:"
-        password: "Password:"
+        username: "Username"
+        password: "Password"
         remember_me: Remember me
         submit: Login
+        register: Register
 
 # Profile
 profile:

@@ -1,23 +1,34 @@
 {% block fos_user_content %}
-{% if error %}
-    <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
+
+{% if app.session.hasFlash('error') %}
+    <div class="loginerror">
+        {{ app.session.flash('error') | trans({}, 'FOSUserBundle')}}
+    </div>
 {% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post">
+<form action="{{ path("fos_user_security_check") }}" method="post" novalidate >
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    
+     <div>   <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label> </div>
+     <div>   <input type="text" class="loginInput" id="username" name="_username" value="{{ last_username }}" required="required" /> </div>
+   
+   
+     <div>   <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label></div>
+     <div>   <input type="password" class="loginInput" id="password" name="_password" required="required" /></div>
+    
     <div>
-        <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+        <label for="remember_me" class="rememberLabel">
+            <input type="checkbox" class="rememberCheck" id="remember_me" name="_remember_me" value="on" /> 
+            <span>{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</span>
+        </label>
+      
     </div>
-    <div>
-        <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
-        <input type="password" id="password" name="_password" required="required" />
-    </div>
-    <div>
-        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-        <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
-    </div>
-    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+    
+    <input type="submit" class="loginBtn" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+   
 </form>
-
+<form>
+<input type="button" class="registerBtn regPos" value="{{ 'security.login.register'|trans({}, 'FOSUserBundle') }}" onClick="parent.location='{{ path("WarlordsGameBundle_registration") }}'">
+</form> 
+<p class="center" ><a>Forgot password?</a></p>
 {% endblock fos_user_content %}

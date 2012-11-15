@@ -14,19 +14,6 @@ class SecurityController extends BaseController
         $session = $request->getSession();
         /* @var $session \Symfony\Component\HttpFoundation\Session */
 
-        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY'))
-        {
-            
-            $url = $request->headers->get("referer");
-            if ($url == '') {
-              //  return new RedirectResponse('/');
-            }
-         //   return new RedirectResponse($url);
-           // return new RedirectResponse('/');
-        }
-
-       
-
         // get the error if any (works with forward and redirect -- see below)
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
@@ -46,6 +33,12 @@ class SecurityController extends BaseController
 
         $csrfToken = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
         
+        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY') && $embedded)
+        {
+            $template = sprintf('WarlordsGameBundle:Page:profile_embedded.html.twig');
+            return $this->container->get('templating')->renderResponse($template, array());
+            
+        }
         return $this->renderLogin(array(
             'last_username' => $lastUsername,
             'error'         => $error,
