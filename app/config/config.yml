@@ -25,6 +25,10 @@ fos_user:
 services:
     authentication_handler:
         class: Warlords\GameBundle\Handler\AuthenticationHandler
+    warlords.twig.warlords_extension:
+        class: Warlords\GameBundle\Twig\WarlordsExtension
+        tags:
+            - { name: twig.extension }
 
 # Twig Configuration
 twig:

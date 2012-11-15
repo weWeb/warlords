@@ -1,5 +1,10 @@
 <!-- app/Resources/views/base.html.twig -->
 <!DOCTYPE html>
+
+{% block setcurrenturi %}
+    {{ setCurrentURI(app.session, app.request.uri) }}
+{% endblock %}
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
