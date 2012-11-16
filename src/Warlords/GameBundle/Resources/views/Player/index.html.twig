@@ -3,14 +3,13 @@
         <header>
             <p><span>Player: {{ player.user.username }}</span></p>
         </header>
-        <ul>
-        	<li>Level: {{ player.level }}</li>
-        	<li>Fame: {{ player.Fame }}</li>
-        	<li>Gold: {{ player.gold}}</li>
-        	<li>Infantry: {{ player.infantry}}</li>
-        	<li>Knights: {{ player.knights}}</li>
-        	<li>Calvary: {{ player.calvary}}</li>
-        </ul>
+        <ul id="info">
+        	<ul>
+			<li>Level: {{ player.level }}</li>
+			<li>Fame: {{ player.Fame }}</li>
+			<li>Gold: {{ player.gold}}</li>
+
+		</ul>
     </article>
 {% else %}
     <p>There are no players match your search.</p>

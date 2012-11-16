@@ -1,29 +1,29 @@
-Warlords\GameBundle\Entity\User:
+FOS\UserBundle\Model\User:
     properties:
         username: 
             - NotBlank: 
-                groups: [registration]
+                groups: [Register]
                 message: You must enter a username.
             - MinLength: 
-                groups: [registration]
+                groups: [Register]
                 limit: 6
                 message: Username must be at least 6 characters long.
             - MaxLength: 
-                groups: [registration] 
+                groups: [Register] 
                 limit: 50
                 message: Username cannot be longer than 50 characters.
             - Regex:
-                groups: [registration]
+                groups: [Register]
                 pattern: /^[a-zA-Z0-9 _]*$/
                 match: true
                 message: Username can only contain letters, digits or underscore "_".
             - Regex:
-                groups: [registration]
+                groups: [Register]
                 pattern: /^[a-zA-Z]/
                 match: true
                 message: Username must start with a letter.
             - Regex:
-                groups: [registration]
+                groups: [Register]
                 pattern: /[a-zA-Z0-9]$/
                 match: true
                 message: Username must end with a letter or number.
@@ -31,26 +31,30 @@ Warlords\GameBundle\Entity\User:
          #       methods:   [isUserValid]
         email:
             - NotBlank:
-                groups: [registration]
+                groups: [Register]
                 message: You must enter an email address.
             - Email: 
-                groups: [registration]
+                groups: [Register]
                 message: The email "{{ value }}" is not a valid email.
                 checkMX: true
+            - MinLength: 
+                groups: [Register] 
+                limit: 6
+                message: Email cannot be shorter than 6 characters.
             - MaxLength: 
-                groups: [registration] 
+                groups: [Register] 
                 limit: 100
                 message: Email cannot be longer than 100 characters.
-        password:
+        plainPassword:
             - NotBlank:
-                groups: [registration]
+                groups: [Register]
                 message: You must enter a password.
             - MinLength:
-                groups: [registration]
+                groups: [Register]
                 limit: 6
                 message: Password must be 6-14 characters long.
             - MaxLength: 
-                groups: [registration] 
+                groups: [Register] 
                 limit: 14
                 message: Password must be 6-14 characters long.
      

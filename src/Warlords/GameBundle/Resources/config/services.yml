@@ -6,8 +6,14 @@ services:
 #        class: %warlords_game.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
 
-     warlords_user.registration.form.type:
-        class: Warlords\GameBundle\Form\RegistrationFormType
+    warlords_user.form.handler.registration:
+        class: Warlords\GameBundle\Form\Handler\RegistrationFormHandler
+        arguments: ["@fos_user.registration.form", "@request", "@fos_user.user_manager", "@fos_user.mailer", "@fos_user.util.token_generator"]
+        scope: request
+        public: false
+
+    warlords_user.registration.form.type:
+        class: Warlords\GameBundle\Form\Type\RegistrationFormType
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: warlords_user_registration }

@@ -1,6 +1,31 @@
-<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
-    </div>
-</form>
+<div class="mainitem">
+	<div class="header">
+		<div class="title"><h1>REGISTRATION</h1></div>
+	</div>
+	<div class="content center">
+		
+        {% if errors != null %}
+		    <ul class="errormsg">
+		        {% for error in errors %}
+			        <li>{{ error }} </li>
+		        {% endfor %}
+		    </ul>
+        {% endif %}
+        
+		{% form_theme form 'WarlordsGameBundle:Form:form_theme.html.twig' %}
+		
+		<form action="{{ path('fos_user_registration_register') }}" method="post" {{ form_enctype(form) }} novalidate id="reg">           	
+			{{ form_row(form.username) }}
+            {{ form_row(form.plainPassword) }}  
+            {{ form_row(form.email) }}
+            {{ form_rest(form) }}
+			<p class="submit">
+    			<input type="submit" class="registerBtn" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}"/>
+			</p>
+		</form>
+		<p><a>Forgot password?</a></p>
+		<p><a>Having problems creating an account?</a></p>
+	</div>
+	<div class="footer"></div>
+</div>
+

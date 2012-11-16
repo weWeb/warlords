@@ -46,6 +46,10 @@ class PageController extends Controller
 					  		$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
 					  				->getPlayerByGold($value);
 					  		break;
+					  	case 'username':
+					  		$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
+					  				->getPlayerByUsername($value);
+					  		break;
 					  	default:
 					  		break;
             				}
@@ -65,54 +69,6 @@ class PageController extends Controller
 		));
 
     	}
-    
-
-    public function registrationAction()
-    {
-		$em = $this->getDoctrine()->getEntityManager();
-		$form = $this->createForm(new RegistrationFormType('Warlords\GameBundle\Entity\User'), new User());
-        $message = null;
-		$request = $this->getRequest();
-		if ($request->getMethod() == 'POST') {
-		    $form->bindRequest($request);
-
-		    if ($form->isValid()) {
-			$user = $form->getData();
-			$stats = new Playerstats();
-			$stats->setLevel(1);
-        		$stats->setExp(0);
-        		$stats->setSp(0);
-			$stats->setFame(0);
-			$stats->setLand(100);
-			$stats->setGold(100);
-			$stats->setInfantry(100);
-			$stats->setKnights(100);
-			$stats->setCalvary(100);
-			$stats->setUser($user);
-			$em->persist($user);
-       			$em->persist($stats);
-        		$em->flush();
-                $notice = 'A confirmation email has been sent to "' . $user->getEmail() . '"<br/>Click the verify email link in the email to complete registration.';
-       			$this->get('session')->setFlash('registration-notice', $notice);
-		        return $this->redirect($this->generateUrl('WarlordsGameBundle_registration'));
-		    } else {			
-        		$message = array();
-        		foreach ($form->getErrors() as $error) {
-            		$message[] = $error->getMessage();
-        		}
-                $children = $form->getChildren();
-
-                foreach ($children as $child) {
-                    if ($child->hasErrors()) {
-                        foreach ($child->getErrors() as $error) {
-                            $message[] = $error->getMessage();
-                        }
-                    }
-                }
-			}
-		}
-    	return $this->render('WarlordsGameBundle:Page:registration.html.twig', array('form' => $form->createView(), 'errors' => $message));
-    }
 
     private function getFormErrors($children) {
         foreach ($children as $child) {

@@ -97,5 +97,24 @@ class PlayerStatsRepository extends EntityRepository
               		->getResult();		
 		
 	} 
+	
+	
+	// $limit set to 3 to see if the result show correctly; subject to change
+	public function getPlayerByUsername($username, $limit = 3)
+	{
+		$qb = $this->createQueryBuilder('p')
+				->select('p', 'User')
+				->leftJoin('p.user', 'User')
+				->where('User.username LIKE :player_username')
+				->addOrderBy('User.username','DESC')
+				->setParameter('player_username', $username . '%');
+		
+		if (false === is_null($limit))
+       	 		$qb->setMaxResults($limit);
+		
+    		return $qb->getQuery()
+              		->getResult();		
+		
+	} 
 		
 }
