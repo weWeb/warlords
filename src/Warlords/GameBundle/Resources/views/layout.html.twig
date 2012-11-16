@@ -8,20 +8,9 @@
 {% endblock %}
 
 {% block sidebar %}
-    <div class="sidebaritem">
-		<div class="header">
-			<div class="title"><h1>LOGIN</h1></div>
-		</div>
-		<div class="content">
-			<div class="login">
-               	
-				{% block login %}{% render "FOSUserBundle:Security:login" with {'embedded': true} %}{% endblock %}
-			</div>
-			
-		</div>
-		<div class="footer"></div>
-	</div>
-	
+    {% block login %}
+        {% render "FOSUserBundle:Security:login" with {'embedded': true} %}
+	{% endblock %}
 	<div class="sidebaritem">
 		<div class="header">
 			<div class="title"><h1>EVENTS</h1></div>

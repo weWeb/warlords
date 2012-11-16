@@ -3,8 +3,7 @@ WarlordsGameBundle_homepage:
     defaults: { _controller: WarlordsGameBundle:Main:index }
     requirements:
         _method:  GET
-        
-        
+               
 WarlordsGameBundle_player:
     pattern: /player
     defaults: { _controller: WarlordsGameBundle:Page:player }
@@ -17,6 +16,35 @@ WarlordsGameBundle_registration:
     requirements:
         _method: GET|POST
        
+WarlordsGameBundle_about:
+    pattern:  /about
+    defaults: { _controller: WarlordsGameBundle:Page:about }
+    requirements:
+        _method:  GET
+
+WarlordsGameBundle_guide:
+    pattern:  /guide
+    defaults: { _controller: WarlordsGameBundle:Page:guide }
+    requirements:
+        _method:  GET
+
+WarlordsGameBundle_wealth:
+    pattern:  /rank/wealth
+    defaults: { _controller: WarlordsGameBundle:Page:wealth }
+    requirements:
+        _method:  GET
+
+WarlordsGameBundle_fame:
+    pattern:  /rank/fame
+    defaults: { _controller: WarlordsGameBundle:Page:fame }
+    requirements:
+        _method:  GET
+
+WarlordsGameBundle_contact:
+    pattern: /contact
+    defaults: { _controller: WarlordsGameBundle:Page:contact }
+    requirements:
+        _method: GET|POST
 
 WarlordsGameBundle_profile_get:
     pattern: /profile/{target_id}

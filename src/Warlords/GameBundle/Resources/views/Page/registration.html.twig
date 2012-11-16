@@ -7,7 +7,6 @@
 			<div class="title"><h1>REGISTRATION</h1></div>
 		</div>
 		<div class="content center">
-			<p>Already have an account? <a>Click here to log in</a></p>
 			{% if app.session.hasFlash('registration-notice') %}
     			<div class="registration-notice">
         			{{ app.session.flash('registration-notice') | raw}}
@@ -24,12 +23,11 @@
 
 			{% form_theme form 'WarlordsGameBundle:Form:form_theme.html.twig' %}
 			
-			<form action="{{ path('WarlordsGameBundle_registration') }}" method="post" {{ form_enctype(form) }} novalidate>
+			<form action="{{ path('WarlordsGameBundle_registration') }}" method="post" {{ form_enctype(form) }} novalidate id="reg">
                 	
-	    		{{ form_row(form.username) }}
-	    		{{ form_row(form.password) }}	
-	    		{{ form_row(form.email) }}
-                {{ form_rest(form) }}
+    			{{ form_widget(form) }}
+
+                	{{ form_rest(form) }}
 				<p class="submit">
 	    			<input type="submit" class="registerBtn" value="REGISTER" />
 				</p>

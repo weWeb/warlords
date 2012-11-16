@@ -33,11 +33,11 @@ security:
                 target: /
                 success_handler: authentication_handler
             anonymous:    true
-#            remember_me:
-#                key:      secret
-#                lifetime: 10 
-#                path:     /profile
-#                domain:   ~ # Defaults to the current domain from $_SERVER
+            remember_me:
+                key:      "%secret%"
+                lifetime: 86400 # 1 day in seconds
+                path:     /
+                domain:   ~ # Defaults to the current domain from $_SERVER
 #                remember_me_parameter: 'login[remember_me]'
 
         dev:

@@ -5,28 +5,29 @@
 {% block title %}Players{% endblock%}
 
 {% block body %}
-	<header>
-    		<h2>Players List and Search</h2>
-    	</header>
+	<div class="mainitem">
+		<div class="header">
+			<div class="title"><h1>Players List and Search</h1></div>
+		</div>
     	
-    	
+    	<div class="content">
     	<form action="{{ path('WarlordsGameBundle_player') }}" method="post" {{ form_enctype(form) }} class="player">
     		{{ form_widget(form) }}
-    	<p>
-        	<input type="submit" value="Search">
-    	</p>
-	</form>
+    	    <p>
+        	    <input type="submit" value="Search">
+    	    </p>
+	    </form>
     	<section class="players" id="players">
             <h3>Results</h3>
             {% if (players is not null) %}
            	{% include 'WarlordsGameBundle:Player:index.html.twig' with { 'players': players } %}
            {% endif %}
         </section>
+    </div>
+    <div class="footer"></div>  
 {% endblock %}
 
-{% block sidebar %}
-    {# empty content #}
-{% endblock %}
+
 
 
 

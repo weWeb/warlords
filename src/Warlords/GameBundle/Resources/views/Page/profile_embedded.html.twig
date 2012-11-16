@@ -1,5 +1,29 @@
-{% block login %}
 
-<p>Welcome!</p>
+<div class="sidebaritem">
+    <div class="header">
+        <div class="title"><h1>{{app.user.username}}</h1></div>
+    </div>
+    <div class="content">
+        <ul id = "profileinfo">  
+            <li><ul> 
+            <li><span>Level:</span> {{ playerstats.level }}</label></li>
+            <li><span>Experience:</span> {{ playerstats.exp }}</li>
+            <li><span>Attack:</span> {{ attack }}</li>
+            <li><span>Defense:</span> {{ defense }}</li>
+            </ul></li>
+            <li><ul> 
+            <li><span>Gold:</span> {{ playerstats.gold }}</li>
+            <li><span>Land:</span> {{ playerstats.land }}</li>
+            <li><span>Fame:</span> {{ playerstats.fame }}</li>
+            </ul></li>
+            <li><ul> 
+            <li><span>Infantry:</span> {{ playerstats.infantry }}</li>
+            <li><span>Knights:</span> {{ playerstats.knights }}</li>
+            <li><span>Calvary:</span> {{ playerstats.calvary }}</li>
+            </ul></li>
+        </ul>
 
-{% endblock %}
+        <div id="profile_logout"><a href="{{ path('fos_user_security_logout') }}">Logout</a></div>
+    </div>
+    <div class="footer"></div>
+</div>

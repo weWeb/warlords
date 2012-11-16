@@ -4,6 +4,7 @@ namespace Warlords\GameBundle\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Controller\SecurityController as BaseController;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\HttpFoundation\Response;
 
 class SecurityController extends BaseController
 {
@@ -25,20 +26,24 @@ class SecurityController extends BaseController
         }
 
         if ($error) {
-            // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
             $error = $error->getMessage();
         }
         // last username entered by the user
         $lastUsername = (null === $session) ? '' : $session->get(SecurityContext::LAST_USERNAME);
-
         $csrfToken = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
         
-        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY') && $embedded)
+        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') && $embedded)
         {
+            $usr = $this->container->get('security.context')->getToken()->getUser();        
+            $em = $this->container->get('doctrine')->getEntityManager();
             $template = sprintf('WarlordsGameBundle:Page:profile_embedded.html.twig');
-            return $this->container->get('templating')->renderResponse($template, array());
-            
-        }
+            return $this->container->get('templating')->renderResponse($template, ProfileController::getUserProfile($usr, $em));           
+        } 
+
+        // For AJAX; figure out later
+        // $return=json_encode(array("responseCode"=>200,  "greeting"=>"ello"));
+        // return new Response($return,200,array('Content-Type'=>'application/json'));
+        
         return $this->renderLogin(array(
             'last_username' => $lastUsername,
             'error'         => $error,
@@ -51,6 +56,7 @@ class SecurityController extends BaseController
     {  
         if ($data['embedded']) {
             $template = sprintf('FOSUserBundle:Security:login_embedded.html.%s', $this->container->getParameter('fos_user.template.engine'));
+                
         } else { 
             $template = sprintf('FOSUserBundle:Security:login.html.%s', $this->container->getParameter('fos_user.template.engine'));
         }
