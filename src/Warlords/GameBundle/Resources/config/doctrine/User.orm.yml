@@ -60,10 +60,12 @@ Warlords\GameBundle\Entity\User:
         stats:
             targetEntity: PlayerStats
             mappedBy: user
+            cascade: ["persist", "remove"]
     manyToMany:
         alliesWithMe:
             targetEntity: User
             mappedBy: myAllies
+            cascade: ["persist", "remove"]
         myAllies:
             targetEntity: User
             inversedBy: alliesWithMe

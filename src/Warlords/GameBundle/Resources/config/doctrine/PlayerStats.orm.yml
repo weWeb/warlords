@@ -29,8 +29,10 @@ Warlords\GameBundle\Entity\PlayerStats:
         user:
             targetEntity: User
             inversedBy: stats
+            cascade: ["persist", "remove"]
     oneToMany:
         skills:
             targetEntity: Skills
             mappedBy: stats
+            cascade: ["persist", "remove"]
     lifecycleCallbacks: {  }
