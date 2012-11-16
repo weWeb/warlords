@@ -39,22 +39,18 @@
                     {% block navigation %}
                         <nav>
                             <ul class="navigation">
-                                <li><a href="{{ path('WarlordsGameBundle_homepage') }}">Home</a>
+                                <li><a href="{{ path('WarlordsGameBundle_homepage') }}">Home</a></li>
+                                <li><a href="{{ path('WarlordsGameBundle_about') }}">About</a></li>
+								<li><a href="{{ path('WarlordsGameBundle_guide') }}">Guide</a></li>
+								<li><a href="{{ path('WarlordsGameBundle_wealth') }}">Ranking</a>
 									<ul>
-           				 				<li><a href="{{ path('WarlordsGameBundle_registration') }}">Registration</a></li>
-        							</ul>		</li>
-                                <li><a href="#">About</a></li>
-								<li><a href="#">Guide</a></li>
-								<li><a href="#">Ranking</a>
-									<ul>
-           				 				<li><a href="#">Wealth</a></li>
-            							<li><a href="#">Fame</a></li>
+           				 				<li><a href="{{ path('WarlordsGameBundle_wealth') }}">Wealth</a></li>
+            							<li><a href="{{ path('WarlordsGameBundle_fame') }}">Fame</a></li>
         							</ul>									
 								</li>
 								<li><a href="{{ path('WarlordsGameBundle_profile') }}">Profile</a></li>
-								<li><a href="{{ path('WarlordsGameBundle_player') }}">Player</a></li>
-								<li><a href="#">Guild</a></li>
-                                <li><a href="#">Contact</a></li>
+								<li><a href="{{ path('WarlordsGameBundle_player') }}">Search</a></li>
+                                <li><a href="{{ path('WarlordsGameBundle_contact') }}">Contact</a></li>
                             </ul>
                         </nav>
                     {% endblock %}

@@ -117,4 +117,24 @@ class PageController extends Controller
             }
         }
     }
+
+    public function aboutAction() {
+        return $this->render('WarlordsGameBundle:Page:about.html.twig');
+    }
+
+    public function guideAction() {
+        return $this->render('WarlordsGameBundle:Page:guide.html.twig');
+    }
+
+    public function contactAction() {
+        return $this->render('WarlordsGameBundle:Page:contact.html.twig');
+    }
+
+    public function wealthAction() {
+        return $this->render('WarlordsGameBundle:Page:wealth.html.twig');
+    }
+
+    public function fameAction() {
+        return $this->render('WarlordsGameBundle:Page:fame.html.twig');
+    }
 }
