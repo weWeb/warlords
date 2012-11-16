@@ -10,12 +10,18 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
 
 class ProfileController extends BaseController{
-    public function profileAction(){
+    public function profileAction(){  	
+    	//Create the form
+    	$form = $this->createForm(new BuySoldierType(), NULL);
         $usr = $this->container->get('security.context')->getToken()->getUser();
-        $id = $usr->getID();
-        
         $em = $this->container->get('doctrine')->getEntityManager();
+    	$returnArray = ProfileController::getUserProfile($usr, $em);
+        $returnArray['form'] = $form->createView();
+        return $this->render('WarlordsGameBundle:Page:profile.html.twig', $returnArray);
+    }
 
+    public static function getUserProfile($usr, $em) {
+        $id = $usr->getID();
         $playerstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($id);
 
 
@@ -29,17 +35,11 @@ class ProfileController extends BaseController{
     	
     	$attk = $soldiers + $knights*2 + $calvary*4;
     	$defn = $soldiers + $knights*3 + $calvary*3;
-    	
-    	//Create the form
-    	$form = $this->createForm(new BuySoldierType(), NULL);
-    	
-        return $this->render('WarlordsGameBundle:Page:profile.html.twig', array(
-                                'playerstats' => $playerstats,
-                                'attack' => $attk,
-                                'defense' => $defn,
-                                'info'=>NULL,
-                                'form' => $form->createView()
-                                ));
+        return array(   'playerstats' => $playerstats,
+                        'attack' => $attk,
+                        'defense' => $defn,
+                        'info'=>NULL,                              
+                        );
     }
     
     public function profile_getAction($target_id){

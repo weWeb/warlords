@@ -52,7 +52,7 @@ p, form {
 	color: #d5a042;
 }
 
-a { text-decoration: none; color: #faa333; transition: all 0.3s ease-out; position: relative; padding: .5em; margin: -.5em; }
+a { text-decoration: none; color: #faa333; transition: all 0.3s ease-out; position: relative; padding: .5em; margin: -.5em; font-size: 1.8em; }
 a:hover { color: #ff6b1a; }
 a:active {outline: none;} 
 
@@ -351,6 +351,10 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
 	background-image:url('../images/warlord_content_bg.jpg'); background-repeat:repeat-y; background-position:-6px 0px; margin-top: -1px; 
 }
 
+.main-col .mainitem .content a {
+	font-size: 1em;
+}
+
 .main-col .mainitem .footer {
 	width: 698px;
 	height: 45px;
@@ -411,17 +415,22 @@ ul.errormsg{ list-style-type: disc; list-style-position: inside; border: 1px das
 	color: #eda321; border:3px solid #eda321; background-color:#1f1b18; outline: none; margin-top: 10px;  
 	-moz-box-shadow: 2px 2px 2px #000;  
     -webkit-box-shadow: 2px 2px 2px #000;  
-    box-shadow: 2px 2px 2px #000; position: absolute; top: 115px; left: 50px; }
+    box-shadow: 2px 2px 2px #000;  position: relative; left: 20px; }
 .loginBtn:hover {  color: #ff760f; background-color: #42362c; border:3px solid #ff760f; }
 .loginBtn:active { outline: none; }
-.regPos { position: absolute; left: 15px; top: 115px; left: 110px; }
+.regPos { position: relative; left: 30px; }
 .rememberCheck { border: 1px solid red;  vertical-align: middle; }
 .rememberLabel { vertical-align: middle; }
 .login span  { vertical-align: middle; }
-.login p { margin-bottom: 5px; margin-top: 35px; }
+.login p { margin-bottom: 5px; margin-top: 10px; font-size: 1em;}
 .loginerror { color: red; font-size: 1.5em; }
 
-
+/* Profile Embedded */
+#profile_logout { margin-bottom: 5px; text-align: right; }
+#profileinfo ul { font-family: 'Arial', 'Helvetica'; 
+	font-size: 1.8em;
+	color: #e2d7c5;  line-height: 1.2em; margin-bottom: 5px; } 
+#profileinfo ul span { font-weight: bold; } 
 
 
 

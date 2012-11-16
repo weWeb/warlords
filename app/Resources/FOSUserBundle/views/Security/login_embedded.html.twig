@@ -1,34 +1,75 @@
-{% block fos_user_content %}
-
-{% if app.session.hasFlash('error') %}
-    <div class="loginerror">
-        {{ app.session.flash('error') | trans({}, 'FOSUserBundle')}}
+<div class="sidebaritem">
+    <div class="header">
+        <div class="title"><h1>LOGIN</h1></div>
     </div>
-{% endif %}
+    <div class="content">
+        <div class="login">
+            {% block fos_user_content %}
+            {% if app.session.hasFlash('error') %}
+                <div class="loginerror">
+                    {{ app.session.flash('error') | trans({}, 'FOSUserBundle')}}
+                </div>
+            {% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post" novalidate >
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            <form action="{{ path("fos_user_security_check") }}" id="login_embedd" method="post" novalidate >
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                <div><label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label> </div>
+                <div><input type="text" class="loginInput" id="username" name="_username" value="{{ last_username }}" required="required" /> </div>
+                <div><label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label></div>
+                <div><input type="password" class="loginInput" id="password" name="_password" required="required" /></div>
     
-     <div>   <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label> </div>
-     <div>   <input type="text" class="loginInput" id="username" name="_username" value="{{ last_username }}" required="required" /> </div>
-   
-   
-     <div>   <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label></div>
-     <div>   <input type="password" class="loginInput" id="password" name="_password" required="required" /></div>
+                <div>
+                    <label for="remember_me" class="rememberLabel">
+                        <input type="checkbox" class="rememberCheck" id="remember_me" name="_remember_me" checked /> 
+                        <span>{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</span>
+                    </label>
+                </div>
     
-    <div>
-        <label for="remember_me" class="rememberLabel">
-            <input type="checkbox" class="rememberCheck" id="remember_me" name="_remember_me" value="on" /> 
-            <span>{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</span>
-        </label>
-      
+                <input type="submit" class="loginBtn" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+                <form>
+                    <input type="button" class="registerBtn regPos" value="{{ 'security.login.register'|trans({}, 'FOSUserBundle') }}"
+                        onClick="parent.location='{{ path("WarlordsGameBundle_registration") }}'">
+                </form> 
+            </form>
+
+            <p class="center" ><a>Forgot password?</a></p>
+            {% endblock fos_user_content %}
+
+            {# Figure out AJAX If time allows later #}
+            {#
+            <div id="output"></div>
+            {% block javascripts %}
+            <script type="text/javascript"> 
+               $("#login_embedd").submit(function(){
+                  var url=$("#login_embedd").attr("action");
+               
+                  //start send the post request
+                   $.post(url,{
+                       userName:$("#username").val(),
+                       other:"attributes"
+                   },function(data){
+                        data = json_decode(data);
+                        if(data.responseCode==200 ){           
+                            $('#output').html(data.greeting);
+                            $('#output').css("color","red");
+                        }
+                       else if(data.responseCode==400){//bad request
+                           $('#output').html(data.greeting);
+                           $('#output').css("color","red");
+                       }
+                       else{
+                          alert("An unexpeded error occured.");
+                       }
+                   });
+                  return true;
+               });
+            </script>
+            {% endblock %}
+            #}  	
+				
+        </div>		
     </div>
-    
-    <input type="submit" class="loginBtn" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
-   
-</form>
-<form>
-<input type="button" class="registerBtn regPos" value="{{ 'security.login.register'|trans({}, 'FOSUserBundle') }}" onClick="parent.location='{{ path("WarlordsGameBundle_registration") }}'">
-</form> 
-<p class="center" ><a>Forgot password?</a></p>
-{% endblock fos_user_content %}
+    <div class="footer"></div>
+</div>
+
+

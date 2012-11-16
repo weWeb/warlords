@@ -1,11 +1,5 @@
 {% extends 'WarlordsGameBundle::layout.html.twig' %}
 
 {% block body %}
-	
-{% if app.session.hasFlash('error') %}
-    <div class="loginerror">
-        {{ app.session.flash('error') }}
-    </div>
-{% endif %}
 <p>Please log in to access the page.</p>
 {% endblock body %}
