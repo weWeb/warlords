@@ -387,7 +387,7 @@ li.news {
 }
 
 /* Registration Form */
-form { margin-top: 10px; text-align: center; width: 320px; margin: 10px auto 10px auto; }
+form#reg { text-align: center; width: 320px; margin: 10px auto 10px auto; }
 .form { border: 1px solid #7d441e; background-color: #1b1511; font-family: 'Arial', 'Helvetica'; font-size: 1.05em; color: #e2d7c5; padding: 2px; width:190px; }
 .formFocused { background-color: errormsg;  -webkit-box-shadow:0 0 5px #ff9c00; -moz-box-shadow:0 0 4px #ff9c00; box-shadow:0 0 4px #ff9c00; outline: none; }
 .label { width: 100px; text-align: right; padding: 4px; margin-top: 3px; }
@@ -431,8 +431,6 @@ ul.errormsg{ list-style-type: disc; list-style-position: inside; border: 1px das
 	font-size: 1.8em;
 	color: #e2d7c5;  line-height: 1.2em; margin-bottom: 5px; } 
 #profileinfo ul span { font-weight: bold; } 
-
-
 
 
 

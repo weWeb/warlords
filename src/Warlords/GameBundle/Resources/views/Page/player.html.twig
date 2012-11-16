@@ -13,10 +13,10 @@
     	<div class="content">
     	<form action="{{ path('WarlordsGameBundle_player') }}" method="post" {{ form_enctype(form) }} class="player">
     		{{ form_widget(form) }}
-    	<p>
-        	<input type="submit" value="Search">
-    	</p>
-	</form>
+    	    <p>
+        	    <input type="submit" value="Search">
+    	    </p>
+	    </form>
     	<section class="players" id="players">
             <h3>Results</h3>
             {% if (players is not null) %}

@@ -1,10 +1,10 @@
-.players { clear: both; margin: 0px; padding: 0px; margin-bottom: 100px; overflow: inherit}
+.players { clear: both; margin: 0px; padding: 0px; overflow: inherit}
 
 .players .player { padding: 0px; margin: 0px; }
 .players p { padding: 5px 10px 25px 10px; margin: 0px; color: #a68282; }
 .players .player p { padding: 5px 10px 25px 10px; margin: 0px; color: #a68282; }
 .players .player header p { padding: 5px 10px 5px 10px; margin: 0px; color: white; }
-.players h3 { border-bottom: 1px dashed; padding: 10px 0px 10px 0px; font-size: 16px; text-align: right; margin-bottom: 20px; color: #a68282; clear: both; }
+.players h3 { border-bottom: 1px dashed; padding: 10px 0px 10px 0px; font-size: 16px; text-align: right; color: #a68282; clear: both; }
 .players .previous-players { margin: 0px; }
 
 
