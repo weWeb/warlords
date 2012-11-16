@@ -42,47 +42,49 @@ class ProfileController extends BaseController{
                         );
     }
     
+    //===============================
+    //VIEW PROFILE function
+    //===============================
+    
     public function profile_getAction($target_id){
-        $usr = $this->get('security.context')->getToken()->getUser();
-        $id = $usr->getID();
+        //$usr = $this->container->get('security.context')->getToken()->getUser();
+        //$id = $usr->getID();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->container->get('doctrine')->getEntityManager();
 
         $playerstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($target_id);
-        $selfstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($id);
+        $target_user=$em->getRepository('WarlordsGameBundle:User')->findOneById($target_id);
+        
+
 
 
         if (!$playerstats) {
-        	throw new NotFoundHttpException('Unable to find player.');
-    	}
-    	if (!$selfstats) {
-            throw new NotFoundHttpException('Unable to find target player.');
+        	return $this->render('WarlordsGameBundle:Page:profile_get.html.twig', array(
+                                'error' => "Cannot find this player."
+                                ));
     	}
     	
-    	$soldiers = $selfstats->getInfantry();
-    	$knights = $selfstats->getKnights();
-    	$calvary = $selfstats->getCalvary();
-    	
-    	$attk = $soldiers + $knights*2 + $calvary*4;
-    	$defn = $soldiers + $knights*3 + $calvary*3;
+        $playername = $target_user->getUsername();
         
         return $this->render('WarlordsGameBundle:Page:profile_get.html.twig', array(
                                 'playerstats' => $playerstats,
-                                'selfstats' => $selfstats,
-                                'attack' => $attk,
-                                'defense' => $defn,
-                                'target_id' => $target_id
+                                'target_id' => $target_id,
+                                'playername' => $playername
                                 ));
     }
+    
+    //===============================
+    //ATTACK function
+    //===============================
     
     public function attackAction($target_id){
         //Inform player how resource and army gained and lost after fight.
         $info="";
 
-        $usr = $this->get('security.context')->getToken()->getUser();
+        $usr = $this->container->get('security.context')->getToken()->getUser();
         $id = $usr->getID();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->container->get('doctrine')->getEntityManager();
 
         $playerstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($id);
         
@@ -186,9 +188,14 @@ class ProfileController extends BaseController{
                                 'defense' => (int)$playerdefn,
                                 'info' => $info));
     }
+    
+    //===============================
+    //BUY function
+    //===============================
+    
     public function buyAction(){
         $form = $this->createForm(new BuySoldierType(), NULL);
-        $request = $this->getRequest();
+        $request = $this->container->get('request');
         
         if ($request->isMethod('POST')) {
             
@@ -196,10 +203,10 @@ class ProfileController extends BaseController{
 
             if ($form->isValid()) {
                 // perform some action, such as saving the task to the database
-                $usr = $this->get('security.context')->getToken()->getUser();
+                $usr = $this->container->get('security.context')->getToken()->getUser();
                 $id = $usr->getID();
                 
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->container->get('doctrine')->getEntityManager();
 
                 $playerstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($id);
                 
@@ -211,15 +218,32 @@ class ProfileController extends BaseController{
             	$buyk = $form["knights"]->getData();
             	$buyc = $form["calvary"]->getData();
             	
+            	//If user enters negative numbers
+            	if($buys < 0 | $buyk < 0 | $buyc < 0)
+            	{
+            	    return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
+            	                'error'=>"You cannot sell soldiers !"
+                                ));
+            	}
+            	
             	//Check Gold
             	$gold = $playerstats->getGold();
             	
             	$cost = $buys*50 + $buyk*200 + $buyc*500;
             	
+            	//bad form, bought nothing.
+            	if($cost == 0)
+            	{
+          	        return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
+            	                'error'=>"Nothing is purchased."
+                                ));
+            	}
+            	
             	if($cost > $gold)
             	{
-            	    $info = "Insufficient gold !";
-            	    return $this->redirect($this->generateUrl('WarlordsGameBundle_profile'));
+            	    return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
+            	                'error'=>"Insufficient Gold"
+                                ));
             	}
             	
             	//adjust gold and army
@@ -245,7 +269,13 @@ class ProfileController extends BaseController{
 
             }
         }
-        return $this->redirect($this->generateUrl('WarlordsGameBundle_profile'));
+        return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
+            	                'info'=>"Success",
+            	                'soldiers' => $buys,
+            	                'knights' => $buyk,
+            	                'calvary' => $buyc,
+            	                'gold'    => $cost
+                                ));
     }
 
     public function createForm($type, $data = null, array $options = array())

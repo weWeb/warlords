@@ -16,13 +16,6 @@ div#profile {
     font-size: 2em;
 }
 
-div#events {
-    float: right;
-    width: 300px;
-    height: 70%;;
-    border: solid;
-}
-
 div#events > h2 {
     text-align: center;
     color: #009933;
@@ -42,5 +35,8 @@ div#events > h2 {
 
 ul#attack_stats {
     border-width: 2px;
+}
 
+.information {
+    font-size: 2em;
 }

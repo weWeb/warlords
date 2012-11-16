@@ -57,4 +57,7 @@ FOS\UserBundle\Model\User:
                 groups: [Register] 
                 limit: 14
                 message: Password must be 6-14 characters long.
-     
+Warlords\GameBundle\Entity\PlayerStats:
+        properties:
+            infantry:
+                - Type: \Integer
