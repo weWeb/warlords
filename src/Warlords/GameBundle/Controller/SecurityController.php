@@ -32,7 +32,7 @@ class SecurityController extends BaseController
         $lastUsername = (null === $session) ? '' : $session->get(SecurityContext::LAST_USERNAME);
         $csrfToken = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
         
-        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY') && $embedded)
+        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') && $embedded)
         {
             $usr = $this->container->get('security.context')->getToken()->getUser();        
             $em = $this->container->get('doctrine')->getEntityManager();
