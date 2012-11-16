@@ -10,12 +10,6 @@ WarlordsGameBundle_player:
     requirements:
         _method: GET|POST
 
-WarlordsGameBundle_registration:
-    pattern: /registration
-    defaults: { _controller: WarlordsGameBundle:Page:registration }
-    requirements:
-        _method: GET|POST
-       
 WarlordsGameBundle_about:
     pattern:  /about
     defaults: { _controller: WarlordsGameBundle:Page:about }

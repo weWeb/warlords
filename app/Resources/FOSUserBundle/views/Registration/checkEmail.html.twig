@@ -1,5 +1,16 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
+{% block body %}
+    <div class="mainitem">
+		<div class="header">
+            <div class="title"><h1>ACTIVATE ACCOUNT</h1></div>
+        </div>
+        <div class="content">
+            <p>{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p>
+        </div>
+		<div class="footer"></div>
+	</div>
+{% endblock body %}
+
 {% block fos_user_content %}
-    <p>{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p>
-{% endblock fos_user_content %}
+    

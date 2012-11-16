@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<news>
+<title>FOSUserBundle</title>
+<content>Our website is now changed to using the FOSUserBundle! It is a bundle that builds on top of Symfony2's security component, providing us with many user management functionalities. The bundle can be easily customized to fit our need through inheritance. The login system has currently been switched over to using this bundle. We now have secure access to pages requiring authentication, proper redirect upon successful or unsuccessful authentication, and a remember me functionality for sessions. The session cookie has been set to expire in 24 hours.</content>
+<author>Lily</author>
+<date>Nov 15, 2012</date>
+</news> 

@@ -23,7 +23,9 @@ fos_user:
     user_class: Warlords\GameBundle\Entity\User
     registration:
         form:
+            handler: warlords_user.form.handler.registration
             type: warlords_user_registration
+            validation_groups: [Register]
 
 services:
     authentication_handler:
