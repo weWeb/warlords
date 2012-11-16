@@ -46,6 +46,10 @@ class PageController extends Controller
 					  		$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
 					  				->getPlayerByGold($value);
 					  		break;
+					  	case 'username':
+					  		$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
+					  				->getPlayerByUsername($value);
+					  		break;
 					  	default:
 					  		break;
             				}

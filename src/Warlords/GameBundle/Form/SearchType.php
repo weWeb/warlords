@@ -16,7 +16,9 @@ class SearchType extends AbstractType
             			'choices' => array(	
             				'level' => 'Level',
             				'fame' => 'Fame',
+            				'username' => 'Player',
             				'gold' => 'Gold',
+            				
             				
             			),
             			'property_path' => false
