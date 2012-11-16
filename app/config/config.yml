@@ -21,6 +21,9 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Warlords\GameBundle\Entity\User
+    registration:
+        form:
+            type: warlords_user_registration
 
 services:
     authentication_handler:

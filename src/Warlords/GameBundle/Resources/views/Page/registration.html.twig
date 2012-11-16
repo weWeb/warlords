@@ -25,10 +25,9 @@
 			
 			<form action="{{ path('WarlordsGameBundle_registration') }}" method="post" {{ form_enctype(form) }} novalidate id="reg">
                 	
-	    		{{ form_row(form.username) }}
-	    		{{ form_row(form.password) }}	
-	    		{{ form_row(form.email) }}
-                {{ form_rest(form) }}
+    			{{ form_widget(form) }}
+
+                	{{ form_rest(form) }}
 				<p class="submit">
 	    			<input type="submit" class="registerBtn" value="REGISTER" />
 				</p>

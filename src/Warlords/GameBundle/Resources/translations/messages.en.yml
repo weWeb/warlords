@@ -7,6 +7,13 @@ username_password_confirm: "Confirm Password"
 username_email_email: "Email"
 username_email_confirm: "Confirm Email"
 
+# Testing ##
+
+warlords_user_registration_username: "Username"
+warlords_user_registration_plainPassword_first: "Password"
+warlords_user_registration_plainPassword_second: "Confirm Password"
+warlords_user_registration_email_first: "Email"
+warlords_user_registration_email_confirm: "Confirm Email"
      
 
 

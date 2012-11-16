@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Warlords\GameBundle\Entity\PlayerStats;
 use Warlords\GameBundle\Form\SearchType;
 use Warlords\GameBundle\Entity\User;
-use Warlords\GameBundle\Form\UserType;
+use Warlords\GameBundle\Form\RegistrationFormType;
 
 class PageController extends Controller
 {
@@ -70,15 +70,27 @@ class PageController extends Controller
     public function registrationAction()
     {
 		$em = $this->getDoctrine()->getEntityManager();
-		$form = $this->createForm(new UserType(), new User());
+		$form = $this->createForm(new RegistrationFormType('Warlords\GameBundle\Entity\User'), new User());
         $message = null;
 		$request = $this->getRequest();
 		if ($request->getMethod() == 'POST') {
 		    $form->bindRequest($request);
 
 		    if ($form->isValid()) {
-				$user = $form->getData();
-       			$em->persist($user);
+			$user = $form->getData();
+			$stats = new Playerstats();
+			$stats->setLevel(1);
+        		$stats->setExp(0);
+        		$stats->setSp(0);
+			$stats->setFame(0);
+			$stats->setLand(100);
+			$stats->setGold(100);
+			$stats->setInfantry(100);
+			$stats->setKnights(100);
+			$stats->setCalvary(100);
+			$stats->setUser($user);
+			$em->persist($user);
+       			$em->persist($stats);
         		$em->flush();
                 $notice = 'A confirmation email has been sent to "' . $user->getEmail() . '"<br/>Click the verify email link in the email to complete registration.';
        			$this->get('session')->setFlash('registration-notice', $notice);

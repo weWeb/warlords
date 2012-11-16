@@ -5,3 +5,9 @@ services:
 #    warlords_game.example:
 #        class: %warlords_game.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+     warlords_user.registration.form.type:
+        class: Warlords\GameBundle\Form\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: warlords_user_registration }
