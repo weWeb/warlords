@@ -27,7 +27,33 @@ class UpdateResourceCommand extends ContainerAwareCommand
         {
             $land = $player->getLand();
             $gold = $player->getGold();
-            $player->setGold($gold+$land);
+            
+            $gold = $land+$gold;
+            
+            $soldiers = $player->getInfantry();
+            $knights = $player->getKnights();
+            $calvary = $player->getCalvary();
+            
+            $upkeep = $soldiers*25 + $knights*75 + $calvary*125;
+            
+            if($gold > $upkeep)
+            {
+                $gold = $gold-$upkeep;
+            }
+            //If not enough gold for upkeep, lose soldiers. Lose all gold
+            else
+            {
+                $gold = 0;
+                $soldiers = (int)($soldiers*0.995);
+                $knights = (int)($knights*0.995);
+                $calvary = (int)($calvary*0.995);
+                
+                $player->setInfantry($soldiers);
+                $player->setKnights($knights);
+                $player->setCalvary($calvary);
+            }
+            
+            $player->setGold($gold);
             $em->persist($player);
         }
         $em->flush();
