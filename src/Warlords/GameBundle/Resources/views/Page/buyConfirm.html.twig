@@ -1,0 +1,43 @@
+{% extends 'WarlordsGameBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('css/profile.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+    <div class="mainitem">
+        <div class="header">
+			<div class="title"><h1>Buy Soldiers</h1></div>
+		</div>
+        <div class="content">
+            {% if error is defined %}
+                <div class="loginerror">{{ error }}</div>
+            {% endif %}
+            
+            {% if info is defined %}
+                <div class="information">
+                <p>{{ info }}</p>
+                <p>You have purchased:</p>
+                
+                {% if soldiers is not empty %}
+                <p>{{ soldiers }} Soldiers  </p>
+                {% endif %}
+                
+                {% if calvary is not empty %}
+                <p>{{ knights }} Knights  </p>
+                {% endif %}
+                
+                {% if calvary is not empty %}
+                <p>{{ calvary }} Calvary  <p>
+                {% endif %}
+                
+                <p>for {{ gold }} gold.<p>
+                </div>
+            {% endif %}
+            
+        </div>
+		<div class="footer"></div>
+	</div>
+{% endblock %}
+
