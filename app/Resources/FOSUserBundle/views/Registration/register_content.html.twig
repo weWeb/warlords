@@ -15,9 +15,6 @@
 		{% form_theme form 'WarlordsGameBundle:Form:form_theme.html.twig' %}
 		
 		<form action="{{ path('fos_user_registration_register') }}" method="post" {{ form_enctype(form) }} novalidate id="reg">           	
-			{{ form_row(form.username) }}
-            {{ form_row(form.plainPassword) }}  
-            {{ form_row(form.email) }}
             {{ form_rest(form) }}
 			<p class="submit">
     			<input type="submit" class="registerBtn" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}"/>

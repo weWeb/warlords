@@ -35,6 +35,17 @@
       <div class="clear"></div>
 {% endblock field_row %}
 
+{% block _fos_user_registration_form_username_widget %}
+    {{ block('field_widget') }}  
+    <img id="username_tick" src="{{ asset('images/tick.png') }}" width="12" height="12">
+    <img id="username_cross" src="{{ asset('images/cross.png') }}" width="12" height="12">
+{% endblock %}
+
+{% block _fos_user_registration_form_email_first_widget %}
+    {{ block('field_widget') }}   
+    <img id="email_tick" src="{{ asset('images/tick.png') }}" width="12" height="12">
+    <img id="email_cross" src="{{ asset('images/cross.png') }}" width="12" height="12">
+{% endblock %}
 
 {% block field_label %}
     {% spaceless %}

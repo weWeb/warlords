@@ -1,4 +1,7 @@
 FOS\UserBundle\Model\User:
+    constraints:
+            - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: [username, usernameCanonical], groups: [Register], message: The username is already used. }
+            - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: [email, emailCanonical], groups: [Register], message: The email is already used. }
     properties:
         username: 
             - NotBlank: 
@@ -35,16 +38,16 @@ FOS\UserBundle\Model\User:
                 message: You must enter an email address.
             - Email: 
                 groups: [Register]
-                message: The email "{{ value }}" is not a valid email.
+                message: The email address "{{ value }}" is not a valid email address.
                 checkMX: true
             - MinLength: 
                 groups: [Register] 
                 limit: 6
-                message: Email cannot be shorter than 6 characters.
+                message: Email address cannot be shorter than 6 characters.
             - MaxLength: 
                 groups: [Register] 
                 limit: 100
-                message: Email cannot be longer than 100 characters.
+                message: Email address cannot be longer than 100 characters.
         plainPassword:
             - NotBlank:
                 groups: [Register]

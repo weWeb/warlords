@@ -387,11 +387,11 @@ li.news {
 }
 
 /* Registration Form */
-form#reg { text-align: center; width: 320px; margin: 10px auto 10px auto; }
-.form { border: 1px solid #7d441e; background-color: #1b1511; font-family: 'Arial', 'Helvetica'; font-size: 1.05em; color: #e2d7c5; padding: 2px; width:190px; }
+form#reg { text-align: center; width: 360px; margin: 10px auto 10px auto; }
+.form { border: 1px solid #7d441e; background-color: #1b1511; font-family: 'Arial', 'Helvetica'; font-size: 1.05em; color: #e2d7c5; padding: 2px; width:190px; height: 14px;}
 .formFocused { background-color: errormsg;  -webkit-box-shadow:0 0 5px #ff9c00; -moz-box-shadow:0 0 4px #ff9c00; box-shadow:0 0 4px #ff9c00; outline: none; }
 .label { width: 100px; text-align: right; padding: 4px; margin-top: 3px; }
-.input { width: 200px; text-align: left; padding: 4px;}
+.input { width: 230px; text-align: left; padding: 4px;}
 .inputerror { border: 1px solid red;  background-color: #1b1511; font-family: 'Arial', 'Helvetica'; font-size: 1.05em; color: #e2d7c5; padding: 2px; width:190px; }
 .error { color: red; }
 .registerBtn { font-family: 'Black Ops One', serif;
@@ -406,6 +406,10 @@ ul.errormsg{ list-style-type: disc; list-style-position: inside; border: 1px das
     text-align: left; padding: 5px 5px 5px 10px; margin: 10px auto 10px auto; font-family: 'Arial', 'Helvetica'; font-size: 1.8em; color: #e2d7c5; }
 .registration-notice{ border: 1px dashed #7d441e; background-color: #1b1511; width: 400px; line-height: 1.5em;
     text-align: left; padding: 5px 5px 5px 10px; margin: 10px auto 10px auto; font-family: 'Arial', 'Helvetica'; font-size: 1.8em; color: #e2d7c5; }
+#username_tick { display:none; margin-left: 2px; }
+#username_cross { display:none; margin-left: 2px; }
+#email_tick { display:none; margin-left: 2px; }
+#email_cross { display:none; margin-left: 2px; }
 
 /* Login Form */
 .login form { margin-top: 5px; text-align: left; width: 170px; margin: 5px auto 5px auto;  }

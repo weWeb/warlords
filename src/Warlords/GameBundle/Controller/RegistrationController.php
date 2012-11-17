@@ -74,5 +74,30 @@ class RegistrationController extends BaseController
         ));
     }
 
+    public function checkUniqueAction() {
+        $request = $this->container->get('request');  
+        $checkField = $request->request->get("checkField");
+        $checkValue = $request->request->get("checkValue");
+        if (strcmp( $checkField, "username" ) == 0) { 
+            $result = $this->container->get('doctrine')
+            ->getEntityManager()
+            ->getRepository('WarlordsGameBundle:User')
+            ->findOneByUsername($checkValue);
+        } else if (strcmp( $checkField, "email" ) == 0) {
+            $result = $this->container->get('doctrine')
+            ->getEntityManager()
+            ->getRepository('WarlordsGameBundle:User')
+            ->findOneByEmail($checkValue);
+        } else {
+            $result = null;
+        }
 
+        if (!$result) {
+            $return = array("exist"=>0);
+        } else {
+            $return = array("exist"=>1);
+        }
+        $return=json_encode($return);
+        return new Response($return,200,array('Content-Type'=>'application/json'));
+    }
 }

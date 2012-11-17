@@ -26,6 +26,22 @@ fos_user:
             handler: warlords_user.form.handler.registration
             type: warlords_user_registration
             validation_groups: [Register]
+        confirmation:
+            enabled: true
+    resetting:
+        email:
+            from_email:
+                address:        resetting@noreply.com
+                sender_name:    WARLORDS NOREPLY
+    from_email:
+        address:        group10weweb@gmail.com
+        sender_name:    WARLORDS ADMIN
+    service:
+        mailer: fos_user.mailer.twig_swift
+    resetting:
+        token_ttl: 604800    #persist for only a week
+        email:
+            template: FOSUserBundle:Resetting:email.txt.twig
 
 services:
     authentication_handler:
@@ -34,6 +50,7 @@ services:
         class: Warlords\GameBundle\Twig\WarlordsExtension
         tags:
             - { name: twig.extension }
+   
 
 # Twig Configuration
 twig:

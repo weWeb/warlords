@@ -65,6 +65,12 @@ WarlordsGameBundle_buy:
     requirements:
         _method: POST
 
+WarlordsGameBundle_CheckUnique:
+    pattern: /registration/checkunique
+    defaults:  { _controller: WarlordsGameBundle:Registration:checkUnique }
+    requirements:
+        _method: POST
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

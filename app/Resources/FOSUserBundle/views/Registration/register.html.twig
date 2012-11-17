@@ -14,5 +14,57 @@
 		$("input").blur(function() {
 			$(this).removeClass("formFocused")
 		});
+        $('#fos_user_registration_form_username').keyup(username_check);
+        $('#fos_user_registration_form_email_first').keyup(function() {email_check('#fos_user_registration_form_email_first')});
+        
+        function username_check(){
+            var username = $('#fos_user_registration_form_username').val();
+ 
+            if(username == "") {
+                $('#username_cross').hide();
+                $('#username_tick').hide();
+            } else if ((username != "" && username.length < 6 ) || username.length > 50){
+                $('#username_cross').fadeIn();
+                $('#username_tick').hide();
+            }else{
+                $.post( "{{ path('WarlordsGameBundle_CheckUnique') }}",
+                    {checkField: "username", checkValue: username},
+                    function(response){
+                        if(response.exist == 1){
+                            $('#username_tick').hide();
+                            $('#username_cross').fadeIn();
+                        }else{
+                            $('#username_cross').hide();
+                            $('#username_tick').fadeIn();
+                        }
+                    }       
+                )
+            }
+        } ;
+
+        function email_check(field){    
+            var email = $(field).val();
+ 
+            if(email == "") {
+                $('#email_cross').hide();
+                $('#email_tick').hide();
+            } else if((email != "" && email.length < 6) || email.length > 100){
+                $('#email_cross').fadeIn();
+                $('#email_tick').hide();
+            }else{
+                $.post( "{{ path('WarlordsGameBundle_CheckUnique') }}",
+                    {checkField: "email", checkValue: email},
+                    function(response){
+                        if(response.exist == 1){
+                            $('#email_tick').hide();
+                            $('#email_cross').fadeIn();
+                        }else{
+                            $('#email_cross').hide();
+                            $('#email_tick').fadeIn();
+                        }
+                    }       
+                )
+            }
+        } ;
 	</script>  
 {% endblock %}

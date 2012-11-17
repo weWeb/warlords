@@ -41,8 +41,10 @@ change_password:
 # Registration
 registration:
     check_email: An email has been sent to %email%. It contains an activation link you must click to activate your account.
-    confirmed: Congrats %username%, your account is now activated! Best of luck in becoming the greatest of all warlords!
-    back: Back to the originating page.
+    confirmed: |
+            Congrats %username%, your account is now activated! 
+            Best of luck in becoming the greatest of all warlords!
+    back: Go to profile page.
     submit: REGISTER
     flash:
         user_created: The user has been created successfully
@@ -51,10 +53,15 @@ registration:
         message: |
             Hello %username%!
 
-            To finish activating your account - please visit %confirmationUrl%
-
+            Thank you for registering with Warlords: The Final Allegiance. 
+            
+            To finish activating your account - please visit:
+            %confirmationUrl%
+            
+            The above confirmation link will expire in a week. 
+           
             Regards,
-            the Team.
+            Warlords Team.
 
 # Password resetting
 resetting:

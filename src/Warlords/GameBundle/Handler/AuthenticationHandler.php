@@ -25,6 +25,10 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
             if (substr_compare($referer, "/login", -strlen("/login"), strlen("/login")) === 0) {
                $referer = str_replace("/login", "/profile", $referer);
             }
+
+            if (substr_compare($referer, "register/check-email", -strlen("register/check-email"), strlen("register/check-email")) === 0) {
+               $referer = str_replace("register/check-email", "", $referer);
+            }
             return new RedirectResponse($referer);
         }
     }
@@ -34,7 +38,10 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
             $result = array('success' => false);
             return new Response(json_encode($result));
         } else {
-            $referer = $request->headers->get('referer');       
+            $referer = $request->headers->get('referer');  
+            if (substr_compare($referer, "register/check-email", -strlen("register/check-email"), strlen("register/check-email")) === 0) {
+               $referer = str_replace("register/check-email", "", $referer);
+            }     
             $request->getSession()->setFlash('error', $exception->getMessage());
             return new RedirectResponse($referer);
         }
