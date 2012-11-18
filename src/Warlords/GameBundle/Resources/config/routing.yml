@@ -71,6 +71,9 @@ WarlordsGameBundle_CheckUnique:
     requirements:
         _method: POST
 
+genemu_base64:
+    resource: "@GenemuFormBundle/Resources/config/routing/base64.xml"
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

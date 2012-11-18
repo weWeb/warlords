@@ -26,7 +26,8 @@ class RegistrationFormType extends BaseType
                 'first_options' => array('label' => 'form.email'),
                 'second_options' => array('label' => 'form.password_confirmation'),
                 'invalid_message' => "The email addresses don't match.",
-            ));
+            ))
+            ->add('captcha', 'genemu_captcha',  array('property_path' => false));
     }
 
     public function getName()

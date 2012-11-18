@@ -11,12 +11,27 @@
 		$("input").focus(function() {
 			$(this).addClass("formFocused")
 		});
+
 		$("input").blur(function() {
 			$(this).removeClass("formFocused")
 		});
-        $('#fos_user_registration_form_username').keyup(username_check);
-        $('#fos_user_registration_form_email_first').keyup(function() {email_check('#fos_user_registration_form_email_first')});
-        
+
+        var delayAction = (function(){
+            var timer = 0;
+            return function(callback, ms){
+                clearTimeout (timer);
+                timer = setTimeout(callback, ms);
+            };
+        })();
+        $(function () {
+            username_check();
+            email_check('#fos_user_registration_form_email_first');
+        });
+
+         $('#fos_user_registration_form_username').keyup( function() {
+                delayAction(function(){ username_check() }, 800 ); });
+         $('#fos_user_registration_form_email_first').keyup(function() {
+                delayAction(function(){ email_check('#fos_user_registration_form_email_first') }, 800 ); });
         function username_check(){
             var username = $('#fos_user_registration_form_username').val();
  
@@ -66,5 +81,14 @@
                 )
             }
         } ;
+    
+        $('#fos_user_registration_form_captcha_refresh').click(function() {
+            $('#fos_user_registration_form_captcha_image').attr('src', '{{ path('genemu_captcha_refresh') }}?' + Math.random());
+            return false;
+        });
+      
+        
 	</script>  
+{% endblock %}
+{% block genemu_captcha_javascript %}
 {% endblock %}

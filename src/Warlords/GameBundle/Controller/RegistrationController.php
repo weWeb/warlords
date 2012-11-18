@@ -100,4 +100,28 @@ class RegistrationController extends BaseController
         $return=json_encode($return);
         return new Response($return,200,array('Content-Type'=>'application/json'));
     }
+
+    /**
+     * Tell the user to check his email provider
+     */
+    public function checkEmailAction()
+    {
+        $email = $this->container->get('session')->get('fos_user_send_confirmation_email/email');
+        $this->container->get('session')->remove('fos_user_send_confirmation_email/email');
+        $user = $this->container->get('fos_user.user_manager')->findUserByEmail($email);
+
+        if (null === $user) {
+            if (strcmp($email, "") == 0) {
+                $route = 'fos_user_registration_register';
+                $url = $this->container->get('router')->generate($route);
+                $response = new RedirectResponse($url);
+                return $response;
+            } else {
+                throw new NotFoundHttpException(sprintf('The user with email "%s" does not exist', $email));
+            }
+        }
+
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:checkEmail.html.'.$this->getEngine(), 
+            array('user' => $user,));
+    }
 }

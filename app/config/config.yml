@@ -70,6 +70,21 @@ assetic:
         #yui_css:
         #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
 
+# Captcha
+genemu_form:
+    captcha:
+        width:            120
+        height:           40
+        length:           6
+        format:           png
+        chars:            0123456789
+        font_size:        18
+        font_color:       ['252525', '8B8787', '550707', '3526E6', '88531E']
+        font_dir:         %kernel.root_dir%/../web/bundles/genemuform/fonts
+        fonts:            ['akbar.ttf', 'brushcut.ttf', 'molten.ttf', 'planetbe.ttf', 'whoobub.ttf']
+        background_color: DDDDDD
+        border_color:     000000
+
 # Doctrine Configuration
 doctrine:
     dbal:

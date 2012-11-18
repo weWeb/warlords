@@ -19,13 +19,14 @@
 {% endblock field_errors %}
 
 {% block field_row %}
-     <div class="label {% if errors|length > 0 %}error{% endif %} float-left">
+     {# commented out the error class for now, since the behavior isn't consistent across all fields #}
+     <div class="label {# if errors|length > 0 %}error{% endif #} float-left">
         {{ form_label(form, label) }}
 	 </div>
      <div class="input float-right">
             {% set class = '' %}
             {% if errors|length > 0 %}
-                {% set class = 'inputerror' %}
+                {#{% set class = 'inputerror' %}#} {% set class = 'form' %}
 			{% else %}
 				{% set class = 'form' %}
             {% endif %}
@@ -53,4 +54,10 @@
     {% endspaceless %}
 {% endblock field_label %}
 
-
+{% block genemu_captcha_widget %}
+     <div id="fos_user_registration_form_captcha">   
+    <img id="fos_user_registration_form_captcha_image" src="{{ src }}" width="{{ width }}" height="{{ height }}" title="{{ name|trans }}" />
+        <a id="fos_user_registration_form_captcha_refresh" href="">Refresh</a>
+    </div>
+    {{ block("field_widget") }}
+{% endblock %}
