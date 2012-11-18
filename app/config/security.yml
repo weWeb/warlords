@@ -67,3 +67,4 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/profile , roles: ROLE_USER}
         - { path: ^/attack , roles: ROLE_USER}
+        - { path: ^/player , roles: ROLE_USER }
