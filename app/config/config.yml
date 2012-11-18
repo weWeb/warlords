@@ -59,6 +59,8 @@ services:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals: 
+        warlords_admin_email: group10weweb@gmail.com
 
 # Assetic Configuration
 assetic:

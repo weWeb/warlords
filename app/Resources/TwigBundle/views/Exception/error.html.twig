@@ -1,0 +1,18 @@
+{% extends 'WarlordsGameBundle::layout.html.twig' %}
+{% block body %}
+    <div class="mainitem">
+		<div class="header">
+			<div class="title"><h1>Error</h1></div>
+		</div>
+		<div class="content">
+		    <h2>Oops! An Error Occurred</h2>
+            <p>Well, this is embarassing. The server returned a "{{ status_code }} {{ status_text }}".<br>
+            Please <a href="mailto:{{ warlords_admin_email }}">contact us</a> regarding the issue, and our team will get back to you 
+            as soon as possible! <br>
+            Sorry for any inconvenience caused.</p>
+		</div>
+		<div class="footer"></div>
+	</div>
+{% endblock %}
+
+
