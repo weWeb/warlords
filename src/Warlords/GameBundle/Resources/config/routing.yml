@@ -9,7 +9,14 @@ WarlordsGameBundle_player:
     defaults: { _controller: WarlordsGameBundle:Page:player }
     requirements:
         _method: GET|POST
-
+  
+WarlordsGameBundle_player_attack:
+    pattern: /player/attack
+    defaults: { _controller: WarlordsGameBundle:Player:result }
+    requirements:
+        _method: GET|POST
+        
+        
 WarlordsGameBundle_about:
     pattern:  /about
     defaults: { _controller: WarlordsGameBundle:Page:about }

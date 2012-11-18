@@ -1,0 +1,50 @@
+
+
+{% block body %}
+	<div class="header">
+		<div class="atk-title"><h1>Player Info</h1></div>
+	</div>
+	<div id="atk-dialog">
+		
+    	        <div class="userinfo">
+			<header>
+		    		<p>You: {{ app.user.username }}</p>
+			</header>
+			<ul id="info">
+				<li>Level: {{ app.user.stats.level }}</li>
+				<li>Fame: {{ app.user.stats.fame }}</li>
+				<li>Gold: {{ app.user.stats.gold}}</li>
+
+			</ul>
+
+        	</div>
+        	<div id="vs"><p>VS</p></div>
+        	<div class="rivalinfo">
+			<header>
+		    		<p>Player: {{ player.user.username }}</p>
+			</header>
+			<ul id="info">
+				<li>Level: {{ player.level }}</li>
+				<li>Fame: {{ player.Fame }}</li>
+				<li>Gold: {{ player.gold}}</li>
+
+			</ul>
+
+	
+        	</div>
+    		
+    	</div>
+    	<div class="content">
+		<form action="{{ path('WarlordsGameBundle_player_attack') }}" method="post" {{ form_enctype(form) }} class="player">
+    			{{ form_widget(form) }}
+    			<p><input type="submit" value="Attack"></p>
+   		</form>
+
+    	</div>
+
+{% endblock %}
+
+
+
+
+

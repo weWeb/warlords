@@ -12,12 +12,13 @@
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
+        <script src="{{ asset('jquery.js') }}"></script>
         {% block stylesheets %}
-            <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" />
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
-		<script type="text/javascript">
+            <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" />
+            
+        {% endblock %}
+        <script type="text/javascript">
       		WebFontConfig = { google: { families: [ 'Black Ops One' ] } };
       		(function() {
         		var wf = document.createElement('script');
@@ -28,7 +29,10 @@
         		s.parentNode.insertBefore(wf, s);
      		 })();
     	</script>
-		<script src="{{ asset('jquery.js') }}"></script>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+		
+
     </head>
     <body>
 

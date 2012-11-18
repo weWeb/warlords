@@ -20,7 +20,6 @@ class PageController extends Controller
     	{
 
 		$players = NULL; 
-		//$search = NULL;  		
         	$em = $this->getDoctrine()->getEntityManager();
 
 		$form = $this->createForm(new SearchType());
@@ -54,8 +53,8 @@ class PageController extends Controller
 					  		break;
             				}
             				
-            				print($type . ' ');
-            				print($value);
+            				//print($type . ' ');
+            				//print($value);
             				
            				$this->render('WarlordsGameBundle:Page:player.html.twig', array('form' => $form->createView(),
 						'players' => $players,

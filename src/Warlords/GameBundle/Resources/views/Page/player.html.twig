@@ -10,21 +10,22 @@
 			<div class="title"><h1>Players List and Search</h1></div>
 		</div>
     	
-    	<div class="content">
-    	<form action="{{ path('WarlordsGameBundle_player') }}" method="post" {{ form_enctype(form) }} class="player">
-    		{{ form_widget(form) }}
-    	    <p>
-        	    <input type="submit" value="Search">
-    	    </p>
-	    </form>
-    	<section class="players" id="players">
-            <h3>Results</h3>
-            {% if (players is not null) %}
-           	{% include 'WarlordsGameBundle:Player:index.html.twig' with { 'players': players } %}
-           {% endif %}
-        </section>
-    </div>
-    <div class="footer"></div>  
+	    	<div class="content">
+	    		<form action="{{ path('WarlordsGameBundle_player') }}" method="post" {{ form_enctype(form) }} class="player">
+	    			{{ form_widget(form) }}
+	    			<p><input type="submit" value="Search"></p>
+		    	</form>
+	    		<section class="players" id="players">
+
+				{% if (players is not null) %}
+					<h3>Results</h3>
+					<p>Please choose a player from the list to continue</p>
+					{% include 'WarlordsGameBundle:Player:index.html.twig' with { 'players': players } %}
+				{% endif %}
+			</section>
+	    	</div>
+    	</div>
+    	<div class="footer"></div>  
 {% endblock %}
 
 

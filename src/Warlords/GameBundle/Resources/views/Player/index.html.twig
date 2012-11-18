@@ -1,16 +1,61 @@
 {% for player in players %}
-    <article class="player {{ cycle(['odd', 'even'], loop.index0) }}" id="player-{{ player.id }}">
-        <header>
-            <p><span>Player: {{ player.user.username }}</span></p>
-        </header>
-        <ul id="info">
-        	<ul>
+    <article class="player" id="player-{{ player.id }}">
+        <div class="userinfo-{{ loop.index }}">
+		<header>
+		    <p><span>Player: {{ player.user.username }}</span></p>
+		</header>
+		<ul id="info">
 			<li>Level: {{ player.level }}</li>
 			<li>Fame: {{ player.Fame }}</li>
 			<li>Gold: {{ player.gold}}</li>
 
 		</ul>
+        </div>
     </article>
+    <div class="dialog-{{ loop.index }}">
+    {% render 'WarlordsGameBundle:Player:attack' with {'player' : player } %}
+    </div>
+    {% block javascript %}
+	<script type="text/javascript"> 
+            $( ".dialog-{{ loop.index }}" ).dialog({
+            autoOpen: false,
+            height: 350,
+            width: 400,
+            modal: true,
+            show: "puff",
+            hide: "explode",
+            open: function() {
+            	$('.ui-widget-overlay').bind('click', function() {
+                		$(".dialog-{{ loop.index }}").dialog('close');
+            		})
+        	}
+        });
+ 
+        $( ".userinfo-{{ loop.index }}" ).click(function() {
+            $( ".dialog-{{ loop.index }}").dialog( "open" );
+            return false;
+        });
+        
+
+	</script>
+	{% endblock %}
 {% else %}
     <p>There are no players match your search.</p>
 {% endfor %}
+
+
+
+{% block javascripts %}
+	<script type="text/javascript"> 
+	
+	
+  	$("[class^=userinfo]").hover(
+    	 	function() { $(this).stop().fadeTo("slow", 1);},
+         	function() { $(this).stop().fadeTo("slow", 0.6);});
+
+
+
+
+	</script>  
+{% endblock %}
+

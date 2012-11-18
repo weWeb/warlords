@@ -4,6 +4,7 @@ namespace Warlords\GameBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Warlords\GameBundle\Entity\PlayerStats;
+use Warlords\GameBundle\Form\SelectPlayerType;
 
 /**
  * Search Player controller.
@@ -12,6 +13,40 @@ class PlayerController extends Controller
 {
    
 
+	public function attackAction($player)
+	{
+		
+
+        	$em = $this->getDoctrine()->getEntityManager();
+
+		$form = $this->createForm(new SelectPlayerType());
+
+		$request = $this->getRequest();
+    			if ($request->getMethod() == 'POST') {
+        			$form->bindRequest($request);
+
+        			if ($form->isValid()) {
+            				
+            				
+           				return $this->render('WarlordsGameBundle:Player:result.html.twig', array('player' => $player,)
+					);
+        			}
+   	 	}
+
+            	
+		return $this->render('WarlordsGameBundle:Player:attack.html.twig',array('form' => $form->createView(),
+			'player' => $player,)
+		);
+
+	}
+	
+	
+	public function resultAction()
+	{
+		return $this->render('WarlordsGameBundle:Player:result.html.twig');
+	}
+
+	
 	
     	protected function getPlayer($id)
     	{

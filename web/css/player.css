@@ -1,19 +1,179 @@
-.players { clear: both; margin: 0px; padding: 0px; overflow: inherit}
+.players { 
+	clear: both; 
+	margin: 0px; 
+	padding: 0px; 
+	overflow: inherit;
+}
 
-.players .player { padding: 0px; margin: 0px; }
-.players p { padding: 5px 10px 25px 10px; margin: 0px; color: #a68282; }
-.players .player p { padding: 5px 10px 25px 10px; margin: 0px; color: #a68282; }
-.players .player header p { padding: 5px 10px 5px 10px; margin: 0px; color: white; }
-.players h3 { border-bottom: 1px dashed; padding: 10px 0px 10px 0px; font-size: 16px; text-align: right; color: #a68282; clear: both; }
-.players .previous-players { margin: 0px; }
+.players .player { 
+	padding: 0px; 
+	margin: 0px; 
+}
+	
+.players p { 
+	padding: 5px 10px 25px 10px; 
+	margin: 0px; 
+	color: #a68282; 
+}
+.players .player p { 
+	padding: 5px 10px 25px 10px; 
+	margin: 0px; 
+	color: #a68282; 
+}
+.players .player header p { 
+	padding: 5px 10px 5px 10px; 
+	margin: 0px; 
+	color: white; 
+}
+.players h3 { 
+	border-bottom: 1px dashed; 
+	padding: 10px 0px 10px 0px; 
+	font-size: 16px; 
+	text-align: right; 
+	color: #a68282; 
+	clear: both; 
+}
 
-.players header { margin: 0px; padding: 0px;  background: #cbbfbc }
-.players span { color: #9d7070; font-size: 14px; font-weight: 600;  }
 
-form.player { font-size: 14px; color: #cbbfbc; font-family: 'Verdana'; margin-top: 20px; }
-form.player div { clear: left; margin-bottom: 10px; }
-form.player label { float: left; margin-right: 30px; text-align: left; width: 70px; font-weight: bold; vertical-align: top; padding-top: 7px; }
-form.player input[type="text"] { width: 400px; line-height: 26=0px; font-size: 12px; min-height: 26px; font-family: 'Verdana';}
-form.player textarea { width: 400px; height: 150px; line-height: 20px; font-size: 12px; max-width: 400px; min-width: 400px; font-family: 'Verdana'; }
-form.player ul li { color: #ff0000; float: left; margin-bottom: 5px; display: inline; }
-form.player input[type="submit"] { margin-left: 240px; width: 100px; line-height: 26px; font-size: 14px; min-height: 26px; }
+.players header { 
+	margin: 0px; 
+	padding: 0px;  
+	background: #cbbfbc ;
+
+}
+
+.players span { 
+	color: #9d7070; 
+	font-size: 14px; 
+	font-weight: 600;  
+}
+
+form.player { 
+	font-size: 14px; 
+	color: #cbbfbc;
+	font-family: 'Arial','Helvetica'; 
+	margin-top: 20px; 
+}
+
+form.player div { 
+	clear: left; 
+	margin-bottom: 10px; 
+}
+
+form.player label { 
+	float: left; 
+	margin-right: 30px; 
+	text-align: left; 
+	width: 70px; 
+	font-weight: bold; 
+	vertical-align: top; 
+	padding-top: 7px; 
+}
+
+form.player input[type="text"] {
+	background-color: #1B1511;
+   	border: 1px solid #7D441E;
+    	color: #E2D7C5;
+    	font-family: 'Arial','Helvetica';
+    	font-size: 1.05em;
+    	margin: 5px 0 10px;
+    	padding: 2px;
+    	width: 200px;
+}
+
+form.player select {
+	background-color: #1B1511;
+   	border: 1px solid #7D441E;
+    	color: #E2D7C5;
+    	font-family: 'Arial','Helvetica';
+    	font-size: 1.05em;
+    	margin: 5px 0 10px;
+    	padding: 2px;
+
+}
+
+form.player input[type="text"] {
+	background-color: #1B1511;
+   	border: 1px solid #7D441E;
+    	color: #E2D7C5;
+    	font-family: 'Arial','Helvetica';
+    	font-size: 1.05em;
+    	margin: 5px 0 10px;
+    	padding: 2px;
+    	width: 200px;
+}
+
+form.player textarea { 
+	background-color: #1B1511;
+   	border: 1px solid #7D441E;
+    	color: #E2D7C5;
+    	font-family: 'Arial','Helvetica';
+    	font-size: 1.05em;
+    	margin: 5px 0 10px;
+    	padding: 2px;
+    	width: 400px; 
+    	height: 150px; 
+    	max-width: 400px; 
+    	min-width: 400px;
+    	line-height: 20px;
+
+}
+form.player ul li { 
+	color: #ff0000; 
+	float: left; 
+	margin-bottom: 5px; 
+	display: inline; 
+}
+form.player input[type="submit"] { 
+	background-color: #1F1B18;
+    	border: 3px solid #EDA321;
+    	box-shadow: 2px 2px 2px #000000;
+    	color: #EDA321;
+    	font-family: 'Black Ops One',serif;
+    	font-size: 0.8em;
+    	margin-top: 10px;
+    	outline: medium none;
+}
+
+.players .player *[class^='userinfo'] { 
+	opacity:0.6; 
+	filter:alpha(opacity=60); /* For IE8 */
+}
+
+.players .player *[class^='userinfo'] #info { 
+	padding: 10px; 
+	font-size: 14px; 
+}
+
+.players .player *[class^='dialog']   { 
+	padding: 10px; 
+	font-size: 14px; 
+}
+
+.atk-title h1 {
+	margin: 10px;
+	padding: 10px;
+	font-size: 36px;
+	
+}
+
+#atk-dialog {
+	padding: 0px;
+	font-size: 14px;
+
+	
+}
+#atk-dialog div{
+
+	display: inline-block;
+	
+}
+
+#vs p{
+    	font-family: 'Black Ops One',serif;
+	font-size: 36px;
+	padding: 10px;
+
+}
+
+
