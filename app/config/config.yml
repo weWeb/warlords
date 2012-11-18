@@ -30,23 +30,22 @@ fos_user:
             enabled: true
     resetting:
         form:
-            type:               warlords_reset_password
             handler:            warlords_user.form.handler.resetting
+            type:               warlords_reset_password
             validation_groups:  [Resetting]
         email:
             from_email:
                 address:        resetting@noreply.com
                 sender_name:    WARLORDS NOREPLY
+        token_ttl: 604800    #persist for only a week
+        email:
+            template: FOSUserBundle:Resetting:email.txt.twig
     from_email:
         address:        group10weweb@gmail.com
         sender_name:    WARLORDS ADMIN
     service:
         mailer: fos_user.mailer.twig_swift
-    resetting:
-        token_ttl: 604800    #persist for only a week
-        email:
-            template: FOSUserBundle:Resetting:email.txt.twig
-
+        
 services:
     authentication_handler:
         class: Warlords\GameBundle\Handler\AuthenticationHandler

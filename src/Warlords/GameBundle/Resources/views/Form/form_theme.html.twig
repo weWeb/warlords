@@ -26,7 +26,7 @@
      <div class="input float-right">
             {% set class = '' %}
             {% if errors|length > 0 %}
-               {% set class = 'inputerror' %}
+                {#{% set class = 'inputerror' %}#} {% set class = 'form' %}
 			{% else %}
 				{% set class = 'form' %}
             {% endif %}

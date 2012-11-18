@@ -68,14 +68,14 @@ FOS\UserBundle\Form\Model\ChangePassword:
     properties:
         new:
             - NotBlank:
-                groups: [ResetPassword, ChangePassword]
+                groups: [Resetting, ChangePassword]
                 message: You must enter a password.
             - MinLength:
-                groups: [Reset, ChangePassword]
+                groups: [Resetting, ChangePassword]
                 limit: 6
                 message: Password must be 6-14 characters long.
             - MaxLength: 
-                groups: [Reset, ChangePassword] 
+                groups: [Resetting, ChangePassword] 
                 limit: 14
                 message: Password must be 6-14 characters long.
         

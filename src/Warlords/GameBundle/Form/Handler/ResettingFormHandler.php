@@ -4,6 +4,7 @@ namespace Warlords\GameBundle\Form\Handler;
 
 use FOS\UserBundle\Form\Handler\ResettingFormHandler as BaseHandler;
 use FOS\UserBundle\Model\UserInterface;
+use FOS\UserBundle\Form\Model\ChangePassword;
 
 class ResettingFormHandler extends BaseHandler
 {

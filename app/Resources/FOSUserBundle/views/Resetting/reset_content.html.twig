@@ -3,6 +3,7 @@
 		<div class="title"><h1>CHANGE PASSWORD</h1></div>
 	</div>
 	<div class="content center">
+
         {% if errors != null %}
 		    <ul class="errormsg">
 		        {% for error in errors %}
@@ -11,7 +12,8 @@
 		    </ul>
         {% endif %}
 
-       
+        {% form_theme form 'WarlordsGameBundle:Form:form_theme.html.twig' %}
+
         <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset" id="change_form" novalidate>
             {{ form_rest(form) }}
             <div>

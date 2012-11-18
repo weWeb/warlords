@@ -3,6 +3,9 @@ namespace Warlords\GameBundle\Controller;
 
 use FOS\UserBundle\Controller\ResettingController as BaseController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccountStatusException;
+use Symfony\Component\HttpFoundation\Response;
 
 class ResettingController extends BaseController
 {
@@ -75,8 +78,8 @@ class ResettingController extends BaseController
                     }
                 }
             }
-            $message  = count($form->getErrors());
-            echo $message;
+          
+ 
         }
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:reset.html.'.$this->getEngine(), array(
             'token' => $token,
