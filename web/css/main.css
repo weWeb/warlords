@@ -432,6 +432,20 @@ ul.errormsg{ list-style-type: disc; list-style-position: inside; border: 1px das
 .login p { margin-bottom: 5px; margin-top: 10px; font-size: 1em;}
 .loginerror { color: red; font-size: 1.5em; }
 
+/* Reset Form */
+.resetBtn { font-family: 'Black Ops One', serif;
+	font-size: 0.8em;
+	color: #eda321; border:3px solid #eda321; background-color:#1f1b18; outline: none; margin-left: 10px;    
+	-moz-box-shadow: 2px 2px 2px #000;  
+    -webkit-box-shadow: 2px 2px 2px #000;  
+    box-shadow: 2px 2px 2px #000;}
+.resetBtn:hover {  color: #ff760f; background-color: #42362c; border:3px solid #ff760f; }
+.resetBtn:active { outline: none; }
+.reset_error { font-size: 1em;  margin-bottom: 5px; color: red} 
+#change_form { text-align: center; width: 360px; margin: 10px auto 10px auto; }
+#change_form .resetBtn { margin-top: 10px; }
+#resetLabel {  padding-top: 25px; margin-right: 10px; }
+
 /* Profile Embedded */
 #profile_logout { margin-bottom: 5px; text-align: right; }
 #profileinfo ul { font-family: 'Arial', 'Helvetica'; 

@@ -21,14 +21,7 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
         } else {
             // $referer = $request->headers->get('referer');  
             $referer = $request->getSession()->get('LAST_URI'); 
-              
-            if (substr_compare($referer, "/login", -strlen("/login"), strlen("/login")) === 0) {
-               $referer = str_replace("/login", "/profile", $referer);
-            }
-
-            if (substr_compare($referer, "register/check-email", -strlen("register/check-email"), strlen("register/check-email")) === 0) {
-               $referer = str_replace("register/check-email", "", $referer);
-            }
+            $referer = $this->modifyRedirectURL($referer);  
             return new RedirectResponse($referer);
         }
     }
@@ -39,9 +32,7 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
             return new Response(json_encode($result));
         } else {
             $referer = $request->headers->get('referer');  
-            if (substr_compare($referer, "register/check-email", -strlen("register/check-email"), strlen("register/check-email")) === 0) {
-               $referer = str_replace("register/check-email", "", $referer);
-            }     
+            $referer = $this->modifyRedirectURL($referer);  
             $request->getSession()->setFlash('error', $exception->getMessage());
             return new RedirectResponse($referer);
         }
@@ -49,8 +40,22 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
     public function onLogoutSuccess(Request $request) 
     {
         $referer = $request->headers->get('referer');
-       
+        $referer = $this->modifyRedirectURL($referer);
         return new RedirectResponse($referer);
+    }
+
+    public function modifyRedirectURL($url) {
+        if (substr_compare($url, "/login", -strlen("/login"), strlen("/login")) === 0) {
+           return str_replace("/login", "/profile", $url);
+        } else if (substr_compare($url, "register/check-email", -strlen("register/check-email"), 
+                strlen("register/check-email")) === 0) {
+           return str_replace("register/check-email", "", $url);
+        } else if (substr_compare($url, "resetting/send-email", -strlen("resetting/send-email"), 
+                strlen("resetting/send-email")) === 0) {
+           return str_replace("resetting/send-email", "", $url);
+        } else {
+            return $url;
+        }
     }
 }
 

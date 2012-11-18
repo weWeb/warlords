@@ -7,4 +7,6 @@ fos_user_registration_form_email_second: "Confirm Email"
 fos_user_registration_form_plainPassword_first: "Password"
 fos_user_registration_form_plainPassword_second: "Confirm Password"
 fos_user_registration_form_captcha: "Enter the Code"
+fos_user_resetting_form_new_first: "New Password"
+fos_user_resetting_form_new_second: "Confirm Password"
 

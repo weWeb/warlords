@@ -29,6 +29,10 @@ fos_user:
         confirmation:
             enabled: true
     resetting:
+        form:
+            type:               warlords_reset_password
+            handler:            warlords_user.form.handler.resetting
+            validation_groups:  [Resetting]
         email:
             from_email:
                 address:        resetting@noreply.com

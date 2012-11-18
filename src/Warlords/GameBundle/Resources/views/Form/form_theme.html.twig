@@ -26,12 +26,12 @@
      <div class="input float-right">
             {% set class = '' %}
             {% if errors|length > 0 %}
-                {#{% set class = 'inputerror' %}#} {% set class = 'form' %}
+               {% set class = 'inputerror' %}
 			{% else %}
 				{% set class = 'form' %}
             {% endif %}
             {{ form_widget(form, { 'attr': { 'class': class } }) }}
-          {#  {{ form_errors(form) }} #}
+         {#  {{ form_errors(form) }} #}
       </div>
       <div class="clear"></div>
 {% endblock field_row %}

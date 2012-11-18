@@ -20,7 +20,7 @@
     			<input type="submit" class="registerBtn" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}"/>
 			</p>
 		</form>
-		<p><a>Forgot password?</a></p>
+		<p><a href="{{ path("fos_user_resetting_request") }}">Forgot password?</a></p>
 		<p><a>Having problems creating an account?</a></p>
 	</div>
 	<div class="footer"></div>

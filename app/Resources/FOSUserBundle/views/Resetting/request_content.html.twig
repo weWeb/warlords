@@ -1,0 +1,23 @@
+<div class="mainitem">
+	<div class="header">
+		<div class="title"><h1>RESET PASSWORD</h1></div>
+	</div>
+	<div class="content">
+        <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+            <div>
+                {% if invalid_email is defined %}
+                    <p class="reset_error">{{ 'resetting.request.invalid_email'|trans({'%email%': invalid_email}, 'FOSUserBundle') }}</p>
+                {% endif %}
+                <div class="float-left">
+                    <label for="email" id="resetLabel">{{ 'resetting.request.email'|trans({}, 'FOSUserBundle') }}</label>
+                    <input type="text" id="resetEmail" name="email" required="required" class = 'form'/>
+                </div>
+              
+                <input type="submit" class="resetBtn" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" />
+                
+            </div>
+        </form>
+    </div>
+	<div class="footer"></div>
+</div>
+

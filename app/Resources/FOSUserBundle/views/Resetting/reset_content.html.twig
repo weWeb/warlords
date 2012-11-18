@@ -1,0 +1,24 @@
+<div class="mainitem">
+	<div class="header">
+		<div class="title"><h1>CHANGE PASSWORD</h1></div>
+	</div>
+	<div class="content center">
+        {% if errors != null %}
+		    <ul class="errormsg">
+		        {% for error in errors %}
+			        <li>{{ error }} </li>
+		        {% endfor %}
+		    </ul>
+        {% endif %}
+
+       
+        <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset" id="change_form" novalidate>
+            {{ form_rest(form) }}
+            <div>
+                <input type="submit" class="resetBtn" value="{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}" />
+            </div>
+        </form>
+    </div>
+	<div class="footer"></div>
+</div>
+

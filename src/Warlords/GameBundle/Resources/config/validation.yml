@@ -64,3 +64,18 @@ Warlords\GameBundle\Entity\PlayerStats:
         properties:
             infantry:
                 - Type: \Integer
+FOS\UserBundle\Form\Model\ChangePassword:
+    properties:
+        new:
+            - NotBlank:
+                groups: [ResetPassword, ChangePassword]
+                message: You must enter a password.
+            - MinLength:
+                groups: [Reset, ChangePassword]
+                limit: 6
+                message: Password must be 6-14 characters long.
+            - MaxLength: 
+                groups: [Reset, ChangePassword] 
+                limit: 14
+                message: Password must be 6-14 characters long.
+        
