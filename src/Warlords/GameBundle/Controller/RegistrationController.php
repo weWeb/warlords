@@ -26,11 +26,11 @@ class RegistrationController extends BaseController
             $stats->setExp(0);
             $stats->setSp(0);
 		    $stats->setFame(0);
-		    $stats->setLand(100);
-		    $stats->setGold(100);
+		    $stats->setLand(6000);
+		    $stats->setGold(12000);
 		    $stats->setInfantry(100);
-		    $stats->setKnights(100);
-		    $stats->setCalvary(100);
+		    $stats->setKnights(25);
+		    $stats->setCalvary(10);
 		    $stats->setUser($user); 
             $em->persist($stats);
             $em->flush();
