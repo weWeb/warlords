@@ -14,7 +14,7 @@ class PlayerStatsRepository extends EntityRepository
 {
 
 	// $limit set to 3 to see if the result show correctly; subject to change
-	public function getPlayerByLevel($level, $limit = 3)
+	public function getPlayerByLevel($level, $limit = 5)
 	{
 		$qb = $this->createQueryBuilder('p')
 				->select('p')
@@ -31,7 +31,7 @@ class PlayerStatsRepository extends EntityRepository
 	}
 	
 	// $limit set to 3 to see if the result show correctly; subject to change
-	public function getPlayerByGold($gold, $limit = 3)
+	public function getPlayerByGold($gold, $limit = 5)
 	{
 		$qb = $this->createQueryBuilder('p')
 				->select('p')
@@ -48,7 +48,7 @@ class PlayerStatsRepository extends EntityRepository
 	}
 	
 	// $limit set to 3 to see if the result show correctly; subject to change
-	public function getPlayerByInfantry($infantry, $limit = 3)
+	public function getPlayerByInfantry($infantry, $limit = 5)
 	{
 		$qb = $this->createQueryBuilder('p')
 				->select('p')
@@ -65,7 +65,7 @@ class PlayerStatsRepository extends EntityRepository
 	} 
 	
 	// $limit set to 3 to see if the result show correctly; subject to change
-	public function getPlayerByKnight($knights, $limit = 3)
+	public function getPlayerByKnight($knights, $limit = 5)
 	{
 		$qb = $this->createQueryBuilder('p')
 				->select('p')
@@ -82,7 +82,7 @@ class PlayerStatsRepository extends EntityRepository
 	}
 
 	// $limit set to 3 to see if the result show correctly; subject to change
-	public function getPlayerByFame($fame, $limit = 3)
+	public function getPlayerByFame($fame, $limit = 5)
 	{
 		$qb = $this->createQueryBuilder('p')
 				->select('p')
@@ -100,7 +100,7 @@ class PlayerStatsRepository extends EntityRepository
 	
 	
 	// $limit set to 3 to see if the result show correctly; subject to change
-	public function getPlayerByUsername($username, $limit = 3)
+	public function getPlayerByUsername($username, $limit = 5)
 	{
 		$qb = $this->createQueryBuilder('p')
 				->select('p', 'User')

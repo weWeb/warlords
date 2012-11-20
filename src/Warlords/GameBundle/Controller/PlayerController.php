@@ -27,8 +27,8 @@ class PlayerController extends Controller
 
         			if ($form->isValid()) {
             				
-            				
-           				return $this->render('WarlordsGameBundle:Player:result.html.twig', array('player' => $player,)
+          				$target_id = $player->getUser()->getId();  				
+           				return $this->render('WarlordsGameBundle:Player:result.html.twig', array('target_id' => $target_id,)
 					);
         			}
    	 	}

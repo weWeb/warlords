@@ -20,7 +20,7 @@
             $( ".dialog-{{ loop.index }}" ).dialog({
             autoOpen: false,
             height: 350,
-            width: 400,
+            width: 450,
             modal: true,
             show: "puff",
             hide: "explode",
@@ -39,8 +39,6 @@
 
 	</script>
 	{% endblock %}
-{% else %}
-    <p>There are no players match your search.</p>
 {% endfor %}
 
 

@@ -19,7 +19,9 @@ class PageController extends Controller
     	public function playerAction()
     	{
 
+		$user = $this->getUser();
 		$players = NULL; 
+		$errors = NULL;
         	$em = $this->getDoctrine()->getEntityManager();
 
 		$form = $this->createForm(new SearchType());
@@ -34,30 +36,57 @@ class PageController extends Controller
             				$value = $postData['value'];
             				switch($type) {
             					case 'level':
-            						$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
-					  				->getPlayerByLevel($value);
+            						if (is_numeric($value) && is_int((int)$value)){
+            							$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
+					  					->getPlayerByLevel($value);
+							}else{
+								$errors[] = "The value must be integer";
+							}
 				    			break;
             					case 'fame':
-            						$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
+            						if (is_numeric($value) && is_int((int)$value)){
+            							$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
 					  				->getPlayerByFame($value);
+					  		}else{
+					  			$errors[] = "The value must be integer";
+					  		}
 					  		break;
 					  	case 'gold':
-					  		$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
+            						if (is_numeric($value) && is_int((int)$value)){
+					  			$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
 					  				->getPlayerByGold($value);
+					  		}else{
+					  			$errors[] = "The value must be integer";
+					  		}
 					  		break;
 					  	case 'username':
-					  		$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
-					  				->getPlayerByUsername($value);
+					  	
+					  		if (is_string($value)){
+					  			if ($value == $user->getUsername()) {
+					  				$errors[] = "You are searching yourself. You can view your stats in profile.";
+					  			}else{
+					  				$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
+					  					->getPlayerByUsername($value);
+					  			}
+					  		}else{
+					  			$errors[] = "The value must be string";
+					  		}
 					  		break;
 					  	default:
 					  		break;
             				}
-            				
-            				//print($type . ' ');
-            				//print($value);
-            				
+
+            				if (!empty($players)){
+            					foreach ($players as $key=>$player){
+            						if ($player->getId() == $user->getId()){
+            							unset($players[$key]);
+            						}
+            					}
+            				}
+
            				$this->render('WarlordsGameBundle:Page:player.html.twig', array('form' => $form->createView(),
 						'players' => $players,
+						'errors' => $errors,
 					));
         			}
    	 	}
@@ -65,6 +94,7 @@ class PageController extends Controller
             	
 		return $this->render('WarlordsGameBundle:Page:player.html.twig', array('form' => $form->createView(),
 			'players' => $players,
+			'errors' => $errors,
 		));
 
     	}

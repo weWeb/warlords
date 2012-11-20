@@ -5,14 +5,14 @@ WarlordsGameBundle_homepage:
         _method:  GET
                
 WarlordsGameBundle_player:
-    pattern: /player
+    pattern: /playerSearch
     defaults: { _controller: WarlordsGameBundle:Page:player }
     requirements:
         _method: GET|POST
   
 WarlordsGameBundle_player_attack:
-    pattern: /player/attack
-    defaults: { _controller: WarlordsGameBundle:Player:result }
+    pattern: /playerSearch/attack/{target_id}
+    defaults: { _controller: WarlordsGameBundle:Profile:attack }
     requirements:
         _method: GET|POST
         

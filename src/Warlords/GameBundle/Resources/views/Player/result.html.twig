@@ -5,7 +5,8 @@
 {% block title %}Battle Result{% endblock%}
 
 {% block body %}
-	<div><p>Battle is to be implemented</p></div>
+    {% render 'WarlordsGameBundle:Profile:attack' with {'target_id' : target_id } %}
+    
 {% endblock %}
 
 
