@@ -1,6 +1,8 @@
 imports:
-    - { resource: parameters.yml }
-    - { resource: security.yml }
+    - { resource: parameters.yml }  # contains sensitive configuration; should not upload to git
+    - { resource: globals.yml }     # contains global configuration used by warlords
+    - { resource: security.yml }    # contains security parameters
+
 
 framework:
     #esi:             ~
@@ -40,6 +42,10 @@ fos_user:
         token_ttl: 604800    #persist for only a week
         email:
             template: FOSUserBundle:Resetting:email.txt.twig
+    change_password:
+        form:
+            type:               warlords_change_password
+            handler:            warlords_user.form.handler.change_password
     from_email:
         address:        group10weweb@gmail.com
         sender_name:    WARLORDS ADMIN

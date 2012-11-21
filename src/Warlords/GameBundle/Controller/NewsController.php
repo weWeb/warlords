@@ -4,31 +4,25 @@
 namespace Warlords\GameBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class NewsController extends Controller
 {
-
-	public $dir = "./xml/news/";
-
-
-    public function recentNewsAction($max = 3)
+    public function recentNewsAction()
     {
+        $dir = $this->container->getParameter('news_dir');
 		$newslist = array();
 
 		$use_errors = libxml_use_internal_errors(true);
 	
-		$xmlInDir = scandir($this->dir, 1); // scan in decsending to display the newest 
+		$xmlInDir = scandir($dir, 1); // scan in decsending to display the newest 
 
 		foreach($xmlInDir as $xmlFile) {
-			if ($max > 0) {
-				--$max;
-			} else { 
-				break;
-			}
+		
  
 			// Look for XML files
 			if(preg_match('/.*\.xml$/i', $xmlFile )) { 
-				$xml = simplexml_load_file($this->dir . $xmlFile);	
+				$xml = simplexml_load_file($dir . $xmlFile);	
 				
 				if (!$xml) {
 					$errors = libxml_get_errors();
@@ -39,7 +33,7 @@ class NewsController extends Controller
 					libxml_use_internal_errors($use_errors);
 				} else {
 					foreach($xml->children() as $child) {
-  						$output[$child->getName()] = $child;
+  						$output[$child->getName()] = str_replace("\n", "<br>",$child);
 					}
 					$newslist[$xmlFile] = $output;
 				}	

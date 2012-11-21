@@ -68,3 +68,4 @@ security:
         - { path: ^/profile , roles: ROLE_USER}
         - { path: ^/attack , roles: ROLE_USER}
         - { path: ^/player , roles: ROLE_USER }
+        - { path: ^/change-password , roles: ROLE_USER }

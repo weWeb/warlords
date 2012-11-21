@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<news>
+<title>Login and Registration System</title>
+<content>Login and Registration system is completed. 
+
+The login system does the proper checks and return error messages:
+- "Invalid username or password": if the username and password combination does not exists in the database
+- "User account cannot be accessed.": if the username and password combination exists in the database, but the account has not been activated yet by the account owner. The owner will need to click on the link in the confirmation email sent to activate the account.
+
+Depending on which page the user logs in and out from, redirect will send it back to the previous page if possible, otherwise the most suitable page if the previous page should not be re-accessed. 
+
+The remember me function will keep the user log in for up to 24 hours. 
+
+The registration form also does the proper checks and return appropriate error messages:
+- None of the fields can be empty
+- Username has to be between 6~50 characters, can only contain letters, digits or underscore "_"
+- Password has to be between 6~14 characters, and the two password fields must match
+- Email has to be valid email address, and the two email fields must match
+- Captcha input has to match image, and can be refreshed using AJAX
+- AJAX call will display check mark or cross beside the username and email address fields to indicate whether the username or email address have been used yet. However, it does not indicate whether the input is valid or not. 
+- Upon successful registration, an email will be sent containing a confirmation link. By default, all newly registered emails are disabled, and must be activated by the user clicking on the confirmation link. 
+
+Forgot password link allows user to input an email address and have a reset password link sent to that email address. Similarly, resend confirmation email will generate a new confirmation token for the account associated with the input email address and a new confirmation email will be sent. A confirmation email will not be sent if the account associated is already activated.
+
+Users can also change the current password after logging in to the account. The change password fields are validated in the same way as the registration form.</content>
+<author>Lily</author>
+<date>Nov 15, 2012</date>
+</news> 

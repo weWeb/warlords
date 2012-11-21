@@ -36,9 +36,9 @@ profile:
 
 # Password change
 change_password:
-    submit: Change password
+    submit: Change Password
     flash:
-        success: The password has been changed
+        success: The password has been changed.
 
 # Registration
 registration:

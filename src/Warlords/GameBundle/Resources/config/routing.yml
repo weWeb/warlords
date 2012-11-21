@@ -96,7 +96,6 @@ WarlordsGameBundle_CheckEmail:
     requirements:
         _method: GET
 
-
 genemu_base64:
     resource: "@GenemuFormBundle/Resources/config/routing/base64.xml"
 
@@ -117,4 +116,4 @@ fos_user_resetting:
 
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
-    prefix: /profile
+    prefix: /

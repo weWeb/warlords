@@ -1,17 +1,19 @@
-<ul>
-{% for news in newslist %}
-	<li class="news">
-    	<p class="news opacity50">
-			Title: {{ news.title }} </br>
-			Content: {{ news.content }}   </br>
-			Author: {{ news.author }}   </br>		
-			Date: {{ news.date }}   </br>			
-		</p>
-	</li>
-{% endfor %}
-</ul>
+<div>
+    <ul id = "paginate">
+    {% for news in newslist %}
+	    <li class="news">
+        	<p class="news opacity50">
+			    Title: {{ news.title }} </br></br>
+			    {{ news.content |striptags('<br>')|raw  }}   </br></br>
+			    Author: {{ news.author }} | Date: {{ news.date }}   </br>			
+		    </p>
+	    </li>
+    {% endfor %}
+    </ul>
+</div>
 
 {% block javascripts %}
+    <script src="{{ asset('jPaginate.js') }}"></script>
 	<script type="text/javascript"> 
 	$('li.news').first();
 	
@@ -19,6 +21,10 @@
     	 function() { $(this).stop().fadeTo("slow", 1);},
          function() { $(this).stop().fadeTo("slow", 0.5);});
   
+	</script>  
+
+    <script type="text/javascript"> 
+           $("#paginate").jPaginate({items: 3});       
 	</script>  
 {% endblock %}
 

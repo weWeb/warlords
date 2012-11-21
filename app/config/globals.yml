@@ -1,0 +1,2 @@
+parameters:
+    news_dir: "./xml/news/" # path relative to web folder
