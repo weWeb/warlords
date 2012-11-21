@@ -1,0 +1,13 @@
+{% extends 'WarlordsGameBundle::layout.html.twig' %}
+
+{% block body %}
+    <div class="mainitem">
+	    <div class="header">
+		    <div class="title"><h1>CONFIRMATION EMAIL SENT</h1></div>
+	    </div>
+	    <div class="content center">
+            <p>{{ 'resend.check_email'|trans({'%email%': email}, 'FOSUserBundle') }}</p>
+        </div>
+	    <div class="footer"></div>
+    </div>
+{% endblock %}

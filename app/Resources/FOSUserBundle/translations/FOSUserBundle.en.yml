@@ -13,6 +13,8 @@ group:
 
 # Security
 "Bad credentials": Invalid username or password
+"User account is disabled." : User account cannot be accessed.
+
 
 security:
     login:
@@ -84,6 +86,16 @@ resetting:
 
             Regards,
             Warlords Team.
+
+# Confirmation Resend
+resend:
+    check_email: A confirmation email has been resent to %email%. It contains a link you must click to activate your account.
+    request:
+        invalid_email: The email address "%email%" does not exist.
+        invalid_resend: The account with the email address "%email%" has already been activated.
+        email: "Email address"
+        submit: Resend Confirmation
+
 
 # Global strings
 layout:

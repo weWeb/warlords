@@ -52,7 +52,10 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
            return str_replace("register/check-email", "", $url);
         } else if (substr_compare($url, "resetting/send-email", -strlen("resetting/send-email"), 
                 strlen("resetting/send-email")) === 0) {
-           return str_replace("resetting/send-email", "", $url);
+           return str_replace("resetting/send-email", "resetting/request", $url);
+        } else if (substr_compare($url, "resend/send-email", -strlen("resend/send-email"), 
+                strlen("resend/send-email")) === 0) {
+           return str_replace("resend/send-email", "resend/request", $url);
         } else {
             return $url;
         }

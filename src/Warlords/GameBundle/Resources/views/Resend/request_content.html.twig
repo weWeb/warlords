@@ -1,0 +1,28 @@
+<div class="mainitem">
+	<div class="header">
+		<div class="title"><h1>RESEND CONFIRMATION</h1></div>
+	</div>
+	<div class="content">
+        <form action="{{ path('WarlordsGameBundle_ResendConfirmation') }}" method="POST" >
+            <div>
+                {% if invalid_email is defined %}
+                    <p class="resend_error">{{ 'resend.request.invalid_email'|trans({'%email%': invalid_email}, 'FOSUserBundle') }}</p>
+                {% endif %}
+
+                {% if invalid_resend is defined %}
+                    <p class="resend_error">{{ 'resend.request.invalid_resend'|trans({'%email%': invalid_resend}, 'FOSUserBundle') }}</p>
+                {% endif %}
+
+                <div class="float-left">
+                    <label for="email" id="resendLabel">{{ 'resend.request.email'|trans({}, 'FOSUserBundle') }}</label>
+                    <input type="text" id="resendEmail" name="email" required="required" class = 'form'/>
+                </div>
+              
+                <input type="submit" class="resendBtn" value="{{ 'resend.request.submit'|trans({}, 'FOSUserBundle') }}" />
+                
+            </div>
+        </form>
+    </div>
+	<div class="footer"></div>
+</div>
+

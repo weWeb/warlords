@@ -447,6 +447,18 @@ ul.errormsg{ list-style-type: disc; list-style-position: inside; border: 1px das
 #change_form .resetBtn { margin-top: 10px; }
 #resetLabel {  padding-top: 25px; margin-right: 10px; }
 
+/* Resend Form */
+.resendBtn { font-family: 'Black Ops One', serif;
+	font-size: 0.8em;
+	color: #eda321; border:3px solid #eda321; background-color:#1f1b18; outline: none; margin-left: 10px;    
+	-moz-box-shadow: 2px 2px 2px #000;  
+    -webkit-box-shadow: 2px 2px 2px #000;  
+    box-shadow: 2px 2px 2px #000;}
+.resendBtn:hover {  color: #ff760f; background-color: #42362c; border:3px solid #ff760f; }
+.resendBtn:active { outline: none; }
+.resend_error { font-size: 1em;  margin-bottom: 5px; color: red} 
+#resendLabel {  padding-top: 25px; margin-right: 10px; }
+
 /* Profile Embedded */
 #profile_logout { margin-bottom: 5px; text-align: right; }
 #profileinfo ul { font-family: 'Arial', 'Helvetica'; 

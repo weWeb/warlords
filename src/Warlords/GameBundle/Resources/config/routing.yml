@@ -78,6 +78,25 @@ WarlordsGameBundle_CheckUnique:
     requirements:
         _method: POST
 
+WarlordsGameBundle_RequestResendConfirmation:
+    pattern: /resend/request
+    defaults:  { _controller: WarlordsGameBundle:ResendConfirmation:request }
+    requirements:
+        _method: GET
+
+WarlordsGameBundle_ResendConfirmation:
+    pattern: /resend/send-email
+    defaults:  { _controller: WarlordsGameBundle:ResendConfirmation:sendEmail }
+    requirements:
+        _method: POST
+
+WarlordsGameBundle_CheckEmail:
+    pattern: /resend/check-email
+    defaults:  { _controller: WarlordsGameBundle:ResendConfirmation:checkEmail }
+    requirements:
+        _method: GET
+
+
 genemu_base64:
     resource: "@GenemuFormBundle/Resources/config/routing/base64.xml"
 
