@@ -43,8 +43,6 @@ class RegistrationController extends BaseController
                 $authUser = true;
                 $route = 'fos_user_registration_confirmed';
             }
-
-            $this->setFlash('fos_user_success', 'registration.flash.user_created');
             $url = $this->container->get('router')->generate($route);
             $response = new RedirectResponse($url);
 

@@ -30,6 +30,21 @@ table{border-collapse:collapse;border-spacing:0}
 
 .clear { clear: both; }
 
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+
+.ellipsis:hover {
+    text-overflow:inherit;
+    overflow:visible;
+    overflow-wrap: break-word;
+    z-index:10;
+}
+
+
 /* Default fonts */
 p, form {
     font-family: 'Arial', 'Helvetica'; 
@@ -280,7 +295,9 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
 	position:relative;
 	right: 30px;
 	top: 29px; 
-	text-shadow: 1px 1px 1px #000;  
+	text-shadow: 1px 1px 1px #000;
+    width: 155px;  
+    text-align: right; 
 }
 
 .sidebar .sidebaritem .content {
@@ -321,7 +338,7 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
 .main-col a { }
 .main-col h1 { line-height: 1.2em; font-size: 4.5em;  font-weight: normal; color: #eda321; }
 .main-col h2 { line-height: 1.2em; font-size: 3em;  font-weight: bold; color: #eda321; margin-bottom: 5px;}
-.main-col p { line-height: 1.5em; }
+.main-col p { line-height: 1.5em; padding-bottom: 10px; }
 
 .main-co .mainitem { 
 	width: 100%;
@@ -434,6 +451,7 @@ ul.errormsg{ list-style-type: disc; list-style-position: inside; border: 1px das
 .login p { margin-bottom: 5px; margin-top: 10px; font-size: 1em;}
 .loginerror { color: red; font-size: 1.5em; }
 
+
 /* Reset Form */
 .resetBtn { font-family: 'Black Ops One', serif;
 	font-size: 0.8em;
@@ -501,8 +519,66 @@ form#contactus { text-align: center; width: 350px; margin: 0px auto 0px auto; }
 .pagination li a{   display:block; padding:3px 5px; text-decoration:none;}
 .pagination li a.inactive { color:#777; }
 
+/* About Page */
+.featurelist {
+    font-family: 'Arial', 'Helvetica'; 
+	font-size: 1.8em;
+    color: #e2d7c5;
+    list-style-type: circle;
+    padding-left: 20px;
+    line-height: 15px;
+}
+
+/* Rank Board */
+.ranktable {
+    font-family: 'Arial', 'Helvetica'; 
+	font-size: 1.8em;
+    color: #e2d7c5;
+    margin: auto;
+  
+}
+
+.ranktableheader {
+    font-weight: bold;
+    text-align: center;
+}
+
+.ranktable td {
+    padding:5px 15px 5px 15px;
+}
 
 
+.ranktable tr:nth-child(odd) {
+    background-color: #3f342d;
+} 
+
+.ranktable tr:nth-child(1) {
+    background-color: #100d0c;
+} 
+
+.ranktable .rank {
+    width: 30px;
+    text-align: center;
+}
+
+.ranktable .username {
+    width: 100px;
+}
+
+.ranktable .level {
+    width: 50px;
+    text-align: center;
+}
+
+.ranktable .gold {
+    width: 100px;
+    text-align: right;
+}
+
+.ranktable .fame {
+    width: 100px;
+    text-align: right;
+}
 
 
 

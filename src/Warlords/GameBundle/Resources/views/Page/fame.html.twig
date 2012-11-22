@@ -7,7 +7,25 @@
 			<div class="title"><h1>RANK BOARD - FAME</h1></div>
 		</div>
 		<div class="content">
-		
+		    <p>Top {{ warlords_fameboard_top }} famous players in Warlords!</p>
+            <table class="ranktable">
+                <tr class="ranktableheader">
+                    <td>Rank</td>
+                    <td>Player</td>
+                    <td>Level</td>
+                    <td>Fame</td>
+                </tr>
+                {% set counter = 1 %}
+                {% for player in players %}
+                    <tr>
+                        <td class="rank">{{ counter }}</td>
+                        <td class="username">{{ player.user.username }}</td>
+                        <td class="level">{{ player.level }}</td>
+                        <td class="fame">{{ player.fame}}</td>
+                    </tr>
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+            </table> 
 		</div>
 		<div class="footer"></div>
 	</div>

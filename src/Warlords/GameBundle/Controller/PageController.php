@@ -128,10 +128,30 @@ class PageController extends Controller
     }
 
     public function wealthAction() {
-        return $this->render('WarlordsGameBundle:Page:wealth.html.twig');
+        $players = NULL;
+        $em = $this->getDoctrine()->getEntityManager();
+        $numresults = $this->container->getParameter('warlords.wealthboard.top');
+        $repository = $em->getRepository('WarlordsGameBundle:PlayerStats');
+        $query = $repository->createQueryBuilder('p')
+            ->orderBy('p.gold', 'DESC')
+            ->setMaxResults($numresults)
+            ->getQuery();
+            
+        $players = $query->getResult();
+        return $this->render('WarlordsGameBundle:Page:wealth.html.twig', array('players' => $players));
     }
 
     public function fameAction() {
-        return $this->render('WarlordsGameBundle:Page:fame.html.twig');
+        $players = NULL;
+        $em = $this->getDoctrine()->getEntityManager();
+        $numresults = $this->container->getParameter('warlords.fameboard.top');
+        $repository = $em->getRepository('WarlordsGameBundle:PlayerStats');
+        $query = $repository->createQueryBuilder('p')
+            ->orderBy('p.fame', 'DESC')
+            ->setMaxResults($numresults)
+            ->getQuery();
+            
+        $players = $query->getResult();
+        return $this->render('WarlordsGameBundle:Page:fame.html.twig', array('players' => $players));
     }
 }

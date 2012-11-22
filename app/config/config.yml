@@ -67,6 +67,8 @@ twig:
     strict_variables: "%kernel.debug%"
     globals: 
         warlords_admin_email: group10weweb@gmail.com
+        warlords_wealthboard_top: %warlords.wealthboard.top%
+        warlords_fameboard_top: %warlords.fameboard.top%
 
 # Assetic Configuration
 assetic:
