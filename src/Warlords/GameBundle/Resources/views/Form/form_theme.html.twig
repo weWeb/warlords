@@ -48,6 +48,14 @@
     <img id="email_cross" src="{{ asset('images/cross.png') }}" width="12" height="12">
 {% endblock %}
 
+{% block _warlords_contact_us_body_widget %}
+    {% spaceless %}
+    <div class="contactus_textarea">
+        <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+    </div>
+    {% endspaceless %}
+{% endblock %}
+
 {% block field_label %}
     {% spaceless %}
         <label for="{{ id }}">{{ id|trans }}</label>

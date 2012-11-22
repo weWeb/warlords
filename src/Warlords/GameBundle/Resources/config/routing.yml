@@ -41,12 +41,6 @@ WarlordsGameBundle_fame:
     requirements:
         _method:  GET
 
-WarlordsGameBundle_contact:
-    pattern: /contact
-    defaults: { _controller: WarlordsGameBundle:Page:contact }
-    requirements:
-        _method: GET|POST
-
 WarlordsGameBundle_profile_get:
     pattern: /profile/{target_id}
     defaults:  { _controller: WarlordsGameBundle:Profile:profile_get }
@@ -95,6 +89,13 @@ WarlordsGameBundle_CheckEmail:
     defaults:  { _controller: WarlordsGameBundle:ResendConfirmation:checkEmail }
     requirements:
         _method: GET
+
+WarlordsGameBundle_contact:
+    pattern:  /contact
+    defaults: { _controller: WarlordsGameBundle:Contact:contact }
+    requirements:
+        _method:  GET|POST
+
 
 genemu_base64:
     resource: "@GenemuFormBundle/Resources/config/routing/base64.xml"

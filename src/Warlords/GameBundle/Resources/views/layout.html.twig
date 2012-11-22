@@ -27,3 +27,14 @@
 	</div>
 {% endblock %}
 
+{% block javascripts %}
+	<script type="text/javascript"> 
+		$("input").focus(function() {
+			$(this).addClass("formFocused")
+		});
+
+		$("input").blur(function() {
+			$(this).removeClass("formFocused")
+		});
+    </script>  
+{% endblock %}

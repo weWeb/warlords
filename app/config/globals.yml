@@ -1,2 +1,3 @@
 parameters:
     news_dir: "./xml/news/" # path relative to web folder
+    warlords.emails.contact_email: group10weweb@gmail.com

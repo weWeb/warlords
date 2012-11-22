@@ -78,4 +78,37 @@ FOS\UserBundle\Form\Model\ChangePassword:
                 groups: [Resetting, ChangePassword] 
                 limit: 14
                 message: Password must be 6-14 characters long.
-        
+Warlords\GameBundle\Entity\Contact:
+    properties:
+        name:
+            - NotBlank:
+                groups: [Contact]
+                message: Name field cannot be blank. 
+            - MaxLength: 
+                groups: [Contact] 
+                limit: 50
+                message: Name cannot be longer than 50 characters.
+        email:
+            - NotBlank:
+                groups: [Contact]
+                message: Email field cannot be blank.
+            - Email: 
+                groups: [Contact]
+                message: The email address "{{ value }}" is not a valid email address.
+                checkMX: true
+        subject:
+            - NotBlank:
+                groups: [Contact]
+                message: Subject field cannot be blank.
+            - MaxLength: 
+                groups: [Contact] 
+                limit: 50
+                message: Subject cannot be longer than 50 characters.
+        body:
+            - NotBlank:
+                groups: [Contact]
+                message: Message field cannot be blank.  
+            - MinLength:
+                groups: [Contact]
+                limit: 50
+                message: Message must be longer than 50 characters.     

@@ -6,9 +6,59 @@
 		<div class="header">
 			<div class="title"><h1>CONTACT US</h1></div>
 		</div>
-		<div class="content">
-		
+		<div class="content center">
+            {% if errors != null %}
+		        <ul class="errormsg">
+		            {% for error in errors %}
+                        {% if error | trans != '' %} 
+                            <li>{{ error | trans }} </li>
+                        {% endif %}
+		            {% endfor %}
+		        </ul>
+            {% endif %}
+            {% if app.session.hasFlash('contact-successful') %}
+                <div class="contactSuccess">
+                    {{ app.session.flash('contact-successful') | raw}}
+                </div>
+            {% endif %}
+
+             {% form_theme form 'WarlordsGameBundle:Form:form_theme.html.twig' %}
+		    <form action="{{ path('WarlordsGameBundle_contact') }}" method="post" {{ form_enctype(form) }} id="contactus" novalidate>
+                {{ form_rest(form) }}
+                <p class="submit">
+                    <input type="submit" class="contactUsBtn" value="{{ 'contact_us.submit'|trans }}"/>
+                </p>
+            </form>
 		</div>
 		<div class="footer"></div>
 	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript"> 
+		$("input").focus(function() {
+			$(this).addClass("formFocused")
+		});
+
+		$("input").blur(function() {
+			$(this).removeClass("formFocused")
+		});
+
+        $("textarea").focus(function() {
+			$(this).addClass("formFocused")
+		});
+
+		$("textarea").blur(function() {
+			$(this).removeClass("formFocused")
+		});
+
+        $('#fos_user_registration_form_captcha_refresh').click(function() {
+            $('#fos_user_registration_form_captcha_image').attr('src', '{{ path('genemu_captcha_refresh') }}?' 
+            + Math.random());
+            return false;
+        });
+
+	</script>  
+{% endblock %}
+{% block genemu_captcha_javascript %}
 {% endblock %}
