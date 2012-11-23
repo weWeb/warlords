@@ -30,6 +30,13 @@ table{border-collapse:collapse;border-spacing:0}
 
 .clear { clear: both; }
 
+.ellipsis_nohover {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+
 .ellipsis {
     overflow: hidden;
     white-space: nowrap;
@@ -357,7 +364,9 @@ html, body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size:
 	position:relative;
 	right: 40px;
 	top: 19px; 
-	text-shadow: 1px 1px 1px #000;  
+	text-shadow: 1px 1px 1px #000; 
+    width: 600px; 
+    text-align: right;
 }
 
 .main-col .mainitem .content {
@@ -579,6 +588,108 @@ form#contactus { text-align: center; width: 350px; margin: 0px auto 0px auto; }
     width: 100px;
     text-align: right;
 }
+
+/* Messaging */
+.messaging ul{ font-family: 'Arial', 'Helvetica'; 
+	font-size: 1.8em;
+	color: #e2d7c5;  line-height: 1.2em; margin-bottom: 5px; } 
+
+.messaging select {
+    background: transparent;
+    -webkit-appearance: none;
+    width: 250px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    color: #56483e;
+}
+
+.messaging  {
+	font-size: 1.8em;	
+}
+
+.messaging table {
+    width: 100%;
+}
+.messaging thead tr {
+    background-color: #100d0c;
+}
+
+.messaging thead tr th {
+    padding: 6px 5px 6px 5px;
+}
+
+.messaging thead tr th.m_starter {
+    width: 100px;
+}
+
+.messaging thead tr th.m_messages {
+    width: 20px;;
+}
+
+.messaging thead tr th.m_last_message {
+    width: 180px;
+}
+
+.messaging thead tr th.m_actions {
+    width: 50px;
+}
+
+.messaging tbody tr td {
+    padding: 7px 5px 7px 5px;
+}
+
+.messaging tbody tr:nth-child(even) {
+    background-color: #3f342d;
+} 
+
+.messaging tbody tr td.delete {
+    vertical-align: middle;
+    padding: 4px 5px 7px 5px;
+}
+
+.messaging .message_delete {
+    border: 1px dashed #d5a042;
+    color: #d5a042;
+    background: transparent;
+    -webkit-appearance: none;
+}
+
+.messaging .new_message {
+    width: 360px; 
+}
+
+.messaging .new_message .form {
+   border: 1px solid #7d441e; background-color: #1b1511; font-family: 'Arial', 'Helvetica'; font-size: 0.6em; color: #e2d7c5; padding: 2px; width:290px; height: 14px;
+}
+.messaging .new_message .formFocused { background-color: errormsg;  -webkit-box-shadow:0 0 5px #ff9c00; -moz-box-shadow:0 0 4px #ff9c00; box-shadow:0 0 4px #ff9c00; outline: none; }
+.messaging .new_message .label { width: 50px; text-align: right; padding: 4px; margin-top: 5px; font-size: 0.6em;  }
+.messaging .new_message .input { width: 290px; text-align: left; padding: 4px;}
+.messaging .new_message .inputerror { border: 1px solid red; background-color: #1b1511; font-family: 'Arial', 'Helvetica'; font-size: 0.6em; color: #e2d7c5; padding: 2px; width:290px; height: 14px;}
+.messaging .new_message .error { color: red; font-size: 0.6em; margin-bottom: 0px;}
+.messaging .new_message .sendBtn { font-family: 'Black Ops One', serif;
+	font-size: 0.8em;
+	color: #eda321; border:3px solid #eda321; background-color:#1f1b18; outline: none;   
+	-moz-box-shadow: 2px 2px 2px #000;  
+    -webkit-box-shadow: 2px 2px 2px #000;  
+    box-shadow: 2px 2px 2px #000;
+    margin: 10px auto 5px 160px; }
+.messaging .new_message .sendBtn:hover {  color: #ff760f; background-color: #42362c; border:3px solid #ff760f; }
+.messaging .new_message .sendBtn:active { outline: none; }
+.messaging .new_message .textarea textarea{  height: 150px; }
+
+.messenger_thread_message .title_header { font-size: 1.2em; font-weight: bold; color: #ac9586; }
+.messenger_thread_message .title_content { margin: 2px 5px 5px 20px; }
+
+.messenger_thread_message { border-bottom: 1px dashed #ac9586; margin: 0px 0px 10px 0px; padding: 0px 0px 6px 0px }
+.messaging .reply {font-size: 1.2em; font-weight: bold; color: #ac9586; margin-bottom: 10px; }
+
+
+
+
+
 
 
 

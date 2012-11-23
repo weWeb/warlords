@@ -1,0 +1,31 @@
+{% extends 'FOSMessageBundle::layout.html.twig' %}
+{% block messaging_title %}{{ 'warlords_messaging_sendnew' | trans}}{% endblock %}
+{% block fos_message_content %}
+{% form_theme form 'WarlordsGameBundle:Form:form_theme_message.html.twig' %}
+<form class="new_message" action="{{ url('fos_message_thread_new') }}" method="post" novalidate >
+    {{ form_widget(form) }}
+    
+    <input type="submit" class="sendBtn" value="{{ 'warlords_messaging_sendnewBtn' | trans}}" />
+</form>
+
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript"> 
+		$("input").focus(function() {
+			$(this).addClass("formFocused")
+		});
+
+		$("input").blur(function() {
+			$(this).removeClass("formFocused")
+		});
+
+        $("textarea").focus(function() {
+			$(this).addClass("formFocused")
+		});
+
+		$("textarea").blur(function() {
+			$(this).removeClass("formFocused")
+		});
+	</script>  
+{% endblock %}

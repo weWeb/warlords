@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Warlords\GameBundle\WarlordsGameBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new FOS\MessageBundle\FOSMessageBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,0 +1,15 @@
+Warlords\GameBundle\Entity\ThreadMetadata:
+    type: entity
+    table: message_thread_metadata
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO    
+    manyToOne:
+        participant:
+            targetEntity: User
+        thread:
+            targetEntity: Thread
+            inversedBy: metadata

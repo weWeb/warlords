@@ -1,0 +1,42 @@
+{% extends 'form_div_layout.html.twig' %}
+
+
+
+{% block field_row %}
+     {# commented out the error class for now, since the behavior isn't consistent across all fields #}
+     <div class="label float-left">
+        {{ form_label(form, label) }}
+	 </div>
+     <div class="input float-right">
+	    {% set class = 'form' %}
+        {{ form_widget(form, { 'attr': { 'class': class } }) }}
+        {{ form_errors(form) }}
+      </div>
+      <div class="clear"></div>
+{% endblock field_row %}
+
+{% block _message_body_widget %}
+    {% spaceless %}
+    <div class="textarea">
+        <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+    </div>
+    {% endspaceless %}
+{% endblock %}
+
+{# form_errors.html.twig #}
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+        <ul class="error">
+            {% for error in errors %}
+                <li>{{
+                    error.messagePluralization is null
+                        ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                        : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+

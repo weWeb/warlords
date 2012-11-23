@@ -60,6 +60,10 @@ services:
         tags:
             - { name: twig.extension }
    
+fos_message:
+    db_driver: orm
+    thread_class:           Warlords\GameBundle\Entity\Thread
+    message_class:          Warlords\GameBundle\Entity\Message
 
 # Twig Configuration
 twig:

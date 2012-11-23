@@ -1,0 +1,28 @@
+Warlords\GameBundle\Entity\Message:
+    type: entity
+    table: message_message
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO    
+    oneToMany:
+        metadata:
+            targetEntity: MessageMetadata
+            mappedBy: message
+            cascade: ["all"]
+    manyToOne:
+        thread:
+            targetEntity: Thread
+            joinTable:
+                joinColumns:
+                    thread_id:
+                        referencedColumnName: id
+        sender:
+            targetEntity: User
+            joinTable:
+                joinColumns:
+                    user_id:
+                        referencedColumnName: id
+               

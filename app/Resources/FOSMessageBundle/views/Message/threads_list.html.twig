@@ -1,0 +1,60 @@
+<table class="thread">
+
+    <thead>
+        <tr>
+            <th class="m_subject">{% trans from 'FOSMessageBundle' %}subject{% endtrans %}</th>
+            <th class="m_starter">{{ 'warlords_messaging_starter' | trans}}</th>
+            <th class="m_messages">{{ 'warlords_messaging_number' | trans}}</th>
+            <th class="m_last_message">{% trans from 'FOSMessageBundle' %}last_message{% endtrans %}</th>
+            <th class="m_actions">{% trans from 'FOSMessageBundle' %}actions{% endtrans %}</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% if threads %}
+        {% for thread in threads %}
+            <tr>
+                <td>
+                    <a href="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}">
+                        {{ thread.subject }}
+                    </a>
+
+                    {% if not fos_message_is_read(thread) %}
+                        ({% trans from 'FOSMessageBundle' %}new{% endtrans %})
+                    {% endif %}
+                </td>
+                <td>
+                    {{ thread.createdBy }}
+                </td>
+                <td>
+                    {{ thread.messages|length }}
+                </td>
+                <td>
+                    {% if thread.lastMessage %}
+                        <a href="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}#message_{{ thread.lastMessage.id }}" title="{% trans from 'FOSMessageBundle' %}goto_last{% endtrans %}">
+                        {% trans with {'%date%': thread.lastMessage.createdAt|date} from 'FOSMessageBundle' %}on{% endtrans %}
+                        <br />
+                        {% trans with {'%sender%': thread.lastMessage.sender|e } from 'FOSMessageBundle' %}by{% endtrans %}</a>
+                    {% else %}
+                        ----
+                    {% endif %}
+                </td>
+                <td class="delete">
+                    <form action="{{ url('fos_message_thread_delete', {'threadId': thread.id}) }}" method="post">
+                        <input type="submit" value="{% trans from 'FOSMessageBundle' %}delete{% endtrans %}" class="message_delete"/>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="6">
+                {% trans from 'FOSMessageBundle' %}no_thread{% endtrans %}.
+            </td>
+        </tr>
+    {% endif %}
+
+    </tbody>
+
+</table>

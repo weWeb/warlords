@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<news>
+<title>Messaging System</title>
+<content>Messaging system has been implemented using the FOSMessageBundle. 
+
+As the FOSMessageBundle is part of the FOS bundle series, it interfaces nicely with our existing FOSUserBundle. Registered users can send messages to each other by creating threads. Users can then reply to the created threads. The threads can also be deleted.
+
+This messaging system provides our users a platform for communicating with one another without having to give out personal information, such as email addresses.</content>
+<author>Lily</author>
+<date>Nov 22, 2012</date>
+</news> 

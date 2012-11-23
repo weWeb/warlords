@@ -1,0 +1,51 @@
+{% extends 'FOSMessageBundle::layout.html.twig' %}
+{% block messaging_title %}<div class="ellipsis_nohover">{{ thread.subject }}</div>{% endblock %}
+{% block fos_message_content %}
+    <div class="messenger_thread_message">
+        <div class="title_header">{{ 'warlords_messaging_subject' | trans}}: </div>
+        <div class="title_content">{{ thread.subject }}</div>
+    </div>
+{% for message in thread.messages %}
+    <div class="messenger_thread_message">
+ 
+        <div class="title_header ">{{ 'warlords_messaging_from' | trans}}: </div>
+        <div class="title_content">{{ message.sender }}</div>
+        <div class="title_header">{{ 'warlords_messaging_date' | trans}}: </div>
+        <div class="title_content">{{ message.createdAt|date }}</div>
+        <div class="title_header">{{ 'warlords_messaging_message' | trans}}: </div>
+        <div class="title_content" id="message_{{ message.id }}">
+            {{ message.body }}
+        </div>
+    </div>
+{% endfor %}
+
+<div class="reply">{% trans from 'FOSMessageBundle' %}reply{% endtrans %}: </div>
+
+{% form_theme form 'WarlordsGameBundle:Form:form_theme_message.html.twig' %}
+<form class="new_message" action="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}" method="post">
+    {{ form_widget(form) }}
+
+    <input type="submit" class="sendBtn" value="{{ 'warlords_messaging_sendnewBtn' | trans}}" />
+</form>
+
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript"> 
+		$("input").focus(function() {
+			$(this).addClass("formFocused")
+		});
+
+		$("input").blur(function() {
+			$(this).removeClass("formFocused")
+		});
+
+        $("textarea").focus(function() {
+			$(this).addClass("formFocused")
+		});
+
+		$("textarea").blur(function() {
+			$(this).removeClass("formFocused")
+		});
+	</script>  
+{% endblock %}

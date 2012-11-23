@@ -1,0 +1,15 @@
+Warlords\GameBundle\Entity\MessageMetadata:
+    type: entity
+    table: message_message_metadata
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO    
+    manyToOne:
+        participant:
+            targetEntity: User
+        message:
+            targetEntity: Message
+            inversedBy: metadata

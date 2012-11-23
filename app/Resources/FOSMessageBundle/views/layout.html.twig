@@ -1,0 +1,22 @@
+{% extends 'WarlordsGameBundle::layout.html.twig' %}
+
+{% block body %}
+    <div class="mainitem">
+		<div class="header">
+			<div class="title"><h1>{% block messaging_title %}{% endblock %}</h1></div>
+		</div>
+		<div class="content messaging">
+            <select name="folder" onchange="if(this.options[this.selectedIndex].value != ''){window.top.location.href=this.options[this.selectedIndex].value}">
+                <option value="">{{ 'warlords_messaging_folder' | trans}}</option>
+                <option value="{{ url('fos_message_inbox') }}">{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</option>
+                <option value="{{ url('fos_message_sent') }}">{% trans from 'FOSMessageBundle' %}sent{% endtrans %}</option>
+            </select> 
+            <a href="{{ url('fos_message_thread_new' )}}">{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="">{{ 'warlords_messaging_refresh' | trans}}</a>
+            {% block fos_message_content %}{% endblock %}
+
+        </div>
+		<div class="footer"></div>
+	</div>
+{% endblock %}
