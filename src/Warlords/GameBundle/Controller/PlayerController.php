@@ -46,7 +46,33 @@ class PlayerController extends Controller
 		return $this->render('WarlordsGameBundle:Player:result.html.twig');
 	}
 
+	public function allyAction($target_id)
+	{
 	
+		print("What the heck");
+		$user = $this->getUser();
+        	$em = $this->getDoctrine()->getEntityManager();
+		$player = $em->getRepository('WarlordsGameBundle:User')
+			->findOneById($target_id);
+		$user->addAlly($player);
+		
+		$em->persist($user);
+		$em->persist($player);
+
+		$em->flush();
+		
+		$errors = array();
+		$players= $user->getAlliesWithMe();
+		foreach ($players as $play){
+		
+			print($play->getId());
+		}
+		
+		return $this->render('WarlordsGameBundle:Page:index.html.twig', array('errors'=> $errors, 'players' => $players));
+		
+		
+		
+	}
 	
     	protected function getPlayer($id)
     	{

@@ -128,6 +128,18 @@ class User extends BaseUser implements ParticipantInterface
     {
         return $this->myAllies;
     }
+    
+    
+    /**
+     * Add new ally
+     *
+     * @param Warlords\GameBundle\Entity\User
+     */
+    public function addAlly(User $user)
+    {
+        $user->alliesWithMe[] = $this;
+        $this->myAllies[] = $user;
+    }
 
     /**
      * @var \Warlords\GameBundle\Entity\Playerstats

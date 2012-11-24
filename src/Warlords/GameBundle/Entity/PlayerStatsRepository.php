@@ -13,14 +13,15 @@ use Doctrine\ORM\EntityRepository;
 class PlayerStatsRepository extends EntityRepository
 {
 
-	// $limit set to 3 to see if the result show correctly; subject to change
+	// $limit set to 5 to see if the result show correctly; subject to change
 	public function getPlayerByLevel($level, $limit = 5)
 	{
 		$qb = $this->createQueryBuilder('p')
 				->select('p')
-				->where('p.level <= :player_lvl')
+				->where('p.level <= :player_lvl_up AND p.level >= :player_lvl_down')
 				->addOrderBy('p.level','DESC')
-				->setParameter('player_lvl', $level);
+				->setParameter('player_lvl_up', ($level + 0) + 2)
+				->setParameter('player_lvl_down', ($level + 0) - 2);
 		
 		if (false === is_null($limit))
        	 		$qb->setMaxResults($limit);
@@ -30,14 +31,15 @@ class PlayerStatsRepository extends EntityRepository
 		
 	}
 	
-	// $limit set to 3 to see if the result show correctly; subject to change
+	// $limit set to 5 to see if the result show correctly; subject to change
 	public function getPlayerByGold($gold, $limit = 5)
 	{
 		$qb = $this->createQueryBuilder('p')
 				->select('p')
-				->where('p.gold <= :player_gold')
+				->where('p.gold <= :player_gold_up AND p.gold >= :player_gold_down')
 				->addOrderBy('p.gold','DESC')
-				->setParameter('player_gold', $gold);
+				->setParameter('player_gold_up', ($gold + 0) * 1.5)
+				->setParameter('player_gold_down', floor(($gold + 0) * 0.5));
 		
 		if (false === is_null($limit))
        	 		$qb->setMaxResults($limit);
@@ -47,14 +49,15 @@ class PlayerStatsRepository extends EntityRepository
 		
 	}
 	
-	// $limit set to 3 to see if the result show correctly; subject to change
+	// $limit set to 5 to see if the result show correctly; subject to change
 	public function getPlayerByInfantry($infantry, $limit = 5)
 	{
 		$qb = $this->createQueryBuilder('p')
 				->select('p')
-				->where('p.infantry <= :player_infantry')
+				->where('p.infantry <= :player_infantry_up AND p.infantry >= :player_infantry_down')
 				->addOrderBy('p.infantry','DESC')
-				->setParameter('player_infantry', $infantry);
+				->setParameter('player_infantry_up', ($infantry + 0) * 1.5)
+				->setParameter('player_infantry_down', floor(($infantry + 0) * 0.5));
 		
 		if (false === is_null($limit))
        	 		$qb->setMaxResults($limit);
@@ -64,14 +67,15 @@ class PlayerStatsRepository extends EntityRepository
 		
 	} 
 	
-	// $limit set to 3 to see if the result show correctly; subject to change
+	// $limit set to 5 to see if the result show correctly; subject to change
 	public function getPlayerByKnight($knights, $limit = 5)
 	{
 		$qb = $this->createQueryBuilder('p')
 				->select('p')
-				->where('p.knights <= :player_knights')
+				->where('p.knights <= :player_knights_up AND p.knights >= :player_knights_down')
 				->addOrderBy('p.knights','DESC')
-				->setParameter('player_knights', $knights);
+				->setParameter('player_knights_up', ($knights + 0) * 1.5)
+				->setParameter('player_knights_down', floor(($knights + 0) * 0.5));
 		
 		if (false === is_null($limit))
        	 		$qb->setMaxResults($limit);
@@ -80,15 +84,33 @@ class PlayerStatsRepository extends EntityRepository
               		->getResult();		
 		
 	}
-
-	// $limit set to 3 to see if the result show correctly; subject to change
+	
+	// $limit set to 5 to see if the result show correctly; subject to change
+	public function getPlayerByLand($land, $limit = 5)
+	{
+		$qb = $this->createQueryBuilder('p')
+				->select('p')
+				->where('p.land <= :player_land_up AND p.land >= :player_land_down')
+				->addOrderBy('p.land','DESC')
+				->setParameter('player_land_up', ($land + 0) * 1.5)
+				->setParameter('player_land_down', floor(($land + 0) * 0.5));
+		
+		if (false === is_null($limit))
+       	 		$qb->setMaxResults($limit);
+		
+    		return $qb->getQuery()
+              		->getResult();		
+		
+	}
+	// $limit set to 5 to see if the result show correctly; subject to change
 	public function getPlayerByFame($fame, $limit = 5)
 	{
 		$qb = $this->createQueryBuilder('p')
 				->select('p')
-				->where('p.fame <= :player_fame')
+				->where('p.fame <= :player_fame_up AND p.fame >= :player_fame_down')
 				->addOrderBy('p.fame','DESC')
-				->setParameter('player_fame', $fame);
+				->setParameter('player_fame_up', ($fame + 0) * 1.5)
+				->setParameter('player_fame_down', floor(($fame + 0) * 0.5));
 		
 		if (false === is_null($limit))
        	 		$qb->setMaxResults($limit);
@@ -99,7 +121,7 @@ class PlayerStatsRepository extends EntityRepository
 	} 
 	
 	
-	// $limit set to 3 to see if the result show correctly; subject to change
+	// $limit set to 5 to see if the result show correctly; subject to change
 	public function getPlayerByUsername($username, $limit = 5)
 	{
 		$qb = $this->createQueryBuilder('p')
