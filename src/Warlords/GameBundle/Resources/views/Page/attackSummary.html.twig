@@ -18,8 +18,18 @@
             {% if info is defined %}
                 <div class="information">
                 <h2>{{ info }}</h2>
-                <p>You have purchased:<br />
+                <p>You have gained:<br />
                 
+                {% if gold is not empty %}
+                {{ gold }} gold<br />
+                {% endif %}
+                
+                {% if calvary is not empty %}
+                {{ land }} land<br />
+                {% endif %}
+                
+                You have lost:<br />
+
                 {% if soldiers is not empty %}
                 {{ soldiers }} Soldiers  <br />
                 {% endif %}
@@ -31,11 +41,12 @@
                 {% if calvary is not empty %}
                 {{ calvary }} Calvary  <br />
                 {% endif %}
+            	</p>
                 
-                for {{ gold }} gold.<br />
                 </div>
             {% endif %}
-            <a href="../profile">Return to profile</a><br/>    
+            <a href="../profile">Return to profile</a><br/>
+            <a href="./{{ target_id }}">Attack again</a>
         </div>
 		<div class="footer"></div>
 	</div>

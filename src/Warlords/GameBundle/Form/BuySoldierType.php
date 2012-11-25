@@ -11,7 +11,7 @@ class BuySoldierType extends AbstractType
     {
         $builder->add('soldiers', 'integer', array('label' => 'Soldiers - 50g','required' => false))
                 ->add('knights', 'integer', array('label' => 'Knights - 200g','required' => false))
-                ->add('calvary', 'integer', array('label' => 'Calvary - 500g','required' => false))
+                ->add('calvary', 'integer', array('label' => 'Calvary - 400g','required' => false))
                 ;
     }
     

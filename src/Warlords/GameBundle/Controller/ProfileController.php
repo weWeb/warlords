@@ -102,12 +102,12 @@ class ProfileController extends BaseController{
     	$knights = $playerstats->getKnights();
     	$calvary = $playerstats->getCalvary();
     	
-    	$playerattk = $soldiers*($this->get('attack_infantry')) +
-                        $knights*($this->get('attack_knight')) +
-                        $calvary*($this->get('attack_calvary'));
-    	$playerdefn = $soldiers*($this->get('defense_infantry')) +
-                        $knights*($this->get('defense_knight')) +
-                        $calvary*($this->get('defense_calvary'));
+        $playerattk = $soldiers*($this->container->getParameter('attack_infantry')) +
+                        $knights*($this->container->getParameter('attack_knight')) +
+                        $calvary*($this->container->getParameter('attack_calvary'));
+        $playerdefn = $soldiers*($this->container->getParameter('defense_infantry')) +
+                        $knights*($this->container->getParameter('defense_knight')) +
+                        $calvary*($this->container->getParameter('defense_calvary'));
     	
     	if($id == $target_id)
         {
@@ -132,25 +132,31 @@ class ProfileController extends BaseController{
     	$knights2 = $targetstats->getKnights();
     	$calvary2 = $targetstats->getCalvary();
     	
-        $targetattk = $soldiers*($this->get('attack_infantry')) +
-                        $knights*($this->get('attack_knight')) +
-                        $calvary*($this->get('attack_calvary'));
-        $targetdefn = $soldiers*($this->get('defense_infantry')) +
-                        $knights*($this->get('defense_knight')) +
-                        $calvary*($this->get('defense_calvary'));
+        $targetattk = $soldiers2*($this->container->getParameter('attack_infantry')) +
+                        $knights2*($this->container->getParameter('attack_knight')) +
+                        $calvary2*($this->container->getParameter('attack_calvary'));
+        $targetdefn = $soldiers2*($this->container->getParameter('defense_infantry')) +
+                        $knights2*($this->container->getParameter('defense_knight')) +
+                        $calvary2*($this->container->getParameter('defense_calvary'));
     	
         //Combat
-        $rand_percent = rand(1,5)/100;
-        $loss_ratio = 1-$rand_percent;
-        
+        $rand_percent = rand(1,5)/100;  //0.01 to 0.05
+        $loss_ratio = 1-$rand_percent;  //0.95 to 0.99
+
         //Everyone loses soldiers
-        $soldiers = (int)($soldiers*$loss_ratio);
-        $knights = (int)($knights*$loss_ratio);
-        $calvary = (int)($calvary*$loss_ratio);
-        
-        $playerstats->setInfantry((int)$soldiers);
-        $playerstats->setKnights((int)$knights);
-        $playerstats->setCalvary((int)$calvary);
+
+        $new_soldiers = (int)($soldiers*$loss_ratio);
+        $soldiers_lost = $soldiers - $new_soldiers;
+
+        $new_knights = (int)($knights*$loss_ratio);
+        $knights_lost = $knights - $new_knights;
+
+        $new_calvary = (int)($calvary*$loss_ratio);
+        $calvary_lost = $calvary - $new_calvary;
+
+        $playerstats->setInfantry($new_soldiers);
+        $playerstats->setKnights($new_knights);
+        $playerstats->setCalvary($new_calvary);
         
         $soldiers2 = (int)($soldiers2*$loss_ratio);
         $knights2 = (int)($knights2*$loss_ratio);
@@ -167,6 +173,7 @@ class ProfileController extends BaseController{
             $land = $targetstats->getLand();
             $diff = (int)($land*$rand_percent);
             $targetstats->setLand($land-$diff);
+            $land_gained = $diff;
             
             $land = $playerstats->getLand();
             $playerstats->setLand($land+$diff);
@@ -175,6 +182,7 @@ class ProfileController extends BaseController{
             $gold = $targetstats->getGold();
             $diff = (int)($gold*$rand_percent);
             $targetstats->setGold((int)($gold-$diff));
+            $gold_gained = $diff;
             
             $gold = $playerstats->getGold();
             $playerstats->setGold((int)($gold+$diff));
@@ -183,6 +191,8 @@ class ProfileController extends BaseController{
         {
             $info = "Attack has failed !";
             //Nothing is lost except army
+            $gold_gained=0;
+            $land_gained=0;
         }
         
         //Save everything to DB
@@ -191,18 +201,14 @@ class ProfileController extends BaseController{
         $em->persist($targetstats);
         $em->flush();
         
-        $playerattk = $soldiers*($this->get('attack_infantry')) +
-                        $knights*($this->get('attack_knight')) +
-                        $calvary*($this->get('attack_calvary'));
-        $playerdefn = $soldiers*($this->get('defense_infantry')) +
-                        $knights*($this->get('defense_knight')) +
-                        $calvary*($this->get('defense_calvary'));
-        
-        return $this->render('WarlordsGameBundle:Page:profile.html.twig', array(
-                                'playerstats' => $playerstats,
-                                'attack' => (int)$playerattk,
-                                'defense' => (int)$playerdefn,
-                                'info' => $info));
+        return $this->render('WarlordsGameBundle:Page:attackSummary.html.twig', array(
+                                'info' => "Attack is successful !",
+                                'gold' => $gold_gained,
+                                'land' => $land_gained,
+                                'soldiers' => $soldiers_lost,
+                                'knights' => $knights_lost,
+                                'calvary' => $calvary_lost,
+                                'target_id' => $target_id));
     }
     
     //===============================
@@ -246,6 +252,10 @@ class ProfileController extends BaseController{
             	$gold = $playerstats->getGold();
             	
             	$cost = $buys*50 + $buyk*200 + $buyc*500;
+
+                $cost = $buys*($this->container->getParameter('cost_infantry')) +
+                        $buyk*($this->container->getParameter('cost_knight')) +
+                        $buyc*($this->container->getParameter('cost_calvary'));
             	
             	//bad form, bought nothing.
             	if($cost == 0)
