@@ -36,7 +36,7 @@ class PageController extends Controller
             				$value = $postData['value'];
             				switch($type) {
             					case 'level':
-            						if (is_numeric($value) && is_int((int)$value)){
+            						if (is_numeric($value) && is_int($value + 0)){
             							$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
 					  					->getPlayerByLevel($value);
 							}else{
@@ -44,15 +44,23 @@ class PageController extends Controller
 							}
 				    			break;
             					case 'fame':
-            						if (is_numeric($value) && is_int((int)$value)){
+            						if (is_numeric($value) && is_int($value + 0)){
             							$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
 					  				->getPlayerByFame($value);
 					  		}else{
 					  			$errors[] = "The value must be integer";
 					  		}
 					  		break;
+				  		case 'land':
+            						if (is_numeric($value)){
+            							$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
+					  				->getPlayerByLand($value);
+					  		}else{
+					  			$errors[] = "The value must be numeric values";
+					  		}
+					  		break;
 					  	case 'gold':
-            						if (is_numeric($value) && is_int((int)$value)){
+            						if (is_numeric($value) && is_int($value + 0)){
 					  			$players = $em->getRepository('WarlordsGameBundle:PlayerStats')
 					  				->getPlayerByGold($value);
 					  		}else{

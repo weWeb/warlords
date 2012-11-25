@@ -1,7 +1,7 @@
 {% for player in players %}
-    <article class="player" id="player-{{ player.id }}">
+    <article class="player" id="player-{{ player.id }} ">
         <div class="userinfo-{{ loop.index }}">
-		<header>
+		<header class="s-header">
 		    <p><span>Player: {{ player.user.username }}</span></p>
 		</header>
 		<ul id="info">
@@ -46,13 +46,34 @@
 {% block javascripts %}
 	<script type="text/javascript"> 
 	
-	
-  	$("[class^=userinfo]").hover(
+
+  	{# $("[class^=userinfo]").hover(
     	 	function() { $(this).stop().fadeTo("slow", 1);},
          	function() { $(this).stop().fadeTo("slow", 0.6);});
 
+	#}
+	
 
+	$("[class^=userinfo]").hover(
 
+                function(){$(this).stop(true).animate({
+                    backgroundColor: "#ff760f",
+                    borderRadius: 5,
+                    WebkitBorderRadius: 5, 
+    		    MozBorderRadius: 5 ,
+                    color: "#fff",
+                    height: 100,
+                }, 'linear' );},
+
+                function(){$(this).stop(true).animate({
+                    backgroundColor: "#1f1b18",
+                    borderRadius: 5,
+                    WebkitBorderRadius: 5, 
+    		    MozBorderRadius: 5 ,
+                    color: "#E2D7C5",
+                    height: 90,
+                }, 'linear' );}
+        );
 
 	</script>  
 {% endblock %}
