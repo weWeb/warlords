@@ -15,15 +15,15 @@ class ProfileController extends BaseController{
     	$form = $this->createForm(new BuySoldierType(), NULL);
         $usr = $this->container->get('security.context')->getToken()->getUser();
         $em = $this->container->get('doctrine')->getEntityManager();
-    	$returnArray = ProfileController::getUserProfile($usr, $em);
+        $handle = $this;
+    	$returnArray = ProfileController::getUserProfile($usr, $em, $handle);
         $returnArray['form'] = $form->createView();
         return $this->render('WarlordsGameBundle:Page:profile.html.twig', $returnArray);
     }
 
-    public static function getUserProfile($usr, $em) {
+    public static function getUserProfile($usr, $em, $handle) {
         $id = $usr->getID();
         $playerstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($id);
-
 
         if (!$playerstats) {
         	throw new NotFoundHttpException('Unable to find player.');
@@ -33,8 +33,12 @@ class ProfileController extends BaseController{
     	$knights = $playerstats->getKnights();
     	$calvary = $playerstats->getCalvary();
     	
-    	$attk = $soldiers + $knights*2 + $calvary*4;
-    	$defn = $soldiers + $knights*3 + $calvary*3;
+    	$attk = $soldiers*($handle->container->getParameter('attack_infantry')) +
+                        $knights*($handle->container->getParameter('attack_knight')) +
+                        $calvary*($handle->container->getParameter('attack_calvary'));
+        $defn = $soldiers*($handle->container->getParameter('defense_infantry')) +
+                        $knights*($handle->container->getParameter('defense_knight')) +
+                        $calvary*($handle->container->getParameter('defense_calvary'));
         return array(   'playerstats' => $playerstats,
                         'attack' => $attk,
                         'defense' => $defn,
@@ -98,8 +102,12 @@ class ProfileController extends BaseController{
     	$knights = $playerstats->getKnights();
     	$calvary = $playerstats->getCalvary();
     	
-    	$playerattk = $soldiers + $knights*2 + $calvary*4;
-    	$playerdefn = $soldiers + $knights*3 + $calvary*3;
+    	$playerattk = $soldiers*($this->get('attack_infantry')) +
+                        $knights*($this->get('attack_knight')) +
+                        $calvary*($this->get('attack_calvary'));
+    	$playerdefn = $soldiers*($this->get('defense_infantry')) +
+                        $knights*($this->get('defense_knight')) +
+                        $calvary*($this->get('defense_calvary'));
     	
     	if($id == $target_id)
         {
@@ -124,25 +132,29 @@ class ProfileController extends BaseController{
     	$knights2 = $targetstats->getKnights();
     	$calvary2 = $targetstats->getCalvary();
     	
-    	$targetattk = $soldiers2 + $knights2*2 + $calvary2*4;
-    	$targetdefn = $soldiers2 + $knights2*3 + $calvary2*3;
+        $targetattk = $soldiers*($this->get('attack_infantry')) +
+                        $knights*($this->get('attack_knight')) +
+                        $calvary*($this->get('attack_calvary'));
+        $targetdefn = $soldiers*($this->get('defense_infantry')) +
+                        $knights*($this->get('defense_knight')) +
+                        $calvary*($this->get('defense_calvary'));
     	
         //Combat
         $rand_percent = rand(1,5)/100;
         $loss_ratio = 1-$rand_percent;
         
         //Everyone loses soldiers
-        (int)$soldiers =$soldiers*$loss_ratio;
-        (int)$knights = $knights*$loss_ratio;
-        (int)$calvary = $calvary*$loss_ratio;
+        $soldiers = (int)($soldiers*$loss_ratio);
+        $knights = (int)($knights*$loss_ratio);
+        $calvary = (int)($calvary*$loss_ratio);
         
         $playerstats->setInfantry((int)$soldiers);
         $playerstats->setKnights((int)$knights);
         $playerstats->setCalvary((int)$calvary);
         
-        (int)$soldiers2 = $soldiers2*$loss_ratio;
-        (int)$knights2 = $knights2*$loss_ratio;
-        (int)$calvary2 = $calvary2*$loss_ratio;
+        $soldiers2 = (int)($soldiers2*$loss_ratio);
+        $knights2 = (int)($knights2*$loss_ratio);
+        $calvary2 = (int)($calvary2*$loss_ratio);
         
         $targetstats->setInfantry((int)$soldiers2);
         $targetstats->setKnights((int)$knights2);
@@ -153,15 +165,15 @@ class ProfileController extends BaseController{
             $info = "Attack is successful!";
             //Land gain
             $land = $targetstats->getLand();
-            $diff = $land*$rand_percent;
+            $diff = (int)($land*$rand_percent);
             $targetstats->setLand($land-$diff);
             
             $land = $playerstats->getLand();
             $playerstats->setLand($land+$diff);
             
             //Gold gain
-            (int)$gold = $targetstats->getGold();
-            (int)$diff = $gold*$rand_percent;
+            $gold = $targetstats->getGold();
+            $diff = (int)($gold*$rand_percent);
             $targetstats->setGold((int)($gold-$diff));
             
             $gold = $playerstats->getGold();
@@ -179,8 +191,12 @@ class ProfileController extends BaseController{
         $em->persist($targetstats);
         $em->flush();
         
-        $playerattk = $soldiers + $knights*2 + $calvary*4;
-    	$playerdefn = $soldiers + $knights*3 + $calvary*3;
+        $playerattk = $soldiers*($this->get('attack_infantry')) +
+                        $knights*($this->get('attack_knight')) +
+                        $calvary*($this->get('attack_calvary'));
+        $playerdefn = $soldiers*($this->get('defense_infantry')) +
+                        $knights*($this->get('defense_knight')) +
+                        $calvary*($this->get('defense_calvary'));
         
         return $this->render('WarlordsGameBundle:Page:profile.html.twig', array(
                                 'playerstats' => $playerstats,

@@ -36,8 +36,9 @@ class SecurityController extends BaseController
         {
             $usr = $this->container->get('security.context')->getToken()->getUser();        
             $em = $this->container->get('doctrine')->getEntityManager();
+            $handle = $this;
             $template = sprintf('WarlordsGameBundle:Page:profile_embedded.html.twig');
-            return $this->container->get('templating')->renderResponse($template, ProfileController::getUserProfile($usr, $em));           
+            return $this->container->get('templating')->renderResponse($template, ProfileController::getUserProfile($usr, $em, $handle));           
         } 
 
         // For AJAX; figure out later

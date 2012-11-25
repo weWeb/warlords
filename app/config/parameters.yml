@@ -12,4 +12,26 @@ parameters:
     locale: en
     secret: fdcab712e14e7b80dd7e3693b986b3410d268f04
     database_path: null
-
+    mailer_transport: gmail
+    mailer_encryption: ssl
+    mailer_auth_mode: login
+    mailer_host: smtp.gmail.com
+    mailer_user: group10weweb
+    mailer_password: fall2012cmpt470
+    default_land: 6000
+    default_gold: 9000
+    default_infantry: 100
+    default_knights: 25
+    default_calvary: 10
+    upkeep_infantry: 25
+    upkeep_knights: 65
+    upkeep_calvary: 85
+    cost_infantry: 50
+    cost_knight: 200
+    cost_calvary: 400
+    attack_infantry: 1
+    attack_knight: 2
+    attack_calvary: 4
+    defense_infantry: 1
+    defense_knight: 3
+    defense_calvary: 3

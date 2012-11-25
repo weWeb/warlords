@@ -34,7 +34,9 @@ class UpdateResourceCommand extends ContainerAwareCommand
             $knights = $player->getKnights();
             $calvary = $player->getCalvary();
             
-            $upkeep = $soldiers*25 + $knights*75 + $calvary*125;
+            $upkeep = $soldiers*$this->getContainer()->getParameter('upkeep_infantry') +
+                        $knights*$this->getContainer()->getParameter('upkeep_knight') +
+                        $calvary*$this->getContainer()->getParameter('upkeep_calvary');
             
             if($gold > $upkeep)
             {
