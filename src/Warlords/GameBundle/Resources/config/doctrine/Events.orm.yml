@@ -1,0 +1,39 @@
+Warlords\GameBundle\Entity\Events:
+    type: entity
+    table: events
+    id:
+        id:
+            type: integer
+            generator: {strategy: AUTO}
+    fields:
+        eventType:
+            type: integer
+            nullable: false
+        message:
+            type: string
+            length: 255
+            nullable: true
+        eventTime:
+            type: datetime
+            nullable: false
+    manyToOne:
+        user:
+            targetEntity: User
+            nullable: false
+            inversedBy: events
+    manyToOne:
+        user2:
+            targetEntity: User
+            nullable: true
+            joinTable:
+                joinColumns:
+                    user_id:
+                        referencedColumnName: id
+    manyToOne: 
+        guild:
+            targetEntity: Guild
+            nullable: true
+            joinTable:
+                joinColumns:
+                    guild_id:
+                        referencedColumnName: id

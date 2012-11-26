@@ -1,0 +1,17 @@
+Warlords\GameBundle\Entity\Guild:
+    type: entity
+    table: guilds
+    id:
+        id:
+            type: integer
+            generator: {strategy: AUTO}
+    fields:
+        name:
+            type: string
+            length: 255
+    oneToOne:
+        leader:
+            targetEntity: User
+            inversedBy: guild
+            type: integer
+            nullable: false
