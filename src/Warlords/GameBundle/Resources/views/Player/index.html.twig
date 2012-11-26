@@ -1,5 +1,5 @@
 {% for player in players %}
-    <article class="player" id="player-{{ player.id }} ">
+    <article class="player" id="player-{{ player.user.id }} ">
         <div class="userinfo-{{ loop.index }}">
 		<header class="s-header">
 		    <p><span>Player: {{ player.user.username }}</span></p>
