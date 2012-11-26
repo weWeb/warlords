@@ -28,7 +28,12 @@ class User extends BaseUser implements ParticipantInterface
     private $alliesWithMe;
 
     private $myAllies;
-
+    
+    /**
+    * @var \Warlords\GameBundle\Entity\Guild
+    */
+    private $guild;
+    
     /**
      * Set isActive
      *
@@ -168,6 +173,29 @@ class User extends BaseUser implements ParticipantInterface
     public function getStats()
     {
         return $this->stats;
+    }
+    
+    /**
+    * Set guild
+    *
+    * @param \Warlords\GameBundle\Entity\Guild $guild
+    * @return User
+    */
+    public function setGuild(\Warlords\GameBundle\Entity\Guild $guild = null)
+    {
+        $this->guild = $guild;
+    
+        return $this;
+    }
+
+    /**
+    * Get guild
+    *
+    * @return \Warlords\GameBundle\Entity\Guild 
+    */
+    public function getGuild()
+    {
+        return $this->guild;
     }
 }
 
