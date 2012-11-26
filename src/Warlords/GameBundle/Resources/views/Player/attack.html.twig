@@ -35,8 +35,8 @@
 	    		
 	    	</div>
 	    	<div class="content">
-	    	<button type="button"  onclick="window.open('{{ path('WarlordsGameBundle_player_add_ally', {'target_id' : player.id }) }}')">Add Friend</button>
-			<form action="{{ path('WarlordsGameBundle_player_attack', {'target_id' : player.id }) }}" method="post" {{ form_enctype(form) }} class="player">
+	    	<button type="button"  onclick="window.open('{{ path('WarlordsGameBundle_player_add_ally', {'target_id' : player.user.id }) }}')">Add Friend</button>
+			<form action="{{ path('WarlordsGameBundle_player_attack', {'target_id' : player.user.id }) }}" method="post" {{ form_enctype(form) }} class="player">
 	    			{{ form_widget(form) }}
 	    			{{ form_rest(form) }}
 	    			<p><input type="submit" value="Attack"></p>
