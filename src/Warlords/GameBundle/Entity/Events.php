@@ -152,4 +152,60 @@ class Events
     {
         return $this->eventType;
     }
+    /**
+     * @var \Warlords\GameBundle\Entity\User
+     */
+    private $user;
+
+    /**
+     * @var \Warlords\GameBundle\Entity\User
+     */
+    private $user2;
+
+
+    /**
+     * Set user
+     *
+     * @param \Warlords\GameBundle\Entity\User $user
+     * @return Events
+     */
+    public function setUser(\Warlords\GameBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Warlords\GameBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set user2
+     *
+     * @param \Warlords\GameBundle\Entity\User $user2
+     * @return Events
+     */
+    public function setUser2(\Warlords\GameBundle\Entity\User $user2 = null)
+    {
+        $this->user2 = $user2;
+    
+        return $this;
+    }
+
+    /**
+     * Get user2
+     *
+     * @return \Warlords\GameBundle\Entity\User 
+     */
+    public function getUser2()
+    {
+        return $this->user2;
+    }
 }

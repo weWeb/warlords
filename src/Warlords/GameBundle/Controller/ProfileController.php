@@ -5,6 +5,7 @@ use FOS\UserBundle\Controller\ProfileController as BaseController;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Warlords\GameBundle\Form\BuySoldierType;
+use Warlords\GameBundle\Entity\Events;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
@@ -59,9 +60,6 @@ class ProfileController extends BaseController{
         $playerstats = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($target_id);
         $target_user=$em->getRepository('WarlordsGameBundle:User')->findOneById($target_id);
         
-
-
-
         if (!$playerstats) {
         	return $this->render('WarlordsGameBundle:Page:profile_get.html.twig', array(
                                 'error' => "Cannot find this player."
