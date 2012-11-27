@@ -1,0 +1,4 @@
+{% for field in events %}
+	{{ field['eventTime'] }}- <a href="profile/{{ field['user2_id'] }}"> {{ field['username'] }}</a><br/>
+	{{ field['message'] }}<br/><br/>
+{% endfor %}
