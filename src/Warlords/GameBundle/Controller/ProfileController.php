@@ -164,6 +164,11 @@ class ProfileController extends BaseController{
         $targetstats->setKnights((int)$knights2);
         $targetstats->setCalvary((int)$calvary2);
         
+        //Create Events
+        
+        $selfEvent = new Events();
+        $targetEvent = new Events();
+        
         if($playerattk > $targetdefn)
         {
             $info = "Attack is successful!";
@@ -184,6 +189,9 @@ class ProfileController extends BaseController{
             
             $gold = $playerstats->getGold();
             $playerstats->setGold((int)($gold+$diff));
+            
+            $selfEvent->setMessage("Your attack was successful and gained " . $land_gained . " land");
+            $targetEvent->setMessage("You failed to defend and lost " . $land_gained . " land");
         }
         else
         {
@@ -191,12 +199,39 @@ class ProfileController extends BaseController{
             //Nothing is lost except army
             $gold_gained=0;
             $land_gained=0;
+            $selfEvent->setMessage("Your attack failed");
+            $targetEvent->setMessage("You defended successfully");
         }
+
+        //Set Events
+
+        $targetUser = $em->getRepository('WarlordsGameBundle:User')->findOneById($target_id);
+        $timenow = new \DateTime("now");
+        if($timenow == NULL)
+        {
+            throw new NotFoundHttpException('Timenow is null');
+        }
+        
+        //Type 1 means user attacked
+        $selfEvent->setEventType(1);
+        $selfEvent->setUser2($targetUser);
+        $selfEvent->setUser($usr);
+        $selfEvent->setEventTime($timenow);
+
+        $targetEvent->setUser($targetUser);
+        $targetEvent->setUser2($usr);
+        $targetEvent->setEventTime($timenow);
+        //Type 2 means target defended
+        $targetEvent->setEventType(2);
+        
+
         
         //Save everything to DB
         
         $em->persist($playerstats);
         $em->persist($targetstats);
+        $em->persist($selfEvent);
+        $em->persist($targetEvent);
         $em->flush();
         
         return $this->render('WarlordsGameBundle:Page:attackSummary.html.twig', array(

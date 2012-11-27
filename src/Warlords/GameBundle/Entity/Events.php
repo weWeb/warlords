@@ -16,9 +16,9 @@ class Events
     private $id;
 
     /**
-     * @var t
+     * @var integer
      */
-    private $type;
+    private $eventType;
 
     /**
      * @var string
@@ -29,6 +29,16 @@ class Events
      * @var \DateTime
      */
     private $eventTime;
+
+    /**
+     * @var \Warlords\GameBundle\Entity\User
+     */
+    private $user;
+
+    /**
+     * @var \Warlords\GameBundle\Entity\User
+     */
+    private $user2;
 
     /**
      * @var \Warlords\GameBundle\Entity\Guild
@@ -47,13 +57,26 @@ class Events
     }
 
     /**
-     * Get type
+     * Set eventType
      *
-     * @return \t 
+     * @param integer $eventType
+     * @return Events
      */
-    public function getType()
+    public function setEventType($eventType)
     {
-        return $this->type;
+        $this->eventType = $eventType;
+    
+        return $this;
+    }
+
+    /**
+     * Get eventType
+     *
+     * @return integer 
+     */
+    public function getEventType()
+    {
+        return $this->eventType;
     }
 
     /**
@@ -103,67 +126,6 @@ class Events
     }
 
     /**
-     * Set guild
-     *
-     * @param \Warlords\GameBundle\Entity\Guild $guild
-     * @return Events
-     */
-    public function setGuild(\Warlords\GameBundle\Entity\Guild $guild = null)
-    {
-        $this->guild = $guild;
-    
-        return $this;
-    }
-
-    /**
-     * Get guild
-     *
-     * @return \Warlords\GameBundle\Entity\Guild 
-     */
-    public function getGuild()
-    {
-        return $this->guild;
-    }
-    /**
-     * @var integer
-     */
-    private $eventType;
-
-
-    /**
-     * Set eventType
-     *
-     * @param integer $eventType
-     * @return Events
-     */
-    public function setEventType($eventType)
-    {
-        $this->eventType = $eventType;
-    
-        return $this;
-    }
-
-    /**
-     * Get eventType
-     *
-     * @return integer 
-     */
-    public function getEventType()
-    {
-        return $this->eventType;
-    }
-    /**
-     * @var \Warlords\GameBundle\Entity\User
-     */
-    private $user;
-
-    /**
-     * @var \Warlords\GameBundle\Entity\User
-     */
-    private $user2;
-
-
-    /**
      * Set user
      *
      * @param \Warlords\GameBundle\Entity\User $user
@@ -207,5 +169,28 @@ class Events
     public function getUser2()
     {
         return $this->user2;
+    }
+
+    /**
+     * Set guild
+     *
+     * @param \Warlords\GameBundle\Entity\Guild $guild
+     * @return Events
+     */
+    public function setGuild(\Warlords\GameBundle\Entity\Guild $guild = null)
+    {
+        $this->guild = $guild;
+    
+        return $this;
+    }
+
+    /**
+     * Get guild
+     *
+     * @return \Warlords\GameBundle\Entity\Guild 
+     */
+    public function getGuild()
+    {
+        return $this->guild;
     }
 }

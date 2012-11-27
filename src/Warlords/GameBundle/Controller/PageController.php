@@ -174,13 +174,20 @@ class PageController extends Controller
             FROM user JOIN events ON
             (user.id = events.user2_id) OR (user.guild_id = events.guild_id) WHERE
             events.user_id = :userId OR events.guild_id=:guildId
-            ORDER BY events.eventTime DESC;
+            ORDER BY events.eventTime DESC LIMIT 0,5;
             ';
 
             $statement = $em->getConnection()->prepare($query);
 
             $statement->bindValue('userId', $usr->getId());
-            $statement->bindValue('guildId', $usr->getGuild()->getId());
+            $guild = $usr->getGuild();
+            if($guild != null)
+            {
+                $statement->bindValue('guildId', $usr->getGuild()->getId());
+            }else
+            {
+                $statement->bindValue('guildId', null);
+            }
             $statement->execute();
 
             $results = $statement->fetchAll();
