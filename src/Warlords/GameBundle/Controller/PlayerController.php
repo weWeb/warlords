@@ -12,13 +12,24 @@ use Warlords\GameBundle\Form\SelectPlayerType;
 class PlayerController extends Controller
 {
    
-
-	public function attackAction($player)
+	public function searchAction($player)
 	{
 		
 
-        	$em = $this->getDoctrine()->getEntityManager();
 
+
+            	
+		return $this->render('WarlordsGameBundle:Player:search.html.twig',array(
+			'player' => $player,)
+		);
+
+	}
+	public function attackAction($target_id)
+	{
+		
+		
+        	$em = $this->getDoctrine()->getEntityManager();
+		$player = $em->getRepository("WarlordsGameBundle:PlayerStats")->findOneByUser($target_id);
 		$form = $this->createForm(new SelectPlayerType());
 
 		$request = $this->getRequest();
@@ -27,7 +38,7 @@ class PlayerController extends Controller
 
         			if ($form->isValid()) {
             				
-          				$target_id = $player->getUser()->getId();  				
+
            				return $this->render('WarlordsGameBundle:Player:result.html.twig', array('target_id' => $target_id,)
 					);
         			}

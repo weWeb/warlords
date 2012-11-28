@@ -138,6 +138,27 @@ form.player input[type="submit"] {
     	outline: medium none;
 }
 
+.search-result div{
+
+	display: inline-block;
+	padding: 1.5em;
+
+
+}
+
+.search-result button[type="button"] {
+	background-color: #1F1B18;
+    	border: 3px solid #EDA321;
+    	box-shadow: 2px 2px 2px #000000;
+    	color: #EDA321;
+    	font-family: 'Black Ops One',serif;
+    	font-size: 3em;
+    	margin-top: 30px;
+    	outline: medium none;
+
+}
+
+
 .players .player *[class^='userinfo'] {
 
 	background: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(31,27,24,1) 100%); /* FF3.6+ */

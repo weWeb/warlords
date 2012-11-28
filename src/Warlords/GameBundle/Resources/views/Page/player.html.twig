@@ -11,7 +11,7 @@
 		</div>
     	
         <div class="content">
-            {% if errors is not null %}
+            {% if errors %}
                 <ul class="errormsg">
                 {% for error in errors %}
                     <li>{{ error }} </li>
@@ -41,6 +41,24 @@
 {% endblock %}
 
 
+{% block javascripts %}
+	<script type="text/javascript"> 
+	
+
+	$("input[type='submit']").hover(
+
+                function(){$(this).stop(true).animate({
+                    backgroundColor: "#ff760f",
+  
+                }, 'linear' );},
+
+                function(){$(this).stop(true).animate({
+                    backgroundColor: "#1f1b18",
+
+                }, 'linear' );}
+        );
+	</script>  
+{% endblock %}
 
 
 
