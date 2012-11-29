@@ -5,7 +5,7 @@
 		<div class="header">
 			<div class="atk-title"><h1>Player Info</h1></div>
 		</div>
-		<div id="atk-dialog">
+		<div id="search-dialog">
 
 			<div class="rival-info">
 				<header>
@@ -24,13 +24,13 @@
 	    	</div>
 	    	
 	    	<div class="search-result">
-	    		<div><button type="button" id="btn-ally">Add Ally</button></div>
-	    		<div><button type="button" id="btn-attack">Attack</button></div>
+	    		<div><button type="button" id="btn-ally-{{ player.user.id }}">Add Ally</button></div>
+	    		<div><button type="button" id="btn-attack-{{ player.user.id }}">Attack</button></div>
 	    		
-			<div id="target-attack">
+			<div id="target-attack-{{ player.user.id }}">
 	    			{% render 'WarlordsGameBundle:Player:attack' with {'target_id' : player.user.id } %}
 		    	</div>
-		    	<div id="target-ally">
+		    	<div id="target-ally-{{ player.user.id }}">
 				{% render 'WarlordsGameBundle:Player:ally' with {'target_id' : player.user.id } %}
 			</div>
 		</div>
@@ -38,13 +38,14 @@
 		
 	    	{% block javascript %}
 		<script type="text/javascript"> 
+		    var d_width = $('target-attack-{{player.user.id}}').width();
 		    $( "[id^=target-]" ).dialog({
 		    autoOpen: false,
 		    height: 350,
-		    minWidth: 450,
-		    width: 'auto',
+		    minWidth: d_width,
+		    maxWidth: 700,
 		    modal: true,
-		    show: "explode",
+		    show: "puff",
 		    hide: "explode",
 		    open: function() {
 		    	$('.ui-widget-overlay').bind('click', function() {
@@ -53,14 +54,14 @@
 			}
 		});
 	 
-		$( "#btn-ally" ).click(function() {
-		    $( "#target-ally").dialog( "open" );
+		$( "#btn-ally-{{ player.user.id }}" ).click(function() {
+		    $( "#target-ally-{{ player.user.id }}").dialog( "open" );
 		    $("[class^=dialog-]").dialog( "close");
 		    return false;
 		});
-		$( "#btn-attack" ).click(function() {
-		    $( "#target-attack").dialog( "open" );
-		    $("[class^=dialog-]").dialog( "close");
+		$( "#btn-attack-{{ player.user.id }}" ).click(function() {
+		    $( "#target-attack-{{ player.user.id }}").dialog( "open" );
+	   	    $("[class^=dialog-]").dialog( "close");
 		    return false;
 		});
 

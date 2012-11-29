@@ -146,7 +146,7 @@ form.player input[type="submit"] {
 
 }
 
-.search-result button[type="button"] {
+div button[type="button"] {
 	background-color: #1F1B18;
     	border: 3px solid #EDA321;
     	box-shadow: 2px 2px 2px #000000;
@@ -200,13 +200,13 @@ form.player input[type="submit"] {
 	
 }
 
-#atk-dialog {
+*[id$='-dialog'] {
 	padding: 0px;
 	font-size: 14px;
 
 	
 }
-#atk-dialog div{
+*[id$='-dialog'] div{
 
 	display: inline-block;
 	
@@ -218,5 +218,7 @@ form.player input[type="submit"] {
 	padding: 10px;
 
 }
+
+
 
 

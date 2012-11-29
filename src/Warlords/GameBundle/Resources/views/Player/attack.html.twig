@@ -1,7 +1,7 @@
 {% block body %}
 	{% if app.user.username is defined %}
 		<div class="header">
-			<div class="atk-title"><h1>Player Info</h1></div>
+			<div class="atk-title"><h1>Battle Info</h1></div>
 		</div>
 		<div id="atk-dialog">
 	    	        <div class="user-info">
@@ -32,7 +32,7 @@
 			</div>
 	    		
 	    	</div>
-	    	<div class="search-result">
+	    	<div class="attack-form">
 
 			<form action="{{ path('WarlordsGameBundle_player_attack', {'target_id' : player.user.id }) }}" method="post" {{ form_enctype(form) }} class="player">
 	    			{{ form_widget(form) }}

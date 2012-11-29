@@ -14,9 +14,6 @@ class PlayerController extends Controller
    
 	public function searchAction($player)
 	{
-		
-
-
 
             	
 		return $this->render('WarlordsGameBundle:Player:search.html.twig',array(

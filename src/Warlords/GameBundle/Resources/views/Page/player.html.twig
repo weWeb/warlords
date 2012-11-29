@@ -25,16 +25,18 @@
                 <p><input type="submit" value="Search"></p>
             </form>
 
-            <section class="players" id="players">				
+	    <div class="players">
                 {% if players %}
                     <h3>Results</h3>
                     <p>Please choose a player from the list to continue</p>
+                <section class="players" id="players">				
                     {% include 'WarlordsGameBundle:Player:index.html.twig' with { 'players': players } %}
+            	</section>
                 {% else %}
                     <h3>Results</h3>
                     <p>No matching results.</p>
                 {% endif %}
-			</section>
+	    </div>
         </div>
     	<div class="footer"></div>  
     </div>
@@ -42,6 +44,7 @@
 
 
 {% block javascripts %}
+    	<script src="{{ asset('jPaginate.js') }}"></script>
 	<script type="text/javascript"> 
 	
 
@@ -57,6 +60,10 @@
 
                 }, 'linear' );}
         );
+        </script>
+        <script type="text/javascript">
+        
+        $("#players").jPaginate({items: 5});       
 	</script>  
 {% endblock %}
 

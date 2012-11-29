@@ -1,6 +1,6 @@
 {% for player in players %}
     <article class="player" id="player-{{ player.user.id }} ">
-        <div class="userinfo-{{ loop.index }}">
+        <div class="userinfo-{{ player.user.id }}">
 		<header class="s-header">
 		    <p><span>Player: {{ player.user.username }}</span></p>
 		</header>
@@ -11,34 +11,36 @@
 
 		</ul>
         </div>
-    </article>
-    <div class="dialog-{{ loop.index }}">
-    {% render 'WarlordsGameBundle:Player:search' with {'player' : player } %}
-    </div>
+
+    	<div class="dialog-{{ player.user.id }}">
+    	{% render 'WarlordsGameBundle:Player:search' with {'player' : player, 'index' : player.user.id} %}
+    	</div>
+
     {% block javascript %}
 	<script type="text/javascript"> 
-            $( ".dialog-{{ loop.index }}" ).dialog({
+            $( ".dialog-{{ player.user.id }}" ).dialog({
             autoOpen: false,
             height: 350,
 	    minWidth: 450,
-	    width: 'auto',
+	    maxWidth: 700,
             modal: true,
             show: "puff",
             hide: "explode",
             open: function() {
             	$('.ui-widget-overlay').bind('click', function() {
-                		$(".dialog-{{ loop.index }}").dialog('close');
+                		$(".dialog-{{ player.user.id }}").dialog('close');
             		})
         	}
         });
  
-        $( ".userinfo-{{ loop.index }}" ).click(function() {
-            $( ".dialog-{{ loop.index }}").dialog( "open" );
+        $( ".userinfo-{{ player.user.id }}" ).click(function() {
+            $( ".dialog-{{ player.user.id }}").dialog( "open" );
             return false;
         });
         
 
 	</script>
+    </article>
 	{% endblock %}
 {% endfor %}
 
