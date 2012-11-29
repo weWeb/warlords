@@ -60,7 +60,7 @@ class PlayerController extends Controller
 	public function allyAction($target_id)
 	{
 	
-		print("What the heck");
+		/*print("What the heck");
 		$user = $this->getUser();
         	$em = $this->getDoctrine()->getEntityManager();
 		$player = $em->getRepository('WarlordsGameBundle:User')
@@ -78,8 +78,13 @@ class PlayerController extends Controller
 		
 			print($play->getId());
 		}
+		*/
+		$em = $this->getDoctrine()->getEntityManager();
+		$player = $em->getRepository("WarlordsGameBundle:PlayerStats")->findOneByUser($target_id);
+		return $this->render('WarlordsGameBundle:Player:ally.html.twig', array(
+			'player' => $player,)
 		
-		return $this->render('WarlordsGameBundle:Page:index.html.twig', array('errors'=> $errors, 'players' => $players));
+		);
 		
 		
 		

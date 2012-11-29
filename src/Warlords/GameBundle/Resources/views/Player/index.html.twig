@@ -20,7 +20,8 @@
             $( ".dialog-{{ loop.index }}" ).dialog({
             autoOpen: false,
             height: 350,
-            width: 450,
+	    minWidth: 450,
+	    width: 'auto',
             modal: true,
             show: "puff",
             hide: "explode",

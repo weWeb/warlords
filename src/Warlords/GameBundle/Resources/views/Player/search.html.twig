@@ -22,15 +22,55 @@
 			</div>
 	    		
 	    	</div>
+	    	
 	    	<div class="search-result">
-	    		<div><button type="button"  onclick="window.location='{{ path('WarlordsGameBundle_player_add_ally', {'target_id' : player.user.id }) }}';" value="Redirect">Add Ally</button></div>
-	    		<div><button type="button"  onclick="window.location='{{ path('WarlordsGameBundle_player_attack', {'target_id' : player.user.id }) }}';" value="Redirect">Attack</button></div>
-			
+	    		<div><button type="button" id="btn-ally">Add Ally</button></div>
+	    		<div><button type="button" id="btn-attack">Attack</button></div>
+	    		
+			<div id="target-attack">
+	    			{% render 'WarlordsGameBundle:Player:attack' with {'target_id' : player.user.id } %}
+		    	</div>
+		    	<div id="target-ally">
+				{% render 'WarlordsGameBundle:Player:ally' with {'target_id' : player.user.id } %}
+			</div>
 		</div>
+		
+		
+	    	{% block javascript %}
+		<script type="text/javascript"> 
+		    $( "[id^=target-]" ).dialog({
+		    autoOpen: false,
+		    height: 350,
+		    minWidth: 450,
+		    width: 'auto',
+		    modal: true,
+		    show: "explode",
+		    hide: "explode",
+		    open: function() {
+		    	$('.ui-widget-overlay').bind('click', function() {
+		        		$("[id^=target-]").dialog('close');
+		    		})
+			}
+		});
+	 
+		$( "#btn-ally" ).click(function() {
+		    $( "#target-ally").dialog( "open" );
+		    $("[class^=dialog-]").dialog( "close");
+		    return false;
+		});
+		$( "#btn-attack" ).click(function() {
+		    $( "#target-attack").dialog( "open" );
+		    $("[class^=dialog-]").dialog( "close");
+		    return false;
+		});
+
+		</script>
+		{% endblock %}	        
 		
 	{% else %}
 		<div><p>Please login to access this page</p></div>
 	{% endif %}
+	
 {% endblock %}
 
 {% block javascripts %}
