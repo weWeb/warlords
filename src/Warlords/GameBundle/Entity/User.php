@@ -24,10 +24,16 @@ class User extends BaseUser implements ParticipantInterface
      */
     private $isActive;
     
- 
+
     private $alliesWithMe;
+    
 
     private $myAllies;
+    
+    /**
+     * @var \DateTime $lastAccess
+     */
+    private $lastAccess;
 
     /**
      * Set isActive
@@ -169,5 +175,30 @@ class User extends BaseUser implements ParticipantInterface
     {
         return $this->stats;
     }
+    
+    /**
+     * Set the last access time.
+     *
+     * @return \DateTime
+     */
+    public function setLastAccess(\DateTime $time)
+    {
+        $this->lastAccess = $time;
+
+        return $this;
+    }
+    
+    
+    /**
+     * Get the last access time.
+     *
+     * @return \DateTime
+     */
+    public function getLastAccess()
+    {
+        return $this->lastAccess;
+    }
+    
+    
 }
 

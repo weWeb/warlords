@@ -2,7 +2,12 @@
     <article class="player" id="player-{{ player.user.id }} ">
         <div class="userinfo-{{ player.user.id }}">
 		<header class="s-header">
-		    <p><span>Player: {{ player.user.username }}</span></p>
+		   <div><p><span>Player: {{ player.user.username }}</span></p></div>
+			{% if player.user.isActive %}
+				<div id="status"><p id="online-status">Status</p><p id="status-image"><img src="{{ asset('images/online.png') }}" /></p></div>
+			{% else %}
+				<div id="status"><p id="online-status">Status</p><p id="status-image"><img src="{{ asset('images/offline.png') }}" /></p></div>
+			{% endif %}
 		</header>
 		<ul id="info">
 			<li>Level: {{ player.level }}</li>
@@ -13,7 +18,7 @@
         </div>
 
     	<div class="dialog-{{ player.user.id }}">
-    	{% render 'WarlordsGameBundle:Player:search' with {'player' : player, 'index' : player.user.id} %}
+    	{% render 'WarlordsGameBundle:Player:search' with {'player' : player} %}
     	</div>
 
     {% block javascript %}

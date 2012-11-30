@@ -5,6 +5,7 @@ namespace Warlords\GameBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Warlords\GameBundle\Entity\PlayerStats;
 use Warlords\GameBundle\Form\SelectPlayerType;
+use DateTime;
 
 /**
  * Search Player controller.
@@ -13,11 +14,15 @@ class PlayerController extends Controller
 {
    
 	public function searchAction($player)
-	{
+	{	
+		
+		$status = null;
+
 
             	
 		return $this->render('WarlordsGameBundle:Player:search.html.twig',array(
-			'player' => $player,)
+			'player' => $player,
+			'status' => $status, )
 		);
 
 	}

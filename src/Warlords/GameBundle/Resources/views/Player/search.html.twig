@@ -9,7 +9,13 @@
 
 			<div class="rival-info">
 				<header>
+					{% if player.user.isActive %}
+						<p>online</p>
+					{% else %}
+						<p>offline</p>
+					{% endif %}
 			    		<p>Player: {{ player.user.username }}</p>
+			    	
 				</header>
 				<ul id="info">
 					<li>Level: {{ player.level }}</li>
@@ -38,12 +44,11 @@
 		
 	    	{% block javascript %}
 		<script type="text/javascript"> 
-		    var d_width = $('target-attack-{{player.user.id}}').width();
+
 		    $( "[id^=target-]" ).dialog({
 		    autoOpen: false,
 		    height: 350,
-		    minWidth: d_width,
-		    maxWidth: 700,
+		    width: "auto",
 		    modal: true,
 		    show: "puff",
 		    hide: "explode",

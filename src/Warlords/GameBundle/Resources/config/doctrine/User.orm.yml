@@ -32,6 +32,9 @@ Warlords\GameBundle\Entity\User:
             type: boolean
         isActive:
             type: boolean
+        lastAccess:
+            type: datetime
+            nullable: true
         lastLogin:
             type: datetime
             nullable: true        

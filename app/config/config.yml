@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }  # contains sensitive configuration; should not upload to git
     - { resource: globals.yml }     # contains global configuration used by warlords
     - { resource: security.yml }    # contains security parameters
+    - { resource: @WarlordsGameBundle/Resources/config/services.yml }
 
 
 framework:
