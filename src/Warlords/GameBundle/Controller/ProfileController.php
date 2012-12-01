@@ -235,7 +235,7 @@ class ProfileController extends BaseController{
         $em->flush();
         
         return $this->render('WarlordsGameBundle:Page:attackSummary.html.twig', array(
-                                'info' => "Attack is successful !",
+                                'info' => $info,
                                 'gold' => $gold_gained,
                                 'land' => $land_gained,
                                 'soldiers' => $soldiers_lost,

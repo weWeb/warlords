@@ -40,3 +40,48 @@ ul#attack_stats {
 .information {
     font-size: 2em;
 }
+
+
+form.comment { 
+	font-size: 14px; 
+	color: #cbbfbc;
+	font-family: 'Arial','Helvetica'; 
+	margin-top: 20px; 
+}
+
+form.comment div { 
+	clear: left; 
+	margin-bottom: 10px; 
+}
+form.comment label { 
+	float: left; 
+	margin-right: 30px; 
+	text-align: right; 
+	width: 100px; 
+	font-weight: bold; 
+	vertical-align: top; 
+	padding-top: 7px; 
+}
+
+form.comment input[type="number"] {
+	background-color: #1B1511;
+   	border: 1px solid #7D441E;
+    	color: #E2D7C5;
+    	font-family: 'Arial','Helvetica';
+    	font-size: 1.05em;
+    	margin: 5px 0 10px;
+    	padding: 2px;
+    	width: 200px;
+}
+
+form.comment input[type="submit"] { 
+	background-color: #1F1B18;
+    	border: 3px solid #EDA321;
+    	box-shadow: 2px 2px 2px #000000;
+    	color: #EDA321;
+    	font-family: 'Black Ops One',serif;
+    	font-size: 0.8em;
+    	margin-top: 30px;
+    	outline: medium none;
+    	min-width: 5em;
+}
