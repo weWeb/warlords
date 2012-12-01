@@ -1,0 +1,93 @@
+{% for player in players %}
+    <article class="player" id="player-{{ player.user.id }} ">
+        <div class="userinfo-{{ player.user.id }}">
+		<header class="s-header">
+		   <div><p><span>Player: {{ player.user.username }}</span></p></div>
+			{% if player.user.isActive %}
+				<div class="status"><p id="online-status">Status</p><p id="status-image"><img src="{{ asset('images/online.png') }}" /></p></div>
+			{% else %}
+				<div class="status"><p id="online-status">Status</p><p id="status-image"><img src="{{ asset('images/offline.png') }}" /></p></div>
+			{% endif %}
+		</header>
+		<ul id="info">
+			<li>Level: {{ player.level }}</li>
+			<li>Fame: {{ player.Fame }}</li>
+			<li>Gold: {{ player.gold}}</li>
+
+		</ul>
+        </div>
+
+    	<div class="dialog-{{ player.user.id }}">
+    	{% render 'WarlordsGameBundle:Player:search' with {'player' : player} %}
+    	</div>
+
+    {% block javascript %}
+	<script type="text/javascript"> 
+            $( ".dialog-{{ player.user.id }}" ).dialog({
+            autoOpen: false,
+            height: 350,
+<<<<<<< HEAD
+	    	minWidth: 450,
+	    	maxWidth: 700,
+=======
+	    minWidth: 450,
+	    maxWidth: 700,
+>>>>>>> 68f79d1bf56e944a7f343c30d07bc0224bb699cd
+            modal: true,
+            show: "puff",
+            hide: "explode",
+            open: function() {
+            	$('.ui-widget-overlay').bind('click', function() {
+                		$(".dialog-{{ player.user.id }}").dialog('close');
+            		})
+        	}
+        });
+ 
+        $( ".userinfo-{{ player.user.id }}" ).click(function() {
+            $( ".dialog-{{ player.user.id }}").dialog( "open" );
+            return false;
+        });
+        
+
+	</script>
+    </article>
+	{% endblock %}
+{% endfor %}
+
+
+
+{% block javascripts %}
+	<script type="text/javascript"> 
+	
+
+  	{# $("[class^=userinfo]").hover(
+    	 	function() { $(this).stop().fadeTo("slow", 1);},
+         	function() { $(this).stop().fadeTo("slow", 0.6);});
+
+	#}
+	
+
+	$("[class^=userinfo]").hover(
+
+                function(){$(this).stop(true).animate({
+                    backgroundColor: "#ff760f",
+                    borderRadius: 5,
+                    WebkitBorderRadius: 5, 
+    		    MozBorderRadius: 5 ,
+                    color: "#fff",
+                    height: 100,
+                }, 'linear' );},
+
+                function(){$(this).stop(true).animate({
+                    backgroundColor: "#1f1b18",
+                    borderRadius: 5,
+                    WebkitBorderRadius: 5, 
+    		    MozBorderRadius: 5 ,
+                    color: "#E2D7C5",
+                    height: 90,
+                }, 'linear' );}
+        );
+
+	</script>  
+{% endblock %}
+

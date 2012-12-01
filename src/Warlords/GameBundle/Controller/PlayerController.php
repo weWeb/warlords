@@ -29,7 +29,7 @@ class PlayerController extends Controller
 	public function attackAction($target_id)
 	{
 		
-
+		
         	$em = $this->getDoctrine()->getEntityManager();
 		$player = $em->getRepository("WarlordsGameBundle:PlayerStats")->findOneByUser($target_id);
 		$form = $this->createForm(new SelectPlayerType());
