@@ -1,0 +1,7 @@
+.events {
+	font-size: 2em;
+}
+
+.events > a {
+    font-size: 1em;
+}

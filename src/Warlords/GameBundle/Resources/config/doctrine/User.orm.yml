@@ -80,6 +80,11 @@ Warlords\GameBundle\Entity\User:
                 inverseJoinColumns:
                     ally_user_id:
                         referencedColumnName: id
+    manyToOne:
+        guild:
+            targetEntity: Guild
+            nullable: true
+            inversedBy: guild
      #   groups:
         #    targetEntity: Group
     lifecycleCallbacks: {  }

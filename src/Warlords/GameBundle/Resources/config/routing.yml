@@ -16,8 +16,6 @@ WarlordsGameBundle_player_attack:
     requirements:
         _method: GET|POST
         
-  
-        
 WarlordsGameBundle_player_add_ally:
     pattern: /playerSearch/ally/{target_id}
     defaults: { _controller: WarlordsGameBundle:Player:ally }

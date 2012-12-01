@@ -37,6 +37,7 @@
 			<form action="{{ path('WarlordsGameBundle_player_attack', {'target_id' : player.user.id }) }}" method="post" {{ form_enctype(form) }} class="player">
 	    			{{ form_widget(form) }}
 	    			{{ form_rest(form) }}
+	    			<p class="prompt">Ready for Battle?</p>
 	    			<p><input type="submit" value="GO!"></p>
 	   		</form>
 

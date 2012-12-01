@@ -26,7 +26,6 @@ class User extends BaseUser implements ParticipantInterface
     
 
     private $alliesWithMe;
-    
 
     private $myAllies;
     
@@ -35,6 +34,14 @@ class User extends BaseUser implements ParticipantInterface
      */
     private $lastAccess;
 
+
+    
+
+    /**
+     * @var \Warlords\GameBundle\Entity\Guild
+     */
+    private $guild;
+    
     /**
      * Set isActive
      *
@@ -177,6 +184,28 @@ class User extends BaseUser implements ParticipantInterface
     }
     
     /**
+    * Set guild
+    *
+    * @param \Warlords\GameBundle\Entity\Guild $guild
+    * @return User
+    */
+    public function setGuild(\Warlords\GameBundle\Entity\Guild $guild = null)
+    {
+        $this->guild = $guild;
+    
+        return $this;
+    }
+
+    /**
+    * Get guild
+    *
+    * @return \Warlords\GameBundle\Entity\Guild 
+    */
+    public function getGuild()
+    {
+        return $this->guild;
+    }
+    
      * Set the last access time.
      *
      * @return \DateTime
@@ -197,8 +226,6 @@ class User extends BaseUser implements ParticipantInterface
     public function getLastAccess()
     {
         return $this->lastAccess;
-    }
-    
     
 }
 

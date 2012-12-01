@@ -2,7 +2,7 @@
 {% extends 'WarlordsGameBundle::layout.html.twig' %}
 
 {% block stylesheets %}
-    <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" />
+    {{ parent() }}
     <link href="{{ asset('css/profile.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
 

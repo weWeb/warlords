@@ -4,9 +4,9 @@
 		<header class="s-header">
 		   <div><p><span>Player: {{ player.user.username }}</span></p></div>
 			{% if player.user.isActive %}
-				<div id="status"><p id="online-status">Status</p><p id="status-image"><img src="{{ asset('images/online.png') }}" /></p></div>
+				<div class="status"><p id="online-status">Status</p><p id="status-image"><img src="{{ asset('images/online.png') }}" /></p></div>
 			{% else %}
-				<div id="status"><p id="online-status">Status</p><p id="status-image"><img src="{{ asset('images/offline.png') }}" /></p></div>
+				<div class="status"><p id="online-status">Status</p><p id="status-image"><img src="{{ asset('images/offline.png') }}" /></p></div>
 			{% endif %}
 		</header>
 		<ul id="info">

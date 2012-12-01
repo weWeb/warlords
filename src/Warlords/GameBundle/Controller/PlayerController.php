@@ -62,7 +62,7 @@ class PlayerController extends Controller
 	public function allyAction($target_id)
 	{
 	
-		/*print("What the heck");
+		/*
 		$user = $this->getUser();
         	$em = $this->getDoctrine()->getEntityManager();
 		$player = $em->getRepository('WarlordsGameBundle:User')

@@ -25,7 +25,7 @@
                 <p><input type="submit" value="Search"></p>
             </form>
 
-	    <div class="players">
+	    	<div class="players">
                 {% if players %}
                     <h3>Results</h3>
                     <p>Please choose a player from the list to continue</p>
@@ -36,7 +36,7 @@
                     <h3>Results</h3>
                     <p>No matching results.</p>
                 {% endif %}
-	    </div>
+	    	</div>
         </div>
     	<div class="footer"></div>  
     </div>
@@ -63,7 +63,12 @@
         </script>
         <script type="text/javascript">
         
-        $("#players").jPaginate({items: 5});       
+        $("#players").jPaginate({
+        	items: 5,
+        	position: "both",
+        
+        
+        });       
 	</script>  
 {% endblock %}
 

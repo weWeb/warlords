@@ -5,7 +5,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('css/player.css') }}" type="text/css" rel="stylesheet" />
-
+    <link href="{{ asset('css/events.css') }}" type="text/css" rel="stylesheet" />
 
     <link href="{{ asset('css/jquery-ui-1.9.1.custom.css') }}" type="text/css" rel="stylesheet" />
     <script src="{{ asset('js/jquery-ui-1.9.1.custom.js') }}"></script>
@@ -21,7 +21,7 @@
 			<div class="title"><h1>EVENTS</h1></div>
 		</div>
 		<div class="content">	
-			<p>This is where the events update can occur!!!</p>
+			{% render "WarlordsGameBundle:Page:events" with {'embedded': true} %}
 		</div>
 		<div class="footer"></div>
 	</div>

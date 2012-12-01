@@ -4,16 +4,17 @@
 	{% if app.user.username is defined %}
 		<div class="header">
 			<div class="atk-title"><h1>Player Info</h1></div>
+						{% if player.user.isActive %}
+				<div class="status"><p id="online-status">Status</p><p id="status-image"><img src="{{ asset('images/online24.png') }}" /></p></div>
+			{% else %}
+				<div class="status"><p id="online-status">Status</p><p id="status-image"><img src="{{ asset('images/offline24.png') }}" /></p></div>
+			{% endif %}
 		</div>
 		<div id="search-dialog">
 
 			<div class="rival-info">
 				<header>
-					{% if player.user.isActive %}
-						<p>online</p>
-					{% else %}
-						<p>offline</p>
-					{% endif %}
+
 			    		<p>Player: {{ player.user.username }}</p>
 			    	
 				</header>
@@ -45,16 +46,16 @@
 	    	{% block javascript %}
 		<script type="text/javascript"> 
 
-		    $( "[id^=target-]" ).dialog({
+		    $( "#target-ally-{{ player.user.id }}" ).dialog({
 		    autoOpen: false,
 		    height: 350,
-		    width: "auto",
+		    width: 450,
 		    modal: true,
 		    show: "puff",
 		    hide: "explode",
 		    open: function() {
 		    	$('.ui-widget-overlay').bind('click', function() {
-		        		$("[id^=target-]").dialog('close');
+		        		$("#target-ally-{{ player.user.id }}").dialog('close');
 		    		})
 			}
 		});
@@ -63,6 +64,21 @@
 		    $( "#target-ally-{{ player.user.id }}").dialog( "open" );
 		    $("[class^=dialog-]").dialog( "close");
 		    return false;
+		});
+		
+		
+		$( "#target-attack-{{ player.user.id }}" ).dialog({
+		    autoOpen: false,
+		    height: 350,
+		    width: "auto",
+		    modal: true,
+		    show: "puff",
+		    hide: "explode",
+		    open: function() {
+		    	$('.ui-widget-overlay').bind('click', function() {
+		        		$("#target-attack-{{ player.user.id }}").dialog('close');
+		    		})
+			}
 		});
 		$( "#btn-attack-{{ player.user.id }}" ).click(function() {
 		    $( "#target-attack-{{ player.user.id }}").dialog( "open" );

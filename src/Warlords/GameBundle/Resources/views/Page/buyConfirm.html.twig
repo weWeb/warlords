@@ -1,7 +1,7 @@
 {% extends 'WarlordsGameBundle::layout.html.twig' %}
 
 {% block stylesheets %}
-    <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" />
+    {{ parent() }}
     <link href="{{ asset('css/profile.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
 
@@ -35,7 +35,7 @@
                 for {{ gold }} gold.<br />
                 </div>
             {% endif %}
-            <a href="../profile">Return to profile</a><br/>    
+            <p><a href="{{ path('WarlordsGameBundle_profile') }}">Return to profile</a></p>
         </div>
 		<div class="footer"></div>
 	</div>
