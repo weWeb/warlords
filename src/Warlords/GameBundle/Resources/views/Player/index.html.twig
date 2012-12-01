@@ -1,8 +1,13 @@
 {% for player in players %}
     <article class="player" id="player-{{ player.user.id }} ">
-        <div class="userinfo-{{ loop.index }}">
+        <div class="userinfo-{{ player.user.id }}">
 		<header class="s-header">
-		    <p><span>Player: {{ player.user.username }}</span></p>
+		   <div><p><span>Player: {{ player.user.username }}</span></p></div>
+			{% if player.user.isActive %}
+				<div class="status"><p id="online-status">Status</p><p id="status-image"><img src="{{ asset('images/online.png') }}" /></p></div>
+			{% else %}
+				<div class="status"><p id="online-status">Status</p><p id="status-image"><img src="{{ asset('images/offline.png') }}" /></p></div>
+			{% endif %}
 		</header>
 		<ul id="info">
 			<li>Level: {{ player.level }}</li>
@@ -11,33 +16,36 @@
 
 		</ul>
         </div>
-    </article>
-    <div class="dialog-{{ loop.index }}">
-    {% render 'WarlordsGameBundle:Player:attack' with {'player' : player } %}
-    </div>
+
+    	<div class="dialog-{{ player.user.id }}">
+    	{% render 'WarlordsGameBundle:Player:search' with {'player' : player} %}
+    	</div>
+
     {% block javascript %}
 	<script type="text/javascript"> 
-            $( ".dialog-{{ loop.index }}" ).dialog({
+            $( ".dialog-{{ player.user.id }}" ).dialog({
             autoOpen: false,
             height: 350,
-            width: 450,
+	    	minWidth: 450,
+	    	maxWidth: 700,
             modal: true,
             show: "puff",
             hide: "explode",
             open: function() {
             	$('.ui-widget-overlay').bind('click', function() {
-                		$(".dialog-{{ loop.index }}").dialog('close');
+                		$(".dialog-{{ player.user.id }}").dialog('close');
             		})
         	}
         });
  
-        $( ".userinfo-{{ loop.index }}" ).click(function() {
-            $( ".dialog-{{ loop.index }}").dialog( "open" );
+        $( ".userinfo-{{ player.user.id }}" ).click(function() {
+            $( ".dialog-{{ player.user.id }}").dialog( "open" );
             return false;
         });
         
 
 	</script>
+    </article>
 	{% endblock %}
 {% endfor %}
 

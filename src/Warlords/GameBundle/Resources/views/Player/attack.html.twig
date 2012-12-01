@@ -1,12 +1,10 @@
-
-
 {% block body %}
 	{% if app.user.username is defined %}
 		<div class="header">
-			<div class="atk-title"><h1>Player Info</h1></div>
+			<div class="atk-title"><h1>Battle Info</h1></div>
 		</div>
 		<div id="atk-dialog">
-	    	        <div class="userinfo">
+	    	        <div class="user-info">
 				<header>
 			    		<p>You: {{ app.user.username }}</p>
 				</header>
@@ -19,7 +17,7 @@
 
 			</div>
 			<div id="vs"><p>VS</p></div>
-			<div class="rivalinfo">
+			<div class="rival-info">
 				<header>
 			    		<p>Player: {{ player.user.username }}</p>
 				</header>
@@ -34,18 +32,39 @@
 			</div>
 	    		
 	    	</div>
-	    	<div class="content">
-	    	<button type="button"  onclick="window.open('{{ path('WarlordsGameBundle_player_add_ally', {'target_id' : player.user.id }) }}')">Add Friend</button>
+	    	<div class="attack-form">
+
 			<form action="{{ path('WarlordsGameBundle_player_attack', {'target_id' : player.user.id }) }}" method="post" {{ form_enctype(form) }} class="player">
 	    			{{ form_widget(form) }}
 	    			{{ form_rest(form) }}
-	    			<p><input type="submit" value="Attack"></p>
+	    			<p class="prompt">Ready for Battle?</p>
+	    			<p><input type="submit" value="GO!"></p>
 	   		</form>
 
 		</div>
 	{% else %}
 		<div><p>Please login to access this page</p></div>
 	{% endif %}
+{% endblock %}
+
+
+{% block javascripts %}
+	<script type="text/javascript"> 
+
+
+	$("input[type='submit']").hover(
+
+                function(){$(this).stop(true).animate({
+                    backgroundColor: "#ff760f",
+  
+                }, 'linear' );},
+
+                function(){$(this).stop(true).animate({
+                    backgroundColor: "#1f1b18",
+
+                }, 'linear' );}
+        );
+	</script>  
 {% endblock %}
 
 

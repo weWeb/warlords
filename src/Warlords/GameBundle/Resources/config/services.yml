@@ -38,3 +38,9 @@ services:
         class: Warlords\GameBundle\Form\Type\ChangePasswordFormType
         tags:
             - { name: form.type, alias: warlords_change_password }
+            
+    activity_listener:
+        class: Warlords\GameBundle\Listener\Activity
+        arguments: [@security.context, @doctrine]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }

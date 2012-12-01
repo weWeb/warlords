@@ -5,6 +5,7 @@ namespace Warlords\GameBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Warlords\GameBundle\Entity\PlayerStats;
 use Warlords\GameBundle\Form\SelectPlayerType;
+use DateTime;
 
 /**
  * Search Player controller.
@@ -12,13 +13,25 @@ use Warlords\GameBundle\Form\SelectPlayerType;
 class PlayerController extends Controller
 {
    
+	public function searchAction($player)
+	{	
+		
+		$status = null;
 
-	public function attackAction($player)
+
+            	
+		return $this->render('WarlordsGameBundle:Player:search.html.twig',array(
+			'player' => $player,
+			'status' => $status, )
+		);
+
+	}
+	public function attackAction($target_id)
 	{
 		
 
         	$em = $this->getDoctrine()->getEntityManager();
-
+		$player = $em->getRepository("WarlordsGameBundle:PlayerStats")->findOneByUser($target_id);
 		$form = $this->createForm(new SelectPlayerType());
 
 		$request = $this->getRequest();
@@ -27,7 +40,7 @@ class PlayerController extends Controller
 
         			if ($form->isValid()) {
             				
-          				$target_id = $player->getUser()->getId();  				
+
            				return $this->render('WarlordsGameBundle:Player:result.html.twig', array('target_id' => $target_id,)
 					);
         			}
@@ -49,7 +62,7 @@ class PlayerController extends Controller
 	public function allyAction($target_id)
 	{
 	
-		print("What the heck");
+		/*
 		$user = $this->getUser();
         	$em = $this->getDoctrine()->getEntityManager();
 		$player = $em->getRepository('WarlordsGameBundle:User')
@@ -67,8 +80,13 @@ class PlayerController extends Controller
 		
 			print($play->getId());
 		}
+		*/
+		$em = $this->getDoctrine()->getEntityManager();
+		$player = $em->getRepository("WarlordsGameBundle:PlayerStats")->findOneByUser($target_id);
+		return $this->render('WarlordsGameBundle:Player:ally.html.twig', array(
+			'player' => $player,)
 		
-		return $this->render('WarlordsGameBundle:Page:index.html.twig', array('errors'=> $errors, 'players' => $players));
+		);
 		
 		
 		

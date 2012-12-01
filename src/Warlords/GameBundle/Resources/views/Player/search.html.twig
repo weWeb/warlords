@@ -1,0 +1,132 @@
+
+
+{% block body %}
+	{% if app.user.username is defined %}
+		<div class="header">
+			<div class="atk-title"><h1>Player Info</h1></div>
+						{% if player.user.isActive %}
+				<div class="status"><p id="online-status">Status</p><p id="status-image"><img src="{{ asset('images/online24.png') }}" /></p></div>
+			{% else %}
+				<div class="status"><p id="online-status">Status</p><p id="status-image"><img src="{{ asset('images/offline24.png') }}" /></p></div>
+			{% endif %}
+		</div>
+		<div id="search-dialog">
+
+			<div class="rival-info">
+				<header>
+
+			    		<p>Player: {{ player.user.username }}</p>
+			    	
+				</header>
+				<ul id="info">
+					<li>Level: {{ player.level }}</li>
+					<li>Fame: {{ player.Fame }}</li>
+					<li>Gold: {{ player.gold}}</li>
+
+				</ul>
+
+	
+			</div>
+	    		
+	    	</div>
+	    	
+	    	<div class="search-result">
+	    		<div><button type="button" id="btn-ally-{{ player.user.id }}">Add Ally</button></div>
+	    		<div><button type="button" id="btn-attack-{{ player.user.id }}">Attack</button></div>
+	    		
+			<div id="target-attack-{{ player.user.id }}">
+	    			{% render 'WarlordsGameBundle:Player:attack' with {'target_id' : player.user.id } %}
+		    	</div>
+		    	<div id="target-ally-{{ player.user.id }}">
+				{% render 'WarlordsGameBundle:Player:ally' with {'target_id' : player.user.id } %}
+			</div>
+		</div>
+		
+		
+	    	{% block javascript %}
+		<script type="text/javascript"> 
+
+		    $( "#target-ally-{{ player.user.id }}" ).dialog({
+		    autoOpen: false,
+		    height: 350,
+		    width: 450,
+		    modal: true,
+		    show: "puff",
+		    hide: "explode",
+		    open: function() {
+		    	$('.ui-widget-overlay').bind('click', function() {
+		        		$("#target-ally-{{ player.user.id }}").dialog('close');
+		    		})
+			}
+		});
+	 
+		$( "#btn-ally-{{ player.user.id }}" ).click(function() {
+		    $( "#target-ally-{{ player.user.id }}").dialog( "open" );
+		    $("[class^=dialog-]").dialog( "close");
+		    return false;
+		});
+		
+		
+		$( "#target-attack-{{ player.user.id }}" ).dialog({
+		    autoOpen: false,
+		    height: 350,
+		    width: "auto",
+		    modal: true,
+		    show: "puff",
+		    hide: "explode",
+		    open: function() {
+		    	$('.ui-widget-overlay').bind('click', function() {
+		        		$("#target-attack-{{ player.user.id }}").dialog('close');
+		    		})
+			}
+		});
+		$( "#btn-attack-{{ player.user.id }}" ).click(function() {
+		    $( "#target-attack-{{ player.user.id }}").dialog( "open" );
+	   	    $("[class^=dialog-]").dialog( "close");
+		    return false;
+		});
+
+		</script>
+		{% endblock %}	        
+		
+	{% else %}
+		<div><p>Please login to access this page</p></div>
+	{% endif %}
+	
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript"> 
+	
+
+	$("button").hover(
+
+                function(){$(this).stop(true).animate({
+                    backgroundColor: "#ff760f",
+  
+                }, 'linear' );},
+
+                function(){$(this).stop(true).animate({
+                    backgroundColor: "#1f1b18",
+
+                }, 'linear' );}
+        );
+
+	$("input[type='submit']").hover(
+
+                function(){$(this).stop(true).animate({
+                    backgroundColor: "#ff760f",
+  
+                }, 'linear' );},
+
+                function(){$(this).stop(true).animate({
+                    backgroundColor: "#1f1b18",
+
+                }, 'linear' );}
+        );
+	</script>  
+{% endblock %}
+
+
+
+

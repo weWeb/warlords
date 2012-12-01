@@ -12,7 +12,7 @@ WarlordsGameBundle_player:
   
 WarlordsGameBundle_player_attack:
     pattern: /playerSearch/attack/{target_id}
-    defaults: { _controller: WarlordsGameBundle:Profile:attack }
+    defaults: { _controller: WarlordsGameBundle:Player:attack }
     requirements:
         _method: GET|POST
         

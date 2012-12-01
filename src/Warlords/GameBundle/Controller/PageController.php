@@ -8,6 +8,7 @@ use Warlords\GameBundle\Entity\PlayerStats;
 use Warlords\GameBundle\Form\SearchType;
 use Warlords\GameBundle\Entity\User;
 use Warlords\GameBundle\Form\RegistrationFormType;
+use DateTime;
 
 class PageController extends Controller
 {
@@ -86,7 +87,31 @@ class PageController extends Controller
 
             				if (!empty($players)){
             					foreach ($players as $key=>$player){
-            						if ($player->getId() == $user->getId()){
+
+
+							$lastAccess = $player->getUser()->getLastAccess();
+
+
+							// Update online status
+							if ($lastAccess){
+								$now = new DateTime();
+								$diff = ($now->format('U') - $lastAccess->format('U'));
+
+								if ($diff <= 300){
+			
+									$player->getUser()->setIsActive(true);
+								
+								}else {
+									$player->getUser()->setIsActive(false);
+								}
+
+								
+							}else{
+								$player->getUser()->setIsActive(false);
+							}
+							$em->persist($player);
+							$em->flush();
+            						if ($player->getUser()->getId() == $user->getId()){
             							unset($players[$key]);
             						}
             					}

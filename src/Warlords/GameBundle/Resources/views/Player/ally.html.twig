@@ -1,0 +1,38 @@
+{% block body %}
+	{% if app.user.username is defined %}
+		<div class="header">
+			<div class="atk-title"><h1>Ally Info</h1></div>
+		</div>
+		<div id="ally-dialog">
+
+			<div class="rival-info">
+				<header>
+			    		<p>Player: {{ player.user.username }}</p>
+				</header>
+				<ul id="info">
+					<li>Level: {{ player.level }}</li>
+					<li>Fame: {{ player.Fame }}</li>
+					<li>Gold: {{ player.gold}}</li>
+
+				</ul>
+
+	
+			</div>
+	    		
+	    	</div>
+		<div>
+			<button type="button">Send Ally Request</button>
+		
+		</div>
+		
+
+		
+	{% else %}
+		<div><p>Please login to access this page</p></div>
+	{% endif %}
+{% endblock %}
+
+
+
+
+
