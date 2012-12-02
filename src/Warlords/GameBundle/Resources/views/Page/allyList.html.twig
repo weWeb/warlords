@@ -1,0 +1,38 @@
+{# src/Warlords/GameBundle/Resources/views/Page/allyList.html.twig #}
+{% extends 'WarlordsGameBundle::layout.html.twig' %}
+
+
+{% block body %}
+    <div class="mainitem">
+		<div class="header">
+			<div class="title"><h1>Ally List</h1></div>
+		</div>
+		<div class="content">
+			<table class="ally-list">
+				<tr class="ally-list-header">
+				    <td>Ally</td>
+				    <td class ="ally-list-header-number">Level</td>
+				    <td class ="ally-list-header-number">Fame</td>
+				    <td>Relationship</td>
+				</tr>
+				{% for ally in allies %}
+				    <tr>
+					<td class="username">{{ ally.username }}</td>
+					<td class="level">{{ ally.stats.level }}</td>
+					<td class="fame">{{ ally.stats.fame}}</td>
+					{% for allycheck in ally.myAllies %}
+							{% if app.user.id == allycheck.id %}	
+								<td class="relation">Ally</td>
+							{% endif %}
+					{% else %}
+							<td class="relation">Requesting</td>
+					{% endfor %}
+				    </tr>
+
+				{% endfor %}
+			</table> 
+            		
+		</div>
+		<div class="footer"></div>
+	</div>
+{% endblock %}
