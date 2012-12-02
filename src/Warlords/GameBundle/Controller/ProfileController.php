@@ -353,11 +353,12 @@ class ProfileController extends BaseController{
 		$allies= $user->getMyAllies();
 
 
+		/*
 		foreach ($allies as $ally){
 
 			print("Allies wth me " . $ally->getId());
 		}
-	
+		*/
 	
 
 
