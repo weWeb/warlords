@@ -21,7 +21,7 @@
 			<div class="title"><h1>EVENTS</h1></div>
 		</div>
 		<div class="content">	
-			{% render "WarlordsGameBundle:Page:events" with {'embedded': true} %}
+			{% render "WarlordsGameBundle:Page:events" with {quantity: 5} %}
 		</div>
 		<div class="footer"></div>
 	</div>
@@ -37,7 +37,7 @@
 			$(this).removeClass("formFocused")
 		});
 		
-		var $link = "{{ path('WarlordsGameBundle_events') }}";
+		var $link = "{{ path('WarlordsGameBundle_events', {'quantity': '100'}) }}";
 	    var $dialog = $('<div></div>')
 	        .load($link)
 	        .dialog({

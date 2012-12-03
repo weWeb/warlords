@@ -61,7 +61,7 @@ WarlordsGameBundle_profile:
         _method:  GET
 
 WarlordsGameBundle_events:
-    pattern: /events
+    pattern: /events/{quantity}
     defaults:  { _controller: WarlordsGameBundle:Page:events }
     requirements:
         _method:  GET

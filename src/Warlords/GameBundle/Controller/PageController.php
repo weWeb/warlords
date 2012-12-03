@@ -188,25 +188,17 @@ class PageController extends Controller
         return $this->render('WarlordsGameBundle:Page:fame.html.twig', array('players' => $players));
     }
 
-    public function eventsAction($embedded = false) {
-        $request = $this->getRequest();
+    public function eventsAction($quantity = 5) {
         if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
         {
             $usr = $this->getUser();
             $em = $this->getDoctrine()->getEntityManager();
 
-            $quantity = 5;
             $showmore = true;
             
-            //If AJAX call
-            if($request->isXmlHttpRequest())
+            if($quantity > 5)
             {
-                $quantity = 100;            
                 $showmore = false;
-            }
-            else
-            {
-                $quantity= 5;
             }
             
             //Since this requires a join, SQL is used to select joined tables
