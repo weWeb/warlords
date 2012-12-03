@@ -36,5 +36,23 @@
 		$("input").blur(function() {
 			$(this).removeClass("formFocused")
 		});
+		
+		var $link = "{{ path('WarlordsGameBundle_events') }}";
+	    var $dialog = $('<div></div>')
+	        .load($link)
+	        .dialog({
+	            autoOpen: false,
+	            title: "Events",
+	            width:500,
+	            height: 600
+	            });
+		
+		$('#showEvents').click(function (event){
+		    event.preventDefault();
+		    if ($dialog.dialog( "isOpen" ) != true )
+		    {
+		        $dialog.dialog('open');
+		    }
+		});
     </script>  
 {% endblock %}

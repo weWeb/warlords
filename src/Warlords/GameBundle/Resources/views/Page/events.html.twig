@@ -3,4 +3,7 @@
 	{{ field['eventTime'] }}- {{ field['username'] }}<br/>
 	{{ field['message'] }}<br/><br/>
 {% endfor %}
+{% if showmore == true %}
+<a href="" id="showEvents" title="Events">Show more</a>
+{% endif %}
 </div>

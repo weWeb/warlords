@@ -189,18 +189,33 @@ class PageController extends Controller
     }
 
     public function eventsAction($embedded = false) {
+        $request = $this->getRequest();
         if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
         {
             $usr = $this->getUser();
             $em = $this->getDoctrine()->getEntityManager();
 
+            $quantity = 5;
+            $showmore = true;
+            
+            //If AJAX call
+            if($request->isXmlHttpRequest())
+            {
+                $quantity = 100;            
+                $showmore = false;
+            }
+            else
+            {
+                $quantity= 5;
+            }
+            
             //Since this requires a join, SQL is used to select joined tables
             $query = 'SELECT user.username, events.user2_id, events.eventType, events.eventTime, events.message
             FROM user JOIN events ON
             (user.id = events.user2_id) OR (user.guild_id = events.guild_id) WHERE
             events.user_id = :userId OR events.guild_id=:guildId
-            ORDER BY events.eventTime DESC LIMIT 0,5;
-            ';
+            ORDER BY events.eventTime DESC LIMIT 0,' . $quantity .
+            ';';
 
             $statement = $em->getConnection()->prepare($query);
 
@@ -216,8 +231,11 @@ class PageController extends Controller
             $statement->execute();
 
             $results = $statement->fetchAll();
-            return $this->render('WarlordsGameBundle:Page:events.html.twig', array('events' => $results));
+            return $this->render('WarlordsGameBundle:Page:events.html.twig', array(
+            'events' => $results,
+            'showmore' => $showmore
+            ));
         }
-        return $this->render('WarlordsGameBundle:Page:events.html.twig', array('events' => ""));
+        return $this->render('WarlordsGameBundle:Page:events.html.twig', array('events' => "", 'showmore' => false));
     }
 }

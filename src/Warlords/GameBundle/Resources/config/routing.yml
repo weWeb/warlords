@@ -59,6 +59,12 @@ WarlordsGameBundle_profile:
     defaults:  { _controller: WarlordsGameBundle:Profile:profile }
     requirements:
         _method:  GET
+
+WarlordsGameBundle_events:
+    pattern: /events
+    defaults:  { _controller: WarlordsGameBundle:Page:events }
+    requirements:
+        _method:  GET
                 
 WarlordsGameBundle_attack:
     pattern: /attack/{target_id}
