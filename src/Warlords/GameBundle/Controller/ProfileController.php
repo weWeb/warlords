@@ -5,6 +5,7 @@ use FOS\UserBundle\Controller\ProfileController as BaseController;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Warlords\GameBundle\Form\BuySoldierType;
+use Warlords\GameBundle\Form\SendSoldierType;
 use Warlords\GameBundle\Entity\Events;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\Form;
@@ -373,9 +374,17 @@ class ProfileController extends BaseController{
 	  * Send Soldiers to allies
 	  */
 
-	public function sendSoldierAction($target_id){
+	public function sendSoldiersAction($target_id){
+		$errors = array();
+		$sendSoldiers = null;
+		$sendKnights = null;
+		$sendCalvary = null;
+		// Get ally info
+		$em = $this->container->get('doctrine')->getEntityManager();
+		$ally = $em->getRepository('WarlordsGameBundle:PlayerStats')
+			->findOneByUser($target_id);
 		$form = $this->createForm(new SendSoldierType());
-		$request = $this->getRequest();
+        	$request = $this->container->get('request');
 		if ($request->getMethod() == 'POST') {
 			$form->bindRequest($request);
 
@@ -383,8 +392,6 @@ class ProfileController extends BaseController{
 				// Get current user
 				$user = $this->container->get('security.context')->getToken()->getUser();
 				//$id = $usr->getID();
-		
-				$em = $this->container->get('doctrine')->getEntityManager();
 
 				$userStats = $user->getStats();
 		
@@ -392,65 +399,97 @@ class ProfileController extends BaseController{
 				    throw new NotFoundHttpException('Unable to find you.');
 			    	}
 	    	
-				$sendSoldier = $form["soldiers"]->getData();
-				$sendKignhts = $form["knights"]->getData();
+				$sendSoldiers = $form["soldiers"]->getData();
+				$sendKnights = $form["knights"]->getData();
 				$SendCalvary = $form["calvary"]->getData();
-	    	
-	    			//If user enters negative numbers
-	    			if($buys < 0 | $buyk < 0 | $buyc < 0)
-	    			{
-	    	    			return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
-	    	                	'error'=>"Value must be positive integer."
-	                		));
-	    			}			
-	    	
-	    	
+				
+				// Positive Integer checker
+	    			if ((is_numeric($sendSoldiers) && is_numeric($sendKnights) && is_numeric($sendCalvary))
+	    				&& (is_int($sendSoldier + 0) && is_int($sendKnights + 0) && is_int($sendCalvary + 0))
+	    				&& ($sendSoldier < 0 && $sendSolider < 0 && $sendCalvary < 0)) {
+	    					$errors[] = "Value must be positive integer.";
+		    	    			return $this->render('WarlordsGameBundle:Pages:sendSoldiers.html.twig', array(
+							'form' => $form->createView(),
+							'target_id' => $target_id,
+							'ally' => $ally,
+							'errors' => $errors,
+			        		));
+		    		}			
+		    		// Convert to integer
+	    			$sendSoldiers += 0;
+	    			$sendKnights += 0;
+	    			$sendCalvary += 0;
 
-	    	if($cost == 0)
-	    	{
-	  	        return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
-	    	                'error'=>"Nothing is purchased."
-		                ));
-	    	}
-	    	
-	    	if($cost > $gold)
-	    	{
-	    	    return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
-	    	                'error'=>"Insufficient Gold"
-		                ));
-	    	}
-	    	
-	    	//adjust gold and army
-	    	
-	    	$gold = $gold - $cost;
-	    	$playerstats->setGold($gold);
-	    	
-	    	$soldiers = $playerstats->getInfantry();
-		$soldiers = $soldiers + $buys;
-		
-		$knights = $playerstats->getKnights();
-		$knights = $knights + $buyk;
-		
-		$calvary = $playerstats->getCalvary();
-		$calvary = $calvary + $buyc;
-		
-		$playerstats->setInfantry($soldiers);
-		$playerstats->setKnights($knights);
-		$playerstats->setCalvary($calvary);
-		
-		$em->persist($playerstats);
-		$em->flush();
+			    	if($sendSoldiers == 0 && $sendKnights == 0 && $sendCalvary == 0) {
+			    		$errors[] = "Please enter some positive integer that you want to send.";
+			  	        return $this->render('WarlordsGameBundle:Page:sendSoldiers.html.twig', array(
+						'form' => $form->createView(),
+						'target_id' => $target_id,
+						'ally' => $ally,
+						'errors' => $errors,
+						));
+			    	}
+			    	
 
-	    }
-	}
-	return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
-	    	                'info'=>"Success",
-	    	                'soldiers' => $sendSoldiers,
-	    	                'knights' => $sendKnights,
-	    	                'calvary' => $sendCalvary,
-	    	                'gold'    => $cost
-		                ));
-	}
+			    	
+			
+
+				
+				// Adjust remaining army after all validations are passed.
+				    	
+			    	
+			    	$soldiers = $userStats->getInfantry();
+			    	if (($soldiers -= $sendSoldiers) <= 0 ){
+			    		$errors[] = "Your only have " . $soldiers . " ,but you are sending " . $sendSoldiers . ".";
+			    	}else{
+					$userStats->setInfantry($soldiers);
+			    		$ally->setInfantry($ally->getInfantry() + $sendSoldiers);
+			    	}
+			    	
+			    	$knights = $userStats->getKnights();
+			    	if (($knights -= $sendKnights) <= 0 ){
+			    		$errors[] = "Your only have " . $knights . " ,but you are sending " . $sendKnights . ".";
+			    	}else{
+					$userStats->setKnights($knights);
+			    		$ally->setKnights($ally->getKnights() + $sendKnights);
+			    	}
+		
+				$calvary = $userStats->getCalvary();
+			    	if (($calvary -= $sendCalvary) <= 0 ){
+			    		$errors[] = "Your only have " . $calvary . " ,but you are sending " . $sendCalvary . ".";
+			    	}else{
+					$userStats->setCalvary($calvary);
+			    		$ally->setCalvary($ally->getCalvary() + $sendCalvary);
+			    	}
+			    	
+
+				if(!$errors) {
+					$em->persist($userStats);
+					$em->persist($ally);
+			
+					$em->flush();
+					
+					return $this->render('WarlordsGameBundle:Page:sendConfirm.html.twig', array(
+						'ally' => $ally,
+			    	                'soldiers' => $sendSoldiers,
+			    	                'knights' => $sendKnights,
+			    	                'calvary' => $sendCalvary,
+			    	                'errors' => $errors,
+				        ));
+
+				}
+
+			    }
+		}
+		return $this->render('WarlordsGameBundle:Page:sendSoldiers.html.twig', array(
+				'form' => $form->createView(),
+				'target_id' => $target_id,
+				'ally' => $ally,
+				'errors' => $errors,
+
+		        ));
+}
+
 
     public function createForm($type, $data = null, array $options = array())
     {

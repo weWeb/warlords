@@ -82,10 +82,11 @@ WarlordsGameBundle_buy:
         _method: POST
         
 WarlordsGameBundle_send_soldiers:
-    pattern: /profile/sendSoldiers
+    pattern: /profile/sendSoldiers/{target_id}
     defaults:  { _controller: WarlordsGameBundle:Profile:sendSoldiers }
     requirements:
-        _method: POST
+        _method: GET|POST
+        target_id: \d+
 
 WarlordsGameBundle_CheckUnique:
     pattern: /registration/checkunique
