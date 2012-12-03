@@ -52,7 +52,7 @@ WarlordsGameBundle_profile_get:
     defaults:  { _controller: WarlordsGameBundle:Profile:profile_get }
     requirements:
         _method:  GET
-        id: \d+
+        target_id: \d+
 
 WarlordsGameBundle_profile:
     pattern: /profile
@@ -63,6 +63,10 @@ WarlordsGameBundle_profile:
 WarlordsGameBundle_events:
     pattern: /events/{quantity}
     defaults:  { _controller: WarlordsGameBundle:Page:events }
+        
+WarlordsGameBundle_ally_list:
+    pattern:  /profile/allyList
+    defaults: { _controller: WarlordsGameBundle:Profile:allyList }
     requirements:
         _method:  GET
                 

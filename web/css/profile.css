@@ -85,3 +85,77 @@ form.comment input[type="submit"] {
     	outline: medium none;
     	min-width: 5em;
 }
+
+
+.ally-list {
+    font-family: 'Arial', 'Helvetica'; 
+    font-size: 1.8em;
+    color: #e2d7c5;
+    margin: auto;
+  
+}
+
+.ally-list-header {
+    font-weight: bolder;
+    font-size: 1.1em;
+    text-align: left;
+}
+
+.ally-list-header-number{
+    text-align: right;
+}
+
+.ally-list td {
+    padding:5px 15px 5px 15px;
+}
+
+
+.ally-list tr:nth-child(odd) {
+    background-color: #3f342d;
+} 
+
+.ally-list tr:nth-child(1) {
+    background-color: #100d0c;
+} 
+
+.ally-list .rank {
+    width: 30px;
+    text-align: right;
+}
+
+.ally-list .username {
+    width: 100px;
+    text-align: left;
+}
+
+.ally-list .level {
+    width: 50px;
+    text-align: right;
+}
+
+.ally-list .gold {
+    width: 100px;
+    text-align: right;
+}
+
+.ally-list .fame {
+    width: 100px;
+    text-align: right;
+}
+.ally-list .relation {
+    width: 100px;
+    text-align: left;
+}
+
+#profile-tab-widget {
+	font-size: 2em;
+
+}
+
+.title h2 {
+	font-family: 'Black Ops One', serif;
+	font-size: 3em;
+	font-weight: normal;
+	color: #d5a042;
+
+}
