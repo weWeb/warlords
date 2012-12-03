@@ -27,6 +27,10 @@
 					    }
 					});
 				    });
+				    
+				    $("#buysubmit").prop("disabled", true);
+				    
+				    $("#buy_soldiers").keyup(function(){ alert("buysoldiers keyup"); });
 
 				</script>
 
@@ -42,42 +46,41 @@
 		    
 				<div id="buysoldiers-tab">
 				    <div class="title"><h2>Buy Soldiers</h2></div>
-				    <div id="stats">
-					<ul id="resources">
-					    <li class="gold">Gold: <label id="gold">{{ playerstats.gold }}</label></li>
-					    <li class="land">Land: <label id="land">{{ playerstats.land }}</label></li>
-					    <li class="fame">Fame: <label id="fame">{{ playerstats.fame }}</label></li>
-					</ul>
-					<br />
-					<ul id="army">
-					    <li>Infantry: <label id="infantry">{{ playerstats.infantry }}</label></li>
-					    <li>Knights: <label id="knights">{{ playerstats.knights }}</label></li>
-					    <li>Calvary: <label id="calvary">{{ playerstats.calvary }}</label></li>
-					</ul>
-				    </div>
+				        <div id="stats">
+					        <ul id="resources">
+					            <li class="gold">Gold: <label id="gold">{{ playerstats.gold }}</label></li>
+					            <li class="land">Land: <label id="land">{{ playerstats.land }}</label></li>
+					            <li class="fame">Fame: <label id="fame">{{ playerstats.fame }}</label></li>
+					        </ul>
+					        <br />
+					        <ul id="army">
+					            <li>Infantry: <label id="infantry">{{ playerstats.infantry }}</label></li>
+					            <li>Knights: <label id="knights">{{ playerstats.knights }}</label></li>
+					            <li>Calvary: <label id="calvary">{{ playerstats.calvary }}</label></li>
+					        </ul>
+				        </div>
 				   
 				    <div id="profile">
-					<label>Level:</label><label id="lvl">{{ playerstats.level }}</label><br />
-					<label>Experience:</label><label id="experience">{{ playerstats.exp }}</label>
-					<ul id="attack_stats">
-					    <li>Attack: <label id="attk">{{ attack }}</label></li>
-					    <li>Defense: <label id="defs">{{ defense }}</label></li>
-					</ul>
+					    <label>Level:</label><label id="lvl">{{ playerstats.level }}</label><br />
+					    <label>Experience:</label><label id="experience">{{ playerstats.exp }}</label>
+					    <ul id="attack_stats">
+					        <li>Attack: <label id="attk">{{ attack }}</label></li>
+					        <li>Defense: <label id="defs">{{ defense }}</label></li>
+					    </ul>
 
-					<div id="buysoldiers">
-					    {% if form is defined %}
-					    <form action="{{ path( 'WarlordsGameBundle_buy' ) }}" method="post" {{ form_enctype(form) }} class="comment">
-						{{ form_widget(form) }}
-						<p class="submit">
-						    <input type="submit" value="Buy">
-						</p>
-					    </form>
-					    {% endif %}
-					</div>
+					    <div id="buysoldiers">
+					        {% if form is defined %}
+					        <form action="{{ path( 'WarlordsGameBundle_buy' ) }}" method="post" {{ form_enctype(form) }} class="comment">
+						    {{ form_widget(form) }}
+						    <p class="submit">
+						        <input type="submit" value="Buy" id="buysubmit">
+						    </p>
+					        </form>
+					        {% endif %}
+					    </div>
 				    </div>
 				</div>
 			</div>
-        	</div>
 		<div class="footer"></div>
 	</div>
 {% endblock %}

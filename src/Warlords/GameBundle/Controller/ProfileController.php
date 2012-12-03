@@ -181,6 +181,17 @@ class ProfileController extends BaseController{
             $land = $playerstats->getLand();
             $playerstats->setLand($land+$diff);
             
+            //Exp gain
+            $exp = $playerstats->getExp();
+            $level = $playerstats->getLevel();
+            $exp = $exp+10;
+            if($exp%200 == 0 && $level < 30)
+            {
+                $level = $level+1;
+                $playerstats->setLevel($level);
+            }
+            $playerstats->setExp($exp);
+            
             //Gold gain
             $gold = $targetstats->getGold();
             $diff = (int)($gold*$rand_percent);
