@@ -1,6 +1,7 @@
 Warlords\GameBundle\Entity\User:
     type: entity
     table: user
+    repositoryClass: Warlords\GameBundle\Entity\UserRepository
     fields:
         id:
             type: integer

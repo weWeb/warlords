@@ -38,7 +38,7 @@
 	    			{% render 'WarlordsGameBundle:Player:attack' with {'target_id' : player.user.id } %}
 		    	</div>
 		    	<div id="target-ally-{{ player.user.id }}">
-				{% render 'WarlordsGameBundle:Player:ally' with {'target_id' : player.user.id } %}
+				{% include 'WarlordsGameBundle:Player:ally.html.twig' with {'player' : player } %}
 			</div>
 		</div>
 		

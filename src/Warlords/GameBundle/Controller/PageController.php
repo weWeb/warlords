@@ -20,6 +20,7 @@ class PageController extends Controller
     	public function playerAction()
     	{
 
+
 		$user = $this->getUser();
 		$players = NULL; 
 		$errors = NULL;
@@ -84,7 +85,8 @@ class PageController extends Controller
 					  	default:
 					  		break;
             				}
-
+					
+					
             				if (!empty($players)){
             					foreach ($players as $key=>$player){
 
@@ -111,6 +113,8 @@ class PageController extends Controller
 							}
 							$em->persist($player);
 							$em->flush();
+							
+							// Exclude current user from the result
             						if ($player->getUser()->getId() == $user->getId()){
             							unset($players[$key]);
             						}
@@ -131,6 +135,9 @@ class PageController extends Controller
 		));
 
     	}
+    	
+    	
+
 
     private function getFormErrors($children) {
         foreach ($children as $child) {
