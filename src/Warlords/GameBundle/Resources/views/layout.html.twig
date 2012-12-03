@@ -20,8 +20,11 @@
 		<div class="header">
 			<div class="title"><h1>EVENTS</h1></div>
 		</div>
-		<div class="content">	
-			{% render "WarlordsGameBundle:Page:events" with {quantity: 5} %}
+		<div class="content">
+		    <div id="embedded_events">	
+			    {% render "WarlordsGameBundle:Page:events" with {quantity: 5} %}
+			</div>
+			<a href="" id="showEvents" title="Events">Show more</a>
 		</div>
 		<div class="footer"></div>
 	</div>
@@ -38,13 +41,21 @@
 		});
 		
 		var $link = "{{ path('WarlordsGameBundle_events', {'quantity': '100'}) }}";
+		var $shortlink = "{{ path('WarlordsGameBundle_events', {'quantity': '5'}) }}";
+		
+		var refreshId = setInterval(function()
+		{
+		    $("#embedded_events").load($shortlink);
+		}, 10000);
+		
 	    var $dialog = $('<div></div>')
 	        .load($link)
 	        .dialog({
 	            autoOpen: false,
 	            title: "Events",
 	            width:500,
-	            height: 600
+	            height: 600,
+	            draggable: false
 	            });
 		
 		$('#showEvents').click(function (event){
