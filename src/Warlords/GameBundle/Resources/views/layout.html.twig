@@ -22,9 +22,11 @@
 		</div>
 		<div class="content">
 		    <div id="embedded_events">	
-			    {% render "WarlordsGameBundle:Page:events" with {quantity: 5} %}
+			    {% render "WarlordsGameBundle:Page:events" with {quantity: 3} %}
 			</div>
+			{% if app.user %}
 			<a href="" id="showEvents" title="Events">Show more</a>
+			{% endif %}
 		</div>
 		<div class="footer"></div>
 	</div>
@@ -41,7 +43,7 @@
 		});
 		
 		var $link = "{{ path('WarlordsGameBundle_events', {'quantity': '100'}) }}";
-		var $shortlink = "{{ path('WarlordsGameBundle_events', {'quantity': '5'}) }}";
+		var $shortlink = "{{ path('WarlordsGameBundle_events', {'quantity': '3'}) }}";
 		
 		var refreshId = setInterval(function()
 		{

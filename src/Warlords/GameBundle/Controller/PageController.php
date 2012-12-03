@@ -195,7 +195,7 @@ class PageController extends Controller
         return $this->render('WarlordsGameBundle:Page:fame.html.twig', array('players' => $players));
     }
 
-    public function eventsAction($quantity = 5) {
+    public function eventsAction($quantity = 3) {
         if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
         {
             $usr = $this->getUser();
@@ -203,7 +203,7 @@ class PageController extends Controller
 
             $showmore = true;
             
-            if($quantity > 5)
+            if($quantity > 3)
             {
                 $showmore = false;
             }
