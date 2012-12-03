@@ -368,6 +368,89 @@ class ProfileController extends BaseController{
 		);
 
 	}
+	
+	/**
+	  * Send Soldiers to allies
+	  */
+
+	public function sendSoldierAction($target_id){
+		$form = $this->createForm(new SendSoldierType());
+		$request = $this->getRequest();
+		if ($request->getMethod() == 'POST') {
+			$form->bindRequest($request);
+
+			if ($form->isValid()) {
+				// Get current user
+				$user = $this->container->get('security.context')->getToken()->getUser();
+				//$id = $usr->getID();
+		
+				$em = $this->container->get('doctrine')->getEntityManager();
+
+				$userStats = $user->getStats();
+		
+				if (!$userStats) {
+				    throw new NotFoundHttpException('Unable to find you.');
+			    	}
+	    	
+				$sendSoldier = $form["soldiers"]->getData();
+				$sendKignhts = $form["knights"]->getData();
+				$SendCalvary = $form["calvary"]->getData();
+	    	
+	    			//If user enters negative numbers
+	    			if($buys < 0 | $buyk < 0 | $buyc < 0)
+	    			{
+	    	    			return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
+	    	                	'error'=>"Value must be positive integer."
+	                		));
+	    			}			
+	    	
+	    	
+
+	    	if($cost == 0)
+	    	{
+	  	        return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
+	    	                'error'=>"Nothing is purchased."
+		                ));
+	    	}
+	    	
+	    	if($cost > $gold)
+	    	{
+	    	    return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
+	    	                'error'=>"Insufficient Gold"
+		                ));
+	    	}
+	    	
+	    	//adjust gold and army
+	    	
+	    	$gold = $gold - $cost;
+	    	$playerstats->setGold($gold);
+	    	
+	    	$soldiers = $playerstats->getInfantry();
+		$soldiers = $soldiers + $buys;
+		
+		$knights = $playerstats->getKnights();
+		$knights = $knights + $buyk;
+		
+		$calvary = $playerstats->getCalvary();
+		$calvary = $calvary + $buyc;
+		
+		$playerstats->setInfantry($soldiers);
+		$playerstats->setKnights($knights);
+		$playerstats->setCalvary($calvary);
+		
+		$em->persist($playerstats);
+		$em->flush();
+
+	    }
+	}
+	return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
+	    	                'info'=>"Success",
+	    	                'soldiers' => $sendSoldiers,
+	    	                'knights' => $sendKnights,
+	    	                'calvary' => $sendCalvary,
+	    	                'gold'    => $cost
+		                ));
+	}
 
     public function createForm($type, $data = null, array $options = array())
     {
