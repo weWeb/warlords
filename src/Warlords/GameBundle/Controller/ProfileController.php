@@ -336,6 +336,38 @@ class ProfileController extends BaseController{
             	                'gold'    => $cost
                                 ));
     }
+    
+    
+    	/**
+    	 *  Ally List that shows all ally with current user	
+    	 *
+    	 */
+	public function allyListAction() 
+	{
+        	$user = $this->container->get('security.context')->getToken()->getUser();
+        	$em = $this->container->get('doctrine')->getEntityManager();
+
+
+
+
+		$allies= $user->getMyAllies();
+
+
+		/*
+		foreach ($allies as $ally){
+
+			print("Allies wth me " . $ally->getId());
+		}
+		*/
+	
+
+
+		return $this->render('WarlordsGameBundle:Page:allyList.html.twig', array(
+			'allies' => $allies,)
+	
+		);
+
+	}
 
     public function createForm($type, $data = null, array $options = array())
     {

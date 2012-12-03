@@ -26,6 +26,13 @@ class PlayerController extends Controller
 		);
 
 	}
+	
+	/**
+	 * Attack function from search page
+	 * Redirect to actual attack page
+	 * The form no fields yet. Might add skill choice later.
+	 */
+	 
 	public function attackAction($target_id)
 	{
 		
@@ -53,40 +60,55 @@ class PlayerController extends Controller
 
 	}
 	
-	
+	/**
+	 * Render Result page function
+	 */
+	 
 	public function resultAction()
 	{
 		return $this->render('WarlordsGameBundle:Player:result.html.twig');
 	}
 
+	/**
+	 * Ally function that Add target into ally List
+	 *
+	 */
 	public function allyAction($target_id)
 	{
 	
-		/*
-		$user = $this->getUser();
-        	$em = $this->getDoctrine()->getEntityManager();
-		$player = $em->getRepository('WarlordsGameBundle:User')
-			->findOneById($target_id);
-		$user->addAlly($player);
 		
+		
+		$user = $this->getUser();
+		$em = $this->getDoctrine()->getEntityManager();
+		$player = $em->getRepository('WarlordsGameBundle:User')
+			->find($target_id);
+			
+		
+		$user->addAlly($player);
+	
 		$em->persist($user);
+		$player->addAlly($user);
 		$em->persist($player);
 
+
 		$em->flush();
-		
-		$errors = array();
+	
+
+		$allies= $user->getMyAllies();
+		foreach ($allies as $ally){
+	
+			print("My allies ". $ally->getId());
+		}
 		$players= $user->getAlliesWithMe();
 		foreach ($players as $play){
-		
-			print($play->getId());
+	
+			print("Allies wth me " . $play->getId());
 		}
-		*/
-		$em = $this->getDoctrine()->getEntityManager();
-		$player = $em->getRepository("WarlordsGameBundle:PlayerStats")->findOneByUser($target_id);
-		return $this->render('WarlordsGameBundle:Player:ally.html.twig', array(
-			'player' => $player,)
 		
-		);
+		
+	
+		
+		return $this->redirect($this->generateUrl('WarlordsGameBundle_ally_list'));
 		
 		
 		
