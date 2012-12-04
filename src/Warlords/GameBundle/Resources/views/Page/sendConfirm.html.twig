@@ -1,0 +1,42 @@
+{% extends 'WarlordsGameBundle::layout.html.twig' %}
+
+
+{% block body %}
+    <div class="mainitem">
+        <div class="header">
+			<div class="title"><h1>Send Soldiers</h1></div>
+		</div>
+        <div class="content">
+		{% if serrors %}
+		        <ul class="errormsg">
+		        {% for serror in serrors %}
+		            <li>{{ serror }} </li>
+		        {% endfor %}
+			</ul>
+		{% else %}
+			{% if soldiers or knights or calvary %}
+				<div class="information">
+				<h2>Success!</h2>
+				<p>You have sent:<br />
+
+				{% if soldiers %}
+					{{ soldiers }} Soldiers  <br />
+				{% endif %}
+
+				{% if knights %}
+			       		{{ knights }} Knights  <br />
+				{% endif %}
+
+				{% if calvary %}
+					{{ calvary }} Calvary  <br />
+				{% endif %}
+				<br />
+			{% endif %}
+			</div>
+            {% endif %}
+            <p><a href="{{ path('WarlordsGameBundle_profile') }}">Return to profile</a></p>
+        </div>
+		<div class="footer"></div>
+	</div>
+{% endblock %}
+
