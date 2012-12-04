@@ -13,18 +13,32 @@
 		    {% if info is defined %}
 		        <div class="loginerror">{{ info }}</div>
 		    {% endif %}
-		    
+		   
+               {% if serrors is defined and serrors%}
+                <ul class="errormsg">
+                {% for serror in serrors %}
+                    <li>{{ serror }} </li>
+                {% endfor %}
+		</ul>
+	    	{% endif %}
 			{% block javascript %}
-				<script type="text/javascript"> 
+				<script type="text/javascript">
+
+				
+				 
 				    $(function() {
 					$( "#profile-tabs" ).tabs({
-					    heightStyle: "auto",
+					    {% if serrors is defined and serrors %}
+					    	selected: 1,
+					    {% endif %}
+					    heightStyle: "content",
 					    beforeLoad: function( event, ui ) {
 						ui.jqXHR.error(function() {
 						    ui.panel.html(
-							"Couldn't load this page. We'll try to fix this as soon as possible." ).css('font-size', 20);
+							"Couldn't load this page. We'll try to fix this as soon as possible." );
 						});
 					    }
+					    
 					});
 				    });
 				    

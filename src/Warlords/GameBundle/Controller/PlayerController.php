@@ -5,6 +5,7 @@ namespace Warlords\GameBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Warlords\GameBundle\Entity\PlayerStats;
 use Warlords\GameBundle\Form\SelectPlayerType;
+use Warlords\GameBundle\Form\BuySoldierType;
 use DateTime;
 
 /**
@@ -77,39 +78,48 @@ class PlayerController extends Controller
 	{
 	
 		
-		
+	    	$form = $this->createForm(new BuySoldierType(), NULL);
 		$user = $this->getUser();
 		$em = $this->getDoctrine()->getEntityManager();
-		$player = $em->getRepository('WarlordsGameBundle:User')
+		$requesting_ally = $em->getRepository('WarlordsGameBundle:User')
 			->find($target_id);
 			
-		
-		$user->addAlly($player);
+		$myAllies = $user->getMyAllies();
+        	foreach ( $myAllies as $ally){
+        		if ($ally->getId() == $requesting_ally->getId()){
+        		
+				$serrors[] = $requesting_ally ." is already your Ally or waiting for approval.";
+			    	$returnArray = ProfileController::getUserProfile($user, $em, $this);
+		    	        $returnArray['form'] = $form->createView();
+			    	$returnArray += array(
+
+				'target_id' => $target_id,
+				'ally' => $requesting_ally,
+				'serrors' => $serrors,
+				);
+			        return $this->render('WarlordsGameBundle:Page:profile.html.twig', $returnArray);
+        		}
+        	}
+		$user->addAlly($requesting_ally);
 	
 		$em->persist($user);
-		$player->addAlly($user);
-		$em->persist($player);
+
 
 
 		$em->flush();
 	
+	
+		
+		$serrors[] = "Request is sent to ".$requesting_ally . ".";
+	    	$returnArray = ProfileController::getUserProfile($user, $em, $this);
+    	        $returnArray['form'] = $form->createView();
+	    	$returnArray += array(
 
-		$allies= $user->getMyAllies();
-		foreach ($allies as $ally){
-	
-			print("My allies ". $ally->getId());
-		}
-		$players= $user->getAlliesWithMe();
-		foreach ($players as $play){
-	
-			print("Allies wth me " . $play->getId());
-		}
-		
-		
-	
-		
-		return $this->redirect($this->generateUrl('WarlordsGameBundle_ally_list'));
-		
+		'target_id' => $target_id,
+		'ally' => $requesting_ally,
+		'serrors' => $serrors,
+		);
+        	return $this->render('WarlordsGameBundle:Page:profile.html.twig', $returnArray);
 		
 		
 	}

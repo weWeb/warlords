@@ -1,0 +1,38 @@
+{% block body %}
+	{% if app.user.username is defined %}
+		<div class="header">
+			<div class="atk-title"><h1>Ally Info</h1></div>
+		</div>
+		<div id="ally-dialog">
+
+			<div class="ally-info">
+				<header>
+			    		<p>Player: {{ ally.user.username }}</p>
+				</header>
+				<ul id="info">
+					<li>Level: {{ ally.level }}</li>
+					<li>Fame: {{ ally.Fame }}</li>
+					<li>Gold: {{ ally.gold}}</li>
+
+				</ul>
+
+	
+			</div>
+	    		
+	    	</div>
+		<div>
+			<button type="button" onclick="location.href='{{ path('WarlordsGameBundle_ally_confirm', {'target_id': ally.user.id }) }}'">Confirm Ally</button>
+		
+		</div>
+		
+
+		
+	{% else %}
+		<div><p>Please login to access this page</p></div>
+	{% endif %}
+{% endblock %}
+
+
+
+
+

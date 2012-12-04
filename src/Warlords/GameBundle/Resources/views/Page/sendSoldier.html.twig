@@ -1,0 +1,93 @@
+{# src/Warlords/GameBundle/Resources/views/Profile/sendSoldier.html.twig #}
+{% extends 'WarlordsGameBundle::layout.html.twig' %}
+
+{% block body %}
+    <div class="mainitem">
+        	<div class="header">
+			<div class="title"><h1>PROFILE</h1></div>
+		</div>
+		
+        	<div class="content">
+		
+			{% if errors %}
+				<ul class="errormsg">
+				{% for error in errors %}
+					<li>{{ error }} </li>
+				{% endfor %}
+				</ul>
+			{% endif %}
+
+
+				<div id="info">
+
+					<div id="user-info">
+						<header>
+							<p>You: {{ app.user.username }}</p>
+						</header>
+						<ul id="resources">
+							<li class="gold">Gold: <label id="gold">{{ app.user.stats.gold }}</label></li>
+							<li class="land">Land: <label id="land">{{ app.user.stats.land }}</label></li>
+							<li class="fame">Fame: <label id="fame">{{ app.user.stats.fame }}</label></li>
+						</ul>
+						<br />
+						<ul id="army">
+							<li>Infantry: <label id="infantry">{{ app.user.stats.infantry }}</label></li>
+							<li>Knights: <label id="knights">{{ app.user.stats.knights }}</label></li>
+							<li>Calvary: <label id="calvary">{{ app.user.stats.calvary }}</label></li>
+						</ul>
+						<div id="profile">
+							<label>Level:</label><label id="lvl">{{ app.user.stats.level }}</label><br />
+							<label>Experience:</label><label id="experience">{{ app.user.stats.exp }}</label>
+						</div>
+					</div>
+
+					<div id="ally-info">
+						<header>
+							<p>Ally: {{ ally.user.username }}</p>
+						</header>
+						<ul id="resources">
+							<li class="gold">Gold: <label id="gold">{{ ally.gold }}</label></li>
+							<li class="land">Land: <label id="land">{{ ally.land }}</label></li>
+							<li class="fame">Fame: <label id="fame">{{ ally.fame }}</label></li>
+						</ul>
+						<br />
+						<ul id="army">
+							<li>Infantry: <label id="infantry">{{ ally.infantry }}</label></li>
+							<li>Knights: <label id="knights">{{ ally.knights }}</label></li>
+							<li>Calvary: <label id="calvary">{{ ally.calvary }}</label></li>
+						</ul>
+						<div id="profile">
+							<label>Level:</label><label id="lvl">{{ ally.level }}</label><br />
+
+						</div>
+					</div>
+					    
+					
+				    
+				</div>  
+  
+				
+				<div id="buysoldiers">
+				    {% if form is defined %}
+				    <p>Please enter the number of soldiers in order to send reinforcements to your ally</p>
+				    <form action="{{ path( 'WarlordsGameBundle_send_soldiers', {'target_id' : target_id} ) }}" method="post" {{ form_enctype(form) }} class="comment">
+					{{ form_widget(form) }}
+					<p class="submit">
+					    <input type="submit" value="Send Reinforcements">
+					</p>
+				    </form>
+				    {% endif %}
+				</div>
+
+			</div>
+			
+			
+		</div>
+			
+        	
+		<div class="footer"></div>
+	</div>
+{% endblock %}
+
+
+
