@@ -3,36 +3,164 @@
 
 
 {% block body %}
-    <div class="mainitem">
+    	<div class="mainitem">
 
-			<div class="title"><h2>Ally List</h2></div>
+		<div class="title"><h2>Ally List</h2></div>
 
 		<div class="content">
+		{% if current_allies %}
+			<p>Current Ally</p>
+			
 			<table class="ally-list">
 				<tr class="ally-list-header">
 				    <td>Ally</td>
 				    <td class ="ally-list-header-number">Level</td>
 				    <td class ="ally-list-header-number">Fame</td>
 				    <td>Relationship</td>
+				    <td></td>
 				</tr>
-				{% for ally in allies %}
-				    <tr>
-					<td class="username">{{ ally.username }}</td>
-					<td class="level">{{ ally.stats.level }}</td>
-					<td class="fame">{{ ally.stats.fame}}</td>
-					{% for allycheck in ally.myAllies %}
-							{% if app.user.id == allycheck.id %}	
-								<td class="relation">Ally</td>
-							{% endif %}
-					{% else %}
-							<td class="relation">Requesting</td>
-					{% endfor %}
+				
+				{% for current_ally in current_allies %}
+				    <tr id="ally-send-info-{{ current_ally.user.id }}">
+					<td class="username">{{ current_ally.user.username }}</td>
+					<td class="level">{{ current_ally.level }}</td>
+					<td class="fame">{{ current_ally.fame}}</td>
+					<td class="relation">Ally</td>
+					<td id="send-page-{{ current_ally.user.id }}">
+						{% render 'WarlordsGameBundle:Profile:sendSoldiers' with {'target_id' : current_ally.user.id } %}
+						{% block javascript %}
+						<script type="text/javascript"> 
+
+						    $( "#send-page-{{ current_ally.user.id }}" ).dialog({
+						    autoOpen: false,
+						    height: 400,
+						    width: "auto",
+						    modal: true,
+						    show: "puff",
+						    hide: "explode",
+						    open: function() {
+						    	$('.ui-widget-overlay').bind('click', function() {
+									$("#send-page-{{ current_ally.user.id }}").dialog('close');
+						    		})
+							}
+							
+						});
+					 
+						$( "#ally-send-info-{{ current_ally.user.id }}" ).click(function() {
+						    $( "#send-page-{{ current_ally.user.id }}").dialog( "open" );
+						    return false;
+						});
+
+
+						$("#ally-send-info-{{ current_ally.user.id }}").css('cursor', 'pointer');
+						</script>
+						{% endblock %}	
+					
+					
+					
+					</td>
+    								
+
 				    </tr>
 
 				{% endfor %}
 			</table> 
-            		
+			{% endif %}
+
+			{% if requesting_allies %}
+        		<p>Requesting Ally</p>
+			
+			<table class="ally-list">
+				<tr class="ally-list-header">
+				    <td>Ally</td>
+				    <td class ="ally-list-header-number">Level</td>
+				    <td class ="ally-list-header-number">Fame</td>
+				    <td>Relationship</td>
+				    <td></td>
+
+				</tr>
+				
+				{% for requesting_ally in requesting_allies %}
+				    <tr id="ally-request-info-{{ requesting_ally.user.id }}">
+					<td class="username">{{ requesting_ally.user.username }}</td>
+					<td class="level">{{ requesting_ally.level }}</td>
+					<td class="fame">{{ requesting_ally.fame}}</td>
+					<td class="relation">Requesting</td>
+					<td></td>
+					
+    								
+
+				    </tr>
+
+				{% endfor %}
+			</table> 
+			{% endif %}
+			
+			{% if waiting_allies %}
+			<p>Waiting for Approval</p>
+			
+			<table class="ally-list">
+				<tr class="ally-list-header">
+				    <td>Ally</td>
+				    <td class ="ally-list-header-number">Level</td>
+				    <td class ="ally-list-header-number">Fame</td>
+				    <td>Relationship</td>
+				    <td></td>
+
+				</tr>
+				
+				{% for waiting_ally in waiting_allies %}
+				    <tr id="ally-wait-info-{{ waiting_ally.user.id }}">
+					<td class="username">{{ waiting_ally.user.username }}</td>
+					<td class="level">{{ waiting_ally.level }}</td>
+					<td class="fame">{{ waiting_ally.fame}}</td>
+					<td class="relation">Waiting</td>
+					<td id="wait-page-{{ waiting_ally.user.id }}">
+						{% include 'WarlordsGameBundle:Page:allyConfirm.html.twig' with {'ally' : waiting_ally } %}
+						{% block javascript2 %}
+						<script type="text/javascript"> 
+
+						    $( "#wait-page-{{ waiting_ally.user.id }}" ).dialog({
+						    autoOpen: false,
+						    height: 400,
+						    width: "auto",
+						    modal: true,
+						    show: "puff",
+						    hide: "explode",
+						    open: function() {
+						    	$('.ui-widget-overlay').bind('click', function() {
+									$("#wait-page-{{ waiting_ally.user.id }}").dialog('close');
+						    		})
+							}
+							
+						});
+					 
+						$( "#ally-wait-info-{{ waiting_ally.user.id }}" ).click(function() {
+						    $( "#wait-page-{{ waiting_ally.user.id }}").dialog( "open" );
+						    return false;
+						});
+
+
+						$("#ally-wait-info-{{ waiting_ally.user.id }}").css('cursor', 'pointer');
+						</script>
+						{% endblock %}	
+					
+					
+					
+					</td>
+					
+    								
+
+				    </tr>
+
+				{% endfor %}
+			</table> 
+			{% endif %}
+			
 		</div>
 
 	</div>
 {% endblock %}
+
+
+

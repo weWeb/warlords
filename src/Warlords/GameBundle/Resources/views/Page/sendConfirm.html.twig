@@ -7,10 +7,10 @@
 			<div class="title"><h1>Send Soldiers</h1></div>
 		</div>
         <div class="content">
-		{% if errors %}
+		{% if serrors %}
 		        <ul class="errormsg">
-		        {% for error in errors %}
-		            <li>{{ error }} </li>
+		        {% for serror in serrors %}
+		            <li>{{ serror }} </li>
 		        {% endfor %}
 			</ul>
 		{% else %}
@@ -23,14 +23,14 @@
 					{{ soldiers }} Soldiers  <br />
 				{% endif %}
 
-				{% if calvary %}
+				{% if knights %}
 			       		{{ knights }} Knights  <br />
 				{% endif %}
 
 				{% if calvary %}
 					{{ calvary }} Calvary  <br />
 				{% endif %}
-				.<br />
+				<br />
 			{% endif %}
 			</div>
             {% endif %}

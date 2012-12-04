@@ -84,6 +84,7 @@ form.comment input[type="submit"] {
     	margin-top: 30px;
     	outline: medium none;
     	min-width: 5em;
+    	margin-bottom: 10px;
 }
 
 
@@ -147,7 +148,13 @@ form.comment input[type="submit"] {
     text-align: left;
 }
 
+#profile-tabs {
+	border: none;
+	
+}
+
 #profile-tab-widget {
+
 	font-size: 2em;
 
 }
@@ -159,3 +166,35 @@ form.comment input[type="submit"] {
 	color: #d5a042;
 
 }
+
+
+#send-info div{
+
+	display: inline-block;
+	vertical-align: top; 
+
+}
+#send-info div li{
+
+	font-size: 2em;
+
+}
+
+#send-to p {
+    	font-family: 'Black Ops One',serif;
+	font-size: 20px;
+
+	padding: 1em;
+}
+
+#send-page {
+	font-size: 0.5em;
+
+}
+
+.send-name {
+	font-size: 3em;
+}
+
+
+

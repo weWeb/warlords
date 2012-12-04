@@ -13,8 +13,8 @@ use Doctrine\ORM\EntityRepository;
 class PlayerStatsRepository extends EntityRepository
 {
 
-	// $limit set to 5 to see if the result show correctly; subject to change
-	public function getPlayerByLevel($level, $limit = 5)
+	// Get players by Level
+	public function getPlayerByLevel($level, $limit = 25)
 	{
 		$qb = $this->createQueryBuilder('p')
 				->select('p')
@@ -31,7 +31,7 @@ class PlayerStatsRepository extends EntityRepository
 		
 	}
 	
-	// $limit set to 5 to see if the result show correctly; subject to change
+	// Get players by Gold
 	public function getPlayerByGold($gold, $limit = 25)
 	{
 		$qb = $this->createQueryBuilder('p')
@@ -49,7 +49,7 @@ class PlayerStatsRepository extends EntityRepository
 		
 	}
 	
-	// $limit set to 5 to see if the result show correctly; subject to change
+	// Get players by number of infantry
 	public function getPlayerByInfantry($infantry, $limit = 25)
 	{
 		$qb = $this->createQueryBuilder('p')
@@ -67,7 +67,7 @@ class PlayerStatsRepository extends EntityRepository
 		
 	} 
 	
-	// $limit set to 5 to see if the result show correctly; subject to change
+	// Get players by number of knights
 	public function getPlayerByKnight($knights, $limit = 25)
 	{
 		$qb = $this->createQueryBuilder('p')
@@ -84,8 +84,25 @@ class PlayerStatsRepository extends EntityRepository
               		->getResult();		
 		
 	}
+	// Get players by number of calvary
+	public function getPlayerByCalvary($calvary, $limit = 25)
+	{
+		$qb = $this->createQueryBuilder('p')
+				->select('p')
+				->where('p.calvary <= :player_calvary_up AND p.knights >= :player_calvary_down')
+				->addOrderBy('p.calvary','DESC')
+				->setParameter('player_calvary_up', ($calvary + 0) * 1.5)
+				->setParameter('player_calvary_down', floor(($calvary + 0) * 0.5));
+		
+		if (false === is_null($limit))
+       	 		$qb->setMaxResults($limit);
+		
+    		return $qb->getQuery()
+              		->getResult();		
+		
+	}
 	
-	// $limit set to 5 to see if the result show correctly; subject to change
+	// Get players by number of land
 	public function getPlayerByLand($land, $limit = 25)
 	{
 		$qb = $this->createQueryBuilder('p')
@@ -102,7 +119,7 @@ class PlayerStatsRepository extends EntityRepository
               		->getResult();		
 		
 	}
-	// $limit set to 5 to see if the result show correctly; subject to change
+	// Get players by fame
 	public function getPlayerByFame($fame, $limit = 25)
 	{
 		$qb = $this->createQueryBuilder('p')
@@ -121,12 +138,13 @@ class PlayerStatsRepository extends EntityRepository
 	} 
 	
 	
-	// $limit set to 5 to see if the result show correctly; subject to change
+	// Get players by username will wildcards 
+	// return all username start with param $username
 	public function getPlayerByUsername($username, $limit = 25)
 	{
 		$qb = $this->createQueryBuilder('p')
-				->select('p', 'User')
-				->leftJoin('p.user', 'User')
+				->select('p')
+				->innerjoin('p.user', 'User')
 				->where('User.username LIKE :player_username')
 				->addOrderBy('User.username','DESC')
 				->setParameter('player_username', $username . '%');

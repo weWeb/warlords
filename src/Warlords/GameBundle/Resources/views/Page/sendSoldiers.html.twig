@@ -1,28 +1,26 @@
-{# src/Warlords/GameBundle/Resources/views/Profile/sendSoldier.html.twig #}
-{% extends 'WarlordsGameBundle::layout.html.twig' %}
+{# src/Warlords/GameBundle/Resources/views/Page/sendSoldiers.html.twig #}
+
+
 
 {% block body %}
-    <div class="mainitem">
-        	<div class="header">
-			<div class="title"><h1>PROFILE</h1></div>
-		</div>
-		
-        	<div class="content">
-		
-			{% if errors %}
+
+
+			<div class="title"><h2>SEND SOLDIERS</h2></div>
+
+			{% if serrors %}
 				<ul class="errormsg">
-				{% for error in errors %}
-					<li>{{ error }} </li>
+				{% for serror in serrors %}
+					<li>{{ serror }} </li>
 				{% endfor %}
 				</ul>
 			{% endif %}
 
 
-				<div id="info">
+				<div id="send-info">
 
 					<div id="user-info">
 						<header>
-							<p>You: {{ app.user.username }}</p>
+							<p class="send-name">You: {{ app.user.username }}</p>
 						</header>
 						<ul id="resources">
 							<li class="gold">Gold: <label id="gold">{{ app.user.stats.gold }}</label></li>
@@ -30,6 +28,7 @@
 							<li class="fame">Fame: <label id="fame">{{ app.user.stats.fame }}</label></li>
 						</ul>
 						<br />
+
 						<ul id="army">
 							<li>Infantry: <label id="infantry">{{ app.user.stats.infantry }}</label></li>
 							<li>Knights: <label id="knights">{{ app.user.stats.knights }}</label></li>
@@ -40,10 +39,12 @@
 							<label>Experience:</label><label id="experience">{{ app.user.stats.exp }}</label>
 						</div>
 					</div>
-
+					<div id="send-to">
+						<p>Send To</p>
+					</div>
 					<div id="ally-info">
 						<header>
-							<p>Ally: {{ ally.user.username }}</p>
+							<p class="send-name">Ally: {{ ally.user.username }}</p>
 						</header>
 						<ul id="resources">
 							<li class="gold">Gold: <label id="gold">{{ ally.gold }}</label></li>
@@ -65,10 +66,10 @@
 					
 				    
 				</div>  
-  
-				
-				<div id="buysoldiers">
-				    {% if form is defined %}
+  				<br />
+  				<br />
+				<div id="send-soldiers">
+
 				    <p>Please enter the number of soldiers in order to send reinforcements to your ally</p>
 				    <form action="{{ path( 'WarlordsGameBundle_send_soldiers', {'target_id' : target_id} ) }}" method="post" {{ form_enctype(form) }} class="comment">
 					{{ form_widget(form) }}
@@ -76,17 +77,10 @@
 					    <input type="submit" value="Send Reinforcements">
 					</p>
 				    </form>
-				    {% endif %}
+
 				</div>
 
-			</div>
-			
-			
-		</div>
-			
-        	
-		<div class="footer"></div>
-	</div>
+
 {% endblock %}
 
 

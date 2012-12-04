@@ -4,6 +4,8 @@ namespace Warlords\GameBundle\Controller;
 use FOS\UserBundle\Controller\ProfileController as BaseController;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Warlords\GameBundle\Form\BuySoldierType;
 use Warlords\GameBundle\Form\SendSoldierType;
 use Warlords\GameBundle\Entity\Events;
@@ -44,7 +46,8 @@ class ProfileController extends BaseController{
         return array(   'playerstats' => $playerstats,
                         'attack' => $attk,
                         'defense' => $defn,
-                        'info'=>NULL,                              
+                        'info'=>NULL,
+                        'serror' => null,                              
                         );
     }
     
@@ -250,15 +253,19 @@ class ProfileController extends BaseController{
     //===============================
     
     public function buyAction(){
-        $form = $this->createForm(new BuySoldierType(), NULL);
-        $request = $this->container->get('request');
-        
-        if ($request->isMethod('POST')) {
-            
-            $form->bind($request);
+    	
+    	$buys = null;
+    	$buyk = null;
+    	$buyc = null;
+    	$cost = null;
+    	$info = null;
+	$form = $this->createForm(new BuySoldierType());
+	$request = $this->container->get('request');
+	if ($request->getMethod() == 'POST') {
+		$form->bindRequest($request);
 
-            if ($form->isValid()) {
-                // perform some action, such as saving the task to the database
+		if ($form->isValid()) {
+       	 	// perform some action, such as saving the task to the database
                 $usr = $this->container->get('security.context')->getToken()->getUser();
                 $id = $usr->getID();
                 
@@ -278,7 +285,7 @@ class ProfileController extends BaseController{
             	if($buys < 0 | $buyk < 0 | $buyc < 0)
             	{
             	    return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
-            	                'error'=>"You cannot sell soldiers !"
+            	                'berror'=>"You cannot sell soldiers !"
                                 ));
             	}
             	
@@ -294,15 +301,18 @@ class ProfileController extends BaseController{
             	//bad form, bought nothing.
             	if($cost == 0)
             	{
-          	        return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
-            	                'error'=>"Nothing is purchased."
+            	
+
+	  	        return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
+            	                'berror'=>"Nothing is purchased."
                                 ));
             	}
             	
             	if($cost > $gold)
             	{
-            	    return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
-            	                'error'=>"Insufficient Gold"
+
+            	    	return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
+            	                'berror'=>"Insufficient Gold"
                                 ));
             	}
             	
@@ -326,15 +336,16 @@ class ProfileController extends BaseController{
     	        
     	        $em->persist($playerstats);
     	        $em->flush();
+    	        $info = "Success";
 
             }
         }
         return $this->render('WarlordsGameBundle:Page:buyConfirm.html.twig', array(
-            	                'info'=>"Success",
+            	                'info'=> $info,
             	                'soldiers' => $buys,
             	                'knights' => $buyk,
             	                'calvary' => $buyc,
-            	                'gold'    => $cost
+            	                'gold'    => $cost,
                                 ));
     }
     
@@ -348,26 +359,74 @@ class ProfileController extends BaseController{
         	$user = $this->container->get('security.context')->getToken()->getUser();
         	$em = $this->container->get('doctrine')->getEntityManager();
 
-
-
-
-		$allies= $user->getMyAllies();
-
-
-		/*
-		foreach ($allies as $ally){
-
-			print("Allies wth me " . $ally->getId());
-		}
-		*/
-	
+		
+                $current_allies_id = $em->getRepository('WarlordsGameBundle:User')->getAllyConfirmed($user->getId());
+		$current_allies = array();
+                $requesting_allies_id = $em->getRepository('WarlordsGameBundle:User')->getAllyrequesting($user->getId());
+		$requesting_allies = array();
+                $waiting_allies_id = $em->getRepository('WarlordsGameBundle:User')->getAllyWaiting($user->getId());
+		$waiting_allies = array();
+		
+                foreach ($current_allies_id as $ally_id){
+                	$current_allies[] = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($ally_id);
+                }
+                
+                foreach ($requesting_allies_id as $ally_id){
+                	$requesting_allies[] = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($ally_id);
+                }
+                
+                foreach ($waiting_allies_id as $ally_id){
+                	$waiting_allies[] = $em->getRepository('WarlordsGameBundle:PlayerStats')->findOneByUser($ally_id);
+                }
 
 
 		return $this->render('WarlordsGameBundle:Page:allyList.html.twig', array(
-			'allies' => $allies,)
+			'current_allies' => $current_allies,
+			'requesting_allies' => $requesting_allies,
+			'waiting_allies' => $waiting_allies,
+
+			)
 	
 		);
 
+	}
+	
+	public function allyConfirmAction($target_id) {
+		$user = $this->container->get('security.context')->getToken()->getUser();
+        	$em = $this->container->get('doctrine')->getEntityManager();
+        	$waiting_ally = $em->getRepository('WarlordsGameBundle:User')->find($target_id);
+        	$myAllies = $user->getMyAllies();
+	    	$form = $this->createForm(new BuySoldierType(), NULL);
+        	foreach ( $myAllies as $ally){
+        		if ($ally->getId() == $waiting_ally->getId()){
+				$serrors[] = $waiting_ally ."is already your Ally";
+			    	$returnArray = ProfileController::getUserProfile($user, $em, $this);
+		    	        $returnArray['form'] = $form->createView();
+			    	$returnArray += array(
+
+				'target_id' => $target_id,
+				'ally' => $waiting_ally,
+				'serrors' => $serrors,
+				);
+        			return $this->render('WarlordsGameBundle:Page:profile.html.twig', $returnArray);
+        		}
+        	}
+        	$user->addAlly($waiting_ally);
+		$em->persist($user);
+		
+		$em->flush();
+
+        	$serrors[] = $waiting_ally . " is now your ally.";
+	    	$returnArray = ProfileController::getUserProfile($user, $em, $this);
+    	        $returnArray['form'] = $form->createView();
+	    	$returnArray += array(
+
+			'target_id' => $target_id,
+			'ally' => $waiting_ally,
+			'serrors' => $serrors,
+		);
+	        return $this->render('WarlordsGameBundle:Page:profile.html.twig', $returnArray);
+		
 	}
 	
 	/**
@@ -375,7 +434,7 @@ class ProfileController extends BaseController{
 	  */
 
 	public function sendSoldiersAction($target_id){
-		$errors = array();
+		$serrors = array();
 		$sendSoldiers = null;
 		$sendKnights = null;
 		$sendCalvary = null;
@@ -401,19 +460,22 @@ class ProfileController extends BaseController{
 	    	
 				$sendSoldiers = $form["soldiers"]->getData();
 				$sendKnights = $form["knights"]->getData();
-				$SendCalvary = $form["calvary"]->getData();
+				$sendCalvary = $form["calvary"]->getData();
 				
 				// Positive Integer checker
 	    			if ((is_numeric($sendSoldiers) && is_numeric($sendKnights) && is_numeric($sendCalvary))
 	    				&& (is_int($sendSoldier + 0) && is_int($sendKnights + 0) && is_int($sendCalvary + 0))
 	    				&& ($sendSoldier < 0 && $sendSolider < 0 && $sendCalvary < 0)) {
-	    					$errors[] = "Value must be positive integer.";
-		    	    			return $this->render('WarlordsGameBundle:Pages:sendSoldiers.html.twig', array(
-							'form' => $form->createView(),
+	    					$serrors[] = "Value must be positive integer.";
+    					    	$returnArray = ProfileController::getUserProfile($user, $em, $this);
+				    	        $returnArray['form'] = $form->createView();
+    					    	$returnArray += array(
+
 							'target_id' => $target_id,
 							'ally' => $ally,
-							'errors' => $errors,
-			        		));
+							'serrors' => $serrors,
+			        		);
+	    	    			        return $this->render('WarlordsGameBundle:Page:profile.html.twig', $returnArray);
 		    		}			
 		    		// Convert to integer
 	    			$sendSoldiers += 0;
@@ -421,13 +483,16 @@ class ProfileController extends BaseController{
 	    			$sendCalvary += 0;
 
 			    	if($sendSoldiers == 0 && $sendKnights == 0 && $sendCalvary == 0) {
-			    		$errors[] = "Please enter some positive integer that you want to send.";
-			  	        return $this->render('WarlordsGameBundle:Page:sendSoldiers.html.twig', array(
-						'form' => $form->createView(),
+			    		$serrors[] = "Please enter some positive integer that you want to send.";
+				    	$returnArray = ProfileController::getUserProfile($user, $em, $this);        
+				    	$returnArray['form'] = $form->createView();
+				    	$returnArray += array(
+
 						'target_id' => $target_id,
 						'ally' => $ally,
-						'errors' => $errors,
-						));
+						'serrors' => $serrors,
+		        		);
+    	    			        return $this->render('WarlordsGameBundle:Page:profile.html.twig', $returnArray);
 			    	}
 			    	
 
@@ -440,7 +505,7 @@ class ProfileController extends BaseController{
 			    	
 			    	$soldiers = $userStats->getInfantry();
 			    	if (($soldiers -= $sendSoldiers) <= 0 ){
-			    		$errors[] = "Your only have " . $soldiers . " ,but you are sending " . $sendSoldiers . ".";
+			    		$serrors[] = "Your only have " . $userStats->getInfantry() . " soldiers, but you are sending " . $sendSoldiers . ".";
 			    	}else{
 					$userStats->setInfantry($soldiers);
 			    		$ally->setInfantry($ally->getInfantry() + $sendSoldiers);
@@ -448,7 +513,7 @@ class ProfileController extends BaseController{
 			    	
 			    	$knights = $userStats->getKnights();
 			    	if (($knights -= $sendKnights) <= 0 ){
-			    		$errors[] = "Your only have " . $knights . " ,but you are sending " . $sendKnights . ".";
+			    		$serrors[] = "Your only have " . $userStats->getKnights() . " knights, but you are sending " . $sendKnights . ".";
 			    	}else{
 					$userStats->setKnights($knights);
 			    		$ally->setKnights($ally->getKnights() + $sendKnights);
@@ -456,14 +521,14 @@ class ProfileController extends BaseController{
 		
 				$calvary = $userStats->getCalvary();
 			    	if (($calvary -= $sendCalvary) <= 0 ){
-			    		$errors[] = "Your only have " . $calvary . " ,but you are sending " . $sendCalvary . ".";
+			    		$serrors[] = "Your only have " . $userStats->getCalvary() . " calvary, but you are sending " . $sendCalvary . ".";
 			    	}else{
 					$userStats->setCalvary($calvary);
 			    		$ally->setCalvary($ally->getCalvary() + $sendCalvary);
 			    	}
 			    	
 
-				if(!$errors) {
+				if(!$serrors) {
 					$em->persist($userStats);
 					$em->persist($ally);
 			
@@ -474,7 +539,7 @@ class ProfileController extends BaseController{
 			    	                'soldiers' => $sendSoldiers,
 			    	                'knights' => $sendKnights,
 			    	                'calvary' => $sendCalvary,
-			    	                'errors' => $errors,
+			    	                'serrors' => $serrors,
 				        ));
 
 				}
@@ -485,7 +550,7 @@ class ProfileController extends BaseController{
 				'form' => $form->createView(),
 				'target_id' => $target_id,
 				'ally' => $ally,
-				'errors' => $errors,
+				'serrors' => $serrors,
 
 		        ));
 }

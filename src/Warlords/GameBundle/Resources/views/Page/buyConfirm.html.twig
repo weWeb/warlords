@@ -11,11 +11,10 @@
 			<div class="title"><h1>Buy Soldiers</h1></div>
 		</div>
         <div class="content">
-            {% if error is defined %}
-                <div class="loginerror">{{ error }}</div>
-            {% endif %}
+            {% if berror is defined %}
+                <div class="loginerror">{{ berror }}</div>
             
-            {% if info is defined %}
+            {% elseif info %}
                 <div class="information">
                 <h2>{{ info }}</h2>
                 <p>You have purchased:<br />
@@ -24,7 +23,7 @@
                 {{ soldiers }} Soldiers  <br />
                 {% endif %}
                 
-                {% if calvary is not empty %}
+                {% if knights is not empty %}
                 {{ knights }} Knights  <br />
                 {% endif %}
                 
@@ -32,8 +31,12 @@
                 {{ calvary }} Calvary  <br />
                 {% endif %}
                 
+                {% if soldiers and calvary and knights %}
                 for {{ gold }} gold.<br />
+                {% endif %}
                 </div>
+            {% else %}
+                <div class="loginerror">Nothing is purchased.</div>
             {% endif %}
             <p><a href="{{ path('WarlordsGameBundle_profile') }}">Return to profile</a></p>
         </div>

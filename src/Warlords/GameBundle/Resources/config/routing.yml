@@ -67,6 +67,13 @@ WarlordsGameBundle_ally_list:
     defaults: { _controller: WarlordsGameBundle:Profile:allyList }
     requirements:
         _method:  GET
+        
+WarlordsGameBundle_ally_confirm:
+    pattern:  /profile/allyList/confirm/{target_id}
+    defaults: { _controller: WarlordsGameBundle:Profile:allyConfirm }
+    requirements:
+        _method:  GET
+        target_id: \d+
                 
 WarlordsGameBundle_attack:
     pattern: /attack/{target_id}
