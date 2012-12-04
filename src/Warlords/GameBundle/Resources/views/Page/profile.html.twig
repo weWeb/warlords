@@ -28,9 +28,9 @@
 					});
 				    });
 				    
-				    $("#buysubmit").prop("disabled", true);
+				    $('#buysubmit').prop("disabled", true);
 				    
-				    $("#buy_soldiers").keyup(function(){ alert("buysoldiers keyup"); });
+				    $('#buy_soldiers').keyup(function(){ alert("buysoldiers keyup"); });
 
 				</script>
 
@@ -60,7 +60,7 @@
 				        </div>
 				   
 				    <div id="profile">
-					    <label>Upkeep:</label><label id="playerLevel">{{ upkeep }} gold/hr</label><br />
+					    <label>Upkeep: </label><label id="playerLevel">{{ upkeep }} gold/hr</label><br />
 
 					    <div id="buysoldiers">
 					        {% if form is defined %}
