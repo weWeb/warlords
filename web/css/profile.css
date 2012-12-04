@@ -10,10 +10,12 @@ ul#army > li {
 
 div#stats {
     font-size: 2em;
+    margin-bottom: 1em;
 }
 
 div#profile {
     font-size: 2em;
+    font-weight: bold;
 }
 
 div#events > h2 {

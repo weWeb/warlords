@@ -43,11 +43,14 @@ class ProfileController extends BaseController{
         $defn = $soldiers*($handle->container->getParameter('defense_infantry')) +
                         $knights*($handle->container->getParameter('defense_knight')) +
                         $calvary*($handle->container->getParameter('defense_calvary'));
+        $upkeep = $soldiers*($handle->container->getParameter('upkeep_infantry')) +
+                        $knights*($handle->container->getParameter('upkeep_knight')) +
+                        $calvary*($handle->container->getParameter('upkeep_calvary'));
         return array(   'playerstats' => $playerstats,
                         'attack' => $attk,
                         'defense' => $defn,
-                        'info'=>NULL,
-                        'serror' => null,                              
+                        'upkeep' => $upkeep,
+                        'info'=>NULL
                         );
     }
     
@@ -172,6 +175,10 @@ class ProfileController extends BaseController{
         
         $selfEvent = new Events();
         $targetEvent = new Events();
+
+        $level = $playerstats->getLevel();
+        $targetLevel = $targetstats->getLevel();
+        $fame = $playerstats->getFame();
         
         if($playerattk > $targetdefn)
         {
@@ -185,6 +192,30 @@ class ProfileController extends BaseController{
             $land = $playerstats->getLand();
             $playerstats->setLand($land+$diff);
             
+            //Exp gain
+            $exp = $playerstats->getExp();
+            $exp = $exp+10;
+            if($exp%200 == 0 && $level < 30)
+            {
+                $level = $level+1;
+                $playerstats->setLevel($level);
+            }
+            $playerstats->setExp($exp);
+
+            //Fame gain
+            if(($level - $targetLevel) > 5)
+            {
+                $playerstats->setFame($fame-1);
+            }
+            else if($targetLevel > $level)
+            {
+                $playerstats->setFame($fame+2);
+            }
+            else
+            {
+                $playerstats->setFame($fame+1);   
+            }
+
             //Gold gain
             $gold = $targetstats->getGold();
             $diff = (int)($gold*$rand_percent);

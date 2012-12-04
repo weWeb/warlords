@@ -20,8 +20,13 @@
 		<div class="header">
 			<div class="title"><h1>EVENTS</h1></div>
 		</div>
-		<div class="content">	
-			{% render "WarlordsGameBundle:Page:events" with {'embedded': true} %}
+		<div class="content">
+		    <div id="embedded_events">	
+			    {% render "WarlordsGameBundle:Page:events" with {quantity: 3} %}
+			</div>
+			{% if app.user %}
+			<a href="" id="showEvents" title="Events">Show more</a>
+			{% endif %}
 		</div>
 		<div class="footer"></div>
 	</div>
@@ -35,6 +40,32 @@
 
 		$("input").blur(function() {
 			$(this).removeClass("formFocused")
+		});
+		
+		var $link = "{{ path('WarlordsGameBundle_events', {'quantity': '100'}) }}";
+		var $shortlink = "{{ path('WarlordsGameBundle_events', {'quantity': '3'}) }}";
+		
+		var refreshId = setInterval(function()
+		{
+		    $("#embedded_events").load($shortlink);
+		}, 10000);
+		
+	    var $dialog = $('<div></div>')
+	        .load($link)
+	        .dialog({
+	            autoOpen: false,
+	            title: "Events",
+	            width:500,
+	            height: 600,
+	            draggable: false
+	            });
+		
+		$('#showEvents').click(function (event){
+		    event.preventDefault();
+		    if ($dialog.dialog( "isOpen" ) != true )
+		    {
+		        $dialog.dialog('open');
+		    }
 		});
     </script>  
 {% endblock %}

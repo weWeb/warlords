@@ -12,6 +12,6 @@ Warlords\GameBundle\Entity\Guild:
     oneToOne:
         leader:
             targetEntity: User
-            inversedBy: guild
+            inversedBy: user
             type: integer
             nullable: false
