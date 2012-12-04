@@ -493,10 +493,12 @@ class ProfileController extends BaseController{
 				$sendKnights = $form["knights"]->getData();
 				$sendCalvary = $form["calvary"]->getData();
 				
+				
+				
 				// Positive Integer checker
-	    			if ((is_numeric($sendSoldiers) && is_numeric($sendKnights) && is_numeric($sendCalvary))
-	    				&& (is_int($sendSoldier + 0) && is_int($sendKnights + 0) && is_int($sendCalvary + 0))
-	    				&& ($sendSoldier < 0 && $sendSolider < 0 && $sendCalvary < 0)) {
+	    			if ((!is_numeric($sendSoldiers) || !is_numeric($sendKnights) || !is_numeric($sendCalvary))
+	    				|| (!is_int($sendSoldiers + 0) || !is_int($sendKnights + 0) || !is_int($sendCalvary + 0))
+	    				|| (($sendSoldiers + 0 )< 0 || ($sendKnights + 0) < 0 || ($sendCalvary + 0)< 0)) {
 	    					$serrors[] = "Value must be positive integer.";
     					    	$returnArray = ProfileController::getUserProfile($user, $em, $this);
 				    	        $returnArray['form'] = $form->createView();
