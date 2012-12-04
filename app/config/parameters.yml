@@ -24,7 +24,7 @@ parameters:
     default_knights: 25
     default_calvary: 10
     upkeep_infantry: 25
-    upkeep_knights: 65
+    upkeep_knight: 65
     upkeep_calvary: 85
     cost_infantry: 50
     cost_knight: 200

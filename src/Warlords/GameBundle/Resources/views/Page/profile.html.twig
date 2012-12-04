@@ -45,7 +45,6 @@
 				</ul>
 		    
 				<div id="buysoldiers-tab">
-				    <div class="title"><h2>Buy Soldiers</h2></div>
 				        <div id="stats">
 					        <ul id="resources">
 					            <li class="gold">Gold: <label id="gold">{{ playerstats.gold }}</label></li>
@@ -61,12 +60,7 @@
 				        </div>
 				   
 				    <div id="profile">
-					    <label>Level:</label><label id="lvl">{{ playerstats.level }}</label><br />
-					    <label>Experience:</label><label id="experience">{{ playerstats.exp }}</label>
-					    <ul id="attack_stats">
-					        <li>Attack: <label id="attk">{{ attack }}</label></li>
-					        <li>Defense: <label id="defs">{{ defense }}</label></li>
-					    </ul>
+					    <label>Upkeep:</label><label id="playerLevel">{{ upkeep }} gold/hr</label><br />
 
 					    <div id="buysoldiers">
 					        {% if form is defined %}
@@ -84,6 +78,3 @@
 		<div class="footer"></div>
 	</div>
 {% endblock %}
-
-
-
