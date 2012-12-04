@@ -422,12 +422,19 @@ class ProfileController extends BaseController{
 
 	}
 	
+	
+	/**
+	 * Confirm ally function
+	 *
+	 */
 	public function allyConfirmAction($target_id) {
 		$user = $this->container->get('security.context')->getToken()->getUser();
         	$em = $this->container->get('doctrine')->getEntityManager();
         	$waiting_ally = $em->getRepository('WarlordsGameBundle:User')->find($target_id);
         	$myAllies = $user->getMyAllies();
 	    	$form = $this->createForm(new BuySoldierType(), NULL);
+	    	
+	    	// Check if the ally is already allied
         	foreach ( $myAllies as $ally){
         		if ($ally->getId() == $waiting_ally->getId()){
 				$serrors[] = $waiting_ally ."is already your Ally";
@@ -441,7 +448,9 @@ class ProfileController extends BaseController{
 				);
         			return $this->render('WarlordsGameBundle:Page:profile.html.twig', $returnArray);
         		}
-        	}
+        	}//else do the following to add it into DB
+        	
+        	
         	$user->addAlly($waiting_ally);
 		$em->persist($user);
 		

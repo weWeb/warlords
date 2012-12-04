@@ -71,7 +71,7 @@
 				<div id="send-soldiers">
 
 				    <p>Please enter the number of soldiers in order to send reinforcements to your ally</p>
-				    <form action="{{ path( 'WarlordsGameBundle_send_soldiers', {'target_id' : target_id} ) }}" method="post" {{ form_enctype(form) }} class="comment">
+				    <form action="{{ path( 'WarlordsGameBundle_send_soldiers', {'target_id' : target_id} ) }}" method="post" {{ form_enctype(form) }} class="profile-form">
 					{{ form_widget(form) }}
 					<p class="submit">
 					    <input type="submit" value="Send Reinforcements">

@@ -78,7 +78,7 @@
 
 					    <div id="buysoldiers">
 					        {% if form is defined %}
-					        <form action="{{ path( 'WarlordsGameBundle_buy' ) }}" method="post" {{ form_enctype(form) }} class="comment">
+					        <form action="{{ path( 'WarlordsGameBundle_buy' ) }}" method="post" {{ form_enctype(form) }} class="profile-form">
 						    {{ form_widget(form) }}
 						    <p class="submit">
 						        <input type="submit" value="Buy" id="buysubmit">
