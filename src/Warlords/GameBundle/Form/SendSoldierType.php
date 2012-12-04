@@ -9,9 +9,9 @@ class SendSoldierType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('soldiers', 'integer', array('label' => 'Soldiers','required' => false))
-                ->add('knights', 'integer', array('label' => 'Knights','required' => false))
-                ->add('calvary', 'integer', array('label' => 'Calvary','required' => false))
+        $builder->add('soldiers', 'text', array('label' => 'Soldiers','required' => false))
+                ->add('knights', 'text', array('label' => 'Knights','required' => false))
+                ->add('calvary', 'text', array('label' => 'Calvary','required' => false))
                 ;
     }
     
