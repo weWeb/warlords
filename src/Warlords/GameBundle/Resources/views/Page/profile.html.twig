@@ -71,19 +71,30 @@
         	<div class="content">
 		    {% if info is defined %}
 		        <div class="loginerror">{{ info }}</div>
-		    {% endif %}
-		    
+		    {% endif %}		   
+               {% if serrors is defined and serrors%}
+                <ul class="errormsg">
+                {% for serror in serrors %}
+                    <li>{{ serror }} </li>
+                {% endfor %}
+				</ul>
+	    	{% endif %}
+	    	
 			{% block tab_javascript %}
-				<script type="text/javascript"> 
+				<script type="text/javascript">
 				    $(function() {
 					$( "#profile-tabs" ).tabs({
-					    heightStyle: "auto",
+					    {% if serrors is defined and serrors %}
+					    	selected: 1,
+					    {% endif %}
+					    heightStyle: "content",
 					    beforeLoad: function( event, ui ) {
 						ui.jqXHR.error(function() {
 						    ui.panel.html(
-							"Couldn't load this page. We'll try to fix this as soon as possible." ).css('font-size', 20);
+							"Couldn't load this page. We'll try to fix this as soon as possible." );
 						});
 					    }
+					    
 					});
 				    });
 				</script>
@@ -118,7 +129,7 @@
 
 					    <div id="buysoldiers">
 					        {% if form is defined %}
-					        <form action="{{ path( 'WarlordsGameBundle_buy' ) }}" method="post" {{ form_enctype(form) }} class="comment">
+					        <form action="{{ path( 'WarlordsGameBundle_buy' ) }}" method="post" {{ form_enctype(form) }} class="profile-form">
 						    {{ form_widget(form) }}
 						    <label id="finalcost"></label>
 						    <p class="submit">
@@ -130,6 +141,10 @@
 				    </div>
 				</div>
 			</div>
+        	</div>
 		<div class="footer"></div>
 	</div>
 {% endblock %}
+
+
+

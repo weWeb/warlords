@@ -15,12 +15,14 @@ WarlordsGameBundle_player_attack:
     defaults: { _controller: WarlordsGameBundle:Player:attack }
     requirements:
         _method: GET|POST
+        target_id: \d+
         
 WarlordsGameBundle_player_add_ally:
     pattern: /playerSearch/ally/{target_id}
     defaults: { _controller: WarlordsGameBundle:Player:ally }
     requirements:
         _method: GET|POST
+        target_id: \d+
         
         
 WarlordsGameBundle_about:
@@ -69,18 +71,33 @@ WarlordsGameBundle_ally_list:
     defaults: { _controller: WarlordsGameBundle:Profile:allyList }
     requirements:
         _method:  GET
+        
+WarlordsGameBundle_ally_confirm:
+    pattern:  /profile/allyList/confirm/{target_id}
+    defaults: { _controller: WarlordsGameBundle:Profile:allyConfirm }
+    requirements:
+        _method:  GET
+        target_id: \d+
                 
 WarlordsGameBundle_attack:
     pattern: /attack/{target_id}
     defaults:  { _controller: WarlordsGameBundle:Profile:attack }
     requirements:
         _method:  GET
+        target_id: \d+
         
 WarlordsGameBundle_buy:
     pattern: /profile/buy
     defaults:  { _controller: WarlordsGameBundle:Profile:buy }
     requirements:
         _method: POST
+        
+WarlordsGameBundle_send_soldiers:
+    pattern: /profile/sendSoldiers/{target_id}
+    defaults:  { _controller: WarlordsGameBundle:Profile:sendSoldiers }
+    requirements:
+        _method: GET|POST
+        target_id: \d+
 
 WarlordsGameBundle_CheckUnique:
     pattern: /registration/checkunique

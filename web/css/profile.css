@@ -44,18 +44,18 @@ ul#attack_stats {
 }
 
 
-form.comment { 
+form.profile-form { 
 	font-size: 14px; 
 	color: #cbbfbc;
 	font-family: 'Arial','Helvetica'; 
 	margin-top: 20px; 
 }
 
-form.comment div { 
+form.profile-form div { 
 	clear: left; 
 	margin-bottom: 10px; 
 }
-form.comment label { 
+form.profile-form label { 
 	float: left; 
 	margin-right: 30px; 
 	text-align: right; 
@@ -65,7 +65,7 @@ form.comment label {
 	padding-top: 7px; 
 }
 
-form.comment input[type="number"] {
+form.profile-form input[type="text"], input[type="number"] {
 	background-color: #1B1511;
    	border: 1px solid #7D441E;
     	color: #E2D7C5;
@@ -76,7 +76,7 @@ form.comment input[type="number"] {
     	width: 200px;
 }
 
-form.comment input[type="submit"] { 
+form.profile-form input[type="submit"] { 
 	background-color: #1F1B18;
     	border: 3px solid #EDA321;
     	box-shadow: 2px 2px 2px #000000;
@@ -86,6 +86,7 @@ form.comment input[type="submit"] {
     	margin-top: 30px;
     	outline: medium none;
     	min-width: 5em;
+    	margin-bottom: 10px;
 }
 
 
@@ -149,7 +150,13 @@ form.comment input[type="submit"] {
     text-align: left;
 }
 
+#profile-tabs {
+	border: none;
+	
+}
+
 #profile-tab-widget {
+
 	font-size: 2em;
 
 }
@@ -161,3 +168,35 @@ form.comment input[type="submit"] {
 	color: #d5a042;
 
 }
+
+
+#send-info div{
+
+	display: inline-block;
+	vertical-align: top; 
+
+}
+#send-info div li{
+
+	font-size: 2em;
+
+}
+
+#send-to p {
+    	font-family: 'Black Ops One',serif;
+	font-size: 20px;
+
+	padding: 1em;
+}
+
+#send-page {
+	font-size: 0.5em;
+
+}
+
+.send-name {
+	font-size: 3em;
+}
+
+
+
