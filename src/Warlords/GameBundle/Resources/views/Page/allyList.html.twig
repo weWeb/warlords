@@ -21,7 +21,7 @@
 				</tr>
 				
 				{% for current_ally in current_allies %}
-				    <tr id="ally-send-info-{{ current_ally.user.id }}">
+				    <tr id="ally-info-send-{{ current_ally.user.id }}">
 					<td class="username">{{ current_ally.user.username }}</td>
 					<td class="level">{{ current_ally.level }}</td>
 					<td class="fame">{{ current_ally.fame}}</td>
@@ -46,13 +46,13 @@
 							
 						});
 					 
-						$( "#ally-send-info-{{ current_ally.user.id }}" ).click(function() {
+						$( "#ally-info-send-{{ current_ally.user.id }}" ).click(function() {
 						    $( "#send-page-{{ current_ally.user.id }}").dialog( "open" );
 						    return false;
 						});
 
 
-						$("#ally-send-info-{{ current_ally.user.id }}").css('cursor', 'pointer');
+						$("#ally-info-send-{{ current_ally.user.id }}").css('cursor', 'pointer');
 						</script>
 						{% endblock %}	
 					
@@ -110,7 +110,7 @@
 				</tr>
 				
 				{% for waiting_ally in waiting_allies %}
-				    <tr id="ally-wait-info-{{ waiting_ally.user.id }}">
+				    <tr id="ally-info-wait-{{ waiting_ally.user.id }}">
 					<td class="username">{{ waiting_ally.user.username }}</td>
 					<td class="level">{{ waiting_ally.level }}</td>
 					<td class="fame">{{ waiting_ally.fame}}</td>
@@ -135,17 +135,22 @@
 							
 						});
 					 
-						$( "#ally-wait-info-{{ waiting_ally.user.id }}" ).click(function() {
+						$( "#ally-info-wait-{{ waiting_ally.user.id }}" ).click(function() {
 						    $( "#wait-page-{{ waiting_ally.user.id }}").dialog( "open" );
 						    return false;
 						});
 
 
-						$("#ally-wait-info-{{ waiting_ally.user.id }}").css('cursor', 'pointer');
+						$("#ally-info-wait-{{ waiting_ally.user.id }}").css('cursor', 'pointer');
+						
+						
+						
 						</script>
 						{% endblock %}	
 					
-					
+						
+
+
 					
 					</td>
 					
@@ -157,10 +162,47 @@
 			</table> 
 			{% endif %}
 			
+			{% block jshover %}
+							<script type="text/javascript"> 
+	
+
+							$("button").hover(
+
+								function(){$(this).stop(true).animate({
+								    backgroundColor: "#ff760f",
+						  
+								}, 'linear' );},
+
+								function(){$(this).stop(true).animate({
+								    backgroundColor: "#1f1b18",
+
+								}, 'linear' );}
+							);
+
+							$("input[type='submit']").hover(
+
+								function(){$(this).stop(true).animate({
+								    backgroundColor: "#ff760f",
+						  
+								}, 'linear' );},
+
+								function(){$(this).stop(true).animate({
+								    backgroundColor: "#1f1b18",
+
+								}, 'linear' );}
+							);
+		
+		
+							
+
+							</script>  
+						{% endblock %}
+			
 		</div>
 
 	</div>
 {% endblock %}
+
 
 
 
