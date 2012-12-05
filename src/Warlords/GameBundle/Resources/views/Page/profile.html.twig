@@ -7,7 +7,7 @@
 	    $('#buysubmit').prop("disabled", true);
 
 	    function validate(value) {
-    		if( value < 0 || value == "")
+    		if( value < 0 || value == "" || isNaN(value))
     		{
     			//alert("negative or empty");
     			$('#buysubmit').prop("disabled", true);	
@@ -98,7 +98,6 @@
 					});
 				    });
 				</script>
-
 			{% endblock %}
 			
 			<div id="profile-tabs">
