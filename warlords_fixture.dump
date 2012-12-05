@@ -1,0 +1,402 @@
+-- MySQL dump 10.13  Distrib 5.5.22, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: warlords
+-- ------------------------------------------------------
+-- Server version	5.5.22-0ubuntu1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `allies`
+--
+
+DROP TABLE IF EXISTS `allies`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `allies` (
+  `user_id` int(11) NOT NULL,
+  `ally_user_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`ally_user_id`),
+  KEY `IDX_C9D8E060A76ED395` (`user_id`),
+  KEY `IDX_C9D8E060B3339E06` (`ally_user_id`),
+  CONSTRAINT `FK_C9D8E060A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FK_C9D8E060B3339E06` FOREIGN KEY (`ally_user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `allies`
+--
+
+LOCK TABLES `allies` WRITE;
+/*!40000 ALTER TABLE `allies` DISABLE KEYS */;
+/*!40000 ALTER TABLE `allies` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `events`
+--
+
+DROP TABLE IF EXISTS `events`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `user2_id` int(11) DEFAULT NULL,
+  `guild_id` int(11) DEFAULT NULL,
+  `eventType` int(11) NOT NULL,
+  `message` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `eventTime` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_5387574AA76ED395` (`user_id`),
+  KEY `IDX_5387574A441B8B65` (`user2_id`),
+  KEY `IDX_5387574A5F2131EF` (`guild_id`),
+  CONSTRAINT `FK_5387574A441B8B65` FOREIGN KEY (`user2_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FK_5387574A5F2131EF` FOREIGN KEY (`guild_id`) REFERENCES `guilds` (`id`),
+  CONSTRAINT `FK_5387574AA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=177 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `events`
+--
+
+LOCK TABLES `events` WRITE;
+/*!40000 ALTER TABLE `events` DISABLE KEYS */;
+INSERT INTO `events` VALUES (173,29,27,NULL,1,'Your attack failed','2012-12-05 15:16:45'),(174,27,29,NULL,2,'You defended successfully','2012-12-05 15:16:45'),(175,25,24,NULL,1,'Your attack was successful and gained 81 land','2012-12-05 15:20:22'),(176,24,25,NULL,2,'You failed to defend and lost 81 land','2012-12-05 15:20:22');
+/*!40000 ALTER TABLE `events` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `guilds`
+--
+
+DROP TABLE IF EXISTS `guilds`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `guilds` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `leader_id` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_5A7FF51673154ED4` (`leader_id`),
+  CONSTRAINT `FK_5A7FF51673154ED4` FOREIGN KEY (`leader_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `guilds`
+--
+
+LOCK TABLES `guilds` WRITE;
+/*!40000 ALTER TABLE `guilds` DISABLE KEYS */;
+/*!40000 ALTER TABLE `guilds` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `message_message`
+--
+
+DROP TABLE IF EXISTS `message_message`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `message_message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `thread_id` int(11) DEFAULT NULL,
+  `sender_id` int(11) DEFAULT NULL,
+  `body` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_26350A73E2904019` (`thread_id`),
+  KEY `IDX_26350A73F624B39D` (`sender_id`),
+  CONSTRAINT `FK_26350A73E2904019` FOREIGN KEY (`thread_id`) REFERENCES `message_thread` (`id`),
+  CONSTRAINT `FK_26350A73F624B39D` FOREIGN KEY (`sender_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `message_message`
+--
+
+LOCK TABLES `message_message` WRITE;
+/*!40000 ALTER TABLE `message_message` DISABLE KEYS */;
+INSERT INTO `message_message` VALUES (1,1,29,'Hi this is your friend!!!','2012-12-05 15:16:22'),(2,2,25,'this is a test message... i guess!','2012-12-05 15:19:47');
+/*!40000 ALTER TABLE `message_message` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `message_message_metadata`
+--
+
+DROP TABLE IF EXISTS `message_message_metadata`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `message_message_metadata` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `participant_id` int(11) DEFAULT NULL,
+  `message_id` int(11) DEFAULT NULL,
+  `is_read` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_1294FE729D1C3019` (`participant_id`),
+  KEY `IDX_1294FE72537A1329` (`message_id`),
+  CONSTRAINT `FK_1294FE72537A1329` FOREIGN KEY (`message_id`) REFERENCES `message_message` (`id`),
+  CONSTRAINT `FK_1294FE729D1C3019` FOREIGN KEY (`participant_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `message_message_metadata`
+--
+
+LOCK TABLES `message_message_metadata` WRITE;
+/*!40000 ALTER TABLE `message_message_metadata` DISABLE KEYS */;
+INSERT INTO `message_message_metadata` VALUES (1,27,1,0),(2,29,1,1),(3,24,2,0),(4,25,2,1);
+/*!40000 ALTER TABLE `message_message_metadata` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `message_thread`
+--
+
+DROP TABLE IF EXISTS `message_thread`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `message_thread` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `subject` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `isSpam` tinyint(1) NOT NULL,
+  `createdBy_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_607D18C3174800F` (`createdBy_id`),
+  CONSTRAINT `FK_607D18C3174800F` FOREIGN KEY (`createdBy_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `message_thread`
+--
+
+LOCK TABLES `message_thread` WRITE;
+/*!40000 ALTER TABLE `message_thread` DISABLE KEYS */;
+INSERT INTO `message_thread` VALUES (1,'Hi','2012-12-05 15:16:22',0,29),(2,'Hi','2012-12-05 15:19:47',0,25);
+/*!40000 ALTER TABLE `message_thread` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `message_thread_metadata`
+--
+
+DROP TABLE IF EXISTS `message_thread_metadata`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `message_thread_metadata` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `participant_id` int(11) DEFAULT NULL,
+  `thread_id` int(11) DEFAULT NULL,
+  `is_deleted` tinyint(1) NOT NULL,
+  `last_participant_message_date` datetime DEFAULT NULL,
+  `last_message_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_38FC293E9D1C3019` (`participant_id`),
+  KEY `IDX_38FC293EE2904019` (`thread_id`),
+  CONSTRAINT `FK_38FC293E9D1C3019` FOREIGN KEY (`participant_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FK_38FC293EE2904019` FOREIGN KEY (`thread_id`) REFERENCES `message_thread` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `message_thread_metadata`
+--
+
+LOCK TABLES `message_thread_metadata` WRITE;
+/*!40000 ALTER TABLE `message_thread_metadata` DISABLE KEYS */;
+INSERT INTO `message_thread_metadata` VALUES (1,27,1,0,NULL,'2012-12-05 15:16:22'),(2,29,1,0,'2012-12-05 15:16:22',NULL),(3,24,2,0,NULL,'2012-12-05 15:19:47'),(4,25,2,0,'2012-12-05 15:19:47',NULL);
+/*!40000 ALTER TABLE `message_thread_metadata` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `playerStats`
+--
+
+DROP TABLE IF EXISTS `playerStats`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `playerStats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `level` int(11) NOT NULL,
+  `exp` int(11) NOT NULL,
+  `sp` int(11) NOT NULL,
+  `fame` int(11) NOT NULL,
+  `land` int(11) NOT NULL,
+  `gold` int(11) NOT NULL,
+  `infantry` int(11) NOT NULL,
+  `knights` int(11) NOT NULL,
+  `calvary` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_69B96886A76ED395` (`user_id`),
+  CONSTRAINT `FK_69B96886A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `playerStats`
+--
+
+LOCK TABLES `playerStats` WRITE;
+/*!40000 ALTER TABLE `playerStats` DISABLE KEYS */;
+INSERT INTO `playerStats` VALUES (22,22,42,698,0,61,2835,314758,117,455,357),(23,23,24,6341,0,98,9012,877629,316,125,422),(24,24,86,1587,0,51,8042,753221,310,291,268),(25,25,72,4234,0,63,6204,557118,432,281,482),(26,26,92,655,0,25,2347,108322,151,448,237),(27,27,77,8424,0,25,6442,381322,210,264,183),(28,28,47,9490,0,5,2329,483400,311,361,180),(29,29,95,2611,0,81,5044,103712,197,271,100),(30,30,34,7078,0,25,4492,836621,144,415,340),(31,31,96,280,0,25,3421,333666,374,327,419),(32,32,64,6098,0,3,1254,137486,371,227,135),(33,33,94,1269,0,59,505,396787,120,122,393),(34,34,76,2999,0,18,6004,411769,485,178,246),(35,35,99,4362,0,71,3297,120542,207,148,402),(36,36,88,1442,0,88,257,820392,175,141,403),(37,37,32,6900,0,80,7144,742029,443,277,301),(38,38,1,0,0,0,6000,12000,100,25,10),(39,39,1,0,0,0,6000,12000,100,25,10);
+/*!40000 ALTER TABLE `playerStats` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `securityQuestions`
+--
+
+DROP TABLE IF EXISTS `securityQuestions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `securityQuestions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `answer` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `question` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_458614C4A76ED395` (`user_id`),
+  CONSTRAINT `FK_458614C4A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `securityQuestions`
+--
+
+LOCK TABLES `securityQuestions` WRITE;
+/*!40000 ALTER TABLE `securityQuestions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `securityQuestions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `skill_list`
+--
+
+DROP TABLE IF EXISTS `skill_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `skill_list` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `base_power` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `skill_list`
+--
+
+LOCK TABLES `skill_list` WRITE;
+/*!40000 ALTER TABLE `skill_list` DISABLE KEYS */;
+INSERT INTO `skill_list` VALUES (1,'Fireball',1000),(2,'Ice',780),(3,'Whirlwind',800);
+/*!40000 ALTER TABLE `skill_list` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `skills`
+--
+
+DROP TABLE IF EXISTS `skills`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `skills` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `skill_id` int(11) DEFAULT NULL,
+  `stats_id` int(11) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL,
+  `instances` int(11) NOT NULL,
+  `isActive` tinyint(1) NOT NULL,
+  `casted_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_D53116705585C142` (`skill_id`),
+  KEY `IDX_D531167070AA3482` (`stats_id`),
+  CONSTRAINT `FK_D53116705585C142` FOREIGN KEY (`skill_id`) REFERENCES `skill_list` (`id`),
+  CONSTRAINT `FK_D531167070AA3482` FOREIGN KEY (`stats_id`) REFERENCES `playerStats` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `skills`
+--
+
+LOCK TABLES `skills` WRITE;
+/*!40000 ALTER TABLE `skills` DISABLE KEYS */;
+/*!40000 ALTER TABLE `skills` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `salt` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `isActive` tinyint(1) NOT NULL,
+  `usernameCanonical` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `emailCanonical` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `enabled` tinyint(1) NOT NULL,
+  `lastLogin` datetime DEFAULT NULL,
+  `confirmationToken` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `passwordRequestedAt` datetime DEFAULT NULL,
+  `locked` tinyint(1) DEFAULT NULL,
+  `expired` tinyint(1) NOT NULL,
+  `expiresAt` datetime DEFAULT NULL,
+  `roles` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
+  `credentialsExpired` tinyint(1) NOT NULL,
+  `credentialsExpireAt` datetime DEFAULT NULL,
+  `guild_id` int(11) DEFAULT NULL,
+  `lastAccess` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_8D93D649F85E0677` (`username`),
+  UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`),
+  KEY `IDX_8D93D6495F2131EF` (`guild_id`),
+  CONSTRAINT `FK_8D93D6495F2131EF` FOREIGN KEY (`guild_id`) REFERENCES `guilds` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (22,'username','8khq8jmxoq04o8skos88wc4kkk0kcs8','Qd9bY15fZtysL2n+m7/w5D2ovYfRTOvGsgVLJkpF+IsTsk/NKXGCf8bVGDD5Df0AZfHthI0n/JEwQv7Ixu8IJQ==','user@warlords.com',1,'username','user@warlords.com',1,NULL,NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,NULL),(23,'yfw1','giuokx5w35cs4o0occ0occw4s8gkwws','ZmUyRU6558hma+RL2p2/glftRSxZbcTfvl+9HNIQjPwNdPMPXlEw8EqR4bC2xMt5h11LPGkhzRcMimNMyOBRhw==','yfw1@warlords.com',1,'yfw1','yfw1@warlords.com',1,NULL,NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,NULL),(24,'yla288','qdib9eb2mz4co4ww0ksw0kowgc0o8g8','nTOaPcmdV+/KtcPPaDFQRNqQD+g5GZEllhIQ045KicOf3XrPf0EtO7iYoVTs+ZmoNGKRly8Ic/NpkGC0wT/pEg==','yla228@warlords.com',1,'yla288','yla228@warlords.com',1,'2012-12-05 15:18:36',NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,'2012-12-05 15:23:46'),(25,'yhw3','1keq57g4at1cs8ccws0k88occ0okgw8','KklNbiPNpBhFUjZsCzb5dxWL7II4tYxgrmsXXCN2IIeT+C8v3rLlRb+8zkl44Lh/ieZuy3arhSuq1qRKK8NF3g==','yhw3@warlords.com',1,'yhw3','yhw3@warlords.com',1,'2012-12-05 15:19:16',NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,'2012-12-05 15:22:46'),(26,'username4','gm75oh40opw08c8048oowco4g000sg0','2o04TMtKGRWdgeToUDzuV8X1/EV3I8yhg3MCN2uNIiiGOqw/Mk3WWQ8E5WB5AeAFi03OH5HyJS1AUXFApJb0IQ==','user4@warlords.com',0,'username4','user4@warlords.com',1,NULL,NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,NULL),(27,'username5','te0xvvhjfyss0wo4skw04sg84wsgook','pRtYU4wiUMakVySjRjHeFQ+ONs+PjPFNTOWjNjUaU9STSOTkaXDqLQRwiUkmmU4Iu6EC0Xs39pAhc4h1VxSq2g==','user5@warlords.com',1,'username5','user5@warlords.com',1,'2012-12-05 15:15:41',NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,'2012-12-05 15:15:41'),(28,'username6','cnt4s4xizqgog4ckgcc8gkwwcg8sgg4','U+G6EJyjm8gGOk4E/S0UBEqWfsnE3iP/HAmOVMuByl6IodSYF2aFEaKwjHzbWHeWbzpyzp37TT44/8vBnE3b+A==','user6@warlords.com',0,'username6','user6@warlords.com',0,NULL,NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,NULL),(29,'username7','jzwz3atrp6owss0cocgsswkwg000080','mdgVAmH1eXVAavvw34QQxQIsNdxHUkSr5CAVj+SdBbR7ESqDvcDRzdx/V4GPQY7wyKGUYGcuBuQH5PDDJfaEUw==','user7@warlords.com',1,'username7','user7@warlords.com',1,'2012-12-05 15:15:56',NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,'2012-12-05 15:16:51'),(30,'username8','g7nu6r27xr4kg4gs8cc0sos080wkggg','heQ6uFTSNwvyb4M1mhs0seoeVLNowzJzxu3Wn4xEa4/P5etTaKyt6fpHiSnsZ4mVtiYjoHBQ21IDcqea7t3jRA==','user8@warlords.com',0,'username8','user8@warlords.com',1,NULL,NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,NULL),(31,'username9','fl83kxwe4oow8c08gg08o4448kkcgwo','oP6rl6eHI6CTGryItfdDinMoJrHDWd+YrolNyPK3vFUy+kE0wBIJDLYgYJxF5C6EZPFLr7FpiDXbnhkHLXm3Jg==','user9@warlords.com',0,'username9','user9@warlords.com',1,NULL,NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,NULL),(32,'username10','3dc1lpf9p268wk4cck8c080kks4484s','5K45STmT75wfrWuchSXxwKA66m7SEmY0xsbFiYCjALxjubMec9KFd4i5KlsEVqgVD3omvoj8lhdgGrBxGKzStA==','user10@warlords.com',0,'username10','user10@warlords.com',1,NULL,NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,NULL),(33,'username11','6mhvrzvmavgo84w84owc84ogoo4gk0g','GFS4/0mmEbmh5SDU2SAFUFk4oK+4W0OlKmy6a68uBI1s/u9rAwFl9N9tZ/OZJYTFu7+NLdOGUnx/v6vyhRPsOw==','user11@warlords.com',0,'username11','user11@warlords.com',1,NULL,NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,NULL),(34,'username12','mta06fsna2o484g88wow8c88ks0osg8','6WrLBTFvq13suUjyMP3XF9j8x8lKUOXzz8NqzUPkk+lrqqEP3zWUg3QIKtwV2ixruJhVDwaEDi1vabEtYtRkyg==','user12@warlords.com',0,'username12','user12@warlords.com',1,NULL,NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,NULL),(35,'username13','syc7ccq0kpccccwco0w44scogo4g08w','Ito7LkQhfHLiBbw5Glr1crQqxAWqFpELwE1UGRYtfQBnc1gr1DSTW5JxqAymyUwV7pBrA80zEzHc4LcxjI8mwQ==','user13@warlords.com',0,'username13','user13@warlords.com',1,NULL,NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,NULL),(36,'username14','119h4osgtdtwgwk8w8kk840k04s84os','7XxVEefJ0U6ULrogqckflChjvs75OE7p51uWEPeN2rATLE/QAtnjnrEAHfpnfaBbgsDmotnyFFcNMSu2Spf5lg==','user14@warlords.com',0,'username14','user14@warlords.com',0,NULL,NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,NULL),(37,'username15','dl2p4b1tmu0c4w80ggk4owkcs0wk04c','ioBzh9dwTPPuJYo3aXo+m78sEnnfwG9bkHDffvXp9tEOLyIpvZf5NUktDvnep1x2KsddaXy/jDrIALb0VwnDzg==','user15@warlords.com',0,'username15','user15@warlords.com',1,NULL,NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,NULL),(38,'lilmocca','6q1u09udheskwosgcgogwk0o04k08oc','B0pGPBVT6XbK8AtSFo3knUCiQLSCdjeiGatnQIo1noyMhu0f7yoX53GJJ03oWNam67/PWOMVFNHbGJIRcz8NXQ==','lilmocca@gmail.com',1,'lilmocca','lilmocca@gmail.com',1,'2012-12-05 15:17:31',NULL,NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,'2012-12-05 15:19:00'),(39,'iamafellowgroupmember','i1xxhsvc720wwwwc4swg4kco088co84','9OR4fUbjL7FS+K8awelku/LboPKlSvT0N3s3hfkFaAg0RSaviEHdmXwju6QUM73s4y6Ejce0KUAdsB7JJPplwg==','charles@hotmail.com',0,'iamafellowgroupmember','charles@hotmail.com',0,NULL,'2cgv351e3gkks4gwwcocgk08kw4cc8gko4g4ss48wcscc0k4wo',NULL,0,0,NULL,'a:0:{}',0,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2012-12-05 15:23:55
