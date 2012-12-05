@@ -516,6 +516,7 @@ class ProfileController extends BaseController{
 				//$id = $usr->getID();
 
 				$userStats = $user->getStats();
+			    	$buyform = $this->createForm(new BuySoldierType(), NULL);
 		
 				if (!$userStats) {
 				    throw new NotFoundHttpException('Unable to find you.');
@@ -524,16 +525,25 @@ class ProfileController extends BaseController{
 				$sendSoldiers = $form["soldiers"]->getData();
 				$sendKnights = $form["knights"]->getData();
 				$sendCalvary = $form["calvary"]->getData();
-				
+				// Assign value if null
+				if (is_null($sendSoldiers)){
+					$sendSoldiers = 0;
+				}
+				if (is_null($sendKnights)){
+					$sendKnights = 0;				
+				}
+				if (is_null($sendCalvary)){
+					$sendCalvary = 0;
+				}
 				
 				
 				// Positive Integer checker
 	    			if ((!is_numeric($sendSoldiers) || !is_numeric($sendKnights) || !is_numeric($sendCalvary))
 	    				|| (!is_int($sendSoldiers + 0) || !is_int($sendKnights + 0) || !is_int($sendCalvary + 0))
-	    				|| (($sendSoldiers + 0 )< 0 || ($sendKnights + 0) < 0 || ($sendCalvary + 0)< 0)) {
+	    				|| (($sendSoldiers + 0 )< 0 || ($sendKnights + 0) < 0) || (($sendCalvary + 0) < 0)) {
 	    					$serrors[] = "Value must be positive integer.";
     					    	$returnArray = ProfileController::getUserProfile($user, $em, $this);
-				    	        $returnArray['form'] = $form->createView();
+				    	        $returnArray['form'] = $buyform->createView();
     					    	$returnArray += array(
 
 							'target_id' => $target_id,
@@ -550,7 +560,7 @@ class ProfileController extends BaseController{
 			    	if($sendSoldiers == 0 && $sendKnights == 0 && $sendCalvary == 0) {
 			    		$serrors[] = "Please enter some positive integer that you want to send.";
 				    	$returnArray = ProfileController::getUserProfile($user, $em, $this);        
-				    	$returnArray['form'] = $form->createView();
+				    	$returnArray['form'] = $buyform->createView();
 				    	$returnArray += array(
 
 						'target_id' => $target_id,
