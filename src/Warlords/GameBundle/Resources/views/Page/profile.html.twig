@@ -19,12 +19,25 @@
 				return true;
     		}
 	    }
+
+	    function updateCost() {
+	    	var total = $('#buy_soldiers').val()*{{ soldiers_cost}} +
+	    				$('#buy_knights').val()*{{ knights_cost}} +
+	    				$('#buy_calvary').val()*{{ calvary_cost}};
+
+	    	$('#finalcost').text("Cost: " + total);
+	    	return 0;
+	    }
 	    
 	    $('#buy_soldiers').keyup(function() {
 	    	var validated = validate($('#buy_soldiers').val());
 	    	if(validated == false)
 	    	{
     			$('#buy_soldiers').val(0);
+	    	}
+	    	else
+	    	{
+	    		updateCost();
 	    	}
 		});
 		$('#buy_knights').keyup(function() {
@@ -33,6 +46,10 @@
 	    	{
     			$('#buy_knights').val(0);
 	    	}
+	    	else
+	    	{
+	    		updateCost();
+	    	}
 		});
 		$('#buy_calvary').keyup(function() {
 	    	var validated = validate($('#buy_calvary').val());
@@ -40,6 +57,7 @@
 	    	{
     			$('#buy_calvary').val(0);
 	    	}
+	    	updateCost();
 		});
     </script>
 {% endblock %}
@@ -102,6 +120,7 @@
 					        {% if form is defined %}
 					        <form action="{{ path( 'WarlordsGameBundle_buy' ) }}" method="post" {{ form_enctype(form) }} class="comment">
 						    {{ form_widget(form) }}
+						    <label id="finalcost"></label>
 						    <p class="submit">
 						        <input type="submit" value="Buy" id="buysubmit">
 						    </p>

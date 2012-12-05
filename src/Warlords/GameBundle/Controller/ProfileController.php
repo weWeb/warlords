@@ -33,6 +33,10 @@ class ProfileController extends BaseController{
     	$soldiers = $playerstats->getInfantry();
     	$knights = $playerstats->getKnights();
     	$calvary = $playerstats->getCalvary();
+
+        $soldiers_cost = $handle->container->getParameter('cost_infantry');
+        $knights_cost = $handle->container->getParameter('cost_knight');
+        $calvary_cost = $handle->container->getParameter('cost_calvary');
     	
     	$attk = $soldiers*($handle->container->getParameter('attack_infantry')) +
                         $knights*($handle->container->getParameter('attack_knight')) +
@@ -47,6 +51,9 @@ class ProfileController extends BaseController{
                         'attack' => $attk,
                         'defense' => $defn,
                         'upkeep' => $upkeep,
+                        'soldiers_cost' => $soldiers_cost,
+                        'knights_cost' => $knights_cost,
+                        'calvary_cost' => $calvary_cost,
                         'info'=>NULL
                         );
     }
