@@ -1,7 +1,48 @@
 {# src/Warlords/GameBundle/Resources/views/Page/index.html.twig #}
 {% extends 'WarlordsGameBundle::layout.html.twig' %}
 
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+	    $('#buysubmit').prop("disabled", true);
 
+	    function validate(value) {
+    		if( value < 0 || value == "")
+    		{
+    			//alert("negative or empty");
+    			$('#buysubmit').prop("disabled", true);	
+    			return false;
+    		}
+    		else
+    		{
+    			$('#buysubmit').prop("disabled", false);
+				return true;
+    		}
+	    }
+	    
+	    $('#buy_soldiers').keyup(function() {
+	    	var validated = validate($('#buy_soldiers').val());
+	    	if(validated == false)
+	    	{
+    			$('#buy_soldiers').val(0);
+	    	}
+		});
+		$('#buy_knights').keyup(function() {
+	    	var validated = validate($('#buy_knights').val());
+	    	if(validated == false)
+	    	{
+    			$('#buy_knights').val(0);
+	    	}
+		});
+		$('#buy_calvary').keyup(function() {
+	    	var validated = validate($('#buy_calvary').val());
+	    	if(validated == false)
+	    	{
+    			$('#buy_calvary').val(0);
+	    	}
+		});
+    </script>
+{% endblock %}
 
 
 {% block body %}
@@ -14,7 +55,7 @@
 		        <div class="loginerror">{{ info }}</div>
 		    {% endif %}
 		    
-			{% block javascript %}
+			{% block tab_javascript %}
 				<script type="text/javascript"> 
 				    $(function() {
 					$( "#profile-tabs" ).tabs({
@@ -27,11 +68,6 @@
 					    }
 					});
 				    });
-				    
-				    $('#buysubmit').prop("disabled", true);
-				    
-				    $('#buy_soldiers').keyup(function(){ alert("buysoldiers keyup"); });
-
 				</script>
 
 			{% endblock %}
