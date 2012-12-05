@@ -579,7 +579,7 @@ class ProfileController extends BaseController{
 				    	
 			    	
 			    	$soldiers = $userStats->getInfantry();
-			    	if (($soldiers -= $sendSoldiers) <= 0 ){
+			    	if (($soldiers -= $sendSoldiers) < 0 ){
 			    		$serrors[] = "Your only have " . $userStats->getInfantry() . " soldiers, but you are sending " . $sendSoldiers . ".";
 			    	}else{
 					$userStats->setInfantry($soldiers);
@@ -587,7 +587,7 @@ class ProfileController extends BaseController{
 			    	}
 			    	
 			    	$knights = $userStats->getKnights();
-			    	if (($knights -= $sendKnights) <= 0 ){
+			    	if (($knights -= $sendKnights) < 0 ){
 			    		$serrors[] = "Your only have " . $userStats->getKnights() . " knights, but you are sending " . $sendKnights . ".";
 			    	}else{
 					$userStats->setKnights($knights);
@@ -595,7 +595,7 @@ class ProfileController extends BaseController{
 			    	}
 		
 				$calvary = $userStats->getCalvary();
-			    	if (($calvary -= $sendCalvary) <= 0 ){
+			    	if (($calvary -= $sendCalvary) < 0 ){
 			    		$serrors[] = "Your only have " . $userStats->getCalvary() . " calvary, but you are sending " . $sendCalvary . ".";
 			    	}else{
 					$userStats->setCalvary($calvary);
@@ -617,6 +617,17 @@ class ProfileController extends BaseController{
 			    	                'serrors' => $serrors,
 				        ));
 
+				}else{
+				    	$returnArray = ProfileController::getUserProfile($user, $em, $this);        
+				    	$returnArray['form'] = $buyform->createView();
+				    	$returnArray += array(
+
+						'target_id' => $target_id,
+						'ally' => $ally,
+						'serrors' => $serrors,
+		        		);
+    	    			        return $this->render('WarlordsGameBundle:Page:profile.html.twig', $returnArray);
+				
 				}
 
 			    }
