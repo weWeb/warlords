@@ -434,7 +434,7 @@ class ProfileController extends BaseController{
 	 * Confirm ally function
 	 *
 	 */
-	public function allyConfirmAction($target_id) {
+	public function allyConfirmAction($target_id, $choice) {
 		$user = $this->container->get('security.context')->getToken()->getUser();
         	$em = $this->container->get('doctrine')->getEntityManager();
         	$waiting_ally = $em->getRepository('WarlordsGameBundle:User')->find($target_id);
@@ -457,7 +457,23 @@ class ProfileController extends BaseController{
         		}
         	}//else do the following to add it into DB
         	
+        	if (!$choice) {
         	
+
+        			$serrors[] = "You have rejected " . $waiting_ally . " invitation";
+			    	$returnArray = ProfileController::getUserProfile($user, $em, $this);
+		    	        $returnArray['form'] = $form->createView();
+			    	$returnArray += array(
+
+				'target_id' => $target_id,
+				'ally' => $waiting_ally,
+				'serrors' => $serrors,
+				);
+				// Remove rejected user from waiting list
+		        	$waiting_ally = $em->getRepository('WarlordsGameBundle:User')->removeAlly($user->getId(), $target_id);
+        			return $this->render('WarlordsGameBundle:Page:profile.html.twig', $returnArray);
+        	
+        	}
         	$user->addAlly($waiting_ally);
 		$em->persist($user);
 		

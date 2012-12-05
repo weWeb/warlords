@@ -76,6 +76,25 @@ class UserRepository extends EntityRepository
  
 	}
 	
+	
+	// Remove a rejected user from the waiting list
+	public function removeAlly($id, $reject_id)
+	{
+	
+	    $em = $this->getEntityManager();
+	    
+	    $sql= 'DELETE FROM allies WHERE user_id = :reject_user AND ally_user_id = :current_user';
+	    
+            $qb = $em->getConnection()->prepare($sql);
 
+            $qb->bindValue('current_user', $id);
+            
+            $qb->bindValue('reject_user', $reject_id);
+            
+            $qb->execute();
+
+            return;
+		
+	}
 	
 }

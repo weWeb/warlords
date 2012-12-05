@@ -73,11 +73,12 @@ WarlordsGameBundle_ally_list:
         _method:  GET
         
 WarlordsGameBundle_ally_confirm:
-    pattern:  /profile/allyList/confirm/{target_id}
+    pattern:  /profile/allyList/confirm/{target_id}/{choice}
     defaults: { _controller: WarlordsGameBundle:Profile:allyConfirm }
     requirements:
         _method:  GET
         target_id: \d+
+        choice: \d
                 
 WarlordsGameBundle_attack:
     pattern: /attack/{target_id}
