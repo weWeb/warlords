@@ -191,7 +191,7 @@ class User extends BaseUser implements ParticipantInterface
      * @param \Warlords\GameBundle\Entity\User $myAllies
      * @return User
      */
-    public function addMyAllie(\Warlords\GameBundle\Entity\User $myAllies)
+    public function addMyAllies(\Warlords\GameBundle\Entity\User $myAllies)
     {
         $this->myAllies[] = $myAllies;
     
@@ -203,7 +203,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param \Warlords\GameBundle\Entity\User $myAllies
      */
-    public function removeMyAllie(\Warlords\GameBundle\Entity\User $myAllies)
+    public function removeMyAllies(\Warlords\GameBundle\Entity\User $myAllies)
     {
         $this->myAllies->removeElement($myAllies);
     }
@@ -229,4 +229,6 @@ class User extends BaseUser implements ParticipantInterface
         $user->alliesWithMe[] = $this;
         $this->myAllies[] = $user;
     }
+    
+    
 }

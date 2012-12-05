@@ -198,5 +198,19 @@ form.profile-form input[type="submit"] {
 	font-size: 3em;
 }
 
+#ally-confirm-btn div{
+	display: inline-block;
+	padding: 10px;
 
+}
+
+button, input[type="button"],input[type="submit"], input[type="reset"]{
+	cursor: pointer;
+}
+
+.ally-header {
+    	color: #EDA321;
+    	font-family: 'Black Ops One',serif;
+    	font-size: 2.2em;
+}
 

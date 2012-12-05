@@ -20,9 +20,9 @@
 			</div>
 	    		
 	    	</div>
-		<div>
-			<button type="button" onclick="location.href='{{ path('WarlordsGameBundle_ally_confirm', {'target_id': ally.user.id }) }}'">Confirm Ally</button>
-		
+		<div id="ally-confirm-btn" >
+			<div><button type="button" onclick="location.href='{{ path('WarlordsGameBundle_ally_confirm', {'target_id': ally.user.id, 'choice' : 1}) }}'">Confirm Ally</button></div>
+			<div><button type="button" onclick="location.href='{{ path('WarlordsGameBundle_ally_confirm', {'target_id': ally.user.id, 'choice' : 0}) }}'">Reject Ally</button></div>
 		</div>
 		
 
