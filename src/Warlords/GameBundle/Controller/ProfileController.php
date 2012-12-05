@@ -601,11 +601,39 @@ class ProfileController extends BaseController{
 					$userStats->setCalvary($calvary);
 			    		$ally->setCalvary($ally->getCalvary() + $sendCalvary);
 			    	}
+
+                //Create Events
+        
+                $selfEvent = new Events();
+                $targetEvent = new Events();
+                $timenow = new \DateTime("now");
+                $targetUser = $em->getRepository('WarlordsGameBundle:User')->findOneById($target_id);
+
+                //Type 3 means army sent
+                $selfEvent->setEventType(3);
+                $selfEvent->setUser2($targetUser);
+                $selfEvent->setUser($user);
+                $selfEvent->setEventTime($timenow);
+
+                //Type 2 means target defended
+                $targetEvent->setEventType(4);
+                $targetEvent->setUser($targetUser);
+                $targetEvent->setUser2($user);
+                $targetEvent->setEventTime($timenow);
+
+                $selfEvent->setMessage("Sent " . $sendSoldiers . " soldiers, " .
+                                                 $sendKnights . " knights, " .
+                                                 $sendCalvary . " calvary");
+                $targetEvent->setMessage("Received " . $sendSoldiers . " soldiers, " .
+                                                 $sendKnights . " knights, " .
+                                                 $sendCalvary . " calvary");
 			    	
 
 				if(!$serrors) {
 					$em->persist($userStats);
 					$em->persist($ally);
+                    $em->persist($selfEvent);
+                    $em->persist($targetEvent);
 			
 					$em->flush();
 					
