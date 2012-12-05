@@ -44,7 +44,8 @@
 
 
 {% block javascripts %}
-    	<script src="{{ asset('jPaginate.js') }}"></script>
+    {{ parent() }}
+    <script src="{{ asset('jPaginate.js') }}"></script>
 	<script type="text/javascript"> 
 	
 
