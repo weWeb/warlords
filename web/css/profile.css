@@ -214,3 +214,15 @@ button, input[type="button"],input[type="submit"], input[type="reset"]{
     	font-size: 2.2em;
 }
 
+
+*[id^=ally-info-]:hover {
+	color: #ff760f; 
+	background: "#ff760f",
+
+}
+	
+*[id^=ally-info-]:active { 
+	outline: none; 
+}
+
+}
